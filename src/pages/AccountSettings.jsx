@@ -6,7 +6,6 @@ import { H3 } from "components/Typography";
 import useTitle from "hooks/useTitle";
 import PasswordIcon from "icons/PasswordIcon";
 import ProfileIcon from "icons/ProfileIcon";
-import SettingIcon from "icons/SettingIcon";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import convertToSlug from "utils/convertSlug"; // styled component

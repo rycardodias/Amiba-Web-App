@@ -40,6 +40,16 @@ const setSession = accessToken => {
   }
 };
 
+const setSessionUserId = UserId => {
+  if (UserId) {
+    localStorage.setItem("UserId", UserId);
+    axios.defaults.headers.common.Authorization = `Bearer ${UserId}`;
+  } else {
+    localStorage.removeItem("UserId");
+    delete axios.defaults.headers.common.Authorization;
+  }
+};
+
 const reducer = (state, action) => {
   switch (action.type) {
     case "INIT":
@@ -116,6 +126,7 @@ export const AuthProvider = ({
     // }];
 
     setSession(response.data.data);
+    setSessionUserId(me.data.data.id)
     dispatch({
       type: Types.Login,
       payload: {
@@ -134,6 +145,7 @@ export const AuthProvider = ({
     const { token, user } = response.data.data
 
     setSession(token);
+    setSessionUserId(user.id)
 
     dispatch({
       type: Types.Register,
@@ -146,6 +158,7 @@ export const AuthProvider = ({
 
   const logout = () => {
     setSession(null);
+    setSessionUserId(null)
     dispatch({
       type: Types.Logout
     });
@@ -156,9 +169,10 @@ export const AuthProvider = ({
       try {
         const accessToken = window.localStorage.getItem("accessToken");
         if (accessToken && isValidToken(accessToken)) {
-          setSession(accessToken);
+          
           const response = await usersRequests.getUserByToken(accessToken) //@ts-ignore
-
+          setSession(accessToken);
+          setSessionUserId(response.data.data.id)
           dispatch({
             type: Types.Init,
             payload: {

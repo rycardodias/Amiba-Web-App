@@ -38,8 +38,9 @@ const updateAddress = async (id, token, address, locale, zipcode) => {
     return await sendRequest('PUT', 'users/update', { id, token, address, locale, zipcode });
 };
 
-const updatePassword = async (id, oldPassword, newPassword) => {
-    const token = Cookies.get('user_token')
+const updatePassword = async (oldPassword, newPassword) => {
+    const id = localStorage.getItem('UserId')
+    const token = localStorage.getItem('accessToken')
     return await sendRequest('PUT', 'users/update/password', { id, token, oldPassword, newPassword });
 };
 
