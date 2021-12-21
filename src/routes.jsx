@@ -55,6 +55,10 @@ const UserList = Loadable(lazy(() => import('./pages/userManagement/UserList')))
 const UserGrid = Loadable(lazy(() => import('./pages/userManagement/UserGrid')));
 const AddNewUser = Loadable(lazy(() => import('./pages/userManagement/AddNewUser'))); // chat
 
+const OrganizationsList = Loadable(lazy(() => import('pages/backoffice/OrganizationsList'))); // chat
+
+
+
 
 const Error = Loadable(lazy(() => import('./pages/404'))); // routes
 
@@ -79,7 +83,9 @@ const routes = [{
   element: <GuestGuard>
         <ForgetPassword />
       </GuestGuard>
-}, {
+}, 
+//COMEÇA O BACKOFFICE
+{
   path: 'dashboard',
   element: <AuthGuard>
         <DashboardLayout />
@@ -87,7 +93,13 @@ const routes = [{
   children: [{
     path: '',
     element: <DashboardSaaS />
-  }, {
+  }, 
+  {
+    path: 'organizations',
+    element: <OrganizationsList />
+  },
+  
+  {
     path: 'sales',
     element: <DashboardSales />
   }, {

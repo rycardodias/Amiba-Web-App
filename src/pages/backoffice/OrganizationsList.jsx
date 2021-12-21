@@ -1,7 +1,7 @@
 import { Add } from "@mui/icons-material";
 import { Box, Button, Card, styled } from "@mui/material";
-import AddEmployeeModal from "components/dataTable/dataTableV2/AddEmployeeModal";
-import DataTable from "components/dataTable/dataTableV2/DataTable";
+import AddEmployeeModal from "components/backoffice/dataTableV2/AddEmployeeModal";
+import DataTable from "components/backoffice/dataTableV2/DataTable";
 import FlexBox from "components/FlexBox";
 import SearchInput from "components/SearchInput";
 import { H6 } from "components/Typography";
@@ -32,7 +32,7 @@ const ButtonWrapper = styled(FlexBox)(({
 
 const DataTableV2 = () => {
   // change navbar title
-  useTitle("Data Table V2");
+  useTitle("Organizations");
   const {
     t
   } = useTranslation();
@@ -54,14 +54,11 @@ const DataTableV2 = () => {
   useEffect(() => {
     organizationsRequests.getOrganizations()
       .then(response => {
-        console.log(response.data.data)
         setTableData(response.data.data)
       })
-    // axios.get("/api/tableData2/all").then(({
-    //   data
-    // }) => setTableData(data))
-    //   .catch(error => console.log(error));
+      .catch(error => console.error(error))
   }, []);
+  
   const ids = selectedRows.map(item => item.original.id);
 
   const handleDelete = async () => {
