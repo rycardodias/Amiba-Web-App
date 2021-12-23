@@ -34,11 +34,8 @@ const columnShape = [{
     const { type, experience } = row.original;
     return <CommonCell title={type} body={experience} />;
   }
-}, {
-  minWidth: 100,
-  Header: "VAT Number",
-  accessor: "fiscalNumber"
-}, {
+},
+{
   minWidth: 150,
   Header: "Responsable",
   accessor: "User.name",
@@ -67,9 +64,8 @@ const columnShape = [{
   accessor: "address",
   Filter: SelectColumnFilter
 }];
-export function SelectColumnFilter({
-  column
-}) {
+
+export function SelectColumnFilter({ column }) {
   const { filterValue, setFilter, preFilteredRows, id } = column;
   const theme = useTheme();
   const options = useMemo(() => {
@@ -79,13 +75,8 @@ export function SelectColumnFilter({
   }, [id, preFilteredRows]); // Render a multi-select box
 
   return <Select value={filterValue || ""} onChange={e => setFilter(e.target.value || undefined)} IconComponent={() => <KeyboardArrowDown color="disabled" />} input={<InputBase sx={{
-    height: 40,
-    width: 110,
-    fontSize: 12,
-    fontWeight: 600,
-    padding: "0 8px",
-    borderRadius: "8px",
-    color: "text.primary",
+    height: 40, width: 110, fontSize: 12, fontWeight: 600, padding: "0 8px",
+    borderRadius: "8px", color: "text.primary",
     backgroundColor: theme.palette.mode === "light" ? "#ECEFF5" : "divider",
     "& .MuiPopover-paper": { boxShadow: "none" },
     "& > .MuiSelect-select": { paddingRight: "0 !important" }

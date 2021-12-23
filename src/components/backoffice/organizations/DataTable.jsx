@@ -5,7 +5,39 @@ import React, { forwardRef, useEffect, useMemo, useRef } from "react";
 import { useFilters, usePagination, useRowSelect, useTable } from "react-table";
 import ScrollBar from "simplebar-react";
 import columnShape from "./columnShape";
-import { StyledPagination, StyledSearchIcon, StyledSearchInput, StyledTableBodyRow } from "./styledComponents";
+
+// ################## STYLED COMPONENTS ############################
+import { alpha, InputBase, Pagination, styled } from "@mui/material";
+import SearchIcon from "icons/SearchIcon";
+
+const StyledTableBodyRow = styled(TableRow)(({ theme, selected_row }) => selected_row === "select" ? {
+  backgroundColor: alpha(theme.palette.primary.light, 0.5), position: "relative",
+  "&::after": { top: 0, left: 0, width: "3px", content: '""', height: "100%", position: "absolute", backgroundColor: theme.palette.primary.main }
+} : {});
+
+const StyledPagination = styled(Pagination)(({ theme }) => ({
+  "& .MuiPaginationItem-root": { fontSize: 12, fontWeight: 500, color: theme.palette.text.disabled },
+  "& .MuiPaginationItem-page:hover": {
+    borderRadius: 20, backgroundColor: "transparent", color: theme.palette.primary.main, border: `1px solid ${theme.palette.primary.main}`
+  },
+  "& .MuiPaginationItem-page.Mui-selected": {
+    borderRadius: 20, backgroundColor: "transparent", color: theme.palette.primary.main, border: `1px solid ${theme.palette.primary.main}`
+  },
+  "& .MuiPaginationItem-previousNext": {
+    margin: 10, borderRadius: 20, color: theme.palette.primary.main, border: `1px solid ${theme.palette.primary.main}`,
+    "&:hover": { backgroundColor: "transparent" }
+  }
+}));
+const StyledSearchInput = styled(InputBase)(({ theme }) => ({
+  height: 40, fontSize: 12, maxWidth: 450, width: "100%", fontWeight: 500,
+  padding: "0.5rem", borderRadius: "4px", backgroundColor: "white", color: theme.palette.text.primary
+}));
+
+const StyledSearchIcon = styled(SearchIcon)(({ theme }) => ({
+  fontSize: 16, marginLeft: "0.5rem", marginRight: "0.5rem", color: theme.palette.primary.main
+}));
+// ################## END - STYLED COMPONENTS ############################
+
 const SelectCheckBox = forwardRef(({ indeterminate, ...rest }, ref) => {
   const defaultRef = useRef();
   const resolvedRef = ref || defaultRef;
@@ -35,17 +67,16 @@ const DataTable = ({ data, clearFilter, handleRowSelect, onFilterChange }) => {
     Filter: SearchFilter
   }), []);
   const { getTableProps, getTableBodyProps, headerGroups, prepareRow, page, pageOptions,
-    gotoPage, state, setAllFilters, selectedFlatRows } = useTable({
-      columns, defaultColumn, data: tableData
-    }, useFilters, usePagination, useRowSelect, hooks => {
-      hooks.visibleColumns.push(columns => [{
-        id: "selection",
-        Header: ({ getToggleAllRowsSelectedProps }) => <SelectCheckBox {...getToggleAllRowsSelectedProps()} />,
-        Cell: ({ row }) => {
-          return <SelectCheckBox {...row.getToggleRowSelectedProps()} />;
-        }
-      }, ...columns]);
-    });
+    gotoPage, state, setAllFilters, selectedFlatRows } = useTable({ columns, defaultColumn, data: tableData },
+      useFilters, usePagination, useRowSelect, hooks => {
+        hooks.visibleColumns.push(columns => [{
+          id: "selection",
+          Header: ({ getToggleAllRowsSelectedProps }) => <SelectCheckBox {...getToggleAllRowsSelectedProps()} />,
+          Cell: ({ row }) => {
+            return <SelectCheckBox {...row.getToggleRowSelectedProps()} />;
+          }
+        }, ...columns]);
+      });
   useEffect(() => {
     handleRowSelect(selectedFlatRows);
   }, [selectedFlatRows, handleRowSelect]);

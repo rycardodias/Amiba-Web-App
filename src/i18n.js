@@ -157,7 +157,35 @@ const resources = {
       Chat: "Chat",
       Calendar: "Calendar",
       Contact: "Contact",
-      Privacy: "Privacy"
+      Privacy: "Privacy",
+
+
+      'Add Picture': 'Add Picture',
+      'Choose a file': 'Choose a file',
+
+      Animals: 'Animals',
+      Carts: 'Carts',
+      Certifications: 'Certifications',
+      "Eggs Batch": "Eggs Batch",
+      Explorations: 'Explorations',
+      Menus: 'Menus',
+      Orders: 'Orders',
+      Organizations: 'Organizations',
+      Products: 'Products',
+      Restaurants: 'Restaurants',
+      Users: 'Users',
+
+      Name: 'Name',
+      Type: 'Type',
+      Address: 'Address',
+      Locale: 'Locale',
+      "Zip Code": 'Zip Code',
+      "VAT Number": 'VAT Number',
+      User: 'User',
+
+
+
+
     }
   },
   es: {
@@ -316,7 +344,56 @@ const resources = {
       Chat: "Chat",
       Calendar: "Calendario",
       Contact: "Contacto",
-      Privacy: "Intimidad"
+      Privacy: "Intimidad",
+
+    }
+
+  },
+  pt: {
+    translation: {
+      "is required!": "é requerido!",
+      "New Data Added Successfully": "Novo Registo Adicionado",
+      Cancel: 'Cancelar',
+      Save: 'Salvar',
+      "Error removing": "Erro ao remover",
+      'Clear filter': 'Limpar Filtro',
+      "Add new": 'Adicionar',
+      "Add": 'Adicionar',
+      'Edit': 'Editar',
+      'Find': 'Procurar',
+      'Add Picture': 'Adicionar Imagem',
+      'Choose a file': 'Escolha um ficheiro',
+
+      Animals: 'Animais',
+      Animal: 'Animal',
+      Carts: 'Carrinhos',
+      Cart: 'Carrinho',
+      Certifications: 'Certificações',
+      Certification: 'Certificação',
+      "Eggs Batches": "Lotes",
+      "Eggs Batch": "Lote",
+      Explorations: 'Explorações',
+      Exploration: 'Exploração',
+      Menus: 'Menús',
+      Menu: 'Menú',
+      Orders: 'Encomendas',
+      Order: 'Encomenda',
+      Organizations: 'Organizações',
+      Organization: 'Organização',
+      Products: 'Produtos',
+      Product: 'Produto',
+      Restaurants: 'Restaurantes',
+      Restaurant: 'Restaurante',
+      Users: 'Utilizadores',
+      User: 'Utilizador',
+
+
+      Name: 'Nome',
+      Type: 'Tipo',
+      Address: 'Endereço',
+      Locale: 'Localidade',
+      "Zip Code": 'Código Postal',
+      "VAT Number": 'NIF',
     }
   }
 };

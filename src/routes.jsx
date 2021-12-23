@@ -6,8 +6,8 @@ import { lazy, Suspense } from 'react';
 import { Navigate } from 'react-router-dom';
 
 const Loadable = Component => props => <Suspense fallback={<LoadingScreen />}>
-      <Component {...props} />
-    </Suspense>; // Landing page
+  <Component {...props} />
+</Suspense>; // Landing page
 
 
 // const LandingPage = Loadable(lazy(() => import('./pages/LandingPage')));
@@ -55,9 +55,7 @@ const UserList = Loadable(lazy(() => import('./pages/userManagement/UserList')))
 const UserGrid = Loadable(lazy(() => import('./pages/userManagement/UserGrid')));
 const AddNewUser = Loadable(lazy(() => import('./pages/userManagement/AddNewUser'))); // chat
 
-const OrganizationsList = Loadable(lazy(() => import('pages/backoffice/OrganizationsList'))); // chat
-
-
+const OrganizationsList = Loadable(lazy(() => import('pages/backoffice/OrganizationsList')));
 
 
 const Error = Loadable(lazy(() => import('./pages/404'))); // routes
@@ -71,34 +69,33 @@ const routes = [{
 }, {
   path: 'login',
   element: <GuestGuard>
-        <Login />
-      </GuestGuard>
+    <Login />
+  </GuestGuard>
 }, {
   path: 'register',
   element: <GuestGuard>
-        <Register />
-      </GuestGuard>
+    <Register />
+  </GuestGuard>
 }, {
   path: 'forget-password',
   element: <GuestGuard>
-        <ForgetPassword />
-      </GuestGuard>
-}, 
+    <ForgetPassword />
+  </GuestGuard>
+},
 //COMEÇA O BACKOFFICE
 {
   path: 'dashboard',
   element: <AuthGuard>
-        <DashboardLayout />
-      </AuthGuard>,
+    <DashboardLayout />
+  </AuthGuard>,
   children: [{
-    path: '',
-    element: <DashboardSaaS />
-  }, 
-  {
     path: 'organizations',
     element: <OrganizationsList />
   },
-  
+  // {
+  //   path: '',
+  //   element: <DashboardSaaS />
+  // },
   {
     path: 'sales',
     element: <DashboardSales />
@@ -117,7 +114,7 @@ const routes = [{
   }, {
     path: 'account-settings',
     element: <AccountSettings />
-  },  {
+  }, {
     path: 'uko-project-v1',
     element: <UkoProjectV1 />
   }, {
@@ -174,7 +171,7 @@ const routes = [{
   }, {
     path: 'add-user',
     element: <AddNewUser />
-  },  {
+  }, {
     path: 'about',
     element: <AboutPage />
   }, {
