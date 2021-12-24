@@ -1,4 +1,5 @@
-import { Box, Button, Card, Grid, IconButton, Modal, styled } from "@mui/material";
+import { Box, Button, Card, Grid, IconButton, Modal, styled, Select, InputBase, MenuItem } from "@mui/material";
+import { CameraAlt, KeyboardArrowDown } from "@mui/icons-material";
 import DarkTextField from "components/DarkTextField";
 import FlexBox from "components/FlexBox";
 import { H2, H6, Small } from "components/Typography";
@@ -15,6 +16,14 @@ const StyledModalCard = styled(Card)(({ theme }) => ({
   top: "50%", left: "50%", maxWidth: 450, minWidth: 200, position: "absolute", padding: "1.5rem",
   boxShadow: theme.shadows[2], transform: "translate(-50%, -50%)", width: "100%",
   [theme.breakpoints.down(325)]: { maxWidth: "100%" }
+}));
+const StyledMenuItem = styled(MenuItem)(({ theme }) => ({
+  fontSize: 12, fontWeight: 500, color: theme.palette.text.disabled
+}));
+const StyledSelect = styled(Select)(({ theme }) => ({
+  height: 35, fontSize: 12, padding: "0 1rem", borderRadius: "8px", color: theme.palette.text.primary,
+  backgroundColor: theme.palette.mode === "light" ? theme.palette.secondary[300] : theme.palette.divider,
+  "& .MuiSvgIcon-root": { color: theme.palette.text.disabled }
 }));
 
 const AddModalOrganizations = ({ open, onClose, edit, data }) => {
@@ -57,15 +66,24 @@ const AddModalOrganizations = ({ open, onClose, edit, data }) => {
       <form onSubmit={handleSubmit}>
         <ScrollBar style={{ maxHeight: 400 }}>
           <Grid container spacing={2}>
-            <Grid item xs={6}>
+            <Grid item xs={12}>
               <H6 mb={1}>{t('Name')}</H6>
               <DarkTextField name="name" placeholder={t('Name')} onChange={handleChange} value={values.name} error={Boolean(errors.name && touched.name)} helperText={touched.name && errors.name} />
             </Grid>
 
+
             <Grid item xs={6}>
               <H6 mb={1}>{t('Type')}</H6>
-              <DarkTextField name="type" placeholder={t('Type')} onChange={handleChange} value={values.type}
-                error={Boolean(errors.type && touched.type)} helperText={touched.type && errors.type} />
+              <StyledSelect fullWidth name="type" value={values.type} onChange={handleChange}
+                input={<InputBase placeholder="Type" />} IconComponent={() => <KeyboardArrowDown fontSize="small" />}>
+                <StyledMenuItem value="AMIBA">{t('Amiba')}</StyledMenuItem>
+                <StyledMenuItem value="MATADOURO">{t('Matadouro')}</StyledMenuItem>
+              </StyledSelect>
+            </Grid>
+            <Grid item xs={6}>
+              <H6 mb={1}>{t('VAT Number')}</H6>
+              <DarkTextField name="fiscalNumber" placeholder={t('VAT Number')} onChange={handleChange} value={values.fiscalNumber}
+                error={Boolean(errors.fiscalNumber && touched.fiscalNumber)} helperText={touched.fiscalNumber && errors.fiscalNumber} />
             </Grid>
 
             <Grid item xs={6}>
@@ -83,11 +101,7 @@ const AddModalOrganizations = ({ open, onClose, edit, data }) => {
               <DarkTextField name="zipcode" placeholder={t('Zip Code')} onChange={handleChange} value={values.zipcode}
                 error={Boolean(errors.zipcode && touched.zipcode)} helperText={touched.zipcode && errors.zipcode} />
             </Grid>
-            <Grid item xs={6}>
-              <H6 mb={1}>{t('VAT Number')}</H6>
-              <DarkTextField name="fiscalNumber" placeholder={t('VAT Number')} onChange={handleChange} value={values.fiscalNumber}
-                error={Boolean(errors.fiscalNumber && touched.fiscalNumber)} helperText={touched.fiscalNumber && errors.fiscalNumber} />
-            </Grid>
+
             <Grid item xs={6}>
               <H6 mb={1}>{t('User')}</H6>
               <DarkTextField name="UserId" placeholder={t('User')} onChange={handleChange} value={values.UserId}

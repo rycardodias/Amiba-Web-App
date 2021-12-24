@@ -357,6 +357,8 @@ const resources = {
       Save: 'Salvar',
       "Error removing": "Erro ao remover",
       'Clear filter': 'Limpar Filtro',
+      "Delete Selected": "Eliminar Seleção",
+      "Selected": "Selecionado(s)",
       "Add new": 'Adicionar',
       "Add": 'Adicionar',
       'Edit': 'Editar',

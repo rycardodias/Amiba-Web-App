@@ -73,9 +73,10 @@ const DataTableV2 = () => {
 
       <ButtonWrapper alignItems="center">
         {selectedRows.length > 0 && <FlexBox alignItems="center" mr={2}>
-          <H6 mr={1}>{selectedRows.length} Selected</H6>
+          <H6 mr={1}>{selectedRows.length} {t('Selected')}</H6>
           <Button size="small" color="error" variant="contained" onClick={handleDelete} sx={{ color: "common.white" }}>
-            Delete Selected
+
+            {t('Delete Selected')}
           </Button>
         </FlexBox>}
 
