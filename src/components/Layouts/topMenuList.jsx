@@ -33,24 +33,6 @@ const index = [
       path: ""
     }]
   }, {
-    title: "Account Settings",
-    Icon: Icons.AccountSettingsIcon,
-    path: "/dashboard/account-settings"
-  }, {
-    title: "User Profile",
-    Icon: Icons.UserProfileIcon,
-    path: "/dashboard/user-profile"
-  }, {
-    title: "Data Table",
-    Icon: Icons.DataTableIcon,
-    children: [{
-      subTitle: "Data Table V1",
-      path: "/dashboard/data-table-v1"
-    }, {
-      subTitle: "Data Table V2",
-      path: "/dashboard/data-table-v2"
-    }]
-  }, {
     title: "Admin Ecommerce",
     Icon: Icons.AdminEcommerceIcon,
     children: [{
@@ -104,25 +86,6 @@ const index = [
     }, {
       subTitle: "Add User",
       path: "/dashboard/add-user"
-    }]
-  }, {
-    title: "Projects",
-    Icon: Icons.ProjectIcon,
-    children: [{
-      subTitle: "Project List V1",
-      path: "/dashboard/uko-project-v1"
-    }, {
-      subTitle: "Project List V2",
-      path: "/dashboard/uko-project-v2"
-    }, {
-      subTitle: "Project List V3",
-      path: "/dashboard/uko-project-v3"
-    }, {
-      subTitle: "Project Details",
-      path: "/dashboard/project-details"
-    }, {
-      subTitle: "Team Member",
-      path: "/dashboard/team-member"
     }]
   }, {
     title: "Sessions",

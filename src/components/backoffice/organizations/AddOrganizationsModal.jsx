@@ -1,5 +1,5 @@
-import { Box, Button, Card, Grid, IconButton, Modal, styled, Select, InputBase, MenuItem } from "@mui/material";
-import { CameraAlt, KeyboardArrowDown } from "@mui/icons-material";
+import { Box, Button, Grid, IconButton, Modal, InputBase } from "@mui/material";
+import { KeyboardArrowDown } from "@mui/icons-material";
 import DarkTextField from "components/DarkTextField";
 import FlexBox from "components/FlexBox";
 import { H2, H6, Small } from "components/Typography";
@@ -9,54 +9,76 @@ import toast from "react-hot-toast";
 import ScrollBar from "simplebar-react";
 import * as Yup from "yup"; // component props interface
 import * as organizationsRequests from 'lib/requests/organizationsRequests'
+import * as usersRequests from 'lib/requests/usersRequests'
+import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { organizationTypes } from "lib/values/types";
 
-// styled components
-const StyledModalCard = styled(Card)(({ theme }) => ({
-  top: "50%", left: "50%", maxWidth: 450, minWidth: 200, position: "absolute", padding: "1.5rem",
-  boxShadow: theme.shadows[2], transform: "translate(-50%, -50%)", width: "100%",
-  [theme.breakpoints.down(325)]: { maxWidth: "100%" }
-}));
-const StyledMenuItem = styled(MenuItem)(({ theme }) => ({
-  fontSize: 12, fontWeight: 500, color: theme.palette.text.disabled
-}));
-const StyledSelect = styled(Select)(({ theme }) => ({
-  height: 35, fontSize: 12, padding: "0 1rem", borderRadius: "8px", color: theme.palette.text.primary,
-  backgroundColor: theme.palette.mode === "light" ? theme.palette.secondary[300] : theme.palette.divider,
-  "& .MuiSvgIcon-root": { color: theme.palette.text.disabled }
-}));
+import { StyledModalCard, StyledMenuItem, StyledSelect } from 'components/backoffice/styledComponents/AddModalStyles'
 
-const AddModalOrganizations = ({ open, onClose, edit, data }) => {
+const AddOrganizationsModal = ({ open, onClose, edit, data }) => {
   const { t } = useTranslation();
 
   const initialValues = {
-    name: data?.name,
-    type: data?.type,
-    UserId: data?.UserId,
-    address: data?.address,
-    locale: data?.locale,
-    zipcode: data?.zipcode,
-    fiscalNumber: data?.fiscalNumber,
-    telephone: data?.telephone,
-    mobilePhone: data?.mobilePhone
+    id: data?.id || "",
+    name: data?.name || "",
+    type: data?.type || "",
+    UserId: data?.UserId || "",
+    address: data?.address || "",
+    locale: data?.locale || "",
+    zipcode: data?.zipcode || "",
+    fiscalNumber: data?.fiscalNumber || "",
+    telephone: data?.telephone || "",
+    mobilePhone: data?.mobilePhone || ""
   };
 
-  const fieldValidationSchema = Yup.object().shape({
-    name: Yup.string().min(3, "Too Short").required(`${t('Name')} ${t('is required!')}`),
-    type: Yup.string().required(`${t('Type')} ${t('is required!')}`),
+  const [users, setusers] = useState([])
 
+  async function initialData() {
+    const res = await usersRequests.getUsers()
+    if (res.error) return
+    if (res.data.error) return toast.error(t("Error Getting essential Data"))
+    setusers(res.data.data)
+  }
+
+  useEffect(() => {
+    initialData()
+  }, [])
+
+
+  const fieldValidationSchema = Yup.object().shape({
+    name: Yup.string().min(3, t("Too Short")).required(`${t('Name')} ${t('is required!')}`),
+    type: Yup.string().required(`${t('Type')} ${t('is required!')}`),
+    UserId: Yup.string().required(`${t('Responsable')} ${t('is required!')}`),
+    address: Yup.string().min(6, t("Too Short")).required(`${t('Name')} ${t('is required!')}`),
+    locale: Yup.string().min(6, t("Too Short")).required(`${t('Locale')} ${t('is required!')}`),
+    zipcode: Yup.string().min(6, t("Too Short")).required(`${t('Zip Code')} ${t('is required!')}`),
+    fiscalNumber: Yup.string().min(9, t("Too Short")).required(`${t('VAT Number')} ${t('is required!')}`),
   });
 
   const { values, errors, handleChange, handleSubmit, touched } = useFormik({
     initialValues, validationSchema: fieldValidationSchema,
     onSubmit: values => {
-      organizationsRequests.createOrganization(values.type, values.UserId, values.name, values.address, values.locale,
-        values.zipcode, values.fiscalNumber, values.telephone, values.mobilePhone)
-        .then(() => {
-          onClose();
-          toast.success(t("New Data Added Successfully"));
-        })
-        .catch(error => console.log(error));
+
+      if (edit) {
+        organizationsRequests.updateOrganization(values.id, values.type, values.UserId, values.name, values.address, values.locale,
+          values.zipcode, values.fiscalNumber, values.telephone, values.mobilePhone)
+          .then(response => {
+            if (response.data.error) return toast.error(t("Error Updating Record"));;
+            onClose(true);
+            toast.success(t("Record Updated Successfully"));
+          })
+          .catch(error => console.log(error));
+      } else {
+        organizationsRequests.createOrganization(values.type, values.UserId, values.name, values.address, values.locale,
+          values.zipcode, values.fiscalNumber, values.telephone, values.mobilePhone)
+          .then(response => {
+            if (response.data.error) return toast.error(t("Error Creating Record"));
+            onClose(true);
+            toast.success(t("New Record Added Successfully"));
+          })
+          .catch(error => console.log(error));
+      }
     }
   });
 
@@ -74,10 +96,10 @@ const AddModalOrganizations = ({ open, onClose, edit, data }) => {
 
             <Grid item xs={6}>
               <H6 mb={1}>{t('Type')}</H6>
-              <StyledSelect fullWidth name="type" value={values.type} onChange={handleChange}
-                input={<InputBase placeholder="Type" />} IconComponent={() => <KeyboardArrowDown fontSize="small" />}>
-                <StyledMenuItem value="AMIBA">{t('Amiba')}</StyledMenuItem>
-                <StyledMenuItem value="MATADOURO">{t('Matadouro')}</StyledMenuItem>
+              <StyledSelect fullWidth name="type" value={values.type} onChange={handleChange} input={<InputBase placeholder="Type" />} IconComponent={() => <KeyboardArrowDown fontSize="small" />}>
+                {organizationTypes.map(item => {
+                  return <StyledMenuItem value={item.id}>{t(item.name)}</StyledMenuItem>
+                })}
               </StyledSelect>
             </Grid>
             <Grid item xs={6}>
@@ -103,9 +125,13 @@ const AddModalOrganizations = ({ open, onClose, edit, data }) => {
             </Grid>
 
             <Grid item xs={6}>
-              <H6 mb={1}>{t('User')}</H6>
-              <DarkTextField name="UserId" placeholder={t('User')} onChange={handleChange} value={values.UserId}
-                error={Boolean(errors.UserId && touched.UserId)} helperText={touched.UserId && errors.UserId} />
+              <H6 mb={1}>{t('Responsable')}</H6>
+              <StyledSelect fullWidth name="UserId" value={values.UserId} onChange={handleChange} input={<InputBase placeholder={t('Responsable')} />} IconComponent={() => <KeyboardArrowDown fontSize="small" />}>
+                <StyledMenuItem selected value="">{`${t('Select')} ${t('Responsable')}`}</StyledMenuItem>
+                {users.map(item => {
+                  return <StyledMenuItem value={item.id}>{t(item.name)}</StyledMenuItem>
+                })}
+              </StyledSelect>
             </Grid>
 
             <Grid item xs={12}>
@@ -141,4 +167,4 @@ const AddModalOrganizations = ({ open, onClose, edit, data }) => {
   </Modal>;
 };
 
-export default AddModalOrganizations;
+export default AddOrganizationsModal;

@@ -1,6 +1,7 @@
-import { Add } from "@mui/icons-material";
+import { Add, Edit } from "@mui/icons-material";
+
 import { Box, Button, Card, styled } from "@mui/material";
-import AddModalOrganizations from "components/backoffice/organizations/AddModalOrganizations";
+import AddOrganizationsModal from "components/backoffice/organizations/AddOrganizationsModal";
 import DataTable from "components/backoffice/organizations/DataTable";
 import FlexBox from "components/FlexBox";
 import SearchInput from "components/SearchInput";
@@ -82,18 +83,17 @@ const DataTableV2 = () => {
 
         {!!hasFilter && <FlexBox alignItems="center" mr={2}>
           <Button size="small" color="error" variant="contained" sx={{ color: "common.white" }} onClick={handleClearFilter}>
-            {/* Clear filter */}
             {t('Clear filter')}
           </Button>
         </FlexBox>}
 
         <Button variant="contained" size="small" endIcon={<Add />} onClick={() => setOpenModal(true)}>
-          {`${t('Add')} ${tableSingleName}`}
+          {`${t('Add')} ${t(tableSingleName)}`}
         </Button>
       </ButtonWrapper>
     </FlexBox>
-
-    <AddModalOrganizations open={openModal} onClose={() => { setOpenModal(false); getInitialData() }} />
+    
+    <AddOrganizationsModal open={openModal} onClose={(newRecord) => { setOpenModal(false); newRecord===true && getInitialData() }} />
 
     <Card sx={{ marginTop: 3 }}>
       <DataTable data={tableData} clearFilter={clearFilter} handleRowSelect={handleRowSelect} onFilterChange={filters => setHasFilter(filters.length)} />

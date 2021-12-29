@@ -7,6 +7,7 @@ import { Fragment, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import PopoverLayout from "./PopoverLayout"; // styled components
+import { useTranslation } from "react-i18next";
 
 const StyledSmall = styled(Small)(({
   theme
@@ -21,6 +22,8 @@ const StyledSmall = styled(Small)(({
 }));
 
 const ProfilePopover = () => {
+  const { t } = useTranslation();
+
   const anchorRef = useRef(null);
   const navigate = useNavigate();
   const {
@@ -73,18 +76,13 @@ const ProfilePopover = () => {
         <Box pt={1}>
 
           <StyledSmall onClick={() => handleMenuItem("/dashboard/account-settings")}>
-            Settings
+            {t("Settings")}
           </StyledSmall>
 
-          <Divider sx={{
-          my: 1
-        }} />
+          <Divider sx={{ my: 1 }} />
 
-          <StyledSmall onClick={() => {
-          logout();
-          toast.error("You Logout Successfully");
-        }}>
-            Sign Out
+          <StyledSmall onClick={() => { logout(); toast.error("You Logout Successfully"); }}>
+          {t("Sign Out")}
           </StyledSmall>
         </Box>
       </PopoverLayout>

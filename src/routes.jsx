@@ -36,8 +36,6 @@ const UkoProjectV2 = Loadable(lazy(() => import('./pages/ukoProjects/UkoProjectV
 const UkoProjectV3 = Loadable(lazy(() => import('./pages/ukoProjects/UkoProjectV3')));
 const ProjectDetails = Loadable(lazy(() => import('./pages/ukoProjects/ProjectDetails'))); // user profile
 
-const UserProfile = Loadable(lazy(() => import('./pages/UserProfile'))); // admin eCommerce
-
 const OrderList = Loadable(lazy(() => import('./pages/adminEcommerce/OrderList')));
 const ProductList = Loadable(lazy(() => import('./pages/adminEcommerce/ProductList')));
 const CustomerList = Loadable(lazy(() => import('./pages/adminEcommerce/CustomerList'))); // shop
@@ -82,6 +80,7 @@ const routes = [{
     <ForgetPassword />
   </GuestGuard>
 },
+
 //COMEÇA O BACKOFFICE
 {
   path: 'dashboard',
@@ -129,9 +128,6 @@ const routes = [{
   }, {
     path: 'team-member',
     element: <TeamMember />
-  }, {
-    path: 'user-profile',
-    element: <UserProfile />
   }, {
     path: 'product-list',
     element: <ProductList />

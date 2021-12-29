@@ -1,5 +1,5 @@
 const organizationTypes = [
-    { id: "PRODUTOR", name: "Produtor" },
+    { id: "PRODUCTOR", name: "Productor" },
     { id: "AMIBA", name: "Amiba" },
     { id: "MATADOURO", name: "Matadouro" },
 ]

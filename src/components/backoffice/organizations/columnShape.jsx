@@ -5,7 +5,10 @@ import FlexBox from "components/FlexBox";
 import { Small, Tiny } from "components/Typography";
 import UkoAvatar from "components/UkoAvatar";
 import { format } from "date-fns";
-import { useMemo } from "react"; // common cell component
+import { useMemo, useState } from "react"; // common cell component
+
+import EditIconButton from "components/EditIconButton";
+import AddOrganizationsModal from "./AddOrganizationsModal";
 
 const CommonCell = ({ title, body }) => <FlexBox flexDirection="column">
   <Small mb={0.5}>{title}</Small>
@@ -37,6 +40,11 @@ const columnShape = [{
 },
 {
   minWidth: 150,
+  Header: "Fiscal Number",
+  accessor: "fiscalNumber",
+},
+{
+  minWidth: 150,
   Header: "Responsable",
   accessor: "User.name",
   Filter: SelectColumnFilter
@@ -63,6 +71,18 @@ const columnShape = [{
   Header: "Address",
   accessor: "address",
   Filter: SelectColumnFilter
+}, {
+  Header: " ",
+  Cell: ({
+    row
+  }) => {
+    const [openModal, setOpenModal] = useState(false);
+    return <>
+          <EditIconButton onClick={() => setOpenModal(true)} />
+
+          <AddOrganizationsModal edit open={openModal} data={row.original} onClose={() => setOpenModal(false)} />
+        </>;
+  }
 }];
 
 export function SelectColumnFilter({ column }) {
