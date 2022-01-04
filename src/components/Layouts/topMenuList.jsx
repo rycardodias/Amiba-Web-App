@@ -10,41 +10,6 @@ const index = [
       subTitle: "Explorations",
       path: "/dashboard/explorations"
     }]
-  },
-
-  {
-    title: "Dashboard",
-    Icon: Icons.DashboardIcon,
-    children: [{
-      subTitle: "Dashboards",
-      subCategories: [{
-        name: "Saas",
-        path: "/dashboard/"
-      }, {
-        name: "Sales",
-        path: "/dashboard/sales"
-      }, {
-        name: "Project Management",
-        path: "/dashboard/project-management"
-      }, {
-        name: "Project Management V2",
-        path: "/dashboard/project-management-v2"
-      }],
-      path: ""
-    }]
-  }, {
-    title: "Admin Ecommerce",
-    Icon: Icons.AdminEcommerceIcon,
-    children: [{
-      subTitle: "Product management",
-      path: "/dashboard/product-list"
-    }, {
-      subTitle: "Order management",
-      path: "/dashboard/order-list"
-    }, {
-      subTitle: "Customer management",
-      path: "/dashboard/customer-list"
-    }]
   }, {
     title: "Ecommerce",
     Icon: Icons.EcommerceIcon,
@@ -60,6 +25,20 @@ const index = [
     }, {
       subTitle: "Purchase Confirmation",
       path: "/dashboard/payment-success"
+    }]
+  },
+  {
+    title: "Admin Ecommerce",
+    Icon: Icons.AdminEcommerceIcon,
+    children: [{
+      subTitle: "Product management",
+      path: "/dashboard/product-list"
+    }, {
+      subTitle: "Order management",
+      path: "/dashboard/order-list"
+    }, {
+      subTitle: "Customer management",
+      path: "/dashboard/customer-list"
     }]
   }, {
     title: "Invoice",

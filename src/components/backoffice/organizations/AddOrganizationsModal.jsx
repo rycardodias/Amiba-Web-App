@@ -7,7 +7,7 @@ import { useFormik } from "formik";
 import ImageUploadIcon from "icons/ImageUploadIcon";
 import toast from "react-hot-toast";
 import ScrollBar from "simplebar-react";
-import * as Yup from "yup"; // component props interface
+import * as Yup from "yup";
 import * as organizationsRequests from 'lib/requests/organizationsRequests'
 import * as usersRequests from 'lib/requests/usersRequests'
 import { useState, useEffect } from "react";
@@ -15,6 +15,7 @@ import { useTranslation } from "react-i18next";
 import { organizationTypes } from "lib/values/types";
 
 import { StyledModalCard, StyledMenuItem, StyledSelect } from 'components/backoffice/styledComponents/AddModalStyles'
+
 
 const AddOrganizationsModal = ({ open, onClose, edit, data }) => {
   const { t } = useTranslation();
@@ -74,6 +75,7 @@ const AddOrganizationsModal = ({ open, onClose, edit, data }) => {
           values.zipcode, values.fiscalNumber, values.telephone, values.mobilePhone)
           .then(response => {
             if (response.data.error) return toast.error(t("Error Creating Record"));
+            
             onClose(true);
             toast.success(t("New Record Added Successfully"));
           })
@@ -92,7 +94,6 @@ const AddOrganizationsModal = ({ open, onClose, edit, data }) => {
               <H6 mb={1}>{t('Name')}</H6>
               <DarkTextField name="name" placeholder={t('Name')} onChange={handleChange} value={values.name} error={Boolean(errors.name && touched.name)} helperText={touched.name && errors.name} />
             </Grid>
-
 
             <Grid item xs={6}>
               <H6 mb={1}>{t('Type')}</H6>

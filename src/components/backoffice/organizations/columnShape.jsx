@@ -1,23 +1,17 @@
-import { KeyboardArrowDown } from "@mui/icons-material";
-import { DatePicker } from "@mui/lab";
-import { InputBase, MenuItem, Select, TextField, useTheme } from "@mui/material";
-import FlexBox from "components/FlexBox";
-import { Small, Tiny } from "components/Typography";
-import UkoAvatar from "components/UkoAvatar";
-import { format } from "date-fns";
-import { useMemo, useState } from "react"; // common cell component
 
+import { Small, Tiny } from "components/Typography";
+import FlexBox from "components/FlexBox";
+import UkoAvatar from "components/UkoAvatar";
+import { useState } from "react"; // common cell component
 import EditIconButton from "components/EditIconButton";
 import AddOrganizationsModal from "./AddOrganizationsModal";
+import i18n from 'i18next';
+import { CommonCell, SelectColumnFilter, DateColumnFilter } from 'components/backoffice/utils/columnFilters'
 
-const CommonCell = ({ title, body }) => <FlexBox flexDirection="column">
-  <Small mb={0.5}>{title}</Small>
-  <Tiny color="text.disabled">{body}</Tiny>
-</FlexBox>;
 
 const columnShape = [{
   minWidth: 200,
-  Header: "Name",
+  Header: () => i18n.t("Name"),
   accessor: "name",
   Cell: ({ row }) => {
     const { avatar, name, id } = row.original;
@@ -30,7 +24,7 @@ const columnShape = [{
     </FlexBox>;
   }
 }, {
-  Header: "Type",
+  Header: () => i18n.t("Type"),
   accessor: "type",
   Filter: SelectColumnFilter,
   Cell: ({ row }) => {
@@ -40,17 +34,17 @@ const columnShape = [{
 },
 {
   minWidth: 150,
-  Header: "Fiscal Number",
+  Header: () => i18n.t("VAT Number"),
   accessor: "fiscalNumber",
 },
 {
   minWidth: 150,
-  Header: "Responsable",
+  Header: () => i18n.t("Responsable"),
   accessor: "User.name",
   Filter: SelectColumnFilter
 }, {
   minWidth: 150,
-  Header: "Phone/Mobile",
+  Header: () => i18n.t("Phone/Mobile"),
   accessor: "telephone",
   Cell: ({ row }) => {
     const { telephone, mobilePhone } = row.original;
@@ -59,7 +53,7 @@ const columnShape = [{
 },
 {
   minWidth: 150,
-  Header: "ZIP Code",
+  Header: () => i18n.t("ZIP Code"),
   accessor: "zipcode",
   Cell: ({ row }) => {
     const { zipcode, locale } = row.original;
@@ -68,60 +62,19 @@ const columnShape = [{
 },
 {
   minWidth: 170,
-  Header: "Address",
+  Header: () => i18n.t("Address"),
   accessor: "address",
   Filter: SelectColumnFilter
 }, {
   Header: " ",
-  Cell: ({
-    row
-  }) => {
+  Cell: ({ row }) => {
     const [openModal, setOpenModal] = useState(false);
     return <>
-          <EditIconButton onClick={() => setOpenModal(true)} />
-
-          <AddOrganizationsModal edit open={openModal} data={row.original} onClose={() => setOpenModal(false)} />
-        </>;
+      <EditIconButton onClick={() => setOpenModal(true)} />
+      <AddOrganizationsModal edit open={openModal} data={row.original} onClose={() => setOpenModal(false)} />
+    </>;
   }
 }];
 
-export function SelectColumnFilter({ column }) {
-  const { filterValue, setFilter, preFilteredRows, id } = column;
-  const theme = useTheme();
-  const options = useMemo(() => {
-    const options = new Set();
-    preFilteredRows.forEach(row => options.add(row.values[id]));
-    return [...options.values()];
-  }, [id, preFilteredRows]); // Render a multi-select box
 
-  return <Select value={filterValue || ""} onChange={e => setFilter(e.target.value || undefined)} IconComponent={() => <KeyboardArrowDown color="disabled" />} input={<InputBase sx={{
-    height: 40, width: 110, fontSize: 12, fontWeight: 600, padding: "0 8px",
-    borderRadius: "8px", color: "text.primary",
-    backgroundColor: theme.palette.mode === "light" ? "#ECEFF5" : "divider",
-    "& .MuiPopover-paper": { boxShadow: "none" },
-    "& > .MuiSelect-select": { paddingRight: "0 !important" }
-  }} />}>
-    <MenuItem value="" sx={{ fontSize: 12, fontWeight: 500 }}> All </MenuItem>
-    {options.map((option, i) => <MenuItem key={i} value={option} sx={{ fontSize: 12, fontWeight: 500 }}>
-      {option}
-    </MenuItem>)}
-  </Select>;
-}
-export function DateColumnFilter({ column }) {
-  const { filterValue, setFilter } = column;
-  const theme = useTheme();
-  const handleChange = newValue => {
-    const date = format(new Date(newValue), "MMM dd, yyyy") || undefined;
-    setFilter(date);
-  };
-
-  return <DatePicker value={filterValue || ""} onChange={handleChange} renderInput={params => {
-    return <TextField {...params} disabled error={false} inputProps={{ placeholder: "" }} sx={{
-      "& .MuiOutlinedInput-root": { height: 40, borderRadius: "8px", backgroundColor: theme.palette.mode === "light" ? "#ECEFF5" : "divider" },
-      "& .MuiOutlinedInput-notchedOutline": { border: "none" },
-      "& .MuiOutlinedInput-input": { padding: 0, paddingLeft: 1 },
-      "& .MuiSvgIcon-root": { fontSize: 22, color: "text.disabled" }
-    }} />;
-  }} />;
-}
 export default columnShape;

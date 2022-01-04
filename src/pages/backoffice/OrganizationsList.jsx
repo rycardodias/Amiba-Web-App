@@ -2,26 +2,26 @@ import { Add, Edit } from "@mui/icons-material";
 
 import { Box, Button, Card, styled } from "@mui/material";
 import AddOrganizationsModal from "components/backoffice/organizations/AddOrganizationsModal";
-import DataTable from "components/backoffice/organizations/DataTable";
+import DataTable from "components/backoffice/utils/DataTable";
 import FlexBox from "components/FlexBox";
 import SearchInput from "components/SearchInput";
 import { H6 } from "components/Typography";
 import useTitle from "hooks/useTitle";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import axios from "utils/axios"; // styled components
 import * as organizationsRequests from 'lib/requests/organizationsRequests'
 import toast from "react-hot-toast";
+import columnShape from "components/backoffice/organizations/columnShape";
+
 
 const ButtonWrapper = styled(FlexBox)(({ theme }) => ({
   [theme.breakpoints.down(500)]: {
     marginTop: 10, width: "100%", flexDirection: "column-reverse",
-    "& > .MuiBox-root": { width: "100%", margin: "10px 0", alignItems: "center", flexDirection: "column" },
-    "& .MuiButton-root": { minWidth: "100%" }
+    "& > .MuiBox-root": { width: "100%", margin: "10px 0", alignItems: "center", flexDirection: "column" }, "& .MuiButton-root": { minWidth: "100%" }
   }
 }));
 
-const DataTableV2 = () => {
+const OrganizationsList = () => {
   const { t } = useTranslation();
   const tableName = t('Organizations')
   const tableSingleName = t('Organization')
@@ -96,9 +96,9 @@ const DataTableV2 = () => {
     <AddOrganizationsModal open={openModal} onClose={(newRecord) => { setOpenModal(false); newRecord===true && getInitialData() }} />
 
     <Card sx={{ marginTop: 3 }}>
-      <DataTable data={tableData} clearFilter={clearFilter} handleRowSelect={handleRowSelect} onFilterChange={filters => setHasFilter(filters.length)} />
+      <DataTable data={tableData} columnShape={columnShape} clearFilter={clearFilter} handleRowSelect={handleRowSelect} onFilterChange={filters => setHasFilter(filters.length)} />
     </Card>
   </Box>;
 };
 
-export default DataTableV2;
+export default OrganizationsList;

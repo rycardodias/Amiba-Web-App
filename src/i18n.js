@@ -426,7 +426,8 @@ const resources = {
       "Zip Code": 'Código Postal',
       "VAT Number": 'NIF',
       Responsable: "Responsável",
-
+      "Phone/Mobile": "Telefone/Telemóvel",
+      "ZIP Code": "Código Postal",
       Productor: 'Produtor'
     }
   }
