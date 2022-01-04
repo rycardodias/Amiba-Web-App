@@ -3,15 +3,9 @@ import Login from "pages/authentication/Login";
 import React, { Fragment, useState } from "react";
 import { Navigate, useLocation } from "react-router-dom"; // component props interface
 
-const AuthGuard = ({
-  children
-}) => {
-  const {
-    isAuthenticated
-  } = useAuth();
-  const {
-    pathname
-  } = useLocation();
+const AuthGuard = ({ children }) => {
+  const { isAuthenticated } = useAuth();
+  const { pathname } = useLocation();
   const [requestedLocation, setRequestedLocation] = useState(null);
 
   if (!isAuthenticated) {

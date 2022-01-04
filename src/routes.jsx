@@ -38,16 +38,12 @@ const ProjectDetails = Loadable(lazy(() => import('./pages/ukoProjects/ProjectDe
 
 const OrderList = Loadable(lazy(() => import('./pages/adminEcommerce/OrderList')));
 const ProductList = Loadable(lazy(() => import('./pages/adminEcommerce/ProductList')));
-const CustomerList = Loadable(lazy(() => import('./pages/adminEcommerce/CustomerList'))); // shop
 
 const Shop = Loadable(lazy(() => import('./pages/shop')));
 const Cart = Loadable(lazy(() => import('./pages/shop/Cart')));
 const Payment = Loadable(lazy(() => import('./pages/shop/Payment')));
 const PaymentSuccess = Loadable(lazy(() => import('./pages/shop/PaymentSuccess'))); // invoice
 
-const InvoiceList = Loadable(lazy(() => import('./pages/invoice/InvoiceList')));
-const AddInvoice = Loadable(lazy(() => import('./pages/invoice/AddInvoice')));
-const InvoiceDetails = Loadable(lazy(() => import('./pages/invoice/InvoiceDetails'))); // user management
 
 const UserList = Loadable(lazy(() => import('./pages/userManagement/UserList')));
 const UserGrid = Loadable(lazy(() => import('./pages/userManagement/UserGrid')));
@@ -134,10 +130,7 @@ const routes = [{
   }, {
     path: 'order-list',
     element: <OrderList />
-  }, {
-    path: 'customer-list',
-    element: <CustomerList />
-  }, {
+  },  {
     path: 'shop',
     element: <Shop />
   }, {
@@ -149,16 +142,7 @@ const routes = [{
   }, {
     path: 'payment-success',
     element: <PaymentSuccess />
-  }, {
-    path: 'invoice-list',
-    element: <InvoiceList />
-  }, {
-    path: 'add-invoice',
-    element: <AddInvoice />
-  }, {
-    path: 'invoice-details',
-    element: <InvoiceDetails />
-  }, {
+  },  {
     path: 'user-list',
     element: <UserList />
   }, {

@@ -1,5 +1,5 @@
 import LoadingScreen from "components/LoadingScreen";
-// import jwtDecode from "jwt-decode";
+import jwtDecode from "jwt-decode";
 import { createContext, useEffect, useReducer } from "react";
 import axios from "utils/axios"; // All types
 import * as usersRequests from 'lib/requests/usersRequests'
@@ -24,10 +24,11 @@ const initialState = {
 const isValidToken = accessToken => {
   return true
   //TODO verificar token
-  // if (!accessToken) return false;
-  // const decodedToken = jwtDecode(accessToken);
-  // const currentTime = Date.now() / 1000;
-  // return decodedToken.exp > currentTime;
+  if (!accessToken) return false;
+  const decodedToken = jwtDecode(accessToken);
+  const currentTime = Date.now() / 1000;
+  
+  return decodedToken.exp > currentTime;
 };
 
 const setSession = accessToken => {
@@ -36,16 +37,6 @@ const setSession = accessToken => {
     axios.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
   } else {
     localStorage.removeItem("accessToken");
-    delete axios.defaults.headers.common.Authorization;
-  }
-};
-
-const setSessionUserId = UserId => {
-  if (UserId) {
-    localStorage.setItem("UserId", UserId);
-    axios.defaults.headers.common.Authorization = `Bearer ${UserId}`;
-  } else {
-    localStorage.removeItem("UserId");
     delete axios.defaults.headers.common.Authorization;
   }
 };
@@ -115,18 +106,8 @@ export const AuthProvider = ({
 
     const me = await usersRequests.getUserByToken(response.data.data)
 
-    // const userList = [{
-    //   id: 1, //
-    //   role: "SA",
-    //   name: "Jason Alexander", //
-    //   username: "jason_alexander",
-    //   email: "demo@example.com", //
-    //   avatar: "/static/avatar/001-man.svg",
-    //   age: 25 // password: 'v&)3?2]:'
-    // }];
-
     setSession(response.data.data);
-    setSessionUserId(me.data.data.id)
+
     dispatch({
       type: Types.Login,
       payload: {
@@ -137,15 +118,14 @@ export const AuthProvider = ({
   };
 
   const register = async (email, name, password) => {
-    
+
     const response = await usersRequests.createUser(name, email, password)
     if (response.error) return response
     if (response.data.error) return response
-    
+
     const { token, user } = response.data.data
 
     setSession(token);
-    setSessionUserId(user.id)
 
     dispatch({
       type: Types.Register,
@@ -158,7 +138,6 @@ export const AuthProvider = ({
 
   const logout = () => {
     setSession(null);
-    setSessionUserId(null)
     dispatch({
       type: Types.Logout
     });
@@ -168,11 +147,11 @@ export const AuthProvider = ({
     (async () => {
       try {
         const accessToken = window.localStorage.getItem("accessToken");
+  
         if (accessToken && isValidToken(accessToken)) {
-          
+
           const response = await usersRequests.getUserByToken(accessToken) //@ts-ignore
           setSession(accessToken);
-          setSessionUserId(response.data.data.id)
           dispatch({
             type: Types.Init,
             payload: {

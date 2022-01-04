@@ -1,5 +1,5 @@
 
-import { units } from "src/lib/values/units"
+import { units } from "lib/values/units"
 
 const convertUnitNames = (unit) => {
     if (!unit) return ''

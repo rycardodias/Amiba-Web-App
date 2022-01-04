@@ -39,7 +39,7 @@ const updateAddress = async (id, token, address, locale, zipcode) => {
 };
 
 const updatePassword = async (oldPassword, newPassword) => {
-    const id = localStorage.getItem('UserId')
+    const id = localStorage.getItem('UserId') //TEM DE SER ALTERADO
     const token = localStorage.getItem('accessToken')
     return await sendRequest('PUT', 'users/update/password', { id, token, oldPassword, newPassword });
 };

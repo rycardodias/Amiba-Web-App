@@ -1,41 +1,26 @@
-import { createCart } from 'src/lib/requests/cartsRequests'
-import { getProductsAllAvailableId } from 'src/lib/requests/productsRequests'
-import { error_missing_quantity } from 'src/lib/values/messages'
+import { createCart } from 'lib/requests/cartsRequests'
 
-const addItem = async (ProductId, quantity, UserId) => {
-    const productsAvailable = (await getProductsAllAvailableId(ProductId)).data
-
-    if (productsAvailable.error) {
-        return 
-    }
-
-    if (productsAvailable.data.AnimalProducts.length > 0) {
-        return addAnimalProducts(UserId, quantity, productsAvailable.data.AnimalProducts)
-    } else if (productsAvailable.data.EggsBatchProducts.length > 0) {
-        return addEggsBatchProducts(UserId, quantity, productsAvailable.data.EggsBatchProducts)
+const addItem = async (Product, quantity, token) => {
+    if (Product.type === "ANIMAL") {
+        return await addAnimalProducts(token, quantity, Product.AnimalProducts)
     } else {
-        return error_missing_quantity
+        return await addEggsBatchProducts(token, quantity, Product.EggsBatchProducts)
     }
-
-
 }
 
 
-const addAnimalProducts = async (UserId, quantity, data) => {
+const addAnimalProducts = async (token, quantity, data) => {
     let i = quantity
     let j = 0
     while (i > 0) {
         if (i <= data[j].quantityAvailable) {
-            const create = await createCart(UserId, data[j].id, undefined, i)
-            if (create.data.error) {
-                return create.data.message || create.data.error
-            }
-            return create.data.message
+            const create = await createCart(token, data[j].id, undefined, i)
+            if (create.error) return create.error
+            return create.data
         } else {
-            const create = await createCart(UserId, data[j].id, undefined, data[j].quantityAvailable)
-            if (create.data.error) {
-                return create.data.message || create.data.error
-            }
+            const create = await createCart(token, data[j].id, undefined, data[j].quantityAvailable)
+            if (create.error) return create.error
+            if (create.data.error) return create.data
 
             i -= data[j].quantityAvailable
         }
@@ -43,21 +28,18 @@ const addAnimalProducts = async (UserId, quantity, data) => {
     }
 }
 
-const addEggsBatchProducts = async (UserId, quantity, data) => {
+const addEggsBatchProducts = async (token, quantity, data) => {
     let i = quantity
     let j = 0
     while (i > 0) {
         if (i <= data[j].quantityAvailable) {
-            const create = await createCart(UserId, undefined, data[j].id, i)
-            if (create.data.error) {
-                return create.data.message || create.data.error
-            }
-            return create.data.message
+            const create = await createCart(token, undefined, data[j].id, i)
+            if (create.error) return create.error
+            return create.data
         } else {
-            const create = await createCart(UserId, undefined, data[j].id, data[j].quantityAvailable)
-            if (create.data.error) {
-                return create.data.message || create.data.error
-            }
+            const create = await createCart(token, undefined, data[j].id, data[j].quantityAvailable)
+            if (create.error) return create.error
+            if (create.data.error) return create.data
 
             i -= data[j].quantityAvailable
         }

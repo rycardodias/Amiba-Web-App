@@ -394,7 +394,13 @@ const resources = {
       'Find': 'Procurar',
       'Add Picture': 'Adicionar Imagem',
       'Choose a file': 'Escolha um ficheiro',
-
+      "Shop": "Loja",
+      "Amiba Ecommerce": "Comércio Amiba",
+      "Fail to add product to cart!": "Erro ao adicionar produto ao carrinho!",
+      "Item added to cart successfully!": "Adicionado ao carrinho com sucesso!",
+      "Add To Cart": "Adicionar ao carrinho",
+      "Reviews": "Comentários",
+      "Description": "Descrição",
       Animals: 'Animais',
       Animal: 'Animal',
       Carts: 'Carrinhos',
@@ -418,6 +424,8 @@ const resources = {
       Users: 'Utilizadores',
       User: 'Utilizador',
 
+      "Dozen": "Duzia",
+      "Half-Dozen": "Meia Duzia",
 
       Name: 'Nome',
       Type: 'Tipo',

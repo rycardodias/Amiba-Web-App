@@ -1,8 +1,8 @@
 const units = [
-    { id: "UNID", name: "Unidade" },
-    { id: "KG", name: "Kilograma" },
-    { id: 'DOZEN', name: "Duzia" },
-    { id: 'HALFDOZEN', name: "Meia Duzia" },
+    { id: "UNID", name: "Uni" },
+    { id: "KG", name: "Kg" },
+    { id: 'DOZEN', name: "Dozen" },
+    { id: 'HALFDOZEN', name: "Half-Dozen" },
 ]
 
 export { units }

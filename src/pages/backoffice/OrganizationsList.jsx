@@ -92,8 +92,8 @@ const OrganizationsList = () => {
         </Button>
       </ButtonWrapper>
     </FlexBox>
-    
-    <AddOrganizationsModal open={openModal} onClose={(newRecord) => { setOpenModal(false); newRecord===true && getInitialData() }} />
+
+    <AddOrganizationsModal open={openModal} onClose={(newRecord) => { setOpenModal(false); newRecord === true && getInitialData() }} />
 
     <Card sx={{ marginTop: 3 }}>
       <DataTable data={tableData} columnShape={columnShape} clearFilter={clearFilter} handleRowSelect={handleRowSelect} onFilterChange={filters => setHasFilter(filters.length)} />
