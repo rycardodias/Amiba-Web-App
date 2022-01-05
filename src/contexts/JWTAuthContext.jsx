@@ -87,16 +87,13 @@ const reducer = (state, action) => {
 };
 
 const AuthContext = createContext({
-  ...initialState,
-  method: "JWT",
+  ...initialState, method: "JWT",
   login: (email, password) => Promise.resolve(),
   logout: () => { },
   register: (email, password, name) => Promise.resolve()
 }); // props type
 
-export const AuthProvider = ({
-  children
-}) => {
+export const AuthProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const login = async (email, password) => {
@@ -123,21 +120,22 @@ export const AuthProvider = ({
     if (response.error) return response
     if (response.data.error) return response
 
-    const { token, user } = response.data.data
+    const { token } = response.data.data
 
     setSession(token);
 
     dispatch({
       type: Types.Register,
       payload: {
-        user: { id: user.id, name: user.name, email: user.email, permission: user.permission }
+        user: { token }
       }
     });
     return response
   };
 
-  const logout = () => {
+  const logout = async () => {
     setSession(null);
+    await usersRequests.logout()
     dispatch({
       type: Types.Logout
     });
