@@ -6,7 +6,7 @@ import { useFilters, usePagination, useRowSelect, useTable } from "react-table";
 import ScrollBar from "simplebar-react";
 // import columnShape from "./columnShape";
 
-import {StyledTableBodyRow, StyledPagination, StyledSearchInput, StyledSearchIcon} from 'components/backoffice/styledComponents/DataTableStyles'
+import { StyledTableBodyRow, StyledPagination, StyledSearchInput, StyledSearchIcon } from 'components/backoffice/styledComponents/DataTableStyles'
 
 const SelectCheckBox = forwardRef(({ indeterminate, ...rest }, ref) => {
   const defaultRef = useRef();
@@ -74,7 +74,7 @@ const DataTable = ({ data, clearFilter, handleRowSelect, onFilterChange, columnS
     <ScrollBar>
       <Table {...getTableProps()}>
         <TableHead>
-          {headerGroups.map(headerGroup => <TableRow {...headerGroup.getHeaderGroupProps()}>
+          {headerGroups.map(headerGroup => <TableRow  {...headerGroup.getHeaderGroupProps()}>
             {headerGroup.headers.map(column => <TableCell {...column.getHeaderProps()} sx={{
               fontSize: 12,
               fontWeight: 600,

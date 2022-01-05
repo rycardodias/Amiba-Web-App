@@ -2,9 +2,6 @@
 import { Small, Tiny } from "components/Typography";
 import FlexBox from "components/FlexBox";
 import UkoAvatar from "components/UkoAvatar";
-import { useState } from "react"; // common cell component
-import EditIconButton from "components/EditIconButton";
-import AddOrganizationsModal from "./AddOrganizationsModal";
 import i18n from 'i18next';
 import { CommonCell, SelectColumnFilter, DateColumnFilter } from 'components/backoffice/utils/columnFilters'
 
@@ -65,15 +62,6 @@ const columnShape = [{
   Header: () => i18n.t("Address"),
   accessor: "address",
   Filter: SelectColumnFilter
-}, {
-  Header: " ",
-  Cell: ({ row }) => {
-    const [openModal, setOpenModal] = useState(false);
-    return <>
-      <EditIconButton onClick={() => setOpenModal(true)} />
-      <AddOrganizationsModal edit open={openModal} data={row.original} onClose={() => setOpenModal(false)} />
-    </>;
-  }
 }];
 
 

@@ -21,16 +21,16 @@ const AddOrganizationsModal = ({ open, onClose, edit, data }) => {
   const { t } = useTranslation();
 
   const initialValues = {
-    id: data?.id || "",
-    name: data?.name || "",
-    type: data?.type || "",
-    UserId: data?.UserId || "",
-    address: data?.address || "",
-    locale: data?.locale || "",
-    zipcode: data?.zipcode || "",
-    fiscalNumber: data?.fiscalNumber || "",
-    telephone: data?.telephone || "",
-    mobilePhone: data?.mobilePhone || ""
+    id: data?.id,
+    name: data?.name,
+    type: data?.type,
+    UserId: data?.UserId,
+    address: data?.address,
+    locale: data?.locale,
+    zipcode: data?.zipcode,
+    fiscalNumber: data?.fiscalNumber,
+    telephone: data?.telephone,
+    mobilePhone: data?.mobilePhone
   };
 
   const [users, setusers] = useState([])
@@ -58,14 +58,12 @@ const AddOrganizationsModal = ({ open, onClose, edit, data }) => {
   });
 
   const { values, errors, handleChange, handleSubmit, touched } = useFormik({
-    initialValues, validationSchema: fieldValidationSchema,
-    onSubmit: values => {
-
+    initialValues, validationSchema: fieldValidationSchema, onSubmit: values => {
       if (edit) {
         organizationsRequests.updateOrganization(values.id, values.type, values.UserId, values.name, values.address, values.locale,
           values.zipcode, values.fiscalNumber, values.telephone, values.mobilePhone)
           .then(response => {
-            if (response.data.error) return toast.error(t("Error Updating Record"));;
+            if (response.error || response.data.error) return toast.error(t("Error Updating Record"));;
             onClose(true);
             toast.success(t("Record Updated Successfully"));
           })
@@ -74,8 +72,8 @@ const AddOrganizationsModal = ({ open, onClose, edit, data }) => {
         organizationsRequests.createOrganization(values.type, values.UserId, values.name, values.address, values.locale,
           values.zipcode, values.fiscalNumber, values.telephone, values.mobilePhone)
           .then(response => {
-            if (response.data.error) return toast.error(t("Error Creating Record"));
-            
+            if (response.error || response.data.error) return toast.error(t("Error Creating Record"));
+
             onClose(true);
             toast.success(t("New Record Added Successfully"));
           })
@@ -87,6 +85,7 @@ const AddOrganizationsModal = ({ open, onClose, edit, data }) => {
   return <Modal open={open} onClose={onClose}>
     <StyledModalCard>
       <H2 mb={2}>{edit ? `${t("Edit")} ${t("Organization")}` : `${t("Add new")} ${t("Organization")}`}</H2>
+
       <form onSubmit={handleSubmit}>
         <ScrollBar style={{ maxHeight: 400 }}>
           <Grid container spacing={2}>
@@ -97,12 +96,13 @@ const AddOrganizationsModal = ({ open, onClose, edit, data }) => {
 
             <Grid item xs={6}>
               <H6 mb={1}>{t('Type')}</H6>
-              <StyledSelect fullWidth name="type" value={values.type} onChange={handleChange} input={<InputBase placeholder="Type" />} IconComponent={() => <KeyboardArrowDown fontSize="small" />}>
-                {organizationTypes.map(item => {
-                  return <StyledMenuItem value={item.id}>{t(item.name)}</StyledMenuItem>
+              <StyledSelect fullWidth name="type" value={values.type} onChange={handleChange} input={<InputBase placeholder={t('Type')} />} IconComponent={() => <KeyboardArrowDown fontSize="small" />}>
+                {organizationTypes && organizationTypes.map(item => {
+                  return <StyledMenuItem key={item.id} value={item.id}>{t(item.name)}</StyledMenuItem>
                 })}
               </StyledSelect>
             </Grid>
+
             <Grid item xs={6}>
               <H6 mb={1}>{t('VAT Number')}</H6>
               <DarkTextField name="fiscalNumber" placeholder={t('VAT Number')} onChange={handleChange} value={values.fiscalNumber}
@@ -128,16 +128,14 @@ const AddOrganizationsModal = ({ open, onClose, edit, data }) => {
             <Grid item xs={6}>
               <H6 mb={1}>{t('Responsable')}</H6>
               <StyledSelect fullWidth name="UserId" value={values.UserId} onChange={handleChange} input={<InputBase placeholder={t('Responsable')} />} IconComponent={() => <KeyboardArrowDown fontSize="small" />}>
-                <StyledMenuItem selected value="">{`${t('Select')} ${t('Responsable')}`}</StyledMenuItem>
-                {users.map(item => {
-                  return <StyledMenuItem value={item.id}>{t(item.name)}</StyledMenuItem>
+                {users && users.map(item => {
+                  return <StyledMenuItem key={item.id} value={item.id}>{t(item.name)}</StyledMenuItem>
                 })}
               </StyledSelect>
             </Grid>
 
             <Grid item xs={12}>
               <H6 mb={1}>{t('Add Picture')}</H6>
-
               <label htmlFor="icon-button-file">
                 <input type="file" accept="image/*" id="icon-button-file" style={{ display: "none" }} />
                 <IconButton disableRipple component="span" sx={{ padding: 0, display: "block" }}>
@@ -153,9 +151,7 @@ const AddOrganizationsModal = ({ open, onClose, edit, data }) => {
         </ScrollBar>
 
         <FlexBox justifyContent="flex-end" marginTop={4}>
-          <Button fullWidth size="small" variant="outlined" onClick={onClose} sx={{
-            width: 124, fontSize: 12, marginRight: 2, color: "text.disabled", borderColor: "text.disabled"
-          }}>
+          <Button fullWidth size="small" variant="outlined" onClick={onClose} sx={{ width: 124, fontSize: 12, marginRight: 2, color: "text.disabled", borderColor: "text.disabled" }}>
             {t('Cancel')}
           </Button>
 
