@@ -1,16 +1,18 @@
 import axios from 'axios';
 
 const sendRequest = async (metodh, url, params) => {
+  
   const requestMetadata = {
     method: metodh,
     credentials: 'same-origin',
-
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
+      Cookies: "blabla"
     },
     body: JSON.stringify(params),
   };
+
 
   const response = await fetch((process.env.REACT_APP_BACKEND_SERVER_URL + url), requestMetadata)
     .then((res) => res.json())
