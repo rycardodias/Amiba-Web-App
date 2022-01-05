@@ -14,7 +14,7 @@ const reducer = (state, action) => {
       {
         return {
           isInitialized: true,
-          user: action.payload.token,
+          user: action.payload.user,
           isAuthenticated: action.payload.isAuthenticated
         };
       }
@@ -24,7 +24,7 @@ const reducer = (state, action) => {
         return {
           ...state,
           isAuthenticated: true,
-          user: action.payload.token
+          user: action.payload.user
         };
       }
 
@@ -42,7 +42,7 @@ const reducer = (state, action) => {
         return {
           ...state,
           isAuthenticated: true,
-          user: action.payload.token
+          user: action.payload.user
         };
       }
 
