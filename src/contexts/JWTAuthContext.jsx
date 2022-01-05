@@ -1,24 +1,14 @@
 import LoadingScreen from "components/LoadingScreen";
 import jwtDecode from "jwt-decode";
 import { createContext, useEffect, useReducer } from "react";
-import axios from "utils/axios"; // All types
 import * as usersRequests from 'lib/requests/usersRequests'
-// =============================================
+import Cookies from 'js-cookie';
 
-var Types;
 
-(function (Types) {
-  Types["Init"] = "INIT";
-  Types["Login"] = "LOGIN";
-  Types["Logout"] = "LOGOUT";
-  Types["Register"] = "REGISTER";
-})(Types || (Types = {}));
-
-// ================================================
 const initialState = {
   isAuthenticated: false,
   isInitialized: false,
-  user: null
+  token: null
 };
 
 const isValidToken = accessToken => {
@@ -31,15 +21,6 @@ const isValidToken = accessToken => {
   return decodedToken.exp > currentTime;
 };
 
-const setSession = accessToken => {
-  if (accessToken) {
-    localStorage.setItem("accessToken", accessToken);
-    axios.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
-  } else {
-    localStorage.removeItem("accessToken");
-    delete axios.defaults.headers.common.Authorization;
-  }
-};
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -47,7 +28,7 @@ const reducer = (state, action) => {
       {
         return {
           isInitialized: true,
-          user: action.payload.user,
+          token: action.payload.token,
           isAuthenticated: action.payload.isAuthenticated
         };
       }
@@ -57,7 +38,7 @@ const reducer = (state, action) => {
         return {
           ...state,
           isAuthenticated: true,
-          user: action.payload.user
+          token: action.payload.token
         };
       }
 
@@ -65,7 +46,7 @@ const reducer = (state, action) => {
       {
         return {
           ...state,
-          user: null,
+          token: null,
           isAuthenticated: false
         };
       }
@@ -75,7 +56,7 @@ const reducer = (state, action) => {
         return {
           ...state,
           isAuthenticated: true,
-          user: action.payload.user
+          token: action.payload.token
         };
       }
 
@@ -101,14 +82,10 @@ export const AuthProvider = ({ children }) => {
     if (response.error) return response
     if (response.data.error) return response
 
-    const me = await usersRequests.getUserByToken(response.data.data)
-
-    setSession(response.data.data);
-
     dispatch({
-      type: Types.Login,
+      type: "LOGIN",
       payload: {
-        user: me.data.data
+        token: response.data.data.token
       }
     });
     return response
@@ -122,46 +99,43 @@ export const AuthProvider = ({ children }) => {
 
     const { token } = response.data.data
 
-    setSession(token);
-
     dispatch({
-      type: Types.Register,
+      type: "REGISTER",
       payload: {
-        user: { token }
+        token: token
       }
     });
     return response
   };
 
   const logout = async () => {
-    setSession(null);
     await usersRequests.logout()
     dispatch({
-      type: Types.Logout
+      type: "LOGOUT"
     });
   };
 
   useEffect(() => {
     (async () => {
       try {
-        const accessToken = window.localStorage.getItem("accessToken");
-
+        const accessToken = Cookies.get("token")
+        console.log(`accessToken`, accessToken)
         if (accessToken && isValidToken(accessToken)) {
 
           const response = await usersRequests.getUserByToken(accessToken) //@ts-ignore
-          setSession(accessToken);
+
           dispatch({
-            type: Types.Init,
+            type: "INIT",
             payload: {
-              user: response.data.data,
+              token: response.data.data,
               isAuthenticated: true
             }
           });
         } else {
           dispatch({
-            type: Types.Init,
+            type: "INIT",
             payload: {
-              user: null,
+              token: null,
               isAuthenticated: false
             }
           });
@@ -169,9 +143,9 @@ export const AuthProvider = ({ children }) => {
       } catch (err) {
         console.error(err);
         dispatch({
-          type: Types.Init,
+          type: "INIT",
           payload: {
-            user: null,
+            token: null,
             isAuthenticated: false
           }
         });
@@ -183,13 +157,7 @@ export const AuthProvider = ({ children }) => {
     return <LoadingScreen />;
   }
 
-  return <AuthContext.Provider value={{
-    ...state,
-    method: "JWT",
-    login,
-    logout,
-    register
-  }}>
+  return <AuthContext.Provider value={{ ...state, method: "JWT", login, logout, register }}>
     {children}
   </AuthContext.Provider>;
 };
