@@ -1,26 +1,12 @@
 import LoadingScreen from "components/LoadingScreen";
-import jwtDecode from "jwt-decode";
 import { createContext, useEffect, useReducer } from "react";
 import * as usersRequests from 'lib/requests/usersRequests'
-import Cookies from 'js-cookie';
-
 
 const initialState = {
   isAuthenticated: false,
   isInitialized: false,
-  token: null
+  user: null
 };
-
-const isValidToken = accessToken => {
-  return true
-  //TODO verificar token
-  if (!accessToken) return false;
-  const decodedToken = jwtDecode(accessToken);
-  const currentTime = Date.now() / 1000;
-
-  return decodedToken.exp > currentTime;
-};
-
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -28,7 +14,7 @@ const reducer = (state, action) => {
       {
         return {
           isInitialized: true,
-          token: action.payload.token,
+          user: action.payload.token,
           isAuthenticated: action.payload.isAuthenticated
         };
       }
@@ -38,7 +24,7 @@ const reducer = (state, action) => {
         return {
           ...state,
           isAuthenticated: true,
-          token: action.payload.token
+          user: action.payload.token
         };
       }
 
@@ -46,7 +32,7 @@ const reducer = (state, action) => {
       {
         return {
           ...state,
-          token: null,
+          user: null,
           isAuthenticated: false
         };
       }
@@ -56,7 +42,7 @@ const reducer = (state, action) => {
         return {
           ...state,
           isAuthenticated: true,
-          token: action.payload.token
+          user: action.payload.token
         };
       }
 
@@ -72,20 +58,19 @@ const AuthContext = createContext({
   login: (email, password) => Promise.resolve(),
   logout: () => { },
   register: (email, password, name) => Promise.resolve()
-}); // props type
+});
 
 export const AuthProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const login = async (email, password) => {
     const response = await usersRequests.login(email, password)
-    if (response.error) return response
-    if (response.data.error) return response
+    if (response.error || response.data.error) return response
 
     dispatch({
       type: "LOGIN",
       payload: {
-        token: response.data.data.token
+        user: response.data.data.token
       }
     });
     return response
@@ -102,7 +87,7 @@ export const AuthProvider = ({ children }) => {
     dispatch({
       type: "REGISTER",
       payload: {
-        token: token
+        user: token
       }
     });
     return response
@@ -119,15 +104,14 @@ export const AuthProvider = ({ children }) => {
     (async () => {
       try {
         const validToken = (await usersRequests.validateToken()).data.data
-        console.log(validToken)
-        if (validToken) {
 
+        if (validToken) {
           const response = await usersRequests.getUserByToken() //@ts-ignore
 
           dispatch({
             type: "INIT",
             payload: {
-              token: response.data.data,
+              user: response.data.data,
               isAuthenticated: true
             }
           });
@@ -135,7 +119,7 @@ export const AuthProvider = ({ children }) => {
           dispatch({
             type: "INIT",
             payload: {
-              token: null,
+              user: null,
               isAuthenticated: false
             }
           });
@@ -145,7 +129,7 @@ export const AuthProvider = ({ children }) => {
         dispatch({
           type: "INIT",
           payload: {
-            token: null,
+            user: null,
             isAuthenticated: false
           }
         });
