@@ -7,8 +7,7 @@ const sendRequest = async (metodh, url, params) => {
     credentials: 'same-origin',
     headers: {
       'Accept': 'application/json',
-      'Content-Type': 'application/json',
-      Cookies: "blabla"
+      'Content-Type': 'application/json'
     },
     body: JSON.stringify(params),
   };

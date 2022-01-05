@@ -12,7 +12,7 @@ const ProductCard = ({ product, handleClick }) => {
   const { t } = useTranslation()
 
   const addToCart = async () => {
-    const newItemsResult = await addItem(product, 1, localStorage.getItem('accessToken'))
+    const newItemsResult = await addItem(product, 1)
     if (newItemsResult.error || newItemsResult.data.error) return toast.error(t("Fail to add product to cart!"));
 
     return toast.success(t("Item added to cart successfully!"));

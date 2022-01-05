@@ -51,8 +51,7 @@ const Shop = () => {
 
 
   const addToCart = async () => {
-    const newItemsResult = await addItem(itemModal, cartQuantity, "df84fc46-8edd-4fc1-ac40-70d99d8179ac")
-    console.log(newItemsResult)
+    const newItemsResult = await addItem(itemModal, cartQuantity)
     if (newItemsResult.error) return toast.error(t("Fail to add product to cart!"));
 
     return toast.success(t("Item added to cart successfully!"));

@@ -1,4 +1,4 @@
-import { sendRequest} from './requests'
+import { sendRequest } from './requests'
 import Cookies from 'js-cookie';
 
 const getUsers = async () => {
@@ -30,8 +30,8 @@ const logout = async () => {
     return await sendRequest('POST', 'users/logout');
 };
 
-const getUserByToken = async (token) => {
-    return await sendRequest('GET', 'users/me/' + token)
+const getUserByToken = async () => {
+    return await sendRequest('GET', 'users/me')
 }
 
 const updateAddress = async (id, token, address, locale, zipcode) => {

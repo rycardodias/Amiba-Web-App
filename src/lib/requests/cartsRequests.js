@@ -15,8 +15,8 @@ const getCartByUserWithProduct = async (UserId) => {
     return await sendRequest('GET', 'carts/UserId/Product/' + UserId);
 };
 
-const createCart = async (token, AnimalProductId, EggsBatchProductId, quantity) => {
-    return await sendRequest('POST', 'carts/create', { token, AnimalProductId, EggsBatchProductId, quantity })
+const createCart = async (AnimalProductId, EggsBatchProductId, quantity) => {
+    return await sendRequest('POST', 'carts/create', { AnimalProductId, EggsBatchProductId, quantity })
 };
 
 const updateCart = async (id, quantity) => {

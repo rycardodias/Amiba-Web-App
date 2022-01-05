@@ -104,14 +104,14 @@ export const AuthProvider = ({
     if (response.error) return response
     if (response.data.error) return response
 
-    // const me = await usersRequests.getUserByToken(response.data.data)
+    const me = await usersRequests.getUserByToken(response.data.data)
 
     setSession(response.data.data);
 
     dispatch({
       type: Types.Login,
       payload: {
-        // user: me.data.data
+        user: me.data.data
       }
     });
     return response
