@@ -21,7 +21,7 @@ const ProfilePopover = () => {
   const navigate = useNavigate();
   const { logout, user } = useAuth();
   const [open, setOpen] = useState(false);
-
+  console.log(`user`, user)
   const handleMenuItem = path => {
     navigate(path);
     setOpen(false);

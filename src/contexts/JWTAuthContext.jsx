@@ -107,7 +107,6 @@ export const AuthProvider = ({ children }) => {
 
         if (validToken) {
           const response = await usersRequests.getUserByToken() //@ts-ignore
-          console.log(`response`, response)
           dispatch({
             type: "INIT",
             payload: {
