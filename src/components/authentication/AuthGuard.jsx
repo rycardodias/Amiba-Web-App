@@ -7,7 +7,7 @@ const AuthGuard = ({ children }) => {
   const { isAuthenticated } = useAuth();
   const { pathname } = useLocation();
   const [requestedLocation, setRequestedLocation] = useState(null);
-
+  console.log(`isAuthenticated, pathname, requestedLocation`, isAuthenticated, pathname, requestedLocation)
   if (!isAuthenticated) {
     if (pathname !== requestedLocation) {
       setRequestedLocation(pathname);
