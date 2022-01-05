@@ -118,11 +118,11 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     (async () => {
       try {
-        const accessToken = Cookies.get("token")
-        console.log(`accessToken`, accessToken)
-        if (accessToken && isValidToken(accessToken)) {
+        const validToken = (await usersRequests.validateToken()).data.data
+        console.log(validToken)
+        if (validToken) {
 
-          const response = await usersRequests.getUserByToken(accessToken) //@ts-ignore
+          const response = await usersRequests.getUserByToken() //@ts-ignore
 
           dispatch({
             type: "INIT",
