@@ -26,7 +26,7 @@ const login = async (email, password) => {
 }
 
 const logout = async () => {
-    Cookies.remove('user_token')
+    Cookies.remove('token')
     return await sendRequest('POST', 'users/logout');
 };
 

@@ -27,7 +27,7 @@ const isValidToken = accessToken => {
   if (!accessToken) return false;
   const decodedToken = jwtDecode(accessToken);
   const currentTime = Date.now() / 1000;
-  
+
   return decodedToken.exp > currentTime;
 };
 
@@ -117,7 +117,7 @@ export const AuthProvider = ({
     return response
   };
 
-  const register = async (email, name, password) => {
+  const register = async (email, password, name) => {
 
     const response = await usersRequests.createUser(name, email, password)
     if (response.error) return response
@@ -147,7 +147,7 @@ export const AuthProvider = ({
     (async () => {
       try {
         const accessToken = window.localStorage.getItem("accessToken");
-  
+
         if (accessToken && isValidToken(accessToken)) {
 
           const response = await usersRequests.getUserByToken(accessToken) //@ts-ignore
