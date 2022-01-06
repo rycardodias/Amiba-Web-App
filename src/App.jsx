@@ -10,9 +10,7 @@ import { ukoTheme } from "./theme";
 
 const App = () => {
   const allPages = useRoutes(routes);
-  const {
-    settings
-  } = useSettings(); // App theme
+  const { settings } = useSettings(); // App theme
 
   const appTheme = ukoTheme({
     theme: settings.theme,
@@ -22,19 +20,18 @@ const App = () => {
 
   const toasterOptions = {
     style: {
-      fontWeight: 500,
-      fontFamily: "'Montserrat', sans-serif"
+      fontWeight: 500, fontFamily: "'Montserrat', sans-serif"
     }
   };
   return <StyledEngineProvider injectFirst>
-      <ThemeProvider theme={appTheme}>
-        <RTL direction={appTheme.direction}>
-          <CssBaseline />
-          <Toaster toastOptions={toasterOptions} />
-          {allPages}
-        </RTL>
-      </ThemeProvider>
-    </StyledEngineProvider>;
+    <ThemeProvider theme={appTheme}>
+      <RTL direction={appTheme.direction}>
+        <CssBaseline />
+        <Toaster toastOptions={toasterOptions} />
+        {allPages}
+      </RTL>
+    </ThemeProvider>
+  </StyledEngineProvider>;
 };
 
 export default App;
