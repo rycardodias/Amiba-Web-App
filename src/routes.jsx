@@ -77,7 +77,7 @@ const routes = [{
   </GuestGuard>
 },
 
-//COMEÇA O BACKOFFICE
+// ###### BACKOFFICE #####
 {
   path: 'backoffice',
   element: <AuthGuard>
@@ -87,10 +87,6 @@ const routes = [{
     path: 'organizations',
     element: <OrganizationsList />
   },
-  // {
-  //   path: '',
-  //   element: <DashboardSaaS />
-  // },
   {
     path: 'sales',
     element: <DashboardSales />
@@ -171,6 +167,18 @@ const routes = [{
     },
   ]
 }, {
+  path: 'account',
+  element: <AuthGuard>
+    <DashboardLayout />
+  </AuthGuard>,
+  children: [
+    {
+      path: 'account-settings',
+      element: <AccountSettings />
+    },
+  ]
+},
+{
   path: '*',
   element: <Error />
 }];

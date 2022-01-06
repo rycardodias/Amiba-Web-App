@@ -45,7 +45,7 @@ const ProfilePopover = () => {
     </FlexBox>}>
       <Box pt={1}>
 
-        <StyledSmall onClick={() => handleMenuItem("/dashboard/account-settings")}>
+        <StyledSmall onClick={() => handleMenuItem("/account/account-settings")}>
           {t("Settings")}
         </StyledSmall>
 
