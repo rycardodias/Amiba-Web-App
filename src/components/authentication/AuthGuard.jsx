@@ -9,7 +9,7 @@ const AuthGuard = ({ children }) => {
   const { isAuthenticated } = useAuth();
   const { pathname } = useLocation();
   const [requestedLocation, setRequestedLocation] = useState(null);
-  const cookies = Cookies.get("express:sess")
+  const cookies = Cookies.get()
   console.log(cookies)
   if (!isAuthenticated) {
     if (pathname !== requestedLocation) {
