@@ -11,6 +11,12 @@ const verifyPermission = (perm1, perm2) => {
 
 
 const routes = [
+    {
+        path: '/dashboard/organizations',
+        nextRoute: '/backoffice/organizations',
+        permissions: ['ADMIN', 'PRODUCTOR'],
+        title: 'Organizações',
+    },
     // ORGANIZATIONS
     {
         path: '/backoffice',
