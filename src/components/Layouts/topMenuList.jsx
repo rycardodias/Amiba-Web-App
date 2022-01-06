@@ -1,13 +1,11 @@
-import i18n from 'i18next';
 import Icons from "icons/sidebar";
-
 
 const index = [
   {
     title: "Backoffice",
     Icon: Icons.DataTableIcon,
     children: [{
-      subTitle: i18n.t("Organizations")(),
+      subTitle: "Organizations",
       path: "/backoffice/organizations"
     }, {
       subTitle: "Explorations",

@@ -423,7 +423,7 @@ const resources = {
       Restaurant: 'Restaurante',
       Users: 'Utilizadores',
       User: 'Utilizador',
-
+      Backoffice: "Backoffice",
       "Dozen": "Duzia",
       "Half-Dozen": "Meia Duzia",
 

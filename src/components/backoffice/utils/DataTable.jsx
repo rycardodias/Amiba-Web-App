@@ -4,8 +4,6 @@ import CheckBoxIcon from "icons/CheckBoxIcon";
 import React, { forwardRef, useEffect, useMemo, useRef } from "react";
 import { useFilters, usePagination, useRowSelect, useTable } from "react-table";
 import ScrollBar from "simplebar-react";
-// import columnShape from "./columnShape";
-
 import { StyledTableBodyRow, StyledPagination, StyledSearchInput, StyledSearchIcon } from 'components/backoffice/styledComponents/DataTableStyles'
 
 const SelectCheckBox = forwardRef(({ indeterminate, ...rest }, ref) => {
@@ -22,12 +20,8 @@ const SelectCheckBox = forwardRef(({ indeterminate, ...rest }, ref) => {
 function SearchFilter({ column }) {
   const { filterValue, setFilter } = column;
   const theme = useTheme();
-  return <StyledSearchInput value={filterValue || ""} onChange={e => setFilter(e.target.value)} startAdornment={<StyledSearchIcon sx={{
-    color: "text.disabled"
-  }} />} sx={{
-    backgroundColor: theme.palette.mode === "light" ? "#ECEFF5" : theme.palette.divider,
-    borderRadius: "8px"
-  }} />;
+  return <StyledSearchInput value={filterValue || ""} onChange={e => setFilter(e.target.value)} startAdornment={<StyledSearchIcon sx={{ color: "text.disabled" }} />}
+    sx={{ backgroundColor: theme.palette.mode === "light" ? "#ECEFF5" : theme.palette.divider, borderRadius: "8px" }} />;
 }
 
 const DataTable = ({ data, clearFilter, handleRowSelect, onFilterChange, columnShape }) => {
@@ -75,12 +69,7 @@ const DataTable = ({ data, clearFilter, handleRowSelect, onFilterChange, columnS
       <Table {...getTableProps()}>
         <TableHead>
           {headerGroups.map(headerGroup => <TableRow  {...headerGroup.getHeaderGroupProps()}>
-            {headerGroup.headers.map(column => <TableCell {...column.getHeaderProps()} sx={{
-              fontSize: 12,
-              fontWeight: 600,
-              minWidth: column.minWidth,
-              borderColor: "secondary.300"
-            }}>
+            {headerGroup.headers.map(column => <TableCell {...column.getHeaderProps()} sx={{ fontSize: 12, fontWeight: 600, minWidth: column.minWidth, borderColor: "secondary.300" }}>
               {column.render("Header")}
               {column.canFilter ? column.render("Filter") : null}
             </TableCell>)}
@@ -91,11 +80,7 @@ const DataTable = ({ data, clearFilter, handleRowSelect, onFilterChange, columnS
           {page.map(row => {
             prepareRow(row);
             return <StyledTableBodyRow {...row.getRowProps()} selected_row={selectedRow(row.id) ? "select" : ""}>
-              {row.cells.map(cell => <TableCell {...cell.getCellProps()} sx={{
-                fontSize: 12,
-                fontWeight: 500,
-                borderColor: "secondary.300"
-              }}>
+              {row.cells.map(cell => <TableCell {...cell.getCellProps()} sx={{ fontSize: 12, fontWeight: 500, borderColor: "secondary.300" }}>
                 {cell.render("Cell")}
               </TableCell>)}
             </StyledTableBodyRow>;

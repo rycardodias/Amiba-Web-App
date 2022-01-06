@@ -3,6 +3,7 @@ import UIAccordion from "components/accordion/UIAccordion";
 import FlexBox from "components/FlexBox";
 import { H3, Small } from "components/Typography";
 import { Fragment, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import ScrollBar from "simplebar-react";
 import topMenuList from "./topMenuList"; // root component interface
@@ -30,10 +31,11 @@ const SubMenuItem = styled(FlexBox)(({ theme, active }) => ({
 }));
 
 const DashboardSideBar = ({ sideBarLocked, showMobileSideBar, closeMobileSideBar, openSecondarySideBar, setOpenSecondarySideBar }) => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [active, setActive] = useState("Dashboard");
   const [activeSubMenuItem, setActiveSubMenuItem] = useState("");
-  const [categoryMenus, setCategoryMenus] = useState(initialCategoryMenus);
+  const [categoryMenus, setCategoryMenus] = useState([{ subTitle: "" }]);
   const downMd = useMediaQuery(theme => theme.breakpoints.down(1200));
 
   const handleActiveMainMenu = menuItem => () => {
@@ -73,7 +75,7 @@ const DashboardSideBar = ({ sideBarLocked, showMobileSideBar, closeMobileSideBar
     </StyledListItemButton>
 
     <ScrollBar style={{ maxHeight: "calc(100% - 50px)" }}>
-      {topMenuList.map((nav, index) => <Tooltip title={nav.title} placement="right" key={index}>
+      {topMenuList.map((nav, index) => <Tooltip title={t(nav.title)} placement="right" key={index}>
         <StyledListItemButton disableRipple onClick={handleActiveMainMenu(nav)}>
           <nav.Icon sx={{ color: active === nav.title ? "primary.main" : "secondary.400" }} />
         </StyledListItemButton>
@@ -83,29 +85,26 @@ const DashboardSideBar = ({ sideBarLocked, showMobileSideBar, closeMobileSideBar
 
   const secondarySideBarContent = <Fragment>
     <ListItem sx={{ py: 2 }}>
-      <H3>{active}</H3>
+      <H3>{t(active)}</H3>
     </ListItem>
 
     {categoryMenus.map((item, index) => item.subCategories ? <UIAccordion key={index} expandedItem={expanded} accordionHeader={item.subTitle} handleChange={handleAccordionChange}>
-      {item.subCategories.map(sub => <SubMenuItem key={sub.name} active={sub.path === activeSubMenuItem} onClick={() => handleSubMenuItem(sub.path)}>
+      {item.subCategories.map(sub => <SubMenuItem key={t(sub.name)} active={sub.path === activeSubMenuItem} onClick={() => handleSubMenuItem(sub.path)}>
         <Dot />
-        <Small color="secondary.400">{sub.name}</Small>
+        <Small color="secondary.400">{t(sub.name)}</Small>
       </SubMenuItem>)}
     </UIAccordion> : <SubMenuItem key={item.subTitle} active={item.path === activeSubMenuItem} onClick={() => handleSubMenuItem(item.path)}>
       <Dot />
-      <Small color="secondary.400">{item.subTitle}</Small>
+      <Small color="secondary.400">{t(item.subTitle)}</Small>
     </SubMenuItem>)}
   </Fragment>; // for mobile device
 
   if (downMd) {
     return <Fragment>
       <Box sx={{
-        width: 60, height: "100%", position: "fixed",
-        zIndex: theme => theme.zIndex.drawer + 3,
-        backgroundColor: theme => theme.palette.background.paper,
-        boxShadow: theme => theme.shadows[1],
-        "& .simplebar-track.simplebar-vertical": { width: 7 },
-        "& .simplebar-scrollbar:before": { background: theme => theme.palette.text.primary },
+        width: 60, height: "100%", position: "fixed", zIndex: theme => theme.zIndex.drawer + 3,
+        backgroundColor: theme => theme.palette.background.paper, boxShadow: theme => theme.shadows[1],
+        "& .simplebar-track.simplebar-vertical": { width: 7 }, "& .simplebar-scrollbar:before": { background: theme => theme.palette.text.primary },
         transform: showMobileSideBar ? "translateX(0)" : "translateX(-100%)", transition: "transform 0.3s"
       }}>
         {mainSideBarContent}
@@ -116,8 +115,7 @@ const DashboardSideBar = ({ sideBarLocked, showMobileSideBar, closeMobileSideBar
       }} />}
 
       <Box sx={{
-        position: "fixed", left: showMobileSideBar ? 0 : -300, width: 300, height: "100%", zIndex: theme => theme.zIndex.drawer + 1,
-        backgroundColor: "background.paper", transition: "left 0.3s"
+        position: "fixed", left: showMobileSideBar ? 0 : -300, width: 300, height: "100%", zIndex: theme => theme.zIndex.drawer + 1, backgroundColor: "background.paper", transition: "left 0.3s"
       }}>
         <Box sx={{ height: "100%", position: "relative", width: "calc(100% - 60px)", marginLeft: "60px" }}>
           {secondarySideBarContent}
@@ -135,21 +133,5 @@ const DashboardSideBar = ({ sideBarLocked, showMobileSideBar, closeMobileSideBar
   </Fragment>;
 };
 
-const initialCategoryMenus = [{
-  subTitle: "Dashboards",
-  subCategories: [{
-    name: "Saas",
-    path: "/dashboard/"
-  }, {
-    name: "Sales",
-    path: "/dashboard/sales"
-  }, {
-    name: "Project Management",
-    path: "/dashboard/project-management"
-  }, {
-    name: "Project Management V2",
-    path: "/dashboard/project-management-v2"
-  }],
-  path: ""
-}];
+
 export default DashboardSideBar;
