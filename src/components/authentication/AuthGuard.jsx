@@ -31,7 +31,7 @@ const AuthGuard = ({ children }) => {
   }
 
   if (!checkURLPermission(pathname, ['ADMIN'])) {
-    return <Navigate to={'/dashboard'} />;
+    return <Navigate to={'/backoffice'} />;
   }
 
 
