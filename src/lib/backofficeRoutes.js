@@ -19,6 +19,7 @@ const routes = [
         path: '/backoffice/organizations',
         permissions: ['ADMIN',]
     },
+    // ### SHOP ###
     {
         path: '/shop',
         permissions: ['ADMIN',]
@@ -27,7 +28,11 @@ const routes = [
         path: '/shop/list',
         permissions: ['ADMIN',]
     },
-
+    // ### ACCOUNT ###
+    {
+        path: '/account/account-settings',
+        permissions: ['USER',]
+    },
 
 
     // ORGANIZATIONS
