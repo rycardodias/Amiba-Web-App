@@ -130,9 +130,6 @@ const routes = [{
   }, {
     path: 'order-list',
     element: <OrderList />
-  },  {
-    path: 'shop',
-    element: <Shop />
   }, {
     path: 'cart',
     element: <Cart />
@@ -142,7 +139,7 @@ const routes = [{
   }, {
     path: 'payment-success',
     element: <PaymentSuccess />
-  },  {
+  }, {
     path: 'user-list',
     element: <UserList />
   }, {
@@ -161,6 +158,18 @@ const routes = [{
     path: 'privacy',
     element: <PrivacyPage />
   }]
+},
+{
+  path: 'shop',
+  element: <AuthGuard>
+    <DashboardLayout />
+  </AuthGuard>,
+  children: [
+    {
+      path: 'list',
+      element: <Shop />
+    },
+  ]
 }, {
   path: '*',
   element: <Error />

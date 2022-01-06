@@ -12,7 +12,19 @@ const index = [
       path: "/backoffice/explorations"
     }]
   },
-
+  // ### LOJA ###
+  {
+    title: "Ecommerce",
+    Icon: Icons.EcommerceIcon,
+    children: [{
+      subTitle: "Shop",
+      path: "/shop/list"
+    }, {
+      subTitle: "Cart",
+      path: "/shop/cart"
+    }]
+  },
+  // #########################
   {
     title: "Ecommerce",
     Icon: Icons.EcommerceIcon,
