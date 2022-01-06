@@ -30,9 +30,10 @@ const AuthGuard = ({ children }) => {
     return permissionValid
   }
 
-  const result = checkURLPermission(pathname, ['ADMIN'])
+  if (!checkURLPermission(pathname, ['ADMIN'])) {
+    return <Navigate to={'/'} />;
+  }
 
-  console.log(result)
 
   if (requestedLocation && pathname !== requestedLocation) {
     setRequestedLocation(null);
