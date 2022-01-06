@@ -31,7 +31,7 @@ const routes = [
     // ### ACCOUNT ###
     {
         path: '/account/account-settings',
-        permissions: ['USER',]
+        permissions: ['ADMIN', 'USER',]
     },
 
 
