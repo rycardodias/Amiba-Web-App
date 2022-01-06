@@ -3,15 +3,14 @@ import Login from "pages/authentication/Login";
 import React, { Fragment, useState } from "react";
 import { Navigate, useLocation } from "react-router-dom"; // component props interface
 import { verifyPermission, routes } from 'lib/backofficeRoutes'
-import Cookies from 'js-cookie';
 import jwtDecode from "jwt-decode";
+import * as organizationsRequests from 'lib/requests/organizationsRequests'
 
 const AuthGuard = ({ children }) => {
   const { isAuthenticated } = useAuth();
   const { pathname } = useLocation();
   const [requestedLocation, setRequestedLocation] = useState(null);
-  const cookie = Cookies.get("express:sess")
-  
+
   if (!isAuthenticated) {
     if (pathname !== requestedLocation) {
       setRequestedLocation(pathname);
@@ -30,16 +29,22 @@ const AuthGuard = ({ children }) => {
         }
       })
 
-    return permissionValid 
+    return permissionValid
   }
 
-  const decoded = jwtDecode(cookie)
-  console.log(`cookie`, cookie)
-  console.log(`decoded`, decoded)
+  organizationsRequests.tokenPermission()
+    .then(response => {
+      console.log(response.data.data)
+      if (!checkURLPermission(pathname, response.data.data)) {
+        return <Navigate to={'/'} />;
+      }
+    })
+    .catch(error => {
+      console.error(error)
+      return <Navigate to={'/'} />;
+    })
 
-  if (!checkURLPermission(pathname, ['ADMIN'])) {
-    return <Navigate to={'/'} />;
-  }
+
 
 
   if (requestedLocation && pathname !== requestedLocation) {

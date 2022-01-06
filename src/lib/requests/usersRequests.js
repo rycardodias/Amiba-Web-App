@@ -38,6 +38,10 @@ const validateToken = async () => {
     return await sendRequest('GET', 'users/validateToken')
 }
 
+const tokenPermission = async () => {
+    return await sendRequest('GET', 'users/tokenPermission')
+}
+
 const updateAddress = async (id, token, address, locale, zipcode) => {
     return await sendRequest('PUT', 'users/update', { id, token, address, locale, zipcode });
 };
@@ -48,4 +52,4 @@ const updatePassword = async (oldPassword, newPassword) => {
     return await sendRequest('PUT', 'users/update/password', { id, token, oldPassword, newPassword });
 };
 
-export { getUsers, getUserId, createUser, updateUser, deleteUser, login, logout, updateAddress, updatePassword, getUserByToken, validateToken }
+export { getUsers, getUserId, createUser, updateUser, deleteUser, login, logout, updateAddress, updatePassword, getUserByToken, validateToken, tokenPermission }
