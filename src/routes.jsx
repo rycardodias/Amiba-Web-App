@@ -83,77 +83,75 @@ const routes = [{
   element: <AuthGuard>
     <DashboardLayout />
   </AuthGuard>,
-  children: [{
-    path: 'organizations',
-    element: <OrganizationsList />
-  },
-  {
-    path: 'sales',
-    element: <DashboardSales />
-  }, {
-    path: 'project-management',
-    element: <DashboardProjectManagement />
-  }, {
-    path: 'project-management-v2',
-    element: <DashboardProjectManagementV2 />
-  }, {
-    path: 'data-table-v1',
-    element: <DataTableV1 />
-  }, {
-    path: 'data-table-v2',
-    element: <DataTableV2 />
-  }, {
-    path: 'account-settings',
-    element: <AccountSettings />
-  }, {
-    path: 'uko-project-v1',
-    element: <UkoProjectV1 />
-  }, {
-    path: 'uko-project-v2',
-    element: <UkoProjectV2 />
-  }, {
-    path: 'uko-project-v3',
-    element: <UkoProjectV3 />
-  }, {
-    path: 'project-details',
-    element: <ProjectDetails />
-  }, {
-    path: 'team-member',
-    element: <TeamMember />
-  }, {
-    path: 'product-list',
-    element: <ProductList />
-  }, {
-    path: 'order-list',
-    element: <OrderList />
-  }, {
-    path: 'cart',
-    element: <Cart />
-  }, {
-    path: 'payment',
-    element: <Payment />
-  }, {
-    path: 'payment-success',
-    element: <PaymentSuccess />
-  }, {
-    path: 'user-list',
-    element: <UserList />
-  }, {
-    path: 'user-grid',
-    element: <UserGrid />
-  }, {
-    path: 'add-user',
-    element: <AddNewUser />
-  }, {
-    path: 'about',
-    element: <AboutPage />
-  }, {
-    path: 'contact',
-    element: <ContactPage />
-  }, {
-    path: 'privacy',
-    element: <PrivacyPage />
-  }]
+  children: [
+    { path: 'organizations', element: <OrganizationsList /> },
+    {
+      path: 'sales',
+      element: <DashboardSales />
+    }, {
+      path: 'project-management',
+      element: <DashboardProjectManagement />
+    }, {
+      path: 'project-management-v2',
+      element: <DashboardProjectManagementV2 />
+    }, {
+      path: 'data-table-v1',
+      element: <DataTableV1 />
+    }, {
+      path: 'data-table-v2',
+      element: <DataTableV2 />
+    }, {
+      path: 'account-settings',
+      element: <AccountSettings />
+    }, {
+      path: 'uko-project-v1',
+      element: <UkoProjectV1 />
+    }, {
+      path: 'uko-project-v2',
+      element: <UkoProjectV2 />
+    }, {
+      path: 'uko-project-v3',
+      element: <UkoProjectV3 />
+    }, {
+      path: 'project-details',
+      element: <ProjectDetails />
+    }, {
+      path: 'team-member',
+      element: <TeamMember />
+    }, {
+      path: 'product-list',
+      element: <ProductList />
+    }, {
+      path: 'order-list',
+      element: <OrderList />
+    }, {
+      path: 'cart',
+      element: <Cart />
+    }, {
+      path: 'payment',
+      element: <Payment />
+    }, {
+      path: 'payment-success',
+      element: <PaymentSuccess />
+    }, {
+      path: 'user-list',
+      element: <UserList />
+    }, {
+      path: 'user-grid',
+      element: <UserGrid />
+    }, {
+      path: 'add-user',
+      element: <AddNewUser />
+    }, {
+      path: 'about',
+      element: <AboutPage />
+    }, {
+      path: 'contact',
+      element: <ContactPage />
+    }, {
+      path: 'privacy',
+      element: <PrivacyPage />
+    }]
 },
 {
   path: 'shop',
@@ -161,10 +159,8 @@ const routes = [{
     <DashboardLayout />
   </AuthGuard>,
   children: [
-    {
-      path: 'list',
-      element: <Shop />
-    },
+    { path: 'list', element: <Shop /> },
+    { path: 'cart', element: <Cart /> }
   ]
 }, {
   path: 'account',
@@ -172,10 +168,7 @@ const routes = [{
     <DashboardLayout />
   </AuthGuard>,
   children: [
-    {
-      path: 'account-settings',
-      element: <AccountSettings />
-    },
+    { path: 'account-settings', element: <AccountSettings /> },
   ]
 },
 {

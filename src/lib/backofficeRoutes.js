@@ -12,27 +12,17 @@ const verifyPermission = (perm1, perm2) => {
 
 const routes = [
     {
-        path: '/backoffice',
-        permissions: ['ADMIN',]
+        path: '/backoffice', permissions: ['ADMIN',]
     },
-    {
-        path: '/backoffice/organizations',
-        permissions: ['ADMIN',]
-    },
+    { path: '/backoffice/organizations', permissions: ['ADMIN',] },
+
     // ### SHOP ###
-    {
-        path: '/shop',
-        permissions: ['ADMIN',]
-    },
-    {
-        path: '/shop/list',
-        permissions: ['ADMIN',]
-    },
+    { path: '/shop', permissions: ['ADMIN', 'USER'] },
+    { path: '/shop/list', permissions: ['ADMIN', 'USER'] },
+    { path: '/shop/cart', permissions: ['ADMIN', 'USER'] },
+
     // ### ACCOUNT ###
-    {
-        path: '/account/account-settings',
-        permissions: ['ADMIN', 'USER',]
-    },
+    { path: '/account/account-settings', permissions: ['ADMIN', 'USER',] },
 
 
     // ORGANIZATIONS
