@@ -55,7 +55,7 @@ const Login = () => {
         
         setLoading(false);
         toast.success("You Logged In Successfully");
-        navigate("/dashboard");
+        navigate("/");
       }).catch(error => {
         setError(error.message);
         setLoading(false);

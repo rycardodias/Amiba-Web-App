@@ -1,16 +1,19 @@
 import Icons from "icons/sidebar";
+
 const index = [
   {
     title: "Backoffice",
     Icon: Icons.DataTableIcon,
     children: [{
       subTitle: "Organizations",
-      path: "/dashboard/organizations"
+      path: "/backoffice/organizations"
     }, {
       subTitle: "Explorations",
-      path: "/dashboard/explorations"
+      path: "/backoffice/explorations"
     }]
-  }, {
+  },
+
+  {
     title: "Ecommerce",
     Icon: Icons.EcommerceIcon,
     children: [{

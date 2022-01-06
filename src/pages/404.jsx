@@ -17,7 +17,7 @@ const ErrorPage = () => {
     </Paragraph>
 
     <NavLink to="/" style={{ display: "block", marginTop: "1.5rem", fontWeight: 600, textDecoration: "underline", color: theme.palette.primary.main }}>
-      Back to Dashboard
+      Back to Home
     </NavLink>
   </FlexBox>;
 };

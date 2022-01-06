@@ -46,7 +46,7 @@ const Sections = () => {
       color: "common.white",
       padding: ".7rem 1rem",
       backgroundColor: "primary.main"
-    }} onClick={() => navigate("/dashboard")}>
+    }} onClick={() => navigate("/")}>
         Live Demo
       </Button>
     </Wrapper>;

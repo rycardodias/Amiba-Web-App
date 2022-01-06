@@ -55,7 +55,7 @@ const Screens = () => {
             Browse Components
           </Button>
 
-          <StyledButton variant="outlined" size="small" endIcon={<ChevronRight />} onClick={() => navigate("/dashboard")}>
+          <StyledButton variant="outlined" size="small" endIcon={<ChevronRight />} onClick={() => navigate("/")}>
             Live Demo
           </StyledButton>
         </Grid>

@@ -44,7 +44,7 @@ const Ecommerce = () => {
             E-commerce pages with product details and edit
           </Small>
 
-          <StyledButton variant="outlined" size="small" endIcon={<ChevronRight />} onClick={() => navigate("/dashboard")}>
+          <StyledButton variant="outlined" size="small" endIcon={<ChevronRight />} onClick={() => navigate("/")}>
             Live Demo
           </StyledButton>
 

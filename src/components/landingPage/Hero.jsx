@@ -66,7 +66,7 @@ const Hero = () => {
         }}>
             Purchase Now
           </StyledButton>
-          <StyledButton onClick={() => navigate("/dashboard")} sx={{
+          <StyledButton onClick={() => navigate("/")} sx={{
           ml: 2,
           color: "common.white",
           backgroundColor: "primary.main"

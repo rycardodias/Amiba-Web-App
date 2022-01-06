@@ -9,13 +9,13 @@ const AuthGuard = ({ children }) => {
   const { pathname } = useLocation();
   const [requestedLocation, setRequestedLocation] = useState(null);
 
-  if (!isAuthenticated) {
-    if (pathname !== requestedLocation) {
-      setRequestedLocation(pathname);
-    }
+  // if (!isAuthenticated) {
+  //   if (pathname !== requestedLocation) {
+  //     setRequestedLocation(pathname);
+  //   }
 
-    return <Login />;
-  }
+  //   return <Login />;
+  // }
 
   const checkURLPermission = (url, permission) => {
     let permissionValid = false

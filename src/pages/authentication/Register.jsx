@@ -55,7 +55,7 @@ const Register = () => {
         }
         setLoading(false);
         toast.success("You registered successfully");
-        navigate("/dashboard");
+        navigate("/");
 
       }).catch(error => {
         setError(error.message);

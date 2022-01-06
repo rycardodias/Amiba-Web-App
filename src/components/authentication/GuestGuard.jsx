@@ -4,7 +4,7 @@ const GuestGuard = ({ children }) => {
   //// UNCOMMNET BELOW CODE IF YOU WANT TO HIDE AUTH PAGES TO AUTHENTICATED USERS
   //   const { isAuthenticated } = useAuth();
   //   if (isAuthenticated) {
-  //     return <Navigate to="/dashboard" />;
+  //     return <Navigate to="/" />;
   //   }
   return <Fragment>{children}</Fragment>;
 };

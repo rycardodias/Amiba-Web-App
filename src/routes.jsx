@@ -56,7 +56,7 @@ const Error = Loadable(lazy(() => import('./pages/404'))); // routes
 
 const routes = [{
   path: '/',
-  element: <Navigate to="backoffice" />
+  element: <Navigate to="backoffice" /> //FIXME adicionar aqui um elemento novo
 }, {
   path: 'components',
   element: <ComponentsPage />
