@@ -3,19 +3,21 @@ import Login from "pages/authentication/Login";
 import React, { Fragment, useState } from "react";
 import { Navigate, useLocation } from "react-router-dom"; // component props interface
 import { verifyPermission, routes } from 'lib/backofficeRoutes'
+import Cookies from 'js-cookie';
 
 const AuthGuard = ({ children }) => {
   const { isAuthenticated } = useAuth();
   const { pathname } = useLocation();
   const [requestedLocation, setRequestedLocation] = useState(null);
+  const cookies = Cookies.get()
+  console.log(cookies)
+  if (!isAuthenticated) {
+    if (pathname !== requestedLocation) {
+      setRequestedLocation(pathname);
+    }
 
-  // if (!isAuthenticated) {
-  //   if (pathname !== requestedLocation) {
-  //     setRequestedLocation(pathname);
-  //   }
-
-  //   return <Login />;
-  // }
+    return <Login />;
+  }
 
   const checkURLPermission = (url, permission) => {
     let permissionValid = false
@@ -31,7 +33,7 @@ const AuthGuard = ({ children }) => {
   }
 
   if (!checkURLPermission(pathname, ['ADMIN'])) {
-    return <Navigate to={'/backoffice'} />;
+    return <Navigate to={'/'} />;
   }
 
 
