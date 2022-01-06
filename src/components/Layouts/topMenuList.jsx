@@ -7,7 +7,7 @@ const index = [
     title: "Backoffice",
     Icon: Icons.DataTableIcon,
     children: [{
-      subTitle: () => i18n.t("Organizations"),
+      subTitle: i18n.t("Organizations")(),
       path: "/backoffice/organizations"
     }, {
       subTitle: "Explorations",
