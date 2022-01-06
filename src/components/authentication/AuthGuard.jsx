@@ -4,7 +4,7 @@ import React, { Fragment, useState } from "react";
 import { Navigate, useLocation } from "react-router-dom"; // component props interface
 import { verifyPermission, routes } from 'lib/backofficeRoutes'
 import jwtDecode from "jwt-decode";
-import * as organizationsRequests from 'lib/requests/organizationsRequests'
+import * as usersRequests from 'lib/requests/usersRequests'
 
 const AuthGuard = ({ children }) => {
   const { isAuthenticated } = useAuth();
@@ -32,7 +32,7 @@ const AuthGuard = ({ children }) => {
     return permissionValid
   }
 
-  organizationsRequests.tokenPermission()
+  usersRequests.tokenPermission()
     .then(response => {
       console.log(response.data.data)
       if (!checkURLPermission(pathname, response.data.data)) {
