@@ -3,7 +3,6 @@ import Login from "pages/authentication/Login";
 import React, { Fragment, useState } from "react";
 import { Navigate, useLocation } from "react-router-dom"; // component props interface
 import { verifyPermission, routes } from 'lib/backofficeRoutes'
-import jwtDecode from "jwt-decode";
 import * as usersRequests from 'lib/requests/usersRequests'
 
 const AuthGuard = ({ children }) => {
@@ -34,7 +33,6 @@ const AuthGuard = ({ children }) => {
 
   usersRequests.tokenPermission()
     .then(response => {
-      console.log(response.data.data)
       if (!checkURLPermission(pathname, response.data.data)) {
         return <Navigate to={'/'} />;
       }
@@ -43,9 +41,6 @@ const AuthGuard = ({ children }) => {
       console.error(error)
       return <Navigate to={'/'} />;
     })
-
-
-
 
   if (requestedLocation && pathname !== requestedLocation) {
     setRequestedLocation(null);

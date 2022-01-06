@@ -1,11 +1,16 @@
+import i18next from "i18next";
 import Icons from "icons/sidebar";
+
+const translate = async (value) => {
+  return i18next.t(value)
+}
 
 const index = [
   {
     title: "Backoffice",
     Icon: Icons.DataTableIcon,
     children: [{
-      subTitle: "Organizations",
+      subTitle: translate("Organizations"),
       path: "/backoffice/organizations"
     }, {
       subTitle: "Explorations",
