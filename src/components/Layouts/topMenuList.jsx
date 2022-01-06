@@ -1,7 +1,7 @@
 import i18next from "i18next";
 import Icons from "icons/sidebar";
 
-const translate = async (value) => {
+const translate = (value) => {
   return i18next.t(value)
 }
 
