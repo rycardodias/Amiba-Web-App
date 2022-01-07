@@ -1,5 +1,5 @@
 import { Box, List, ListItem, ListItemButton, styled, Tooltip, useMediaQuery } from "@mui/material";
-import UIAccordion from "components/accordion/UIAccordion";
+import UIAccordion from "components/Layouts/UIAccordion";
 import FlexBox from "components/FlexBox";
 import { H3, Small } from "components/Typography";
 import { Fragment, useEffect, useState } from "react";

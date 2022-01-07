@@ -1,8 +1,8 @@
 import { Add, Favorite } from "@mui/icons-material";
 import { Box, Button, ButtonBase, Card, Grid, IconButton, Modal, Select, InputLabel, MenuItem, Stack, styled } from "@mui/material";
-import { StyledModalCard } from "components/adminEcommerce/CreateProductModal";
-import Heading from "components/adminEcommerce/Heading";
-import { StyledPagination } from "components/dataTable/dataTableV2/styledComponents";
+import { StyledModalCard } from 'components/backoffice/styledComponents/AddModalStyles'
+import Heading from "components/shop/Heading";
+import { StyledPagination } from 'components/backoffice/styledComponents/DataTableStyles'
 import FlexBox from "components/FlexBox";
 import ModalAccordion from "components/shop/ModalAccordion";
 import ProductCard from "components/shop/ProductCard";

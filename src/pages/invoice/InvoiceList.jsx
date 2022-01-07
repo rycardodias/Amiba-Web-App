@@ -1,6 +1,6 @@
 import { Button, useTheme } from "@mui/material";
 import { Box } from "@mui/system";
-import CustomTable from "components/adminEcommerce/CustomTable";
+import CustomTable from "components/shop/CustomTable";
 import FlexBox from "components/FlexBox";
 import InvoiceColumnShape from "components/invoice/columnShape";
 import { invoiceFakeData } from "components/invoice/fakeData";
