@@ -45,7 +45,7 @@ const SearchFilter = () => {
 
   return <Card sx={{ padding: 2 }}>
     <Box>
-      <H6>{t("Categories")}</H6>
+      <H6>{t("Organization")}</H6>
       {organizationsList && organizationsList.map(item => <FlexBox key={item.id} alignItems="center" justifyContent="space-between" marginTop={2} onClick={() => setActiveCategory(item.name)}
         sx={{ cursor: "pointer", color: activeCategory === item.name ? "primary.main" : "text.disabled" }}>
         <FlexBox alignItems="center">

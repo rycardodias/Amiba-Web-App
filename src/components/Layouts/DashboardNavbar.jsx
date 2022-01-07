@@ -11,7 +11,6 @@ import { useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { THEMES } from "../../constants";
 import LanguagePopover from "./popovers/LanguagePopover";
-import NotificationsPopover from "./popovers/NotificationsPopover";
 import ProfilePopover from "./popovers/ProfilePopover";
 
 // custom styled components
@@ -116,7 +115,6 @@ const DashboardNavbar = props => {
 
       {upSm && <>
         <LanguagePopover />
-        <NotificationsPopover />
       </>}
       <ProfilePopover />
     </StyledToolBar>

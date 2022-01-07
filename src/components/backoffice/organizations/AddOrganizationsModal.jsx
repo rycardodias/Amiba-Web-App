@@ -12,9 +12,9 @@ import * as organizationsRequests from 'lib/requests/organizationsRequests'
 import * as usersRequests from 'lib/requests/usersRequests'
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { organizationTypes } from "lib/values/types";
 
 import { StyledModalCard, StyledMenuItem, StyledSelect } from 'components/backoffice/styledComponents/AddModalStyles'
+
 
 
 const AddOrganizationsModal = ({ open, onClose, edit, data }) => {
@@ -82,6 +82,7 @@ const AddOrganizationsModal = ({ open, onClose, edit, data }) => {
     }
   });
 
+
   return <Modal open={open} onClose={onClose}>
     <StyledModalCard>
       <H2 mb={2}>{edit ? `${t("Edit")} ${t("Organization")}` : `${t("Add new")} ${t("Organization")}`}</H2>
@@ -92,15 +93,6 @@ const AddOrganizationsModal = ({ open, onClose, edit, data }) => {
             <Grid item xs={12}>
               <H6 mb={1}>{t('Name')}</H6>
               <DarkTextField name="name" placeholder={t('Name')} onChange={handleChange} value={values.name} error={Boolean(errors.name && touched.name)} helperText={touched.name && errors.name} />
-            </Grid>
-
-            <Grid item xs={6}>
-              <H6 mb={1}>{t('Type')}</H6>
-              <StyledSelect fullWidth name="type" value={values.type} onChange={handleChange} input={<InputBase placeholder={t('Type')} />} IconComponent={() => <KeyboardArrowDown fontSize="small" />}>
-                {organizationTypes && organizationTypes.map(item => {
-                  return <StyledMenuItem key={item.id} value={item.id}>{t(item.name)}</StyledMenuItem>
-                })}
-              </StyledSelect>
             </Grid>
 
             <Grid item xs={6}>

@@ -19,12 +19,12 @@ const getOrganizationsProductAvailable = async () => {
 };
 
 
-const createOrganization = async (type, UserId, name, address, locale, zipcode, fiscalNumber, telephone, mobilePhone) => {
-    return await sendRequest('POST', 'organizations/create', { token, type, UserId, name, address, locale, zipcode, fiscalNumber, telephone, mobilePhone })
+const createOrganization = async (UserId, name, address, locale, zipcode, fiscalNumber, telephone, mobilePhone) => {
+    return await sendRequest('POST', 'organizations/create', { token, UserId, name, address, locale, zipcode, fiscalNumber, telephone, mobilePhone })
 };
 
-const updateOrganization = async (id, type, UserId, name, address, locale, zipcode, fiscalNumber, telephone, mobilePhone) => {
-    return await sendRequest('PUT', 'organizations/update', { token, id, type, UserId, name, address, locale, zipcode, fiscalNumber, telephone, mobilePhone })
+const updateOrganization = async (id, UserId, name, address, locale, zipcode, fiscalNumber, telephone, mobilePhone) => {
+    return await sendRequest('PUT', 'organizations/update', { token, id, UserId, name, address, locale, zipcode, fiscalNumber, telephone, mobilePhone })
 };
 
 const deleteOrganization = async (id) => {

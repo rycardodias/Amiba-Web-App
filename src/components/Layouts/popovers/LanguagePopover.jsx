@@ -8,39 +8,23 @@ const languageOptions = {
     icon: "/static/flags/usa.png",
     label: "English"
   },
-  es: {
-    icon: "/static/flags/spain.png",
-    label: "Spanish"
-  },
+  // es: {
+  //   icon: "/static/flags/spain.png",
+  //   label: "Spanish"
+  // },
   pt: {
     icon: "/static/flags/pt.png",
     label: "Portuguese"
   }
 }; // custom styled components
 
-const IconWrapper = styled(Box)(() => ({
-  display: "flex",
-  height: 20,
-  width: 20,
-  "& img": {
-    width: "100%",
-    borderRadius: "50%",
-    objectFit: "cover"
-  }
-}));
-const ItemWrapper = styled(Box)(() => ({
-  display: "flex",
-  "& img": {
-    width: "100%"
-  }
-}));
+const IconWrapper = styled(Box)(() => ({ display: "flex", height: 20, width: 20, "& img": { width: "100%", borderRadius: "50%", objectFit: "cover" } }));
+const ItemWrapper = styled(Box)(() => ({ display: "flex", "& img": { width: "100%" } }));
 
 const LanguagePopover = () => {
   const anchorRef = useRef(null);
   const [open, setOpen] = useState(false);
-  const {
-    i18n
-  } = useTranslation();
+  const { i18n } = useTranslation();
 
   const handleOpen = () => setOpen(true);
 
@@ -53,30 +37,23 @@ const LanguagePopover = () => {
 
   const selectedLanguage = languageOptions[i18n.language];
   return <>
-      <IconButton onClick={handleOpen} ref={anchorRef}>
-        <IconWrapper>
-          <img alt={selectedLanguage.label} src={selectedLanguage.icon} />
-        </IconWrapper>
-      </IconButton>
-      <Popover keepMounted open={open} onClose={handleClose} anchorEl={anchorRef.current} anchorOrigin={{
-      horizontal: "center",
-      vertical: "bottom"
-    }} PaperProps={{
-      sx: {
-        width: 150,
-        padding: "0.5rem 0"
-      }
-    }}>
-        {Object.keys(languageOptions).map(language => <MenuItem key={languageOptions[language].label} onClick={() => handleChangeLanguage(language)}>
-            <ItemWrapper>
-              <img alt={languageOptions[language].label} src={languageOptions[language].icon} />
-              <H6 fontWeight={600} ml={1}>
-                {languageOptions[language].label}
-              </H6>
-            </ItemWrapper>
-          </MenuItem>)}
-      </Popover>
-    </>;
+    <IconButton onClick={handleOpen} ref={anchorRef}>
+      <IconWrapper>
+        <img alt={selectedLanguage.label} src={selectedLanguage.icon} />
+      </IconWrapper>
+    </IconButton>
+    <Popover keepMounted open={open} onClose={handleClose} anchorEl={anchorRef.current} anchorOrigin={{ horizontal: "center", vertical: "bottom" }}
+      PaperProps={{ sx: { width: 150, padding: "0.5rem 0" } }}>
+      {Object.keys(languageOptions).map(language => <MenuItem key={languageOptions[language].label} onClick={() => handleChangeLanguage(language)}>
+        <ItemWrapper>
+          <img alt={languageOptions[language].label} src={languageOptions[language].icon} />
+          <H6 fontWeight={600} ml={1}>
+            {languageOptions[language].label}
+          </H6>
+        </ItemWrapper>
+      </MenuItem>)}
+    </Popover>
+  </>;
 };
 
 export default LanguagePopover;

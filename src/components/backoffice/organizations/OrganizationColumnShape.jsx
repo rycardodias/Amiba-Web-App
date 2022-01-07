@@ -20,14 +20,6 @@ const columnShape = [{
       </FlexBox>
     </FlexBox>;
   }
-}, {
-  Header: () => i18n.t("Type"),
-  accessor: "type",
-  Filter: SelectColumnFilter,
-  Cell: ({ row }) => {
-    const { type, experience } = row.original;
-    return <CommonCell title={type} body={experience} />;
-  }
 },
 {
   minWidth: 150,
@@ -61,7 +53,6 @@ const columnShape = [{
   minWidth: 170,
   Header: () => i18n.t("Address"),
   accessor: "address",
-  Filter: SelectColumnFilter
 }];
 
 

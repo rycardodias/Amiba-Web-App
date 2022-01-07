@@ -1,8 +1,8 @@
-const organizationTypes = [
-    { id: "PRODUCTOR", name: "Productor" },
-    { id: "AMIBA", name: "Amiba" },
-    { id: "MATADOURO", name: "Matadouro" },
-]
+// const organizationTypes = [
+//     { id: "PRODUCTOR", name: "Productor" },
+//     { id: "AMIBA", name: "Amiba" },
+//     { id: "MATADOURO", name: "Matadouro" },
+// ]
 
 const races = [
     { id: 'PRETA', name: 'Raça Preta' },
@@ -25,4 +25,4 @@ const genders = [
     { id: "F", name: "Femea" },
 ]
 
-export { organizationTypes, races, productTypes, explorationTypes, genders }
+export { races, productTypes, explorationTypes, genders }

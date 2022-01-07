@@ -51,7 +51,7 @@ const ProfilePopover = () => {
 
         <Divider sx={{ my: 1 }} />
 
-        <StyledSmall onClick={() => { logout(); toast.error("You Logout Successfully"); }}>
+        <StyledSmall onClick={() => { logout(); toast.error(t("You Logout Successfully")); }}>
           {t("Sign Out")}
         </StyledSmall>
       </Box>
