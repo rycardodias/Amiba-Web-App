@@ -6,6 +6,8 @@ import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next"; // styled components
 import { getOrganizationsProductAvailable } from 'lib/requests/organizationsRequests'
 import { set } from "date-fns/esm";
+import { productTypes } from "lib/values/types";
+
 const Dot = styled(Box)(({ theme, active }) => ({
   width: 8, height: 8, borderRadius: "50%", marginRight: 8, backgroundColor: active ? theme.palette.primary.main : theme.palette.text.secondary
 }));
@@ -14,10 +16,8 @@ const CountWrapper = styled(Box)(({ theme }) => ({
   color: theme.palette.text.disabled, backgroundColor: theme.palette.mode === "light" ? theme.palette.secondary[300] : theme.palette.divider
 }));
 
-const SearchFilter = () => {
+const SearchFilter = (props) => {
   const { t } = useTranslation();
-  const [activeCategory, setActiveCategory] = useState("");
-  const [activeSortBy, setActiveSortBy] = useState("");
   const [value, setValue] = useState([100, 1000]);
 
   const handleChange = (e, value) => {
@@ -31,40 +31,51 @@ const SearchFilter = () => {
       .then(response => {
         if (response.data.error) return
         setorganizationsList(response.data.data)
-        // for (const element of response.data.data) {
-        //   console.log(element.id)
-        //   setorganizationsList(element)
-        // }
       })
       .catch(error => {
         console.error(error)
       })
-    // console.log(`organizationsList`, organizationsList)
-
   }, [])
 
   return <Card sx={{ padding: 2 }}>
     <Box>
       <H6>{t("Organization")}</H6>
-      {organizationsList && organizationsList.map(item => <FlexBox key={item.id} alignItems="center" justifyContent="space-between" marginTop={2} onClick={() => setActiveCategory(item.name)}
-        sx={{ cursor: "pointer", color: activeCategory === item.name ? "primary.main" : "text.disabled" }}>
-        <FlexBox alignItems="center">
-          <Dot active={activeCategory === item.name} />
-          <Small>{t(item.name)}</Small>
-        </FlexBox>
-        <CountWrapper>
-          <Small>{item.totalProducts}</Small>
-        </CountWrapper>
-      </FlexBox>)}
+      {organizationsList && organizationsList.map(item =>
+        <FlexBox key={item.id} alignItems="center" justifyContent="space-between" marginTop={2}
+          onClick={() => props.onFilterChange("ORG", item.id)}
+          sx={{ cursor: "pointer", color: props.organization === item.name ? "primary.main" : "text.disabled" }}>
+          <FlexBox alignItems="center">
+            <Dot active={props.organization === item.name} />
+            <Small>{t(item.name)}</Small>
+          </FlexBox>
+          <CountWrapper>
+            <Small>{item.totalProducts}</Small>
+          </CountWrapper>
+        </FlexBox>)}
+    </Box>
+
+    <Box marginTop={4}>
+      <H6>{t("Categories")}</H6>
+      {productTypes.map(item =>
+        <FlexBox key={item.id} value={item.id} alignItems="center" marginTop={2}
+          onClick={() => props.onFilterChange("CATEGORY", item.id)}
+          sx={{ cursor: "pointer", color: props.category === item ? "primary.main" : "text.disabled" }}>
+
+          <Dot active={props.category === item.id} />
+          <Small value={item.id}>{t(item.name)}</Small>
+
+        </FlexBox>)}
     </Box>
 
     <Box marginTop={4}>
       <H6>{t("Sort By")}</H6>
-      {sortBy.map(item => <FlexBox key={item} alignItems="center" marginTop={2} onClick={() => setActiveSortBy(item)}
-        sx={{ cursor: "pointer", color: activeSortBy === item ? "primary.main" : "text.disabled" }}>
-        <Dot active={activeSortBy === item} />
-        <Small>{t(item)}</Small>
-      </FlexBox>)}
+      {sortBy.map(item =>
+        <FlexBox key={item.id} alignItems="center" marginTop={2}
+          onClick={() => props.onFilterChange("SORTBY", item.id)}
+          sx={{ cursor: "pointer", color: props.sortBy === item.id ? "primary.main" : "text.disabled" }}>
+          <Dot active={props.sortBy === item.id} />
+          <Small>{t(item.name)}</Small>
+        </FlexBox>)}
     </Box>
 
     <Box marginTop={4}>
@@ -93,26 +104,15 @@ const SearchFilter = () => {
   </Card>;
 };
 
-const categories = [{
-  id: 1,
-  name: "Shoes",
-  count: 8
-}, {
-  id: 2,
-  name: "Furniture",
-  count: 12
-}, {
-  id: 3,
-  name: "Clothes",
-  count: 70
-}, {
-  id: 4,
-  name: "Accessories",
-  count: 45
-}, {
-  id: 5,
-  name: "Others",
-  count: 12
-}];
-const sortBy = ["Newest", "Popular", "Default", "Price: high to low", "Price: low to high"];
+
+const sortBy = [
+  {
+    id: "NEW",
+    name: "Newest"
+  }, {
+    id: "POP",
+    name: "Popular"
+  },
+  // "Default", "Price: high to low", "Price: low to high"
+];
 export default SearchFilter;

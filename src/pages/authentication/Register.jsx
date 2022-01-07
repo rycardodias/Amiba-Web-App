@@ -82,19 +82,19 @@ const Register = () => {
         <form noValidate onSubmit={handleSubmit} style={{ width: "100%" }}>
           <FlexBox justifyContent="space-between" flexWrap="wrap">
             <TextFieldWrapper>
-              <LightTextField fullWidth name="name" type="text" label="Name" onBlur={handleBlur} onChange={handleChange} value={values.name || ""} error={Boolean(touched.name && errors.name)} helperText={touched.name && errors.name} />
+              <LightTextField fullWidth name="name" type="text" label={t("Name")} onBlur={handleBlur} onChange={handleChange} value={values.name || ""} error={Boolean(touched.name && errors.name)} helperText={touched.name && errors.name} />
             </TextFieldWrapper>
 
             <TextFieldWrapper>
-              <LightTextField fullWidth name="email" type="email" label="Email" onBlur={handleBlur} onChange={handleChange} value={values.email || ""} error={Boolean(touched.email && errors.email)} helperText={touched.email && errors.email} />
+              <LightTextField fullWidth name="email" type="email" label={t("Email")} onBlur={handleBlur} onChange={handleChange} value={values.email || ""} error={Boolean(touched.email && errors.email)} helperText={touched.email && errors.email} />
             </TextFieldWrapper>
           </FlexBox>
 
           <TextFieldWrapper sx={{ mt: 2, width: "100%" }}>
-            <LightTextField fullWidth name="password" type="password" label="Password" onBlur={handleBlur} onChange={handleChange} value={values.password || ""} error={Boolean(touched.password && errors.password)} helperText={touched.password && errors.password} />
+            <LightTextField fullWidth name="password" type="password" label={t("Password")} onBlur={handleBlur} onChange={handleChange} value={values.password || ""} error={Boolean(touched.password && errors.password)} helperText={touched.password && errors.password} />
           </TextFieldWrapper>
 
-          <FormControlLabel control={<Checkbox disableRipple checked={values.terms} onChange={handleChange} name="terms" />} label="I agree to terms & conditions" sx={{
+          <FormControlLabel control={<Checkbox disableRipple checked={values.terms} onChange={handleChange} name="terms" />} label={t("I agree to terms & conditions")} sx={{
             marginTop: "0.5rem",
             "& .MuiTypography-root": {
               fontWeight: 600

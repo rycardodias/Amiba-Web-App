@@ -12,7 +12,7 @@ const races = [
 
 const productTypes = [
     { id: 'ANIMAL', name: 'Animal' },
-    { id: 'LOTE', name: 'Lote Ovos' },
+    { id: 'OVOS', name: 'Eggs' },
 ]
 
 const explorationTypes = [

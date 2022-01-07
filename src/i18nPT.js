@@ -78,6 +78,7 @@ const i18nPT = {
     "Half-Dozen": "Meia Duzia",
     Categories: "Categorias",
     "Sort By": "Ordernado por",
+    "Eggs": "Ovos",
     Name: 'Nome',
     Type: 'Tipo',
     Address: 'Endereço',
@@ -95,6 +96,11 @@ const i18nPT = {
     "Email": "Email",
     "Forgot Password?": "Esqueceu-se da Palavra-passe?",
     "Do you already have an account?": "Já tem uma conta?",
+    "Dont have an account?": "Não tem uma conta?",
+    "Reset": "Recuperar",
+    "Reset your password": "Recuperar palavra-chave",
+    "Reset link has been sent!": "Endereço de recuperação enviado!",
+    "Must be a valid email": "Deve ser um email válido",
     "Sign In": "Entrar",
     "Sign Up": "Registar",
     "Log in": "Entrar",
@@ -104,8 +110,9 @@ const i18nPT = {
     "You Logout Successfully": "Terminou Sessão com Sucesso",
     "Get started with Amiba": "Inscreva-se na Amiba",
     "You registered successfully": "Registou-se com Sucesso",
-    "Sign up with Google": "Registe-se com o Google",
-    "Sign up with Facebook": "Registe-se com o Facebook",
+    "Sign up with Google": "Registar com Google",
+    "Sign up with Facebook": "Registar com Facebook",
+    "I agree to terms & conditions": "Aceito os termos e condições"
 }
 
 export { i18nPT }

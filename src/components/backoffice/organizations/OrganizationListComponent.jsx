@@ -26,7 +26,10 @@ export const OrganizationListComponent = () => {
 
     function getInitialData() {
         organizationsRequests.getOrganizations()
-            .then(response => setTableData(response.data.data))
+            .then(response => {
+                if (response.error || response.data.error) return
+                setTableData(response.data.data)
+            })
             .catch(error => console.error(error))
     }
 

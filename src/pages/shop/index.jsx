@@ -36,6 +36,10 @@ const Shop = () => {
   const [itemModal, setItemModal] = useState([])
   const [cartQuantity, setcartQuantity] = useState(1)
 
+  const [filterCategory, setfilterCategory] = useState("")
+  const [filterOrganization, setfilterOrganization] = useState("")
+  const [filterSortBy, setfilterSortBy] = useState("")
+
   useEffect(() => {
     async function fetchProducts() {
       const res = await getProductsAllAvailable()
@@ -88,15 +92,20 @@ const Shop = () => {
       </Select>
     </>
   }
-
+  
+  function handleFilterChange(type, value) {
+    if (type === "CATEGORY") return setfilterCategory(value)
+    if (type === "ORG") return setfilterOrganization(value)
+    if (type === "SORTBY") return setfilterSortBy(value)
+  }
 
   return <Box pt={2} pb={4}>
     <Heading heading={t("Amiba Ecommerce")} />
     <Box marginTop={3}>
-
+      
       <Grid container spacing={3}>
         <Grid item lg={3} sm={4} xs={12}>
-          <SearchFilter organizations={data} />
+          <SearchFilter sortBy={filterSortBy} organization={filterOrganization} category={filterCategory} onFilterChange={handleFilterChange} />
         </Grid>
         <Grid item lg={9} sm={8} xs={12}>
           <Card sx={{ padding: 3 }}>
