@@ -16,7 +16,6 @@ import { useTranslation } from "react-i18next";
 import { convertUnitNames } from "lib/values/convertions";
 import toast from "react-hot-toast";
 import { addItem } from 'lib/requests/specific/cartsAddProducts'
-import ShopList from "components/shop/ShopList";
 
 const ModalCard = styled(StyledModalCard)(({ theme }) => ({
   outline: "none", [theme.breakpoints.down("sm")]: { maxHeight: 400, overflow: "auto" }
@@ -94,13 +93,12 @@ const Shop = () => {
   return <Box pt={2} pb={4}>
     <Heading heading={t("Amiba Ecommerce")} />
     <Box marginTop={3}>
-      
+
       <Grid container spacing={3}>
         <Grid item lg={3} sm={4} xs={12}>
-          <SearchFilter />
+          <SearchFilter organizations={data} />
         </Grid>
         <Grid item lg={9} sm={8} xs={12}>
-        {/* <ShopList></ShopList> */}
           <Card sx={{ padding: 3 }}>
             <Grid container spacing={3}>
               {data.map(item => <Grid item lg={4} md={6} xs={12} key={item.id}>
@@ -108,7 +106,7 @@ const Shop = () => {
               </Grid>)}
             </Grid>
 
-                {/* //TODO alterar o Count conforme o num páginas */}
+            {/* //TODO alterar o Count conforme o num páginas */}
             <Stack alignItems="center" marginTop={4}>
               <StyledPagination count={4} shape="rounded" //   onChange={handleChange}
               />

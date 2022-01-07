@@ -14,6 +14,11 @@ const getOrganizationUserId = async (UserId) => {
     return await sendRequest('GET', 'organizations/UserId/' + UserId);
 };
 
+const getOrganizationsProductAvailable = async () => {
+    return await sendRequest('GET', 'organizations/productAvailable');
+};
+
+
 const createOrganization = async (type, UserId, name, address, locale, zipcode, fiscalNumber, telephone, mobilePhone) => {
     return await sendRequest('POST', 'organizations/create', { token, type, UserId, name, address, locale, zipcode, fiscalNumber, telephone, mobilePhone })
 };
@@ -26,4 +31,4 @@ const deleteOrganization = async (id) => {
     return await sendRequest('DELETE', 'organizations/delete', { token, id })
 }
 
-export { getOrganizations, getOrganizationId, getOrganizationUserId, createOrganization, updateOrganization, deleteOrganization }
+export { getOrganizations, getOrganizationId, getOrganizationUserId, getOrganizationsProductAvailable, createOrganization, updateOrganization, deleteOrganization }
