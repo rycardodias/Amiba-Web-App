@@ -151,7 +151,7 @@ const AddOrganizationsModal = ({ open, onClose, edit, data }) => {
           {/* <Button fullWidth size="small" onClick={() => console.log("clicou")} type="submit" variant="contained" sx={{ width: 124, fontSize: 12 }}>
             {t('Save')}
           </Button> */}
-          <Button fullWidth size="small" type="submit" onSubmit={() => handleSubmit()} variant="contained" sx={{
+          <Button fullWidth size="small" type="submit" onSubmit={(e) => {e.preventDefault() ; handleSubmit()}} variant="contained" sx={{
             width: 124,
             fontSize: 12
           }}>
