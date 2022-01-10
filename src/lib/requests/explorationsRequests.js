@@ -1,4 +1,4 @@
-import { sendRequest } from 'src/lib/requests/requests'
+import { sendRequest } from './requests'
 
 const getExplorations = async () => {
     return await sendRequest('GET', 'explorations');
