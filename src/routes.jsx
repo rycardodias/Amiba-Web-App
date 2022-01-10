@@ -34,6 +34,8 @@ const CertificationsList = Loadable(lazy(() => import('pages/backoffice/Certific
 
 const UsersList = Loadable(lazy(() => import('pages/backoffice/UsersList')));
 const RestaurantsList = Loadable(lazy(() => import('pages/backoffice/RestaurantsList')));
+const MenusList = Loadable(lazy(() => import('pages/backoffice/MenusList')));
+
 
 
 const Error = Loadable(lazy(() => import('./pages/404'))); // routes
@@ -74,6 +76,8 @@ const routes = [{
 
     { path: 'users', element: <UsersList /> },
     { path: 'restaurants', element: <RestaurantsList /> },
+    { path: 'restaurants/menus', element: <MenusList /> },
+
 
 
     {

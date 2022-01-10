@@ -53,7 +53,7 @@ const AddModal = ({ open, onClose, edit, data }) => {
     address: Yup.string().min(6, t("Too Short")).required(`${t('Name')} ${t('is required!')}`),
     locale: Yup.string().min(6, t("Too Short")).required(`${t('Locale')} ${t('is required!')}`),
     zipcode: Yup.string().min(6, t("Too Short")).required(`${t('Zip Code')} ${t('is required!')}`),
-    fiscalNumber: Yup.string().min(9, t("Too Short")).required(`${t('VAT Number')} ${t('is required!')}`),
+    fiscalNumber: Yup.string().min(9, t("Too Short")).max(9, t("Too Long")).required(`${t('VAT Number')} ${t('is required!')}`),
   });
 
   const { values, errors, handleChange, handleSubmit, touched } = useFormik({
