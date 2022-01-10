@@ -150,7 +150,7 @@ const AddOrganizationsModal = ({ open, onClose, edit, data }) => {
             {t('Cancel')}
           </Button>
 
-          <Button fullWidth size="small" type="submit" variant="contained" sx={{ width: 124, fontSize: 12 }}>
+          <Button fullWidth size="small" onClick={() => console.log("clicou")} type="submit" variant="contained" sx={{ width: 124, fontSize: 12 }}>
             {t('Save')}
           </Button>
         </FlexBox>
