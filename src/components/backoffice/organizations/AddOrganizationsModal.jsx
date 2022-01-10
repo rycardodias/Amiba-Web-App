@@ -15,6 +15,8 @@ import { useTranslation } from "react-i18next";
 
 import { StyledModalCard, StyledMenuItem, StyledSelect } from 'components/backoffice/styledComponents/AddModalStyles'
 
+
+
 const AddOrganizationsModal = ({ open, onClose, edit, data }) => {
   const { t } = useTranslation();
 
@@ -47,8 +49,8 @@ const AddOrganizationsModal = ({ open, onClose, edit, data }) => {
 
   const fieldValidationSchema = Yup.object().shape({
     name: Yup.string().min(3, t("Too Short")).required(`${t('Name')} ${t('is required!')}`),
-    type: Yup.string().required(`${t('Type')} ${t('is required!')}`),
-    UserId: Yup.string().required(`${t('Responsable')} ${t('is required!')}`),
+    // type: Yup.string().required(`${t('Type')} ${t('is required!')}`),
+    // UserId: Yup.string().required(`${t('Responsable')} ${t('is required!')}`),
     address: Yup.string().min(6, t("Too Short")).required(`${t('Name')} ${t('is required!')}`),
     locale: Yup.string().min(6, t("Too Short")).required(`${t('Locale')} ${t('is required!')}`),
     zipcode: Yup.string().min(6, t("Too Short")).required(`${t('Zip Code')} ${t('is required!')}`),
@@ -148,19 +150,13 @@ const AddOrganizationsModal = ({ open, onClose, edit, data }) => {
             {t('Cancel')}
           </Button>
 
-          {/* <Button fullWidth size="small" onClick={() => console.log("clicou")} type="submit" variant="contained" sx={{ width: 124, fontSize: 12 }}>
+          <Button fullWidth size="small" type="submit" variant="contained" sx={{ width: 124, fontSize: 12 }}>
             {t('Save')}
-          </Button> */}
-          <Button fullWidth size="small" type="submit" onSubmit={(e) => {e.preventDefault() ; handleSubmit()}} variant="contained" sx={{
-            width: 124,
-            fontSize: 12
-          }}>
-            Save
           </Button>
         </FlexBox>
       </form>
     </StyledModalCard>
-  </Modal >;
+  </Modal>;
 };
 
 export default AddOrganizationsModal;
