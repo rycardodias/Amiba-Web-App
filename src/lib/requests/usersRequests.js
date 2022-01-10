@@ -42,12 +42,12 @@ const tokenPermission = async () => {
     return await sendRequest('GET', 'users/tokenPermission')
 }
 
-const updateAddress = async (id, address, locale, zipcode) => {
-    return await sendRequest('PUT', 'users/update', { id, address, locale, zipcode });
+const updateAddress = async (address, locale, zipcode) => {
+    return await sendRequest('PUT', 'users/update', { address, locale, zipcode });
 };
 
 const updatePassword = async (oldPassword, newPassword) => {
-    return await sendRequest('PUT', 'users/update/password', { id, oldPassword, newPassword });
+    return await sendRequest('PUT', 'users/update/password', { oldPassword, newPassword });
 };
 
 export { getUsers, getUserId, createUser, updateUser, deleteUser, login, logout, updateAddress, updatePassword, getUserByToken, validateToken, tokenPermission }
