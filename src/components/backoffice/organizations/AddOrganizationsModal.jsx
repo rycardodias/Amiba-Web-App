@@ -69,9 +69,11 @@ const AddOrganizationsModal = ({ open, onClose, edit, data }) => {
           })
           .catch(error => console.log(error));
       } else {
+        console.log("Entra Insert")
         organizationsRequests.createOrganization(values.type, values.UserId, values.name, values.address, values.locale,
           values.zipcode, values.fiscalNumber, values.telephone, values.mobilePhone)
           .then(response => {
+            console.log(`response`, response)
             if (response.error || response.data.error) return toast.error(t("Error Creating Record"));
 
             onClose(true);
