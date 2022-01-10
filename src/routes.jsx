@@ -30,6 +30,7 @@ const PaymentSuccess = Loadable(lazy(() => import('./pages/shop/PaymentSuccess')
 
 const OrganizationsList = Loadable(lazy(() => import('pages/backoffice/OrganizationsList')));
 const ExplorationsList = Loadable(lazy(() => import('pages/backoffice/ExplorationsList')));
+const UsersList = Loadable(lazy(() => import('pages/backoffice/UsersList')));
 
 
 
@@ -67,6 +68,8 @@ const routes = [{
   children: [
     { path: 'organizations', element: <OrganizationsList /> },
     { path: 'explorations', element: <ExplorationsList /> },
+    { path: 'users', element: <UsersList /> },
+
     
     {
       path: 'account-settings',

@@ -10,7 +10,13 @@ const index = [
     }, {
       subTitle: "Explorations",
       path: "/backoffice/explorations"
-    }]
+    },
+    {
+      subTitle: "Users",
+      path: "/backoffice/users"
+    },
+
+    ]
   },
   // ### LOJA ###
   {
