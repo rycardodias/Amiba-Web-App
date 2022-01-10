@@ -59,6 +59,7 @@ const AddOrganizationsModal = ({ open, onClose, edit, data }) => {
 
   const { values, errors, handleChange, handleSubmit, touched } = useFormik({
     initialValues, validationSchema: fieldValidationSchema, onSubmit: values => {
+      console.log("teste", edit, values)
       if (edit) {
         organizationsRequests.updateOrganization(values.id, values.type, values.UserId, values.name, values.address, values.locale,
           values.zipcode, values.fiscalNumber, values.telephone, values.mobilePhone)
