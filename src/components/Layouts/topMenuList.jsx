@@ -40,7 +40,7 @@ const index = [
       path: "/backoffice/animals",
       subCategories: [
         { name: "Animals", path: "/backoffice/animals" },
-        { name: "Animals/Products", path: "/backoffice/animals/animalProducts" },
+        { name: "Animal/Product", path: "/backoffice/animals/animalProducts" },
       ]
     },
     {
@@ -48,7 +48,7 @@ const index = [
       path: "/backoffice/eggsBatches",
       subCategories: [
         { name: "Eggs Batches", path: "/backoffice/eggsBatches" },
-        { name: "Eggs Batch/Products", path: "/backoffice/eggsBatches/eggsBatchProducts" },
+        { name: "Eggs Batch/Product", path: "/backoffice/eggsBatches/eggsBatchProducts" },
         { name: "Eggs Batch Lines", path: "/backoffice/eggsBatches/eggsBatchLines" },
       ]
     },

@@ -21,6 +21,7 @@ const AddModal = ({ open, onClose, edit, data }) => {
   const initialValues = {
     id: data?.id || "",
     certificationCode: data?.certificationCode || "",
+    description: data?.description || "",
     ExplorationId: data?.ExplorationId || "",
     initialDate: data?.initialDate || "",
     finalDate: data?.finalDate || "",
@@ -84,7 +85,7 @@ const AddModal = ({ open, onClose, edit, data }) => {
           <Grid container spacing={2}>
             <Grid item xs={6}>
               <H6 mb={1}>{t('Certification Code')}</H6>
-              <DarkTextField disabled={edit} name="certificationCode" placeholder={t('Name')} onChange={handleChange} value={values.certificationCode}
+              <DarkTextField disabled={edit} name="certificationCode" placeholder={t('Certification Code')} onChange={handleChange} value={values.certificationCode}
                 error={Boolean(errors.certificationCode && touched.certificationCode)} helperText={touched.certificationCode && errors.certificationCode} />
             </Grid>
 
@@ -115,7 +116,7 @@ const AddModal = ({ open, onClose, edit, data }) => {
             </Grid>
 
 
-            <Grid item xs={6}>
+            <Grid item xs={12}>
               <H6 mb={1}>{t('Description')}</H6>
               <DarkTextField name="description" placeholder={t('Description')} onChange={handleChange} value={values.description}
                 error={Boolean(errors.description && touched.description)} helperText={touched.description && errors.description} />
