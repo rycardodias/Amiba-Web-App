@@ -28,7 +28,7 @@ const AddModal = ({ open, onClose, edit, data }) => {
     RestaurantName: data?.Restaurant?.name || ""
   };
 
-  const [explorations, setexplorations] = useState([])
+  const [restaurants, setrestaurants] = useState([])
 
   async function initialData() {
     if (edit) return
@@ -36,7 +36,7 @@ const AddModal = ({ open, onClose, edit, data }) => {
     const res = await restaurantsRequests.getRestaurants()
     if (res.error) return
     if (res.data.error) return toast.error(t("Error Getting essential Data"))
-    setexplorations(res.data.data)
+    setrestaurants(res.data.data)
 
   }
 

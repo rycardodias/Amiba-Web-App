@@ -7,8 +7,8 @@ import { H6 } from "components/Typography";
 import toast from "react-hot-toast";
 import FlexBox from "components/FlexBox";
 import DataTable from "components/backoffice/utils/DataTable";
-import columnShape from "components/backoffice/certifications/ColumnShape";
-import AddModal from "components/backoffice/certifications/AddModal";
+import columnShape from "components/backoffice/menus/ColumnShape";
+import AddModal from "components/backoffice/menus/AddModal";
 import * as menusRequests from 'lib/requests/menusRequests'
 import { ButtonWrapper } from '../styledComponents/ButtonWrapper';
 
