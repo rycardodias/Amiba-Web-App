@@ -31,6 +31,8 @@ export const OrganizationListComponent = () => {
                 setTableData(response.data.data)
             })
             .catch(error => console.error(error))
+        usersRequests.validateToken().then(response => console.log(`response`, response))
+            .catch(error => console.error(error))
     }
 
     useEffect(() => {
