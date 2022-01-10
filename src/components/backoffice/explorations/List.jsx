@@ -4,12 +4,13 @@ import { useTranslation } from "react-i18next";
 import { Add, Edit, Delete } from "@mui/icons-material";
 import { Box, Button, Card, styled } from "@mui/material";
 import { H6 } from "components/Typography";
-import FlexBox from "components/FlexBox";
 import toast from "react-hot-toast";
+import FlexBox from "components/FlexBox";
 import DataTable from "components/backoffice/utils/DataTable";
 import columnShape from "components/backoffice/explorations/ColumnShape";
 import AddModal from "components/backoffice/explorations/AddModal";
 import * as explorationsRequests from 'lib/requests/explorationsRequests'
+import { ButtonWrapper } from '../styledComponents/ButtonWrapper';
 
 export const List = () => {
     const { t } = useTranslation();
@@ -26,7 +27,7 @@ export const List = () => {
     function getInitialData() {
         explorationsRequests.getExplorations()
             .then(response => {
-                if (response.error || response.data.error) return
+                if (response.error || response.data.error) return setTableData([])
                 setTableData(response.data.data)
             })
             .catch(error => console.error(error))
@@ -47,17 +48,15 @@ export const List = () => {
         const ids = selectedRows.map(item => item.original.id);
         for (let id of ids) {
             const res = await explorationsRequests.deleteExploration(id)
-            if (res.error || res.data.error) toast.error(`${t('Error removing')} ${tableSingleName}`);
+            if (res.error || res.data.error) {
+                toast.error(`${t('Error removing')} ${tableSingleName}`);
+            } else {
+                toast.success(`${t('Success removing')} ${tableSingleName}`)
+            }
         }
         await getInitialData()
     };
 
-    const ButtonWrapper = styled(FlexBox)(({ theme }) => ({
-        [theme.breakpoints.down(500)]: {
-            marginTop: 10, width: "100%", flexDirection: "column-reverse",
-            "& > .MuiBox-root": { width: "100%", margin: "10px 0", alignItems: "center", flexDirection: "column" }, "& .MuiButton-root": { minWidth: "100%" }
-        }
-    }));
 
     return (
         <Box pt={2} pb={4}>

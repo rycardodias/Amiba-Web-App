@@ -31,16 +31,20 @@ const AddModal = ({ open, onClose, edit, data }) => {
     fiscalNumber: data?.fiscalNumber || "",
     telephone: data?.telephone || "",
     mobilePhone: data?.mobilePhone || "",
-    gpsLocalization: data?.gpsLocalization || ""
+    gpsLocalization: data?.gpsLocalization || "",
+    OrganizationName: data?.Organization?.name || ""
   };
 
   const [organizations, setorganizations] = useState([])
 
   async function initialData() {
+    if (edit) return
+
     const res = await organizationsRequests.getOrganizations()
     if (res.error) return
     if (res.data.error) return toast.error(t("Error Getting essential Data"))
     setorganizations(res.data.data)
+
   }
 
   useEffect(() => {
@@ -55,13 +59,13 @@ const AddModal = ({ open, onClose, edit, data }) => {
     address: Yup.string().min(6, t("Too Short")).required(`${t('Name')} ${t('is required!')}`),
     locale: Yup.string().min(6, t("Too Short")).required(`${t('Locale')} ${t('is required!')}`),
     zipcode: Yup.string().min(6, t("Too Short")).required(`${t('Zip Code')} ${t('is required!')}`),
-    fiscalNumber: Yup.string().min(9, t("Too Short")).required(`${t('VAT Number')} ${t('is required!')}`),
+    fiscalNumber: Yup.string().min(9, t("Too Short")).max(9, t("Too Long")).required(`${t('VAT Number')} ${t('is required!')}`),
   });
 
   const { values, errors, handleChange, handleSubmit, touched } = useFormik({
     initialValues, validationSchema: fieldValidationSchema, onSubmit: values => {
       if (edit) {
-        explorationsRequests.updateExploration(values.id, values.type, values.UserId, values.name, values.address, values.locale,
+        explorationsRequests.updateExploration(values.id, values.type, values.name, values.address, values.locale,
           values.zipcode, values.fiscalNumber, values.telephone, values.mobilePhone, values.gpsLocalization)
           .then(response => {
             if (response.error || response.data.error) return toast.error(t("Error Updating Record"));;
@@ -104,17 +108,39 @@ const AddModal = ({ open, onClose, edit, data }) => {
                 })}
               </StyledSelect>
             </Grid>
+
+            {edit ?
+              <Grid item xs={6}>
+                <H6 mb={1}>{t('Organization')}</H6>
+                <DarkTextField disabled name="OrganizationId" value={values.OrganizationName} />
+              </Grid> :
+              <Grid item xs={6}>
+                <H6 mb={1}>{t('Organization')}</H6>
+                <StyledSelect fullWidth name="OrganizationId" value={values.OrganizationId} onChange={handleChange} input={<InputBase placeholder={t('Organization')} />} IconComponent={() => <KeyboardArrowDown fontSize="small" />}>
+                  {organizations && organizations.map(item => {
+                    return <StyledMenuItem key={item.id} value={item.id}>{t(item.name)}</StyledMenuItem>
+                  })}
+                </StyledSelect>
+              </Grid>
+            }
+
             <Grid item xs={6}>
               <H6 mb={1}>{t('VAT Number')}</H6>
               <DarkTextField name="fiscalNumber" placeholder={t('VAT Number')} onChange={handleChange} value={values.fiscalNumber}
                 error={Boolean(errors.fiscalNumber && touched.fiscalNumber)} helperText={touched.fiscalNumber && errors.fiscalNumber} />
             </Grid>
-
             <Grid item xs={6}>
+              <H6 mb={1}>{t('GPS Localization')}</H6>
+              <DarkTextField name="gpsLocalization" placeholder={t('GPS Localization')} onChange={handleChange} value={values.gpsLocalization}
+                error={Boolean(errors.gpsLocalization && touched.gpsLocalization)} helperText={touched.gpsLocalization && errors.gpsLocalization} />
+            </Grid>
+
+            <Grid item xs={12}>
               <H6 mb={1}>{t('Address')}</H6>
               <DarkTextField name="address" placeholder={t('Address')} onChange={handleChange} value={values.address}
                 error={Boolean(errors.address && touched.address)} helperText={touched.address && errors.address} />
             </Grid>
+
             <Grid item xs={6}>
               <H6 mb={1}>{t('Locale')}</H6>
               <DarkTextField name="locale" placeholder={t('Locale')} onChange={handleChange} value={values.locale}
@@ -125,21 +151,6 @@ const AddModal = ({ open, onClose, edit, data }) => {
               <DarkTextField name="zipcode" placeholder={t('Zip Code')} onChange={handleChange} value={values.zipcode}
                 error={Boolean(errors.zipcode && touched.zipcode)} helperText={touched.zipcode && errors.zipcode} />
             </Grid>
-            <Grid item xs={6}>
-              <H6 mb={1}>{t('GPS Localization')}</H6>
-              <DarkTextField name="gpsLocalization" placeholder={t('GPS Localization')} onChange={handleChange} value={values.gpsLocalization}
-                error={Boolean(errors.gpsLocalization && touched.gpsLocalization)} helperText={touched.gpsLocalization && errors.gpsLocalization} />
-            </Grid>
-
-            <Grid item xs={6}>
-              <H6 mb={1}>{t('Organization')}</H6>
-              <StyledSelect fullWidth name="OrganizationId" value={values.OrganizationId} onChange={handleChange} input={<InputBase placeholder={t('Organization')} />} IconComponent={() => <KeyboardArrowDown fontSize="small" />}>
-                {organizations && organizations.map(item => {
-                  return <StyledMenuItem key={item.id} value={item.id}>{t(item.name)}</StyledMenuItem>
-                })}
-              </StyledSelect>
-            </Grid>
-
           </Grid>
         </ScrollBar>
 

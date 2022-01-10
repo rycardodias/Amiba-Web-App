@@ -98,12 +98,32 @@ const AddModal = ({ open, onClose, edit, data }) => {
               <DarkTextField name="fiscalNumber" placeholder={t('VAT Number')} onChange={handleChange} value={values.fiscalNumber}
                 error={Boolean(errors.fiscalNumber && touched.fiscalNumber)} helperText={touched.fiscalNumber && errors.fiscalNumber} />
             </Grid>
+            <Grid item xs={6}>
+              <H6 mb={1}>{t('Responsable')}</H6>
+              <StyledSelect fullWidth name="UserId" value={values.UserId} onChange={handleChange} input={<InputBase placeholder={t('Responsable')} />} IconComponent={() => <KeyboardArrowDown fontSize="small" />}>
+                {users && users.map(item => {
+                  return <StyledMenuItem key={item.id} value={item.id}>{t(item.name)}</StyledMenuItem>
+                })}
+              </StyledSelect>
+            </Grid>
 
             <Grid item xs={6}>
+              <H6 mb={1}>{t('Telephone')}</H6>
+              <DarkTextField name="telephone" placeholder={t('telephone')} onChange={handleChange} value={values.telephone}
+                error={Boolean(errors.telephone && touched.telephone)} helperText={touched.telephone && errors.telephone} />
+            </Grid>
+            <Grid item xs={6}>
+              <H6 mb={1}>{t('Mobile Phone')}</H6>
+              <DarkTextField name="mobilePhone" placeholder={t('mobilePhone')} onChange={handleChange} value={values.mobilePhone}
+                error={Boolean(errors.mobilePhone && touched.mobilePhone)} helperText={touched.mobilePhone && errors.mobilePhone} />
+            </Grid>
+
+            <Grid item xs={12}>
               <H6 mb={1}>{t('Address')}</H6>
               <DarkTextField name="address" placeholder={t('Address')} onChange={handleChange} value={values.address}
                 error={Boolean(errors.address && touched.address)} helperText={touched.address && errors.address} />
             </Grid>
+            
             <Grid item xs={6}>
               <H6 mb={1}>{t('Locale')}</H6>
               <DarkTextField name="locale" placeholder={t('Locale')} onChange={handleChange} value={values.locale}
@@ -115,14 +135,7 @@ const AddModal = ({ open, onClose, edit, data }) => {
                 error={Boolean(errors.zipcode && touched.zipcode)} helperText={touched.zipcode && errors.zipcode} />
             </Grid>
 
-            <Grid item xs={6}>
-              <H6 mb={1}>{t('Responsable')}</H6>
-              <StyledSelect fullWidth name="UserId" value={values.UserId} onChange={handleChange} input={<InputBase placeholder={t('Responsable')} />} IconComponent={() => <KeyboardArrowDown fontSize="small" />}>
-                {users && users.map(item => {
-                  return <StyledMenuItem key={item.id} value={item.id}>{t(item.name)}</StyledMenuItem>
-                })}
-              </StyledSelect>
-            </Grid>
+
 
             <Grid item xs={12}>
               <H6 mb={1}>{t('Add Picture')}</H6>
