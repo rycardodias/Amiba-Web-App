@@ -1,7 +1,5 @@
 import { sendRequest } from './requests'
 
-const token = localStorage.getItem('accessToken')
-
 const getOrganizations = async () => {
     return await sendRequest('GET', 'organizations');
 };
@@ -20,15 +18,15 @@ const getOrganizationsProductAvailable = async () => {
 
 
 const createOrganization = async (UserId, name, address, locale, zipcode, fiscalNumber, telephone, mobilePhone) => {
-    return await sendRequest('POST', 'organizations/create', { token, UserId, name, address, locale, zipcode, fiscalNumber, telephone, mobilePhone })
+    return await sendRequest('POST', 'organizations/create', { UserId, name, address, locale, zipcode, fiscalNumber, telephone, mobilePhone })
 };
 
 const updateOrganization = async (id, UserId, name, address, locale, zipcode, fiscalNumber, telephone, mobilePhone) => {
-    return await sendRequest('PUT', 'organizations/update', { token, id, UserId, name, address, locale, zipcode, fiscalNumber, telephone, mobilePhone })
+    return await sendRequest('PUT', 'organizations/update', { id, UserId, name, address, locale, zipcode, fiscalNumber, telephone, mobilePhone })
 };
 
 const deleteOrganization = async (id) => {
-    return await sendRequest('DELETE', 'organizations/delete', { token, id })
+    return await sendRequest('DELETE', 'organizations/delete', { id })
 }
 
 export { getOrganizations, getOrganizationId, getOrganizationUserId, getOrganizationsProductAvailable, createOrganization, updateOrganization, deleteOrganization }

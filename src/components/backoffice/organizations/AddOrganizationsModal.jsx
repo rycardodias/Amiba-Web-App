@@ -156,7 +156,7 @@ const AddOrganizationsModal = ({ open, onClose, edit, data }) => {
         </FlexBox>
       </form>
     </StyledModalCard>
-  </Modal>;
+  </Modal >;
 };
 
 export default AddOrganizationsModal;

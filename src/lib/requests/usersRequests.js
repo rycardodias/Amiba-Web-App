@@ -13,12 +13,12 @@ const createUser = async (name, email, password, address, locale, zipcode, fisca
     return await sendRequest('POST', 'users/create', { name, email, password, address, locale, zipcode, fiscalNumber, telephone, mobilePhone })
 };
 
-const updateUser = async (token, id, name, email, password, address, locale, zipcode, fiscalNumber, telephone, mobilePhone) => {
-    return await sendRequest('PUT', 'users/update', { token, id, name, email, password, address, locale, zipcode, fiscalNumber, telephone, mobilePhone })
+const updateUser = async (id, name, email, password, address, locale, zipcode, fiscalNumber, telephone, mobilePhone) => {
+    return await sendRequest('PUT', 'users/update', { id, name, email, password, address, locale, zipcode, fiscalNumber, telephone, mobilePhone })
 };
 
-const deleteUser = async (token, id) => {
-    return await sendRequest('DELETE', 'users/delete', { token, id })
+const deleteUser = async (id) => {
+    return await sendRequest('DELETE', 'users/delete', { id })
 }
 
 const login = async (email, password) => {
@@ -42,14 +42,12 @@ const tokenPermission = async () => {
     return await sendRequest('GET', 'users/tokenPermission')
 }
 
-const updateAddress = async (id, token, address, locale, zipcode) => {
-    return await sendRequest('PUT', 'users/update', { id, token, address, locale, zipcode });
+const updateAddress = async (id, address, locale, zipcode) => {
+    return await sendRequest('PUT', 'users/update', { id, address, locale, zipcode });
 };
 
 const updatePassword = async (oldPassword, newPassword) => {
-    const id = localStorage.getItem('UserId') //TEM DE SER ALTERADO
-    const token = localStorage.getItem('accessToken')
-    return await sendRequest('PUT', 'users/update/password', { id, token, oldPassword, newPassword });
+    return await sendRequest('PUT', 'users/update/password', { id, oldPassword, newPassword });
 };
 
 export { getUsers, getUserId, createUser, updateUser, deleteUser, login, logout, updateAddress, updatePassword, getUserByToken, validateToken, tokenPermission }
