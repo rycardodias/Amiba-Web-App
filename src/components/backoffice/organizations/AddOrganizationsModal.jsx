@@ -59,9 +59,8 @@ const AddOrganizationsModal = ({ open, onClose, edit, data }) => {
 
   const { values, errors, handleChange, handleSubmit, touched } = useFormik({
     initialValues, validationSchema: fieldValidationSchema, onSubmit: values => {
-      console.log("teste", edit, values)
       if (edit) {
-        organizationsRequests.updateOrganization(values.id, values.type, values.UserId, values.name, values.address, values.locale,
+        organizationsRequests.updateOrganization(values.id, values.UserId, values.name, values.address, values.locale,
           values.zipcode, values.fiscalNumber, values.telephone, values.mobilePhone)
           .then(response => {
             if (response.error || response.data.error) return toast.error(t("Error Updating Record"));;
@@ -70,8 +69,7 @@ const AddOrganizationsModal = ({ open, onClose, edit, data }) => {
           })
           .catch(error => console.log(error));
       } else {
-        console.log("Entra Insert")
-        organizationsRequests.createOrganization(values.type, values.UserId, values.name, values.address, values.locale,
+        organizationsRequests.createOrganization(values.UserId, values.name, values.address, values.locale,
           values.zipcode, values.fiscalNumber, values.telephone, values.mobilePhone)
           .then(response => {
             console.log(`response`, response)
