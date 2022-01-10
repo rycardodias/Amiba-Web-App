@@ -1,7 +1,7 @@
-import { OrganizationListComponent } from "components/backoffice/organizations/OrganizationListComponent";
+import { List } from "components/backoffice/organizations/List";
 
 const OrganizationsList = () => {
-    return <OrganizationListComponent />
+    return <List />
 };
 
 export default OrganizationsList;

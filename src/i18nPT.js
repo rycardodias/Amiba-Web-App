@@ -84,6 +84,7 @@ const i18nPT = {
     Address: 'Endereço',
     Locale: 'Localidade',
     "Zip Code": 'Código Postal',
+    "GPS Localization": "Localização GPS",
     "VAT Number": 'NIF',
     Responsable: "Responsável",
     "Phone/Mobile": "Telefone/Telemóvel",

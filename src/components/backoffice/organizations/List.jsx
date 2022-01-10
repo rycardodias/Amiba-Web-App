@@ -7,11 +7,11 @@ import { H6 } from "components/Typography";
 import FlexBox from "components/FlexBox";
 import toast from "react-hot-toast";
 import DataTable from "components/backoffice/utils/DataTable";
-import columnShape from "components/backoffice/organizations/OrganizationColumnShape";
-import AddOrganizationsModal from "components/backoffice/organizations/AddOrganizationsModal";
+import columnShape from "components/backoffice/organizations/ColumnShape";
+import AddModal from "components/backoffice/organizations/AddModal";
 import * as organizationsRequests from 'lib/requests/organizationsRequests'
 
-export const OrganizationListComponent = () => {
+export const List = () => {
     const { t } = useTranslation();
     const tableName = t('Organizations')
     const tableSingleName = t('Organization')
@@ -103,7 +103,7 @@ export const OrganizationListComponent = () => {
                 </ButtonWrapper>
             </FlexBox >
 
-            {openModal && <AddOrganizationsModal open={openModal}
+            {openModal && <AddModal open={openModal}
                 edit={selectedRows.length === 1}
                 data={selectedRows.length === 1 && selectedRows[0].original}
                 onClose={(newRecord) => { setOpenModal(false); newRecord === true && getInitialData() }}

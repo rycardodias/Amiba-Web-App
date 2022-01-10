@@ -1,45 +1,46 @@
-import { Box, Button, Grid, IconButton, Modal, InputBase } from "@mui/material";
+import { Button, Grid, Modal, InputBase } from "@mui/material";
 import { KeyboardArrowDown } from "@mui/icons-material";
 import DarkTextField from "components/DarkTextField";
 import FlexBox from "components/FlexBox";
-import { H2, H6, Small } from "components/Typography";
+import { H2, H6 } from "components/Typography";
 import { useFormik } from "formik";
-import ImageUploadIcon from "icons/ImageUploadIcon";
 import toast from "react-hot-toast";
 import ScrollBar from "simplebar-react";
 import * as Yup from "yup";
 import * as organizationsRequests from 'lib/requests/organizationsRequests'
-import * as usersRequests from 'lib/requests/usersRequests'
+import * as explorationsRequests from 'lib/requests/explorationsRequests'
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 import { StyledModalCard, StyledMenuItem, StyledSelect } from 'components/backoffice/styledComponents/AddModalStyles'
+import { explorationTypes } from "lib/values/types";
 
 
 
-const AddOrganizationsModal = ({ open, onClose, edit, data }) => {
+const AddModal = ({ open, onClose, edit, data }) => {
   const { t } = useTranslation();
 
   const initialValues = {
     id: data?.id || "",
     name: data?.name || "",
     type: data?.type || "",
-    UserId: data?.UserId || "",
+    OrganizationId: data?.OrganizationId || "",
     address: data?.address || "",
     locale: data?.locale || "",
     zipcode: data?.zipcode || "",
     fiscalNumber: data?.fiscalNumber || "",
     telephone: data?.telephone || "",
-    mobilePhone: data?.mobilePhone || ""
+    mobilePhone: data?.mobilePhone || "",
+    gpsLocalization: data?.gpsLocalization || ""
   };
 
-  const [users, setusers] = useState([])
+  const [organizations, setorganizations] = useState([])
 
   async function initialData() {
-    const res = await usersRequests.getUsers()
+    const res = await organizationsRequests.getOrganizations()
     if (res.error) return
     if (res.data.error) return toast.error(t("Error Getting essential Data"))
-    setusers(res.data.data)
+    setorganizations(res.data.data)
   }
 
   useEffect(() => {
@@ -49,8 +50,8 @@ const AddOrganizationsModal = ({ open, onClose, edit, data }) => {
 
   const fieldValidationSchema = Yup.object().shape({
     name: Yup.string().min(3, t("Too Short")).required(`${t('Name')} ${t('is required!')}`),
-    // type: Yup.string().required(`${t('Type')} ${t('is required!')}`),
-    // UserId: Yup.string().required(`${t('Responsable')} ${t('is required!')}`),
+    type: Yup.string().required(`${t('Type')} ${t('is required!')}`),
+    OrganizationId: Yup.string().required(`${t('Organization')} ${t('is required!')}`),
     address: Yup.string().min(6, t("Too Short")).required(`${t('Name')} ${t('is required!')}`),
     locale: Yup.string().min(6, t("Too Short")).required(`${t('Locale')} ${t('is required!')}`),
     zipcode: Yup.string().min(6, t("Too Short")).required(`${t('Zip Code')} ${t('is required!')}`),
@@ -60,8 +61,8 @@ const AddOrganizationsModal = ({ open, onClose, edit, data }) => {
   const { values, errors, handleChange, handleSubmit, touched } = useFormik({
     initialValues, validationSchema: fieldValidationSchema, onSubmit: values => {
       if (edit) {
-        organizationsRequests.updateOrganization(values.id, values.UserId, values.name, values.address, values.locale,
-          values.zipcode, values.fiscalNumber, values.telephone, values.mobilePhone)
+        explorationsRequests.updateExploration(values.id, values.type, values.UserId, values.name, values.address, values.locale,
+          values.zipcode, values.fiscalNumber, values.telephone, values.mobilePhone, values.gpsLocalization)
           .then(response => {
             if (response.error || response.data.error) return toast.error(t("Error Updating Record"));;
             onClose(true);
@@ -69,10 +70,9 @@ const AddOrganizationsModal = ({ open, onClose, edit, data }) => {
           })
           .catch(error => console.log(error));
       } else {
-        organizationsRequests.createOrganization(values.UserId, values.name, values.address, values.locale,
-          values.zipcode, values.fiscalNumber, values.telephone, values.mobilePhone)
+        explorationsRequests.createExploration(values.OrganizationId, values.type, values.name, values.address, values.locale,
+          values.zipcode, values.fiscalNumber, values.telephone, values.mobilePhone, values.gpsLocalization)
           .then(response => {
-            console.log(`response`, response)
             if (response.error || response.data.error) return toast.error(t("Error Creating Record"));
 
             onClose(true);
@@ -86,7 +86,7 @@ const AddOrganizationsModal = ({ open, onClose, edit, data }) => {
 
   return <Modal open={open} onClose={onClose}>
     <StyledModalCard>
-      <H2 mb={2}>{edit ? `${t("Edit")} ${t("Organization")}` : `${t("Add new")} ${t("Organization")}`}</H2>
+      <H2 mb={2}>{edit ? `${t("Edit")} ${t("Exploration")}` : `${t("Add new")} ${t("Exploration")}`}</H2>
 
       <form onSubmit={handleSubmit}>
         <ScrollBar style={{ maxHeight: 400 }}>
@@ -96,6 +96,14 @@ const AddOrganizationsModal = ({ open, onClose, edit, data }) => {
               <DarkTextField name="name" placeholder={t('Name')} onChange={handleChange} value={values.name} error={Boolean(errors.name && touched.name)} helperText={touched.name && errors.name} />
             </Grid>
 
+            <Grid item xs={6}>
+              <H6 mb={1}>{t('Type')}</H6>
+              <StyledSelect fullWidth name="type" value={values.type} onChange={handleChange} input={<InputBase placeholder={t('Type')} />} IconComponent={() => <KeyboardArrowDown fontSize="small" />}>
+                {explorationTypes && explorationTypes.map(item => {
+                  return <StyledMenuItem key={item.id} value={item.id}>{t(item.name)}</StyledMenuItem>
+                })}
+              </StyledSelect>
+            </Grid>
             <Grid item xs={6}>
               <H6 mb={1}>{t('VAT Number')}</H6>
               <DarkTextField name="fiscalNumber" placeholder={t('VAT Number')} onChange={handleChange} value={values.fiscalNumber}
@@ -117,27 +125,19 @@ const AddOrganizationsModal = ({ open, onClose, edit, data }) => {
               <DarkTextField name="zipcode" placeholder={t('Zip Code')} onChange={handleChange} value={values.zipcode}
                 error={Boolean(errors.zipcode && touched.zipcode)} helperText={touched.zipcode && errors.zipcode} />
             </Grid>
+            <Grid item xs={6}>
+              <H6 mb={1}>{t('GPS Localization')}</H6>
+              <DarkTextField name="gpsLocalization" placeholder={t('GPS Localization')} onChange={handleChange} value={values.gpsLocalization}
+                error={Boolean(errors.gpsLocalization && touched.gpsLocalization)} helperText={touched.gpsLocalization && errors.gpsLocalization} />
+            </Grid>
 
             <Grid item xs={6}>
-              <H6 mb={1}>{t('Responsable')}</H6>
-              <StyledSelect fullWidth name="UserId" value={values.UserId} onChange={handleChange} input={<InputBase placeholder={t('Responsable')} />} IconComponent={() => <KeyboardArrowDown fontSize="small" />}>
-                {users && users.map(item => {
+              <H6 mb={1}>{t('Organization')}</H6>
+              <StyledSelect fullWidth name="OrganizationId" value={values.OrganizationId} onChange={handleChange} input={<InputBase placeholder={t('Organization')} />} IconComponent={() => <KeyboardArrowDown fontSize="small" />}>
+                {organizations && organizations.map(item => {
                   return <StyledMenuItem key={item.id} value={item.id}>{t(item.name)}</StyledMenuItem>
                 })}
               </StyledSelect>
-            </Grid>
-
-            <Grid item xs={12}>
-              <H6 mb={1}>{t('Add Picture')}</H6>
-              <label htmlFor="icon-button-file">
-                <input type="file" accept="image/*" id="icon-button-file" style={{ display: "none" }} />
-                <IconButton disableRipple component="span" sx={{ padding: 0, display: "block" }}>
-                  <Box sx={{ minHeight: 40, display: "flex", borderRadius: "8px", alignItems: "center", justifyContent: "center", backgroundColor: "divider" }}>
-                    <ImageUploadIcon sx={{ fontSize: 18, marginRight: 0.5, color: "text.disabled" }} />
-                    <Small color="text.disabled">{t('Choose a file')}</Small>
-                  </Box>
-                </IconButton>
-              </label>
             </Grid>
 
           </Grid>
@@ -157,4 +157,4 @@ const AddOrganizationsModal = ({ open, onClose, edit, data }) => {
   </Modal>;
 };
 
-export default AddOrganizationsModal;
+export default AddModal;

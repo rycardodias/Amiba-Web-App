@@ -29,6 +29,8 @@ const Payment = Loadable(lazy(() => import('./pages/shop/Payment')));
 const PaymentSuccess = Loadable(lazy(() => import('./pages/shop/PaymentSuccess'))); // invoice
 
 const OrganizationsList = Loadable(lazy(() => import('pages/backoffice/OrganizationsList')));
+const ExplorationsList = Loadable(lazy(() => import('pages/backoffice/ExplorationsList')));
+
 
 
 const Error = Loadable(lazy(() => import('./pages/404'))); // routes
@@ -64,6 +66,8 @@ const routes = [{
   </AuthGuard>,
   children: [
     { path: 'organizations', element: <OrganizationsList /> },
+    { path: 'explorations', element: <ExplorationsList /> },
+    
     {
       path: 'account-settings',
       element: <AccountSettings />
