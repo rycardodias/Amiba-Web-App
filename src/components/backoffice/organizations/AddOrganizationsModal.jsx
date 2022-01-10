@@ -15,8 +15,6 @@ import { useTranslation } from "react-i18next";
 
 import { StyledModalCard, StyledMenuItem, StyledSelect } from 'components/backoffice/styledComponents/AddModalStyles'
 
-
-
 const AddOrganizationsModal = ({ open, onClose, edit, data }) => {
   const { t } = useTranslation();
 
@@ -150,9 +148,15 @@ const AddOrganizationsModal = ({ open, onClose, edit, data }) => {
             {t('Cancel')}
           </Button>
 
-          <Button fullWidth size="small" onClick={() => console.log("clicou")} type="submit" variant="contained" sx={{ width: 124, fontSize: 12 }}>
+          {/* <Button fullWidth size="small" onClick={() => console.log("clicou")} type="submit" variant="contained" sx={{ width: 124, fontSize: 12 }}>
             {t('Save')}
-          </Button>
+          </Button> */}
+          <Button fullWidth size="small" type="submit" variant="contained" sx={{
+            width: 124,
+            fontSize: 12
+          }}>
+              Save
+            </Button>
         </FlexBox>
       </form>
     </StyledModalCard>
