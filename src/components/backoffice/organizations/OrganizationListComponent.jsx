@@ -6,7 +6,6 @@ import { Box, Button, Card, styled } from "@mui/material";
 import { H6 } from "components/Typography";
 import FlexBox from "components/FlexBox";
 import toast from "react-hot-toast";
-import * as usersRequests from 'lib/requests/usersRequests'
 import DataTable from "components/backoffice/utils/DataTable";
 import columnShape from "components/backoffice/organizations/OrganizationColumnShape";
 import AddOrganizationsModal from "components/backoffice/organizations/AddOrganizationsModal";
@@ -30,8 +29,6 @@ export const OrganizationListComponent = () => {
                 if (response.error || response.data.error) return
                 setTableData(response.data.data)
             })
-            .catch(error => console.error(error))
-        usersRequests.validateToken().then(response => console.log(`response`, response))
             .catch(error => console.error(error))
     }
 
