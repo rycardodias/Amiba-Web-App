@@ -60,7 +60,7 @@ const AddModal = ({ open, onClose, edit, data }) => {
           })
           .catch(error => console.log(error));
       } else {
-        menusRequests.createMenu(values.RestaurantId, values.name, values.description, values.image, values.active)
+        menusRequests.createMenu(values.RestaurantId, values.name, values.description, values.image, values.active || true)
           .then(response => {
             if (response.error || response.data.error) return toast.error(t("Error Creating Record"));
 
