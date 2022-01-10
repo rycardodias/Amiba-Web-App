@@ -40,7 +40,7 @@ function DateColumnFilter({ column }) {
     const { filterValue, setFilter } = column;
     const theme = useTheme();
     const handleChange = newValue => {
-        const date = format(new Date(newValue), "MMM dd, yyyy") || undefined;
+        const date = format(new Date(newValue),'yyyy-MM-dd') || undefined;
         setFilter(date);
     };
 

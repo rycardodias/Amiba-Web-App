@@ -15,13 +15,12 @@ const columnShape = [
     Filter: DateColumnFilter
   },
   {
-    minWidth: 150,
     Header: () => i18n.t("Final Date"),
     accessor: "finalDate",
     Filter: DateColumnFilter
   },
   {
-    minWidth: 150,
+    minWidth: 300,
     Header: () => i18n.t("Description"),
     accessor: "description",
   },

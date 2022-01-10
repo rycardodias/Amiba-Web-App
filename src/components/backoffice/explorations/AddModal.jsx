@@ -125,6 +125,17 @@ const AddModal = ({ open, onClose, edit, data }) => {
             }
 
             <Grid item xs={6}>
+              <H6 mb={1}>{t('Telephone')}</H6>
+              <DarkTextField name="telephone" placeholder={t('telephone')} onChange={handleChange} value={values.telephone}
+                error={Boolean(errors.telephone && touched.telephone)} helperText={touched.telephone && errors.telephone} />
+            </Grid>
+            <Grid item xs={6}>
+              <H6 mb={1}>{t('Mobile Phone')}</H6>
+              <DarkTextField name="mobilePhone" placeholder={t('mobilePhone')} onChange={handleChange} value={values.mobilePhone}
+                error={Boolean(errors.mobilePhone && touched.mobilePhone)} helperText={touched.mobilePhone && errors.mobilePhone} />
+            </Grid>
+
+            <Grid item xs={6}>
               <H6 mb={1}>{t('VAT Number')}</H6>
               <DarkTextField name="fiscalNumber" placeholder={t('VAT Number')} onChange={handleChange} value={values.fiscalNumber}
                 error={Boolean(errors.fiscalNumber && touched.fiscalNumber)} helperText={touched.fiscalNumber && errors.fiscalNumber} />
