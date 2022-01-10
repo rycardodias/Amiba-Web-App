@@ -123,7 +123,9 @@ const i18nPT = {
     "You registered successfully": "Registou-se com Sucesso",
     "Sign up with Google": "Registar com Google",
     "Sign up with Facebook": "Registar com Facebook",
-    "I agree to terms & conditions": "Aceito os termos e condições"
+    "I agree to terms & conditions": "Aceito os termos e condições",
+    "The page you requested could not be found.": "A página que procura não se encontra disponivel",
+    "Back to Home": "Voltar ao Início",
 }
 
 export { i18nPT }

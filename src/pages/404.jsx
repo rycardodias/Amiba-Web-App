@@ -1,9 +1,12 @@
 import { Box, useTheme } from "@mui/material";
 import FlexBox from "components/FlexBox";
 import { H1, Paragraph } from "components/Typography";
+import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router-dom";
 
+
 const ErrorPage = () => {
+  const { t } = useTranslation()
   const theme = useTheme();
   return <FlexBox p={4} height="100%" alignItems="center" flexDirection="column" justifyContent="center">
     <Box maxWidth={350}>
@@ -13,11 +16,11 @@ const ErrorPage = () => {
       Ooops... 404!
     </H1>
     <Paragraph color="text.disabled" fontWeight="500">
-      The page you requested could not be found.
+      {t("The page you requested could not be found.")}
     </Paragraph>
 
     <NavLink to="/" style={{ display: "block", marginTop: "1.5rem", fontWeight: 600, textDecoration: "underline", color: theme.palette.primary.main }}>
-      Back to Home
+      {t("Back to Home")}
     </NavLink>
   </FlexBox>;
 };
