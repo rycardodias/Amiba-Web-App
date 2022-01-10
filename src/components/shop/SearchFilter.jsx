@@ -67,7 +67,7 @@ const SearchFilter = (props) => {
         </FlexBox>)}
     </Box>
 
-    <Box marginTop={4}>
+    {/* <Box marginTop={4}>
       <H6>{t("Sort By")}</H6>
       {sortBy.map(item =>
         <FlexBox key={item.id} alignItems="center" marginTop={2}
@@ -95,7 +95,7 @@ const SearchFilter = (props) => {
           Max
         </Tiny>
       </FlexBox>
-    </Box>
+    </Box> */}
 
     <Button variant="contained" fullWidth sx={{ marginTop: 4 }}>
       View Cart

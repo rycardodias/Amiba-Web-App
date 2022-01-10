@@ -21,16 +21,16 @@ const AddOrganizationsModal = ({ open, onClose, edit, data }) => {
   const { t } = useTranslation();
 
   const initialValues = {
-    id: data?.id,
-    name: data?.name,
-    type: data?.type,
-    UserId: data?.UserId,
-    address: data?.address,
-    locale: data?.locale,
-    zipcode: data?.zipcode,
-    fiscalNumber: data?.fiscalNumber,
-    telephone: data?.telephone,
-    mobilePhone: data?.mobilePhone
+    id: data?.id || "",
+    name: data?.name || "",
+    type: data?.type || "",
+    UserId: data?.UserId || "",
+    address: data?.address || "",
+    locale: data?.locale || "",
+    zipcode: data?.zipcode || "",
+    fiscalNumber: data?.fiscalNumber || "",
+    telephone: data?.telephone || "",
+    mobilePhone: data?.mobilePhone || ""
   };
 
   const [users, setusers] = useState([])
