@@ -30,8 +30,10 @@ const PaymentSuccess = Loadable(lazy(() => import('./pages/shop/PaymentSuccess')
 
 const OrganizationsList = Loadable(lazy(() => import('pages/backoffice/OrganizationsList')));
 const ExplorationsList = Loadable(lazy(() => import('pages/backoffice/ExplorationsList')));
-const UsersList = Loadable(lazy(() => import('pages/backoffice/UsersList')));
+const CertificationsList = Loadable(lazy(() => import('pages/backoffice/CertificationsList')));
 
+const UsersList = Loadable(lazy(() => import('pages/backoffice/UsersList')));
+const RestaurantsList = Loadable(lazy(() => import('pages/backoffice/RestaurantsList')));
 
 
 const Error = Loadable(lazy(() => import('./pages/404'))); // routes
@@ -68,9 +70,12 @@ const routes = [{
   children: [
     { path: 'organizations', element: <OrganizationsList /> },
     { path: 'explorations', element: <ExplorationsList /> },
-    { path: 'users', element: <UsersList /> },
+    { path: 'explorations/certifications', element: <CertificationsList /> },
 
-    
+    { path: 'users', element: <UsersList /> },
+    { path: 'restaurants', element: <RestaurantsList /> },
+
+
     {
       path: 'account-settings',
       element: <AccountSettings />

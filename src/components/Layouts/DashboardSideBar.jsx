@@ -88,7 +88,7 @@ const DashboardSideBar = ({ sideBarLocked, showMobileSideBar, closeMobileSideBar
       <H3>{t(active)}</H3>
     </ListItem>
 
-    {categoryMenus.map((item, index) => item.subCategories ? <UIAccordion key={index} expandedItem={expanded} accordionHeader={item.subTitle} handleChange={handleAccordionChange}>
+    {categoryMenus.map((item, index) => item.subCategories ? <UIAccordion key={index} expandedItem={expanded} accordionHeader={t(item.subTitle)} handleChange={handleAccordionChange}>
       {item.subCategories.map(sub => <SubMenuItem key={t(sub.name)} active={sub.path === activeSubMenuItem} onClick={() => handleSubMenuItem(sub.path)}>
         <Dot />
         <Small color="secondary.400">{t(sub.name)}</Small>

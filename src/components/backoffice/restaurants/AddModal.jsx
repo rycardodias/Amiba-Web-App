@@ -8,7 +8,7 @@ import ImageUploadIcon from "icons/ImageUploadIcon";
 import toast from "react-hot-toast";
 import ScrollBar from "simplebar-react";
 import * as Yup from "yup";
-import * as organizationsRequests from 'lib/requests/organizationsRequests'
+import * as restaurantsRequests from 'lib/requests/restaurantsRequests'
 import * as usersRequests from 'lib/requests/usersRequests'
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
@@ -23,6 +23,7 @@ const AddModal = ({ open, onClose, edit, data }) => {
   const initialValues = {
     id: data?.id || "",
     name: data?.name || "",
+    description: data?.description || "",
     UserId: data?.UserId || "",
     address: data?.address || "",
     locale: data?.locale || "",
@@ -45,9 +46,9 @@ const AddModal = ({ open, onClose, edit, data }) => {
     initialData()
   }, [])
 
-
   const fieldValidationSchema = Yup.object().shape({
     name: Yup.string().min(3, t("Too Short")).required(`${t('Name')} ${t('is required!')}`),
+    description: Yup.string().min(10, t("Too Short")).required(`${t('Description')} ${t('is required!')}`),
     UserId: Yup.string().required(`${t('Responsable')} ${t('is required!')}`),
     address: Yup.string().min(6, t("Too Short")).required(`${t('Name')} ${t('is required!')}`),
     locale: Yup.string().min(6, t("Too Short")).required(`${t('Locale')} ${t('is required!')}`),
@@ -58,7 +59,7 @@ const AddModal = ({ open, onClose, edit, data }) => {
   const { values, errors, handleChange, handleSubmit, touched } = useFormik({
     initialValues, validationSchema: fieldValidationSchema, onSubmit: values => {
       if (edit) {
-        organizationsRequests.updateOrganization(values.id, values.UserId, values.name, values.address, values.locale,
+        restaurantsRequests.updateRestaurant(values.id, values.UserId, values.name, values.description, values.address, values.locale,
           values.zipcode, values.fiscalNumber, values.telephone, values.mobilePhone)
           .then(response => {
             if (response.error || response.data.error) return toast.error(t("Error Updating Record"));;
@@ -67,7 +68,7 @@ const AddModal = ({ open, onClose, edit, data }) => {
           })
           .catch(error => console.log(error));
       } else {
-        organizationsRequests.createOrganization(values.UserId, values.name, values.address, values.locale,
+        restaurantsRequests.createRestaurant(values.UserId, values.name, values.description, values.address, values.locale,
           values.zipcode, values.fiscalNumber, values.telephone, values.mobilePhone)
           .then(response => {
             if (response.error || response.data.error) return toast.error(t("Error Creating Record"));
@@ -83,14 +84,20 @@ const AddModal = ({ open, onClose, edit, data }) => {
 
   return <Modal open={open} onClose={onClose}>
     <StyledModalCard>
-      <H2 mb={2}>{edit ? `${t("Edit")} ${t("Organization")}` : `${t("Add new")} ${t("Organization")}`}</H2>
+      <H2 mb={2}>{edit ? `${t("Edit")} ${t("Restaurant")}` : `${t("Add new")} ${t("Restaurant")}`}</H2>
 
       <form onSubmit={handleSubmit}>
         <ScrollBar style={{ maxHeight: 400 }}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <H6 mb={1}>{t('Name')}</H6>
-              <DarkTextField name="name" placeholder={t('Name')} onChange={handleChange} value={values.name} error={Boolean(errors.name && touched.name)} helperText={touched.name && errors.name} />
+              <DarkTextField name="name" placeholder={t('Name')} onChange={handleChange} value={values.name}
+                error={Boolean(errors.name && touched.name)} helperText={touched.name && errors.name} />
+            </Grid>
+            <Grid item xs={12}>
+              <H6 mb={1}>{t('Description')}</H6>
+              <DarkTextField name="description" placeholder={t('Description')} onChange={handleChange} value={values.description}
+                error={Boolean(errors.description && touched.description)} helperText={touched.description && errors.description} />
             </Grid>
 
             <Grid item xs={6}>
@@ -123,7 +130,7 @@ const AddModal = ({ open, onClose, edit, data }) => {
               <DarkTextField name="address" placeholder={t('Address')} onChange={handleChange} value={values.address}
                 error={Boolean(errors.address && touched.address)} helperText={touched.address && errors.address} />
             </Grid>
-            
+
             <Grid item xs={6}>
               <H6 mb={1}>{t('Locale')}</H6>
               <DarkTextField name="locale" placeholder={t('Locale')} onChange={handleChange} value={values.locale}

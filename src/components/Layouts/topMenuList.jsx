@@ -6,16 +6,70 @@ const index = [
     Icon: Icons.DataTableIcon,
     children: [{
       subTitle: "Organizations",
-      path: "/backoffice/organizations"
-    }, {
+      path: "/backoffice/organizations",
+      subCategories: [
+        { name: "Organizations", path: "/backoffice/organizations" },
+      ]
+    },
+    {
       subTitle: "Explorations",
-      path: "/backoffice/explorations"
+      path: "/backoffice/explorations",
+      subCategories: [
+        { name: "Explorations", path: "/backoffice/explorations" },
+        { name: "Certifications", path: "/backoffice/explorations/certifications" },
+      ]
     },
     {
       subTitle: "Users",
-      path: "/backoffice/users"
+      path: "/backoffice/users",
+      subCategories: [
+        { name: "Users", path: "/backoffice/users" },
+      ]
     },
 
+    {
+      subTitle: "Restaurants",
+      path: "/backoffice/restaurants",
+      subCategories: [
+        { name: "Restaurants", path: "/backoffice/restaurants" },
+        { name: "Menus", path: "/backoffice/restaurants/menus" },
+      ]
+    },
+    {
+      subTitle: "Animals",
+      path: "/backoffice/animals",
+      subCategories: [
+        { name: "Animals", path: "/backoffice/animals" },
+        { name: "Animals/Products", path: "/backoffice/animals/animalProducts" },
+      ]
+    },
+    {
+      subTitle: "Eggs Batches",
+      path: "/backoffice/eggsBatches",
+      subCategories: [
+        { name: "Eggs Batches", path: "/backoffice/eggsBatches" },
+        { name: "Eggs Batch/Products", path: "/backoffice/eggsBatches/eggsBatchProducts" },
+        { name: "Eggs Batch Lines", path: "/backoffice/eggsBatches/eggsBatchLines" },
+      ]
+    },
+
+    {
+      subTitle: "Orders",
+      path: "/backoffice/orders",
+      subCategories: [
+        { name: "Orders", path: "/backoffice/orders" },
+        { name: "Order Lines", path: "/backoffice/orderLines" },
+        { name: "Order History", path: "/backoffice/orderHistory" },
+      ]
+    },
+
+    {
+      subTitle: "Products",
+      path: "/backoffice/products",
+      subCategories: [
+        { name: "Products", path: "/backoffice/products" },
+      ]
+    },
     ]
   },
   // ### LOJA ###
