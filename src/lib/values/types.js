@@ -21,8 +21,13 @@ const explorationTypes = [
 ]
 
 const genders = [
-    { id: "M", name: "Macho" },
-    { id: "F", name: "Femea" },
+    { id: "M", name: "Male" },
+    { id: "F", name: "Female" },
 ]
 
-export { races, productTypes, explorationTypes, genders }
+const ordersHistoryTypes = [
+    { id: "PROCESSING", name: "Processing" },
+    { id: "SENT", name: "Sent" }
+]
+
+export { races, productTypes, explorationTypes, genders, ordersHistoryTypes }

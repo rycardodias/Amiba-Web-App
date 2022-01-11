@@ -26,8 +26,8 @@ const routes = [
     { path: '/backoffice/eggsBatches/EggsBatchesProducts', permissions: ['ADMIN',] },
     { path: '/backoffice/eggsBatches/eggsBatchesLines', permissions: ['ADMIN',] },
     { path: '/backoffice/orders', permissions: ['ADMIN',] },
-    { path: '/backoffice/orders/orderLines', permissions: ['ADMIN',] },
-    { path: '/backoffice/orders/orderHistory', permissions: ['ADMIN',] },
+    { path: '/backoffice/orders/ordersLines', permissions: ['ADMIN',] },
+    { path: '/backoffice/orders/ordersHistory', permissions: ['ADMIN',] },
     { path: '/backoffice/products', permissions: ['ADMIN',] },
 
     // ### SHOP ###

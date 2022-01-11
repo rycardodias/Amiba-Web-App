@@ -12,8 +12,8 @@ const createOrderHistory = async (state, OrderId) => {
     return await sendRequest('POST', 'orderHistory/create', { state, OrderId })
 };
 
-const updateOrderHistory = async (id, state, OrderId) => {
-    return await sendRequest('PUT', 'orderHistory/update', { id, state, OrderId })
+const updateOrderHistory = async (id, state) => {
+    return await sendRequest('PUT', 'orderHistory/update', { id, state })
 };
 
 const deleteOrderHistory = async (id) => {

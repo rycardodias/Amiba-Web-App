@@ -36,6 +36,11 @@ const AnimalsProductsList = Loadable(lazy(() => import('pages/backoffice/Animals
 const EggsBatchesList = Loadable(lazy(() => import('pages/backoffice/EggsBatchesList')));
 const EggsBatchesProductsList = Loadable(lazy(() => import('pages/backoffice/EggsBatchesProductsList')));
 const EggsBatchesLinesList = Loadable(lazy(() => import('pages/backoffice/EggsBatchesLinesList')));
+const OrdersList = Loadable(lazy(() => import('pages/backoffice/OrdersList')));
+const OrdersLinesList = Loadable(lazy(() => import('pages/backoffice/OrdersLinesList')));
+const OrdersHistoryList = Loadable(lazy(() => import('pages/backoffice/OrdersHistoryList')));
+
+
 
 const UsersList = Loadable(lazy(() => import('pages/backoffice/UsersList')));
 const RestaurantsList = Loadable(lazy(() => import('pages/backoffice/RestaurantsList')));
@@ -89,33 +94,36 @@ const routes = [{
     { path: 'eggsBatches', element: <EggsBatchesList /> },
     { path: 'eggsBatches/EggsBatchesProducts', element: <EggsBatchesProductsList /> },
     { path: 'eggsBatches/EggsBatchesLines', element: <EggsBatchesLinesList /> },
-    
+    { path: 'orders', element: <OrdersList /> },
+    { path: 'orders/ordersLines', element: <OrdersLinesList /> },
+    { path: 'orders/ordersHistory', element: <OrdersHistoryList /> },
 
     { path: 'products', element: <ProductsList /> },
 
 
-    {
-      path: 'account-settings',
-      element: <AccountSettings />
-    }, {
-      path: 'cart',
-      element: <Cart />
-    }, {
-      path: 'payment',
-      element: <Payment />
-    }, {
-      path: 'payment-success',
-      element: <PaymentSuccess />
-    }, {
-      path: 'about',
-      element: <AboutPage />
-    }, {
-      path: 'contact',
-      element: <ContactPage />
-    }, {
-      path: 'privacy',
-      element: <PrivacyPage />
-    }]
+    // {
+    //   path: 'account-settings',
+    //   element: <AccountSettings />
+    // }, {
+    //   path: 'cart',
+    //   element: <Cart />
+    // }, {
+    //   path: 'payment',
+    //   element: <Payment />
+    // }, {
+    //   path: 'payment-success',
+    //   element: <PaymentSuccess />
+    // }, {
+    //   path: 'about',
+    //   element: <AboutPage />
+    // }, {
+    //   path: 'contact',
+    //   element: <ContactPage />
+    // }, {
+    //   path: 'privacy',
+    //   element: <PrivacyPage />
+    // }
+  ]
 },
 {
   path: 'shop',
