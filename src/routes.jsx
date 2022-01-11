@@ -81,7 +81,7 @@ const routes = [{
     { path: 'restaurants', element: <RestaurantsList /> },
     { path: 'restaurants/menus', element: <MenusList /> },
     { path: 'animals', element: <AnimalsList /> },
-    { path: 'animalProducts', element: <AnimalsProductsList /> },
+    { path: 'animals/animalProducts', element: <AnimalsProductsList /> },
 
 
 
