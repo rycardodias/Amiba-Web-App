@@ -7,16 +7,15 @@ import { useFormik } from "formik";
 import toast from "react-hot-toast";
 import ScrollBar from "simplebar-react";
 import * as Yup from "yup";
-import * as animalsRequests from 'lib/requests/animalsRequests'
-import * as productsRequests from 'lib/requests/productsRequests'
+import * as eggsBatchsRequests from 'lib/requests/eggsBatchsRequests'
 import * as explorationsRequests from 'lib/requests/explorationsRequests'
+import * as eggsBatchsLinesRequests from 'lib/requests/eggsBatchsLinesRequests'
 
-import * as animalProductsRequests from 'lib/requests/animalProductsRequests'
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 import { StyledModalCard, StyledMenuItem, StyledSelect } from 'components/backoffice/styledComponents/AddModalStyles'
-import { genders, productTypes, races } from "lib/values/types";
+
 
 
 const AddModal = ({ open, onClose, edit, data }) => {
@@ -25,17 +24,12 @@ const AddModal = ({ open, onClose, edit, data }) => {
   const initialValues = {
     id: data?.id || "",
     quantity: data?.quantity || "",
-    weight: data?.weight || "",
-    AnimalId: data?.AnimalId || "",
-    ProductId: data?.ProductId || "",
-    ProductName: data?.Product?.name || ""
+    EggsBatchId: data?.ExplorationId || "",
+    EggsBatchName: data?.EggsBatch?.name || ""
   };
 
-  const [animals, setanimals] = useState([])
-  const [products, setproducts] = useState([])
   const [explorations, setexplorations] = useState([])
-  const [enableWeight, setenableWeight] = useState(false)
-
+  const [eggsBatches, seteggsBatches] = useState([])
 
   async function initialData() {
     if (edit) return
@@ -45,51 +39,30 @@ const AddModal = ({ open, onClose, edit, data }) => {
     if (res.data.error) return toast.error(t("Error Getting essential Data"))
     setexplorations(res.data.data)
   }
+
   useEffect(() => {
     initialData()
   }, [])
 
   async function followingData(e) {
-    const res = await animalsRequests.getAnimalsExplorationIdCertificated(e.target.value)
+    const res = await eggsBatchsRequests.getEggsBatchsByExploration(e.target.value)
 
-    if (res.error) { console.error(res.error); setanimals([]) }
-
-    if (res.data.error) {
-      console.error(res.data.error)
-      setanimals([])
-    } else {
-      setanimals(res.data.data)
+    if (res.error || res.data.error) {
+      toast.error(t("Error Getting essential Data"))
+      seteggsBatches([])
     }
-
-    const res2 = await productsRequests.getProductByExploration(e.target.value, productTypes[0].id)
-
-    if (res2.error) { console.error(res2.error); setproducts([]) }
-
-    if (res2.data.error) {
-      console.error(res2.data.error)
-      setproducts([])
-    } else {
-      setproducts(res2.data.data)
-    }
-  }
-
-  function handleWeight(e) {
-    handleChange(e)
-    const product = products.find(product => product.id === e.target.value)
-
-    product && product.unit === 'KG' ? setenableWeight(true) : setenableWeight(false)
+    seteggsBatches(res.data.data)
   }
 
   const fieldValidationSchema = Yup.object().shape({
-    quantity: Yup.string().required(`${t('Quantity')} ${t('is required!')}`),
-    AnimalId: Yup.string().required(`${t('Animal')} ${t('is required!')}`),
-    ProductId: Yup.string().required(`${t('Product')} ${t('is required!')}`),
+    quantity: Yup.string().min(3, t("Too Short")).required(`${t('Name')} ${t('is required!')}`),
+    EggsBatchId: Yup.string().required(`${t('Eggs Batch')} ${t('is required!')}`),
   });
 
   const { values, errors, handleChange, handleSubmit, touched } = useFormik({
     initialValues, validationSchema: fieldValidationSchema, onSubmit: values => {
       if (edit) {
-        animalProductsRequests.updateAnimalProducts(values.id, values.quantity, values.weight || undefined)
+        eggsBatchsLinesRequests.updateEggsBatchsLines(values.id, values.quantity)
           .then(response => {
             if (response.error || response.data.error) return toast.error(t("Error Updating Record"));;
             onClose(true);
@@ -97,7 +70,7 @@ const AddModal = ({ open, onClose, edit, data }) => {
           })
           .catch(error => console.log(error));
       } else {
-        animalProductsRequests.createAnimalProducts(values.ProductId, values.AnimalId, values.quantity, values.weight || undefined)
+        eggsBatchsLinesRequests.createEggsBatchsLines(values.EggsBatchId, values.quantity)
           .then(response => {
             if (response.error || response.data.error) return toast.error(t("Error Creating Record"));
 
@@ -112,7 +85,7 @@ const AddModal = ({ open, onClose, edit, data }) => {
 
   return <Modal open={open} onClose={onClose}>
     <StyledModalCard>
-      <H2 mb={2}>{edit ? `${t("Edit")} ${t("Animal/Product")}` : `${t("Add new")} ${t("Animal/Product")}`}</H2>
+      <H2 mb={2}>{edit ? `${t("Edit")} ${t("Animal")}` : `${t("Add new")} ${t("Animal")}`}</H2>
 
       <form onSubmit={handleSubmit}>
         <ScrollBar style={{ maxHeight: 400 }}>
@@ -129,46 +102,23 @@ const AddModal = ({ open, onClose, edit, data }) => {
 
             {edit ?
               <Grid item xs={6}>
-                <H6 mb={1}>{t('Product')}</H6>
-                <DarkTextField disabled name="ProductId" value={values.ProductName} />
+                <H6 mb={1}>{t('Eggs Batch')}</H6>
+                <DarkTextField disabled name="EggsBatchId" value={values.EggsBatchName} />
               </Grid> :
               <Grid item xs={6}>
-                <H6 mb={1}>{t('Product')}</H6>
-                <StyledSelect fullWidth name="ProductId" value={values.ProductId} onChange={(e) => { handleChange(e); handleWeight(e) }} input={<InputBase placeholder={t('Product')} />} IconComponent={() => <KeyboardArrowDown fontSize="small" />}>
-                  {products && products.map(item => {
-                    return <StyledMenuItem key={item.id} value={item.id}>{t(item.name)}</StyledMenuItem>
-                  })}
-                </StyledSelect>
-              </Grid>
-            }
-
-            {edit ?
-              <Grid item xs={6}>
-                <H6 mb={1}>{t('Animal')}</H6>
-                <DarkTextField disabled name="AnimalId" value={values.AnimalId} />
-              </Grid> :
-              <Grid item xs={6}>
-                <H6 mb={1}>{t('Animal')}</H6>
-                <StyledSelect fullWidth name="AnimalId" value={values.AnimalId} onChange={handleChange} input={<InputBase placeholder={t('Animal')} />} IconComponent={() => <KeyboardArrowDown fontSize="small" />}>
-                  {animals && animals.map(item => {
+                <H6 mb={1}>{t('Eggs Batch')}</H6>
+                <StyledSelect fullWidth name="EggsBatchId" value={values.EggsBatchId} onChange={handleChange} input={<InputBase placeholder={t('Eggs Batch')} />} IconComponent={() => <KeyboardArrowDown fontSize="small" />}>
+                  {eggsBatches && eggsBatches.map(item => {
                     return <StyledMenuItem key={item.id} value={item.id}>{t(item.identifier)}</StyledMenuItem>
                   })}
                 </StyledSelect>
               </Grid>
             }
-
             <Grid item xs={6}>
               <H6 mb={1}>{t('Quantity')}</H6>
               <DarkTextField name="quantity" placeholder={t('Quantity')} onChange={handleChange} value={values.quantity}
                 error={Boolean(errors.quantity && touched.quantity)} helperText={touched.quantity && errors.quantity} />
             </Grid>
-            {(enableWeight || data?.weight) &&
-              <Grid item xs={6}>
-                <H6 mb={1}>{t('Weight')}</H6>
-                <DarkTextField name="weight" placeholder={t('Weight')} onChange={handleChange} value={values.weight}
-                  error={Boolean(errors.weight && touched.weight)} helperText={touched.weight && errors.weight} />
-              </Grid>
-            }
 
           </Grid>
         </ScrollBar>

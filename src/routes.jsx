@@ -34,6 +34,8 @@ const CertificationsList = Loadable(lazy(() => import('pages/backoffice/Certific
 const AnimalsList = Loadable(lazy(() => import('pages/backoffice/AnimalsList')));
 const AnimalsProductsList = Loadable(lazy(() => import('pages/backoffice/AnimalsProductsList')));
 const EggsBatchesList = Loadable(lazy(() => import('pages/backoffice/EggsBatchesList')));
+const EggsBatchesProductsList = Loadable(lazy(() => import('pages/backoffice/EggsBatchesProductsList')));
+const EggsBatchesLinesList = Loadable(lazy(() => import('pages/backoffice/EggsBatchesLinesList')));
 
 const UsersList = Loadable(lazy(() => import('pages/backoffice/UsersList')));
 const RestaurantsList = Loadable(lazy(() => import('pages/backoffice/RestaurantsList')));
@@ -85,7 +87,8 @@ const routes = [{
     { path: 'animals', element: <AnimalsList /> },
     { path: 'animals/animalProducts', element: <AnimalsProductsList /> },
     { path: 'eggsBatches', element: <EggsBatchesList /> },
-
+    { path: 'eggsBatches/EggsBatchesProducts', element: <EggsBatchesProductsList /> },
+    { path: 'eggsBatches/EggsBatchesLines', element: <EggsBatchesLinesList /> },
     
 
     { path: 'products', element: <ProductsList /> },
