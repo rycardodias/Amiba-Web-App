@@ -80,7 +80,7 @@ const AddModal = ({ open, onClose, edit, data }) => {
       <form onSubmit={handleSubmit}>
         <ScrollBar style={{ maxHeight: 400 }}>
           <Grid container spacing={2}>
-            <Grid item xs={6}>
+            <Grid item xs={12}>
               <H6 mb={1}>{t('Name')}</H6>
               <DarkTextField name="name" placeholder={t('Name')} onChange={handleChange} value={values.name}
                 error={Boolean(errors.name && touched.name)} helperText={touched.name && errors.name} />
