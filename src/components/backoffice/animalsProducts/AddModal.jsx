@@ -28,7 +28,7 @@ const AddModal = ({ open, onClose, edit, data }) => {
     weight: data?.weight || "",
     AnimalId: data?.AnimalId || "",
     ProductId: data?.ProductId || "",
-    ProductName: data?.Exploration?.name || ""
+    ProductName: data?.Product?.name || ""
   };
 
   const [animals, setanimals] = useState([])
@@ -89,7 +89,7 @@ const AddModal = ({ open, onClose, edit, data }) => {
   const { values, errors, handleChange, handleSubmit, touched } = useFormik({
     initialValues, validationSchema: fieldValidationSchema, onSubmit: values => {
       if (edit) {
-        animalProductsRequests.updateAnimalProducts(values.id, values.quantity, values.weight)
+        animalProductsRequests.updateAnimalProducts(values.id, values.quantity, values.weight || undefined)
           .then(response => {
             if (response.error || response.data.error) return toast.error(t("Error Updating Record"));;
             onClose(true);
@@ -97,7 +97,7 @@ const AddModal = ({ open, onClose, edit, data }) => {
           })
           .catch(error => console.log(error));
       } else {
-        animalProductsRequests.createAnimalProducts(values.ProductId, values.AnimalId, values.quantity, values.weight)
+        animalProductsRequests.createAnimalProducts(values.ProductId, values.AnimalId, values.quantity, values.weight || undefined)
           .then(response => {
             if (response.error || response.data.error) return toast.error(t("Error Creating Record"));
 
@@ -162,7 +162,7 @@ const AddModal = ({ open, onClose, edit, data }) => {
               <DarkTextField name="quantity" placeholder={t('Quantity')} onChange={handleChange} value={values.quantity}
                 error={Boolean(errors.quantity && touched.quantity)} helperText={touched.quantity && errors.quantity} />
             </Grid>
-            {enableWeight &&
+            {(enableWeight || data?.weight) &&
               <Grid item xs={6}>
                 <H6 mb={1}>{t('Weight')}</H6>
                 <DarkTextField name="weight" placeholder={t('Weight')} onChange={handleChange} value={values.weight}

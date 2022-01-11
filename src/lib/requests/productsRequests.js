@@ -36,8 +36,8 @@ const createProduct = async (type, tax, name, description, price, unit, image, O
     return await sendRequest('POST', 'products/create', { type, tax, name, description, price, unit, image, OrganizationId })
 };
 
-const updateProduct = async (id, type, tax, name, description, price, image) => {
-    return await sendRequest('PUT', 'products/update', { id, type, tax, name, description, price, image })
+const updateProduct = async (id, tax, name, description, price, image) => {
+    return await sendRequest('PUT', 'products/update', { id, tax, name, description, price, image })
 };
 
 const deleteProduct = async (id) => {

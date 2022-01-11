@@ -7,15 +7,15 @@ import { H6 } from "components/Typography";
 import toast from "react-hot-toast";
 import FlexBox from "components/FlexBox";
 import DataTable from "components/backoffice/utils/DataTable";
-import columnShape from "components/backoffice/animalsProducts/ColumnShape";
-import AddModal from "components/backoffice/animalsProducts/AddModal";
-import * as animalProductsRequests from 'lib/requests/animalProductsRequests'
+import columnShape from "components/backoffice/products/ColumnShape";
+import AddModal from "components/backoffice/products/AddModal";
+import * as productsRequests from 'lib/requests/productsRequests'
 import { ButtonWrapper } from '../styledComponents/ButtonWrapper';
 
 export const List = () => {
     const { t } = useTranslation();
-    const tableName = t('Animal/Product')
-    const tableSingleName = t('Animal/Product')
+    const tableName = t('Products')
+    const tableSingleName = t('Product')
     useTitle(tableName);
 
     const [tableData, setTableData] = useState([]);
@@ -25,7 +25,7 @@ export const List = () => {
     const [openModal, setOpenModal] = useState(false);
 
     function getInitialData() {
-        animalProductsRequests.getAnimalProducts()
+        productsRequests.getProducts()
             .then(response => {
                 if (response.error || response.data.error) return setTableData([])
                 setTableData(response.data.data)
@@ -47,7 +47,7 @@ export const List = () => {
     const handleDelete = async () => {
         const ids = selectedRows.map(item => item.original.id);
         for (let id of ids) {
-            const res = await animalProductsRequests.deleteAnimalProducts(id)
+            const res = await productsRequests.deleteProduct(id)
             if (res.error || res.data.error) {
                 toast.error(`${t('Error removing')} ${tableSingleName}`);
             } else {
