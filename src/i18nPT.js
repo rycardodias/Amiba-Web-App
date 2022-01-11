@@ -67,6 +67,8 @@ const i18nPT = {
     "Eggs Batches": "Lotes",
     "Eggs Batch": "Lote",
     "Eggs Batch/Product": "Lote/Produto",
+    "Eggs Batches Lines": "Linhas de Lotes",
+    "Eggs Batch Line": "Linha de Lote",
     Explorations: 'Explorações',
     Exploration: 'Exploração',
     Menus: 'Menus',

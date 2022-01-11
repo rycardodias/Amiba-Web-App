@@ -6,13 +6,13 @@ const columnShape = [
   {
     minWidth: 150,
     Header: () => i18n.t("Exploration"),
-    accessor: "Exploration.name",
+    accessor: "EggsBatch.Exploration.name",
     Filter: SelectColumnFilter
   },
   {
     minWidth: 150,
     Header: () => i18n.t("Eggs Batch"),
-    accessor: "EggsBatchId",
+    accessor: "EggsBatch.name",
   },
   {
     minWidth: 150,

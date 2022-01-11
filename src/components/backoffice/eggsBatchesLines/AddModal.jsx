@@ -55,7 +55,7 @@ const AddModal = ({ open, onClose, edit, data }) => {
   }
 
   const fieldValidationSchema = Yup.object().shape({
-    quantity: Yup.string().min(3, t("Too Short")).required(`${t('Name')} ${t('is required!')}`),
+    quantity: Yup.string().required(`${t('Quantity')} ${t('is required!')}`),
     EggsBatchId: Yup.string().required(`${t('Eggs Batch')} ${t('is required!')}`),
   });
 
@@ -85,7 +85,7 @@ const AddModal = ({ open, onClose, edit, data }) => {
 
   return <Modal open={open} onClose={onClose}>
     <StyledModalCard>
-      <H2 mb={2}>{edit ? `${t("Edit")} ${t("Animal")}` : `${t("Add new")} ${t("Animal")}`}</H2>
+      <H2 mb={2}>{edit ? `${t("Edit")} ${t("Eggs Batch Line")}` : `${t("Add new")} ${t("Eggs Batch Line")}`}</H2>
 
       <form onSubmit={handleSubmit}>
         <ScrollBar style={{ maxHeight: 400 }}>
@@ -109,7 +109,7 @@ const AddModal = ({ open, onClose, edit, data }) => {
                 <H6 mb={1}>{t('Eggs Batch')}</H6>
                 <StyledSelect fullWidth name="EggsBatchId" value={values.EggsBatchId} onChange={handleChange} input={<InputBase placeholder={t('Eggs Batch')} />} IconComponent={() => <KeyboardArrowDown fontSize="small" />}>
                   {eggsBatches && eggsBatches.map(item => {
-                    return <StyledMenuItem key={item.id} value={item.id}>{t(item.identifier)}</StyledMenuItem>
+                    return <StyledMenuItem key={item.id} value={item.id}>{t(item.name)}</StyledMenuItem>
                   })}
                 </StyledSelect>
               </Grid>
