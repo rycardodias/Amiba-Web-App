@@ -9,6 +9,7 @@ import ScrollBar from "simplebar-react";
 import * as Yup from "yup";
 import * as animalsRequests from 'lib/requests/animalsRequests'
 import * as productsRequests from 'lib/requests/productsRequests'
+import * as explorationsRequests from 'lib/requests/explorationsRequests'
 
 import * as animalProductsRequests from 'lib/requests/animalProductsRequests'
 import { useState, useEffect } from "react";
@@ -32,26 +33,52 @@ const AddModal = ({ open, onClose, edit, data }) => {
 
   const [animals, setanimals] = useState([])
   const [products, setproducts] = useState([])
+  const [explorations, setexplorations] = useState([])
+  const [enableWeight, setenableWeight] = useState(false)
 
 
   async function initialData() {
     if (edit) return
 
-    const res = await animalsRequests.getAnimals()
+    const res = await explorationsRequests.getExplorations()
     if (res.error) return
     if (res.data.error) return toast.error(t("Error Getting essential Data"))
-    setanimals(res.data.data)
-
-    const res2 = await productsRequests.getProducts()
-    if (res2.error) return
-    if (res2.data.error) return toast.error(t("Error Getting essential Data"))
-    setproducts(res2.data.data)
-
+    setexplorations(res.data.data)
   }
-
   useEffect(() => {
     initialData()
   }, [])
+
+  async function followingData(e) {
+    const res = await animalsRequests.getAnimalsExplorationIdCertificated(e.target.value)
+
+    if (res.error) { console.error(res.error); setanimals([]) }
+
+    if (res.data.error) {
+      console.error(res.data.error)
+      setanimals([])
+    } else {
+      setanimals(res.data.data)
+    }
+
+    const res2 = await productsRequests.getProductByExploration(e.target.value, 'ANIMAL')
+
+    if (res2.error) { console.error(res2.error); setproducts([]) }
+
+    if (res2.data.error) {
+      console.error(res2.data.error)
+      setproducts([])
+    } else {
+      setproducts(res2.data.data)
+    }
+  }
+
+  function handleWeight(e) {
+    handleChange(e)
+    const product = products.find(product => product.id === e.target.value)
+
+    product && product.unit === 'KG' ? setenableWeight(true) : setenableWeight(false)
+  }
 
   const fieldValidationSchema = Yup.object().shape({
     quantity: Yup.string().required(`${t('Quantity')} ${t('is required!')}`),
@@ -90,6 +117,16 @@ const AddModal = ({ open, onClose, edit, data }) => {
       <form onSubmit={handleSubmit}>
         <ScrollBar style={{ maxHeight: 400 }}>
           <Grid container spacing={2}>
+            {!edit &&
+              <Grid item xs={12}>
+                <H6 mb={1}>{t('Exploration')}</H6>
+                <StyledSelect fullWidth name="ExplorationId" value={values.ExplorationId} onChange={followingData} input={<InputBase placeholder={t('Exploration')} />} IconComponent={() => <KeyboardArrowDown fontSize="small" />}>
+                  {explorations && explorations.map(item => {
+                    return <StyledMenuItem key={item.id} value={item.id}>{t(item.name)}</StyledMenuItem>
+                  })}
+                </StyledSelect>
+              </Grid>}
+
             {edit ?
               <Grid item xs={6}>
                 <H6 mb={1}>{t('Product')}</H6>
@@ -97,7 +134,7 @@ const AddModal = ({ open, onClose, edit, data }) => {
               </Grid> :
               <Grid item xs={6}>
                 <H6 mb={1}>{t('Product')}</H6>
-                <StyledSelect fullWidth name="ProductId" value={values.ProductId} onChange={handleChange} input={<InputBase placeholder={t('Product')} />} IconComponent={() => <KeyboardArrowDown fontSize="small" />}>
+                <StyledSelect fullWidth name="ProductId" value={values.ProductId} onChange={(e) => { handleChange(e); handleWeight(e) }} input={<InputBase placeholder={t('Product')} />} IconComponent={() => <KeyboardArrowDown fontSize="small" />}>
                   {products && products.map(item => {
                     return <StyledMenuItem key={item.id} value={item.id}>{t(item.name)}</StyledMenuItem>
                   })}
@@ -114,7 +151,7 @@ const AddModal = ({ open, onClose, edit, data }) => {
                 <H6 mb={1}>{t('Animal')}</H6>
                 <StyledSelect fullWidth name="AnimalId" value={values.AnimalId} onChange={handleChange} input={<InputBase placeholder={t('Animal')} />} IconComponent={() => <KeyboardArrowDown fontSize="small" />}>
                   {animals && animals.map(item => {
-                    return <StyledMenuItem key={item.id} value={item.id}>{t(item.name)}</StyledMenuItem>
+                    return <StyledMenuItem key={item.id} value={item.id}>{t(item.identifier)}</StyledMenuItem>
                   })}
                 </StyledSelect>
               </Grid>
@@ -125,11 +162,13 @@ const AddModal = ({ open, onClose, edit, data }) => {
               <DarkTextField name="quantity" placeholder={t('Quantity')} onChange={handleChange} value={values.quantity}
                 error={Boolean(errors.quantity && touched.quantity)} helperText={touched.quantity && errors.quantity} />
             </Grid>
-            <Grid item xs={6}>
-              <H6 mb={1}>{t('Weight')}</H6>
-              <DarkTextField name="weight" placeholder={t('Weight')} onChange={handleChange} value={values.weight}
-                error={Boolean(errors.weight && touched.weight)} helperText={touched.weight && errors.weight} />
-            </Grid>
+            {enableWeight &&
+              <Grid item xs={6}>
+                <H6 mb={1}>{t('Weight')}</H6>
+                <DarkTextField name="weight" placeholder={t('Weight')} onChange={handleChange} value={values.weight}
+                  error={Boolean(errors.weight && touched.weight)} helperText={touched.weight && errors.weight} />
+              </Grid>
+            }
 
           </Grid>
         </ScrollBar>

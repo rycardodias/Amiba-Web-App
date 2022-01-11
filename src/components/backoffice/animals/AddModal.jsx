@@ -129,8 +129,8 @@ const AddModal = ({ open, onClose, edit, data }) => {
 
             <Grid item xs={6}>
               <H6 mb={1}>{t('Birth Date')}</H6>
-              <DarkTextField disabled={edit} name="birthdate" type="date" placeholder="dd/mm/yyyy" onChange={handleChange} value={values.birthdate}
-                error={Boolean(errors.birthdate && touched.birthdate)} helperText={touched.birthdate && errors.birthdate} />
+              <DarkTextField disabled={edit} name="birthDate" type="date" placeholder="dd/mm/yyyy" onChange={handleChange} value={values.birthDate}
+                error={Boolean(errors.birthDate && touched.birthDate)} helperText={touched.birthDate && errors.birthDate} />
             </Grid>
 
             <Grid item xs={6}>
