@@ -31,6 +31,10 @@ const PaymentSuccess = Loadable(lazy(() => import('./pages/shop/PaymentSuccess')
 const OrganizationsList = Loadable(lazy(() => import('pages/backoffice/OrganizationsList')));
 const ExplorationsList = Loadable(lazy(() => import('pages/backoffice/ExplorationsList')));
 const CertificationsList = Loadable(lazy(() => import('pages/backoffice/CertificationsList')));
+const AnimalsList = Loadable(lazy(() => import('pages/backoffice/AnimalsList')));
+const AnimalsProductsList = Loadable(lazy(() => import('pages/backoffice/AnimalsProductsList')));
+
+
 
 const UsersList = Loadable(lazy(() => import('pages/backoffice/UsersList')));
 const RestaurantsList = Loadable(lazy(() => import('pages/backoffice/RestaurantsList')));
@@ -73,10 +77,12 @@ const routes = [{
     { path: 'organizations', element: <OrganizationsList /> },
     { path: 'explorations', element: <ExplorationsList /> },
     { path: 'explorations/certifications', element: <CertificationsList /> },
-
     { path: 'users', element: <UsersList /> },
     { path: 'restaurants', element: <RestaurantsList /> },
     { path: 'restaurants/menus', element: <MenusList /> },
+    { path: 'animals', element: <AnimalsList /> },
+    { path: 'animalProducts', element: <AnimalsProductsList /> },
+
 
 
 
