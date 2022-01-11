@@ -89,6 +89,7 @@ const i18nPT = {
     Users: 'Utilizadores',
     User: 'Utilizador',
     Backoffice: "Backoffice",
+    "View Cart": "Ver Carrinho",
     "Dozen": "Duzia",
     "Half-Dozen": "Meia Duzia",
     Categories: "Categorias",

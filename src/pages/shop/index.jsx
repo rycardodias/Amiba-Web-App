@@ -11,7 +11,7 @@ import { H2, H3, H6 } from "components/Typography";
 import useTitle from "hooks/useTitle";
 import { CarouselProvider, Dot, Slide, Slider } from "pure-react-carousel";
 import { useState, useEffect } from "react";
-import { getProductsAllAvailable } from 'lib/requests/productsRequests'
+import * as productsRequests from 'lib/requests/productsRequests'
 import { useTranslation } from "react-i18next";
 import { convertUnitNames } from "lib/values/convertions";
 import toast from "react-hot-toast";
@@ -40,17 +40,47 @@ const Shop = () => {
   const [filterOrganization, setfilterOrganization] = useState("")
   const [filterSortBy, setfilterSortBy] = useState("")
 
+  function handleFilterChange(type, value) {
+    if (type === "CATEGORY") return setfilterCategory(value)
+    if (type === "ORG") return setfilterOrganization(value)
+    if (type === "SORTBY") return setfilterSortBy(value)
+  }
+
   useEffect(() => {
-    async function fetchProducts() {
-      const res = await getProductsAllAvailable()
-
-      if (res.error) return
-      if (res.data.error) return
-      setdata(res.data.data)
+    if (!(filterCategory || filterOrganization)) { //empty filters
+      productsRequests.getProductsAllAvailable()
+        .then(response => {
+          if (response.error || response.data.error) return setdata([])
+          setdata(response.data.data)
+        })
+        .catch(error => console.error(error))
     }
-    fetchProducts()
+    else if (filterCategory && !filterOrganization) {
+      productsRequests.getProductsAllAvailableType(filterCategory)
+        .then(response => {
+          if (response.error || response.data.error) return setdata([])
+          setdata(response.data.data)
+        })
+        .catch(error => console.error(error))
+    }
+    else if (!filterCategory && filterOrganization) {
+      productsRequests.getProductsAllAvailableInOrganization([filterOrganization])
+        .then(response => {
+          if (response.error || response.data.error) return setdata([])
+          setdata(response.data.data)
+        })
+        .catch(error => console.error(error))
+    }
+    else {
+      productsRequests.getProductsAllAvailableTypeOrganization(filterCategory, filterOrganization)
+        .then(response => {
+          if (response.error || response.data.error) return setdata([])
+          setdata(response.data.data)
+        })
+        .catch(error => console.error(error))
+    }
 
-  }, [])
+  }, [filterCategory || filterOrganization])
 
 
   const addToCart = async () => {
@@ -92,17 +122,11 @@ const Shop = () => {
       </Select>
     </>
   }
-  
-  function handleFilterChange(type, value) {
-    if (type === "CATEGORY") return setfilterCategory(value)
-    if (type === "ORG") return setfilterOrganization(value)
-    if (type === "SORTBY") return setfilterSortBy(value)
-  }
 
   return <Box pt={2} pb={4}>
     <Heading heading={t("Amiba Ecommerce")} />
     <Box marginTop={3}>
-      
+
       <Grid container spacing={3}>
         <Grid item lg={3} sm={4} xs={12}>
           <SearchFilter sortBy={filterSortBy} organization={filterOrganization} category={filterCategory} onFilterChange={handleFilterChange} />

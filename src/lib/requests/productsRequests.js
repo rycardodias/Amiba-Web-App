@@ -27,9 +27,12 @@ const getProductsAllAvailableId = async (id) => {
 const getProductsAllAvailableType = async (type) => {
     return await sendRequest('GET', 'products/allAvailable/type/' + type);
 }
+const getProductsAllAvailableTypeOrganization = async (type, organization) => {
+    return await sendRequest('GET', 'products/allAvailable/type/' + type + '/organization/' + organization);
+}
 
 const getProductsAllAvailableInOrganization = async (organizations) => {
-    return await sendRequest('POST', 'products/allAvailable/inOrganization', {organizations});
+    return await sendRequest('POST', 'products/allAvailable/inOrganization', { organizations });
 }
 
 const createProduct = async (type, tax, name, description, price, unit, image, OrganizationId) => {
@@ -46,6 +49,6 @@ const deleteProduct = async (id) => {
 
 export {
     getProducts, getProductId, getProductByType, getProductByExploration,
-    getProductsAllAvailable, getProductsAllAvailableId, getProductsAllAvailableType, getProductsAllAvailableInOrganization,
+    getProductsAllAvailable, getProductsAllAvailableId, getProductsAllAvailableType, getProductsAllAvailableTypeOrganization, getProductsAllAvailableInOrganization,
     createProduct, updateProduct, deleteProduct
 }

@@ -22,7 +22,7 @@ const ProductCard = ({ product, handleClick }) => {
     <FlexBox onClick={handleClick} sx={{ height: 135, cursor: "pointer", alignItems: "center", justifyContent: "center", backgroundColor: "secondary.light", overflow: "hidden" }}>
       <img src={product.image} alt={t("Product")} style={{ objectFit: "cover", maxWidth: "100%" }} />
     </FlexBox>
-
+    {console.log(`product`, product)}
     <Box padding={1.5} bgcolor={theme.palette.mode === "dark" ? alpha("#fff", 0.03) : ""}>
       <FlexBox alignItems="flex-start" justifyContent="space-between">
         <Box>

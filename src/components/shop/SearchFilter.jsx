@@ -5,7 +5,7 @@ import { H6, Small, Tiny } from "components/Typography";
 import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next"; // styled components
 import { getOrganizationsProductAvailable } from 'lib/requests/organizationsRequests'
-import { set } from "date-fns/esm";
+// import { set } from "date-fns/esm";
 import { productTypes } from "lib/values/types";
 
 const Dot = styled(Box)(({ theme, active }) => ({
@@ -45,13 +45,14 @@ const SearchFilter = (props) => {
           onClick={() => props.onFilterChange("ORG", item.id)}
           sx={{ cursor: "pointer", color: props.organization === item.name ? "primary.main" : "text.disabled" }}>
           <FlexBox alignItems="center">
-            <Dot active={props.organization === item.name} />
+            <Dot active={props.organization === item.id} />
             <Small>{t(item.name)}</Small>
           </FlexBox>
           <CountWrapper>
             <Small>{item.totalProducts}</Small>
           </CountWrapper>
-        </FlexBox>)}
+        </FlexBox>
+      )}
     </Box>
 
     <Box marginTop={4}>
@@ -64,7 +65,8 @@ const SearchFilter = (props) => {
           <Dot active={props.category === item.id} />
           <Small value={item.id}>{t(item.name)}</Small>
 
-        </FlexBox>)}
+        </FlexBox>
+      )}
     </Box>
 
     {/* <Box marginTop={4}>
@@ -98,7 +100,7 @@ const SearchFilter = (props) => {
     </Box> */}
 
     <Button variant="contained" fullWidth sx={{ marginTop: 4 }}>
-      View Cart
+      {t("View Cart")}
       <ShoppingCart sx={{ fontSize: 17, marginLeft: 1 }} />
     </Button>
   </Card>;

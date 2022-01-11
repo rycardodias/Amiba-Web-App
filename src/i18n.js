@@ -174,7 +174,6 @@ const resources = {
       Organizations: 'Organizations',
       Products: 'Products',
       Restaurants: 'Restaurants',
-      Users: 'Users',
 
       Name: 'Name',
       Type: 'Type',
