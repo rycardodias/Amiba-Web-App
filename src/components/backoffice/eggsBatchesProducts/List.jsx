@@ -9,7 +9,7 @@ import FlexBox from "components/FlexBox";
 import DataTable from "components/backoffice/utils/DataTable";
 import columnShape from "components/backoffice/eggsBatchesProducts/ColumnShape";
 import AddModal from "components/backoffice/eggsBatchesProducts/AddModal";
-import * as eggsBatchsRequests from 'lib/requests/eggsBatchsRequests'
+import * as eggsBatchProductsRequests from 'lib/requests/eggsBatchProductsRequests'
 import { ButtonWrapper } from '../styledComponents/ButtonWrapper';
 
 export const List = () => {
@@ -25,7 +25,7 @@ export const List = () => {
     const [openModal, setOpenModal] = useState(false);
 
     function getInitialData() {
-        eggsBatchsRequests.getEggsBatchs()
+        eggsBatchProductsRequests.getEggsBatchProducts()
             .then(response => {
                 if (response.error || response.data.error) return setTableData([])
                 setTableData(response.data.data)
@@ -45,9 +45,9 @@ export const List = () => {
     };
 
     const handleDelete = async () => {
-        const ids = selectedRows.map(item => item.original.id);
+        const ids = selectedRows.map(item => item.original.id); 
         for (let id of ids) {
-            const res = await eggsBatchsRequests.deleteEggsBatch(id)
+            const res = await eggsBatchProductsRequests.deleteEggsBatchProducts(id)
             if (res.error || res.data.error) {
                 toast.error(`${t('Error removing')} ${tableSingleName}`);
             } else {
