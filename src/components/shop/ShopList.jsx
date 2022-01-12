@@ -44,7 +44,6 @@ export const ShopList = () => {
         else if (filterCategory && !filterOrganization) {
             productsRequests.getProductsAllAvailableType(filterCategory)
                 .then(response => {
-                    console.log(`response`, response)
                     if (response.error || response.data.error) return setdata([])
                     setdata(response.data.data)
                 })
@@ -67,7 +66,7 @@ export const ShopList = () => {
                 .catch(error => console.error(error))
         }
 
-    }, [filterOrganization,filterCategory ])
+    }, [filterOrganization, filterCategory])
 
     return <Box pt={2} pb={4}>
         <Heading heading={t("Amiba Ecommerce")} />
@@ -82,7 +81,7 @@ export const ShopList = () => {
                         <Grid container spacing={3}>
                             {data.map(item =>
                                 <Grid item lg={4} md={6} xs={12} key={item.id}>
-                                    <ProductCard product={item} handleClick={() => { setOpenModal(true); setItemModal(item) }} />
+                                    <ProductCard product={item} onCloseModal={() => setOpenModal(false)} handleClick={() => { setOpenModal(true); setItemModal(item) }} />
                                 </Grid>
                             )}
                         </Grid>

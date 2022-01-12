@@ -18,11 +18,6 @@ const CountWrapper = styled(Box)(({ theme }) => ({
 
 const SearchFilter = (props) => {
   const { t } = useTranslation();
-  const [value, setValue] = useState([100, 1000]);
-
-  const handleChange = (e, value) => {
-    setValue(value);
-  };
 
   const [organizationsList, setorganizationsList] = useState([])
 
