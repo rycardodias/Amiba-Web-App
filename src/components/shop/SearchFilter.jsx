@@ -3,7 +3,8 @@ import { Box, Button, Card, Slider, styled } from "@mui/material";
 import FlexBox from "components/FlexBox";
 import { H6, Small, Tiny } from "components/Typography";
 import React, { useState, useEffect } from "react";
-import { useTranslation } from "react-i18next"; // styled components
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router";
 import { getOrganizationsProductAvailable } from 'lib/requests/organizationsRequests'
 // import { set } from "date-fns/esm";
 import { productTypes } from "lib/values/types";
@@ -18,6 +19,7 @@ const CountWrapper = styled(Box)(({ theme }) => ({
 
 const SearchFilter = (props) => {
   const { t } = useTranslation();
+  const navigate = useNavigate()
 
   const [organizationsList, setorganizationsList] = useState([])
 
@@ -96,9 +98,9 @@ const SearchFilter = (props) => {
       </FlexBox>
     </Box> */}
 
-    <Button variant="contained" fullWidth sx={{ marginTop: 4 }}>
+    <Button variant="contained" fullWidth sx={{ marginTop: 4 }} onClick={() => navigate("/shop/cart")}>
       {t("View Cart")}
-      <ShoppingCart sx={{ fontSize: 17, marginLeft: 1 }} />
+      {/* <ShoppingCart sx={{ fontSize: 17, marginLeft: 1 }} /> */}
     </Button>
   </Card>;
 };

@@ -96,7 +96,7 @@ const AddModal = ({ open, onClose, edit, data }) => {
 
   return <Modal open={open} onClose={onClose}>
     <StyledModalCard>
-      <H2 mb={2}>{edit ? `${t("Edit")} ${t("Animal/Product")}` : `${t("Add new")} ${t("Animal/Product")}`}</H2>
+      <H2 mb={2}>{edit ? `${t("Edit")} ${t("Eggs Batch/Product")}` : `${t("Add new")} ${t("Eggs Batch/Product")}`}</H2>
 
       <form onSubmit={handleSubmit}>
         <ScrollBar style={{ maxHeight: 400 }}>
@@ -135,7 +135,7 @@ const AddModal = ({ open, onClose, edit, data }) => {
                 <H6 mb={1}>{t('Eggs Batch')}</H6>
                 <StyledSelect fullWidth name="EggsBatchId" value={values.EggsBatchId} onChange={handleChange} input={<InputBase placeholder={t('Eggs Batch')} />} IconComponent={() => <KeyboardArrowDown fontSize="small" />}>
                   {eggsBatches && eggsBatches.map(item => {
-                    return <StyledMenuItem key={item.id} value={item.id}>{t(item.identifier)}</StyledMenuItem>
+                    return <StyledMenuItem key={item.id} value={item.id}>{t(item.name)}</StyledMenuItem>
                   })}
                 </StyledSelect>
               </Grid>

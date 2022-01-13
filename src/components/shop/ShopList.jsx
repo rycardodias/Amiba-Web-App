@@ -17,6 +17,8 @@ import ShopItemModal from 'components/shop/ShopItemModal';
 export const ShopList = () => {
     const { t } = useTranslation()
     useTitle(t("Shop"));
+    const [page, setPage] = useState(1);
+
     const [openModal, setOpenModal] = useState(false);
 
     const [data, setdata] = useState([])
@@ -68,6 +70,10 @@ export const ShopList = () => {
 
     }, [filterOrganization, filterCategory])
 
+    function handlePaginationChange(target, value) {
+        setPage(value)
+    }
+
     return <Box pt={2} pb={4}>
         <Heading heading={t("Amiba Ecommerce")} />
         <Box marginTop={3}>
@@ -79,15 +85,18 @@ export const ShopList = () => {
                 <Grid item lg={9} sm={8} xs={12}>
                     <Card sx={{ padding: 3 }}>
                         <Grid container spacing={3}>
-                            {data.map(item =>
-                                <Grid item lg={4} md={6} xs={12} key={item.id}>
-                                    <ProductCard product={item} onCloseModal={() => setOpenModal(false)} handleClick={() => { setOpenModal(true); setItemModal(item) }} />
-                                </Grid>
+                            {data.map((item, index) => {
+                                if (((page * 6 - 6) <= index) && (index < (page * 6)))
+                                    return (
+                                        <Grid item lg={4} md={6} xs={12} key={item.id}>
+                                            <ProductCard product={item} onCloseModal={() => setOpenModal(false)} handleClick={() => { setOpenModal(true); setItemModal(item) }} />
+                                        </Grid>)
+
+                            }
                             )}
                         </Grid>
-
                         <Stack alignItems="center" marginTop={4}>
-                            <StyledPagination count={Math.ceil(data.length / 10)} shape="rounded" //   onChange={handleChange}
+                            <StyledPagination count={Math.ceil(data.length / 6)} shape="rounded" onChange={handlePaginationChange} page={page}
                             />
                         </Stack>
                     </Card>
