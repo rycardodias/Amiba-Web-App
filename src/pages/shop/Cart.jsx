@@ -3,7 +3,7 @@ import CartListItem from "components/shop/CartListItem";
 import OrderSummery from "components/shop/OrderSummery";
 import useTitle from "hooks/useTitle";
 import { useTranslation } from "react-i18next";
-import { getProductsAllAvailable } from 'lib/requests/productsRequests'
+import * as cartsRequests from 'lib/requests/cartsRequests'
 import { useState, useEffect } from "react";
 
 
@@ -16,7 +16,7 @@ const Cart = () => {
 
   useEffect(() => {
     async function fetchProducts() {
-      const res = await getProductsAllAvailable()
+      const res = await cartsRequests.getCartByUser()
 
       if (res.error) return
       if (res.data.error) return

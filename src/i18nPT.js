@@ -37,6 +37,7 @@ const i18nPT = {
     "Error Updating Record": "Erro a alterar registo",
     "Error Creating Record": "Erro a adicionar registo",
     "Error Getting essential Data": "Erro a adicionar informação essencial",
+    "Find Products": "Procurar Productos",
     'Clear filter': 'Limpar Filtro',
     "Delete Selected": "Eliminar Seleção",
     "Edit Selected": "Editar Seleção",

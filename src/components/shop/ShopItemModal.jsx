@@ -106,7 +106,7 @@ const ShopItemModal = (props) => {
                             </IconButton>
                         </Box>
 
-                        <Box marginTop={1}>
+                        <Box marginTop={3}>
                             <ModalAccordion item={props.itemModal} />
                         </Box>
                     </Grid>

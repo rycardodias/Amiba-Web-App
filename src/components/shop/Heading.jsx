@@ -14,7 +14,7 @@ const Heading = ({ heading }) => {
       "& h2": { marginLeft: 0, marginBottom: 1 }
     }
   }}>
-    <SearchInput placeholder="Find Products" />
+    <SearchInput placeholder={t("Find Products")} disabled/>
     <H2 marginLeft={2}>{t(heading)}</H2>
   </FlexBox>;
 };

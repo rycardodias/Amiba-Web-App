@@ -8,8 +8,8 @@ const getCartId = async (id) => {
     return await sendRequest('GET', 'carts/id/' + id);
 };
 
-const getCartByUser = async (UserId) => {
-    return await sendRequest('GET', 'carts/UserId/' + UserId);
+const getCartByUser = async () => {
+    return await sendRequest('GET', 'carts/UserId');
 };
 const getCartByUserWithProduct = async (UserId) => {
     return await sendRequest('GET', 'carts/UserId/Product/' + UserId);

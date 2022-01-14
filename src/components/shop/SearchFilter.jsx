@@ -48,7 +48,7 @@ const SearchFilter = (props) => {
             <Small>{t(item.name)}</Small>
           </FlexBox>
           <CountWrapper>
-            <Small>{item.totalProducts}</Small>
+            <Small>{item.Products.length}</Small>
           </CountWrapper>
         </FlexBox>
       )}

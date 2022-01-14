@@ -91,11 +91,10 @@ export const ShopList = () => {
                                         <Grid item lg={4} md={6} xs={12} key={item.id}>
                                             <ProductCard product={item} onCloseModal={() => setOpenModal(false)} handleClick={() => { setOpenModal(true); setItemModal(item) }} />
                                         </Grid>)
-
                             }
                             )}
                         </Grid>
-                        <Stack alignItems="center" marginTop={4}>
+                        <Stack alignItems="center" marginTop={2}>
                             <StyledPagination count={Math.ceil(data.length / 6)} shape="rounded" onChange={handlePaginationChange} page={page}
                             />
                         </Stack>
