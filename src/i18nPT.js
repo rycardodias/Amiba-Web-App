@@ -32,6 +32,7 @@ const i18nPT = {
     Save: 'Salvar',
     Select: 'Selecionar',
     Quantity: "Quantidade",
+    Weight: "Peso",
     "Error removing": "Erro ao remover",
     "Error Updating Record": "Erro a alterar registo",
     "Error Creating Record": "Erro a adicionar registo",

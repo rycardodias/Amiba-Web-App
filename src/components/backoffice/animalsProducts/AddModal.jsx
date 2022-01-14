@@ -35,6 +35,8 @@ const AddModal = ({ open, onClose, edit, data }) => {
   const [products, setproducts] = useState([])
   const [explorations, setexplorations] = useState([])
   const [enableWeight, setenableWeight] = useState(false)
+  const [enableQuantity, setenableQuantity] = useState(false)
+
 
 
   async function initialData() {
@@ -78,10 +80,11 @@ const AddModal = ({ open, onClose, edit, data }) => {
     const product = products.find(product => product.id === e.target.value)
 
     product && product.unit === 'KG' ? setenableWeight(true) : setenableWeight(false)
+    product && product.unit === 'KG' ? setenableQuantity(false) : setenableQuantity(true)
   }
 
   const fieldValidationSchema = Yup.object().shape({
-    quantity: Yup.string().required(`${t('Quantity')} ${t('is required!')}`),
+    // quantity: Yup.string().required(`${t('Quantity')} ${t('is required!')}`),
     AnimalId: Yup.string().required(`${t('Animal')} ${t('is required!')}`),
     ProductId: Yup.string().required(`${t('Product')} ${t('is required!')}`),
   });
@@ -97,7 +100,7 @@ const AddModal = ({ open, onClose, edit, data }) => {
           })
           .catch(error => console.log(error));
       } else {
-        animalProductsRequests.createAnimalProducts(values.ProductId, values.AnimalId, values.quantity, values.weight || undefined)
+        animalProductsRequests.createAnimalProducts(values.ProductId, values.AnimalId, values.quantity > 0 ? values.quantity : 1, values.weight || undefined)
           .then(response => {
             if (response.error || response.data.error) return toast.error(t("Error Creating Record"));
 
@@ -157,11 +160,14 @@ const AddModal = ({ open, onClose, edit, data }) => {
               </Grid>
             }
 
-            <Grid item xs={6}>
-              <H6 mb={1}>{t('Quantity')}</H6>
-              <DarkTextField name="quantity" placeholder={t('Quantity')} onChange={handleChange} value={values.quantity}
-                error={Boolean(errors.quantity && touched.quantity)} helperText={touched.quantity && errors.quantity} />
-            </Grid>
+            {(enableQuantity || data?.quantity) &&
+              <Grid item xs={6}>
+                <H6 mb={1}>{t('Quantity')}</H6>
+                <DarkTextField name="quantity" placeholder={t('Quantity')} onChange={handleChange} value={values.quantity}
+                  error={Boolean(errors.quantity && touched.quantity)} helperText={touched.quantity && errors.quantity} />
+              </Grid>
+            }
+
             {(enableWeight || data?.weight) &&
               <Grid item xs={6}>
                 <H6 mb={1}>{t('Weight')}</H6>

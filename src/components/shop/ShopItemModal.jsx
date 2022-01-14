@@ -27,7 +27,7 @@ const ShopItemModal = (props) => {
 
             if (list.unit === 'DOZEN') {
                 for (let i = 1; i <= (list.quantityAvailable / 12); i++) {
-                    items.push(<MenuItem key={i} value={i * 12}>{i}</MenuItem>);
+                    items.push(<MenuItem key={i} value={i}>{i}</MenuItem>);
                 }
             } else if (list.unit === 'KG') {
                 let k = 0
@@ -36,6 +36,7 @@ const ShopItemModal = (props) => {
                     for (let i = 0; i < list.AnimalProducts[j].quantityAvailable; i++) {
                         k++
                         totalweight += list.AnimalProducts[j].weight
+
                         items.push(<MenuItem key={k} value={k}>{k + ' - ' + totalweight / 1000 + ' Kg'}</MenuItem>);
                     }
                 }
@@ -53,11 +54,16 @@ const ShopItemModal = (props) => {
         </>
     }
 
-    const addToCart = async (itemModal, cartQuantity) => {
-        const newItemsResult = await addItem(itemModal, cartQuantity)
-        if (newItemsResult.error) return toast.error(t("Fail to add product to cart!"));
-
-        return toast.success(t("Item added to cart successfully!"));
+    const addToCart = async () => {
+        addItem(props.itemModal, props.itemModal.unit === "DOZEN" ? cartQuantity * 12 : cartQuantity)
+            .then(response => {
+                if (response.error || response.data.error) return toast.error(t("Fail to add product to cart!"));
+                return toast.success(t("Item added to cart successfully!"));
+            })
+            .catch(error => {
+                console.error(error)
+                return toast.error(t("Fail to add product to cart!"));
+            })
     }
 
     return (
@@ -100,7 +106,7 @@ const ShopItemModal = (props) => {
                             </IconButton>
                         </Box>
 
-                        <Box marginTop={3}>
+                        <Box marginTop={1}>
                             <ModalAccordion item={props.itemModal} />
                         </Box>
                     </Grid>
