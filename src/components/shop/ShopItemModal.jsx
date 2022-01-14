@@ -55,7 +55,7 @@ const ShopItemModal = (props) => {
     }
 
     const addToCart = async () => {
-        addItem(props.itemModal, props.itemModal.unit === "DOZEN" ? cartQuantity * 12 : cartQuantity)
+        addItem(props.itemModal, cartQuantity)
             .then(response => {
                 if (response.error || response.data.error) return toast.error(t("Fail to add product to cart!"));
                 return toast.success(t("Item added to cart successfully!"));

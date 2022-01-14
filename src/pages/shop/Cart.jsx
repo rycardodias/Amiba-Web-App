@@ -1,6 +1,6 @@
 import { Box, Grid } from "@mui/material";
-import CartListItem from "components/shop/CartListItem";
-import OrderSummery from "components/shop/OrderSummery";
+import CartListItem from "components/shop/cart/CartListItem";
+import OrderSummery from "components/shop/cart/OrderSummery";
 import useTitle from "hooks/useTitle";
 import { useTranslation } from "react-i18next";
 import * as cartsRequests from 'lib/requests/cartsRequests'
@@ -13,18 +13,18 @@ const Cart = () => {
   useTitle(t("Cart"));
 
   const [data, setdata] = useState([])
-
+  
   useEffect(() => {
     async function fetchProducts() {
-      const res = await cartsRequests.getCartByUser()
+      const res = await cartsRequests.getCartByUserWithProduct("1f096354-1679-4b83-b94d-7442708af4ec") //.getCartByUser()
 
       if (res.error) return
       if (res.data.error) return
       setdata(res.data.data)
     }
     fetchProducts()
-
   }, [])
+
 
   return <Box pt={2} pb={4}>
     <Grid container spacing={3}>
@@ -32,7 +32,7 @@ const Cart = () => {
         {data.map((item, index) => <CartListItem key={index} item={item} />)}
       </Grid>
       <Grid item md={5} sm={5} xs={12}>
-        <OrderSummery />
+        <OrderSummery data={data} />
       </Grid>
     </Grid>
   </Box>;

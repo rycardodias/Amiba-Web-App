@@ -1,6 +1,6 @@
 import { Box, Card, Grid } from "@mui/material";
 import LightTextField from "components/LightTextField";
-import OrderSummery from "components/shop/OrderSummery";
+import OrderSummery from "components/shop/cart/OrderSummery";
 import { Small } from "components/Typography";
 import useTitle from "hooks/useTitle";
 
