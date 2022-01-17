@@ -70,7 +70,7 @@ export const AuthProvider = ({ children }) => {
     dispatch({
       type: "LOGIN",
       payload: {
-        user: response.data.data.token
+        user: response.data.data
       }
     });
     return response
