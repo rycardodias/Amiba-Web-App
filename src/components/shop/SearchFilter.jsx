@@ -26,7 +26,7 @@ const SearchFilter = (props) => {
   useEffect(() => {
     getOrganizationsProductAvailable()
       .then(response => {
-        if (response.data.error) return
+        if (response.error || response.data.error) return console.error(response)
         setorganizationsList(response.data.data)
       })
       .catch(error => {
