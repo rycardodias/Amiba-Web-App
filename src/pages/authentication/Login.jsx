@@ -26,7 +26,7 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   let navigate = useNavigate();
   const initialValues = {
-    email: "ricardo@amiba.pt", password: "1", submit: null, remember: true
+    email: "ricardo@amiba.pt", password: "Lol123!!", submit: null, remember: true
   }; // form field value validation schema
 
   const validationSchema = Yup.object().shape({

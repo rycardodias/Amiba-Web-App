@@ -18,6 +18,10 @@ const ButtonWrapper = styled(Box)(({ theme }) => ({ [theme.breakpoints.down(868)
 const CartListItem = ({ item }) => {
   const [quantity, setQuantity] = useState(item.quantity);
 
+  function handleSumArticleQuantity() {
+    console.log("sum", item)
+  }
+
   const image = item.AnimalProduct ? item.AnimalProduct.Product.image : item.EggsBatchProduct.Product.image;
 
   return <StyledCard>
@@ -35,7 +39,7 @@ const CartListItem = ({ item }) => {
 
     <ButtonWrapper>
       {quantity > 0 ? <FlexBox alignItems="center">
-        <StyledButton onClick={() => setQuantity(state => state + 1)}>
+        <StyledButton onClick={handleSumArticleQuantity}>
           <Add color="disabled" />
         </StyledButton>
 
