@@ -8,8 +8,8 @@ const getExplorationId = async (id) => {
     return await sendRequest('GET', 'explorations/id/' + id);
 };
 
-const getExplorationUserId = async (UserId) => {
-    return await sendRequest('GET', 'explorations/UserId/' + UserId);
+const getExplorationUserId = async () => {
+    return await sendRequest('GET', 'explorations/UserId');
 };
 
 const createExploration = async (OrganizationId, type, name, address, locale, zipcode, fiscalNumber, telephone, mobilePhone, gpsLocalization) => {

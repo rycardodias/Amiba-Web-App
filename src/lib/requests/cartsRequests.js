@@ -12,7 +12,7 @@ const getCartByUser = async () => {
     return await sendRequest('GET', 'carts/UserId');
 };
 const getCartByUserWithProduct = async () => {
-    return await sendRequest('GET', 'carts/UserId/Product/');
+    return await sendRequest('GET', 'carts/UserId/Product');
 };
 
 const createCart = async (AnimalProductId, EggsBatchProductId, quantity) => {
