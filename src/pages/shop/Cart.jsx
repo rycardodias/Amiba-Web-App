@@ -16,7 +16,7 @@ const Cart = () => {
   
   useEffect(() => {
     async function fetchProducts() {
-      const res = await cartsRequests.getCartByUserWithProduct("1f096354-1679-4b83-b94d-7442708af4ec") //.getCartByUser()
+      const res = await cartsRequests.getCartByUserWithProduct() //.getCartByUser()
 
       if (res.error) return
       if (res.data.error) return
