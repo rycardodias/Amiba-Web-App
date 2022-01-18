@@ -6,6 +6,9 @@ import { H3, Small } from "components/Typography";
 import UkoAvatar from "components/UkoAvatar";
 import { useState } from "react"; // styled components
 import { calcPrice } from "./priceCalculations";
+import * as cartsRequests from 'lib/requests/cartsRequests'
+import { useTranslation } from "react-i18next";
+import toast from "react-hot-toast";
 
 const StyledButton = styled(ButtonBase)(({ theme }) => ({
   width: 35, height: 35, borderRadius: "8px", backgroundColor: theme.palette.mode === "light" ? theme.palette.secondary[200] : theme.palette.divider
@@ -16,10 +19,16 @@ const StyledCard = styled(Card)(() => ({ display: "flex", flexWrap: "wrap", alig
 const ButtonWrapper = styled(Box)(({ theme }) => ({ [theme.breakpoints.down(868)]: { marginTop: 16 } }));
 
 const CartListItem = ({ item }) => {
+  const { t } = useTranslation()
   const [quantity, setQuantity] = useState(item.quantity);
 
-  function handleSumArticleQuantity() {
-    console.log("sum", item)
+  async function handleSumArticleQuantity(quantity) {
+    const { AnimalProductId, EggsBatchProductId, } = item
+    const res = await cartsRequests.createCart(AnimalProductId, EggsBatchProductId, quantity)
+
+    if (res.error || res.data.error) return toast.error(t("Error Adding Quantity"));
+
+    return setQuantity(state => state + quantity)
   }
 
   const image = item.AnimalProduct ? item.AnimalProduct.Product.image : item.EggsBatchProduct.Product.image;
@@ -39,7 +48,7 @@ const CartListItem = ({ item }) => {
 
     <ButtonWrapper>
       {quantity > 0 ? <FlexBox alignItems="center">
-        <StyledButton onClick={handleSumArticleQuantity}>
+        <StyledButton onClick={() => handleSumArticleQuantity(1)}>
           <Add color="disabled" />
         </StyledButton>
 
@@ -47,15 +56,14 @@ const CartListItem = ({ item }) => {
           {quantity}
         </H3>
 
-        <StyledButton onClick={() => setQuantity(state => state > 0 ? state - 1 : state
-        )}>
+        <StyledButton onClick={() => handleSumArticleQuantity(-1)}>
           <Remove color="disabled" />
         </StyledButton>
       </FlexBox> : <Button variant="contained" onClick={() => setQuantity(quantity + 1)}>
         Add To Cart
       </Button>}
     </ButtonWrapper>
-  </StyledCard>;
+  </StyledCard >;
 };
 
 export default CartListItem;
