@@ -1,4 +1,4 @@
-import { Add, Remove } from "@mui/icons-material";
+import { Add, Remove, Delete } from "@mui/icons-material";
 import { Box, Button, ButtonBase, Card } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import FlexBox from "components/FlexBox";
@@ -26,9 +26,18 @@ const CartListItem = ({ item }) => {
     const { AnimalProductId, EggsBatchProductId, } = item
     const res = await cartsRequests.createCart(AnimalProductId, EggsBatchProductId, quantity)
 
-    if (res.error || res.data.error) return toast.error(t("Error Adding Quantity"));
+    if (res.error || res.data.error) return toast.error(t("Error Changing Quantity"));
 
     return setQuantity(state => state + quantity)
+  }
+
+  async function handleDelete() {
+    const { id } = item
+    const res = await cartsRequests.deleteCart(id)
+
+    if (res.error || res.data.error) return toast.error(t("Error Removing Cart Item"));
+
+    return setQuantity(0)
   }
 
   const image = item.AnimalProduct ? item.AnimalProduct.Product.image : item.EggsBatchProduct.Product.image;
@@ -59,9 +68,14 @@ const CartListItem = ({ item }) => {
         <StyledButton onClick={() => handleSumArticleQuantity(-1)}>
           <Remove color="disabled" />
         </StyledButton>
-      </FlexBox> : <Button variant="contained" onClick={() => setQuantity(quantity + 1)}>
-        Add To Cart
-      </Button>}
+      </FlexBox> :
+        <FlexBox alignItems="center">
+          <Button variant="contained" onClick={() => handleSumArticleQuantity(1)}>
+            {t("Add To Cart")}
+          </Button>
+          <Remove color="disabled" onClick={handleDelete} />
+        </FlexBox>
+      }
     </ButtonWrapper>
   </StyledCard >;
 };
