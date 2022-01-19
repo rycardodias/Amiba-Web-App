@@ -55,7 +55,7 @@ const CartListItem = ({ item, removeItemList }) => {
         </Small>
       </Box>
     </FlexBox>
-    {item.quantity}
+    {item.quantity, quantity}
     <ButtonWrapper>
       {quantity > 0 ? <FlexBox alignItems="center">
         <StyledButton onClick={() => handleSumArticleQuantity(1)}>
