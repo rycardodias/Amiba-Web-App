@@ -11,7 +11,6 @@ const OrderSummery = ({ btnText, data }) => {
     <H3 paddingX={3} paddingY={2}>
       {t("Order Summary")}
     </H3>
-    {console.log(`data`, data)}
 
     <Box paddingX={3}>
       <FlexBox alignItems="center" justifyContent="space-between" my={2}>
