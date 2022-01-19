@@ -18,7 +18,7 @@ const StyledCard = styled(Card)(() => ({ display: "flex", flexWrap: "wrap", alig
 
 const ButtonWrapper = styled(Box)(({ theme }) => ({ [theme.breakpoints.down(868)]: { marginTop: 16 } }));
 
-const CartListItem = ({ item }) => {
+const CartListItem = ({ item, removeItemList }) => {
   const { t } = useTranslation()
   const [quantity, setQuantity] = useState(item.quantity);
 
@@ -73,7 +73,9 @@ const CartListItem = ({ item }) => {
           <Button variant="contained" onClick={() => handleSumArticleQuantity(1)}>
             {t("Add To Cart")}
           </Button>
-          <Remove color="disabled" onClick={handleDelete} />
+          <StyledButton onClick={() => { handleDelete(); removeItemList(item.id) }}>
+            <Delete color="danger" />
+          </StyledButton>
         </FlexBox>
       }
     </ButtonWrapper>
