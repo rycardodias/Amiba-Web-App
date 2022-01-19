@@ -37,7 +37,8 @@ const CartListItem = ({ item, removeItemList }) => {
 
     if (res.error || res.data.error) return toast.error(t("Error Removing Cart Item"));
 
-    return setQuantity(quantity)
+    await setQuantity(0)
+    removeItemList(item.id)
   }
 
   const image = item.AnimalProduct ? item.AnimalProduct.Product.image : item.EggsBatchProduct.Product.image;
@@ -73,7 +74,7 @@ const CartListItem = ({ item, removeItemList }) => {
           <Button variant="contained" onClick={() => handleSumArticleQuantity(1)}>
             {t("Add To Cart")}
           </Button>
-          <StyledButton onClick={() => { handleDelete(); removeItemList(item.id) }}>
+          <StyledButton onClick={handleDelete}>
             <Delete color="danger" />
           </StyledButton>
         </FlexBox>
