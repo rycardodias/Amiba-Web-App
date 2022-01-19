@@ -37,7 +37,7 @@ const CartListItem = ({ item, removeItemList }) => {
 
     if (res.error || res.data.error) return toast.error(t("Error Removing Cart Item"));
 
-    return setQuantity(0)
+    return setQuantity(quantity)
   }
 
   const image = item.AnimalProduct ? item.AnimalProduct.Product.image : item.EggsBatchProduct.Product.image;
