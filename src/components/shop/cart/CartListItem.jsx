@@ -78,7 +78,7 @@ const CartListItem = ({ item, removeItemList }) => {
             <Delete color="danger" />
           </StyledButton>
 
-          <Button variant="contained" sx={{ padding: '0 0 0 2rem' }} onClick={() => handleSumArticleQuantity(1)}>
+          <Button variant="contained" sx={{ paddingLeft: 2 }} onClick={() => handleSumArticleQuantity(1)}>
             {t("Add To Cart")}
           </Button>
 
