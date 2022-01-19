@@ -4,7 +4,7 @@ import { styled } from "@mui/material/styles";
 import FlexBox from "components/FlexBox";
 import { H3, Small } from "components/Typography";
 import UkoAvatar from "components/UkoAvatar";
-import { useState } from "react"; // styled components
+import { useState, useEffect } from "react"; // styled components
 import { calcPrice } from "./priceCalculations";
 import * as cartsRequests from 'lib/requests/cartsRequests'
 import { useTranslation } from "react-i18next";
@@ -31,13 +31,16 @@ const CartListItem = ({ item, removeItemList }) => {
     return setQuantity(state => state + quantity)
   }
 
+  useEffect(() => {
+    setQuantity(item.quantity)
+  }, [])
+
   async function handleDelete() {
     const { id } = item
     const res = await cartsRequests.deleteCart(id)
 
     if (res.error || res.data.error) return toast.error(t("Error Removing Cart Item"));
 
-    setQuantity(state => state > 0 ? state - 1 : state)
     removeItemList(item.id)
   }
 
@@ -55,7 +58,7 @@ const CartListItem = ({ item, removeItemList }) => {
         </Small>
       </Box>
     </FlexBox>
-    {item.quantity}
+    {item.quantity + " - "}
     {quantity}
     <ButtonWrapper>
       {quantity > 0 ? <FlexBox alignItems="center">
