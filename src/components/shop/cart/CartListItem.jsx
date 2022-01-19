@@ -74,15 +74,14 @@ const CartListItem = ({ item, removeItemList }) => {
         </StyledButton>
       </FlexBox> :
         <FlexBox alignItems="center">
-          <StyledButton onClick={() => handleSumArticleQuantity(1)}>
-            {/* <Button variant="contained" > */}
-              {t("Add To Cart")}
-            {/* </Button> */}
-          </StyledButton>
-
           <StyledButton onClick={handleDelete}>
             <Delete color="danger" />
           </StyledButton>
+
+          <Button class="ps-2" variant="contained" onClick={() => handleSumArticleQuantity(1)}>
+            {t("Add To Cart")}
+          </Button>
+
         </FlexBox>
       }
     </ButtonWrapper>
