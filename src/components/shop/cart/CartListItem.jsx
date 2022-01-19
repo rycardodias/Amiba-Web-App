@@ -77,8 +77,8 @@ const CartListItem = ({ item, removeItemList }) => {
           <StyledButton onClick={handleDelete}>
             <Delete color="danger" />
           </StyledButton>
-
-          <Button variant="contained" sx={{ paddingLeft: 2 }} onClick={() => handleSumArticleQuantity(1)}>
+          <H3 width={10} textAlign="center"> </H3>
+          <Button variant="contained" onClick={() => handleSumArticleQuantity(1)}>
             {t("Add To Cart")}
           </Button>
 
