@@ -37,7 +37,7 @@ const CartListItem = ({ item, removeItemList }) => {
 
     if (res.error || res.data.error) return toast.error(t("Error Removing Cart Item"));
 
-    await setQuantity(0)
+    setQuantity(state => state > 0 ? state - 1 : state)
     removeItemList(item.id)
   }
 
@@ -55,7 +55,7 @@ const CartListItem = ({ item, removeItemList }) => {
         </Small>
       </Box>
     </FlexBox>
-
+    {item.quantity}
     <ButtonWrapper>
       {quantity > 0 ? <FlexBox alignItems="center">
         <StyledButton onClick={() => handleSumArticleQuantity(1)}>
