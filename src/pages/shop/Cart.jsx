@@ -43,7 +43,7 @@ const Cart = () => {
         {!isLoading && data.map((item, index) => <CartListItem key={index} item={item} removeItemList={handleRemoveItem} />)}
       </Grid>
       <Grid item md={5} sm={5} xs={12}>
-        <OrderSummery data={data} />
+        <OrderSummery data={!isLoading && data} />
       </Grid>
     </Grid>
   </Box>;
