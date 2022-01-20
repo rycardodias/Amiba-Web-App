@@ -7,6 +7,9 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import ScrollBar from "simplebar-react";
 import topMenuList from "./topMenuList"; // root component interface
+import checkURLPermission from "lib/CheckUrlPermissions";
+import * as usersRequests from 'lib/requests/usersRequests'
+
 
 // custom styled components
 const MainMenu = styled(Box)(({ theme }) => ({
@@ -38,11 +41,23 @@ const DashboardSideBar = ({ sideBarLocked, showMobileSideBar, closeMobileSideBar
   const [categoryMenus, setCategoryMenus] = useState([{ subTitle: "" }]);
   const downMd = useMediaQuery(theme => theme.breakpoints.down(1200));
 
-  const handleActiveMainMenu = menuItem => () => {
+  const handleActiveMainMenu = menuItem => async () => {
+    console.log("menuItem", menuItem.children);
     setActive(menuItem.title);
 
     if (menuItem.children && menuItem.children.length > 0) {
-      setCategoryMenus(menuItem.children);
+
+      const res = await usersRequests.tokenPermission()
+      if (res.error || res.data.error) return
+
+      const newData = menuItem.children.filter(item => {
+        // console.log(checkURLPermission(item.path, res.data.data));
+        if (checkURLPermission(item.path, res.data.data)) return item
+
+      })
+      console.log('categoriasAux', res.data.data, newData);
+
+      setCategoryMenus(newData);
       const matched = openSecondarySideBar && active === menuItem.title;
       setOpenSecondarySideBar(matched ? false : true);
     } else {
