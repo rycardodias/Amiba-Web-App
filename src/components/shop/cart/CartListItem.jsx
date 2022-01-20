@@ -9,6 +9,7 @@ import { calcPrice } from "./priceCalculations";
 import * as cartsRequests from 'lib/requests/cartsRequests'
 import { useTranslation } from "react-i18next";
 import toast from "react-hot-toast";
+import * as uploadFilesRequests from 'lib/requests/uploadFilesRequests'
 
 const StyledButton = styled(ButtonBase)(({ theme }) => ({
   width: 35, height: 35, borderRadius: "8px", backgroundColor: theme.palette.mode === "light" ? theme.palette.secondary[200] : theme.palette.divider
@@ -44,11 +45,16 @@ const CartListItem = ({ item, removeItemList }) => {
     removeItemList(item.id)
   }
 
+  async function getImage(image) {
+    const res = await uploadFilesRequests.getFile(image)
+    console.log(res);
+  }
+
   const image = item.AnimalProduct ? item.AnimalProduct.Product.image : item.EggsBatchProduct.Product.image;
 
   return <StyledCard>
     <FlexBox alignItems="center">
-      <UkoAvatar src={image} sx={{ width: 70, height: 70, borderRadius: "10%" }} />
+      <UkoAvatar src={getImage(image)} sx={{ width: 70, height: 70, borderRadius: "10%" }} />
 
       <Box marginLeft={2}>
         <H3>{item.AnimalProduct ? item.AnimalProduct.Product.name : item.EggsBatchProduct.Product.name}</H3>
