@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const sendRequest = async (metodh, url, params) => {
-  
+
   const requestMetadata = {
     method: metodh,
     credentials: 'same-origin',
@@ -22,10 +22,13 @@ const sendRequest = async (metodh, url, params) => {
   return response;
 };
 
-const sendImageRequest = async (url, formData, directory) => {
+const sendImageRequest = async (url, formData) => {
   const response = await axios.post((process.env.REACT_APP_BACKEND_SERVER_URL + url), formData, {
     headers: {
       'Content-Type': 'multipart/form-data'
+    },
+    body: {
+      requiredSizes: ["1:1", "16:9"]
     }
   });
 

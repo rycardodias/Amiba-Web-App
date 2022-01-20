@@ -1,13 +1,17 @@
-import { Button, Grid, Modal, InputBase } from "@mui/material";
+import { IconButton, Box, Button, Grid, Modal, InputBase } from "@mui/material";
 import { KeyboardArrowDown } from "@mui/icons-material";
+import ImageUploadIcon from "icons/ImageUploadIcon";
+
 import DarkTextField from "components/DarkTextField";
 import FlexBox from "components/FlexBox";
-import { H2, H6 } from "components/Typography";
+import { H2, H6, Small } from "components/Typography";
 import { useFormik } from "formik";
 import toast from "react-hot-toast";
 import ScrollBar from "simplebar-react";
 import * as Yup from "yup";
 import * as organizationsRequests from 'lib/requests/organizationsRequests'
+import * as uploadFilesRequests from 'lib/requests/uploadFilesRequests'
+
 import * as productsRequests from 'lib/requests/productsRequests'
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
@@ -30,7 +34,7 @@ const AddModal = ({ open, onClose, edit, data }) => {
     unit: data?.unit || "",
     image: data?.image || "",
     OrganizationId: data?.OrganizationId || "",
-    OrganizationName: data?.Organization?.name || ""
+    OrganizationName: data?.Organization?.name || "",
   };
 
   const [organizations, setorganizations] = useState([])
@@ -60,6 +64,13 @@ const AddModal = ({ open, onClose, edit, data }) => {
 
   const { values, errors, handleChange, handleSubmit, touched } = useFormik({
     initialValues, validationSchema: fieldValidationSchema, onSubmit: values => {
+      console.log(values);
+      uploadFilesRequests.createFile(values.image)
+        .then((response) => {
+          console.log(response);
+        })
+        .catch(error => console.error(error));
+        
       if (edit) {
         productsRequests.updateProduct(values.id, values.tax, values.name, values.description, values.price, values.image)
           .then(response => {
@@ -159,6 +170,19 @@ const AddModal = ({ open, onClose, edit, data }) => {
                 </StyledSelect>
               </Grid>
             }
+
+            <Grid item xs={12}>
+              <H6 mb={1}>{t('Add Picture')}</H6>
+              <label htmlFor="image">
+                <input value={values.image} onChange={handleChange} type="file" accept="image/*" id="image" style={{ display: "none" }} />
+                <IconButton disableRipple component="span" sx={{ padding: 0, display: "block" }}>
+                  <Box sx={{ minHeight: 40, display: "flex", borderRadius: "8px", alignItems: "center", justifyContent: "center", backgroundColor: "divider" }}>
+                    <ImageUploadIcon sx={{ fontSize: 18, marginRight: 0.5, color: "text.disabled" }} />
+                    <Small color="text.disabled">{t('Choose a file')}</Small>
+                  </Box>
+                </IconButton>
+              </label>
+            </Grid>
 
           </Grid>
         </ScrollBar>
