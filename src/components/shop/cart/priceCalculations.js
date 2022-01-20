@@ -17,7 +17,8 @@ function calcPrice(item) {
 function calcTotalPrice(list) {
     let total = 0;
     for (const element of list) {
-        total = total + calcPrice(element)
+        total += element.quantity * element.Product.price
+        // total = total + calcPrice(element) //antigo cart por /Products
     }
     return total.toFixed(2);
 };

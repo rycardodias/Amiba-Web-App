@@ -3,9 +3,11 @@ import FlexBox from "components/FlexBox";
 import { H3, H4 } from "components/Typography";
 import { useTranslation } from "react-i18next"; // component props interface
 import { calcTotalPrice } from "./priceCalculations";
+import { useNavigate } from "react-router";
+
 const OrderSummery = ({ btnText, data }) => {
   const { t } = useTranslation();
-
+  const navigate = useNavigate()
 
   return <Card>
     <H3 paddingX={3} paddingY={2}>
@@ -15,7 +17,7 @@ const OrderSummery = ({ btnText, data }) => {
     <Box paddingX={3}>
       <FlexBox alignItems="center" justifyContent="space-between" my={2}>
         <H4 fontWeight={600}>{t("Subtotal")}</H4>
-        <H4 fontWeight={600}>{`${calcTotalPrice(data)}€`}</H4>
+        <H4 fontWeight={600}>{data && `${calcTotalPrice(data)}€`}</H4>
       </FlexBox>
       <FlexBox alignItems="center" justifyContent="space-between" my={2}>
         <H4 fontWeight={600}>{t("Discount")}</H4>
@@ -37,16 +39,12 @@ const OrderSummery = ({ btnText, data }) => {
         </H3>
       </FlexBox>
 
-      <Button variant="contained" fullWidth>
+      <Button variant="contained" fullWidth onClick={() => navigate("/shop/payment")}>
         {btnText || t("Proceed to payment")}
       </Button>
     </Box>
 
-    <Box sx={{
-      textAlign: "center",
-      marginTop: 5,
-      padding: 0
-    }}>
+    <Box sx={{ textAlign: "center", marginTop: 5, padding: 0 }}>
       <img src="/static/illustration/cart-page.svg" alt="" />
     </Box>
   </Card>;

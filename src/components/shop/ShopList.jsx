@@ -95,8 +95,7 @@ export const ShopList = () => {
                             )}
                         </Grid>
                         <Stack alignItems="center" marginTop={2}>
-                            <StyledPagination count={Math.ceil(data.length / 6)} shape="rounded" onChange={handlePaginationChange} page={page}
-                            />
+                            <StyledPagination count={Math.ceil(data.length / 6)} shape="rounded" onChange={handlePaginationChange} page={page} />
                         </Stack>
                     </Card>
                 </Grid>

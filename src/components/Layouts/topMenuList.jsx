@@ -83,10 +83,11 @@ const index = [
       subTitle: "Cart",
       path: "/shop/cart"
     },
-      // {
-      //   subTitle: "Checkout",
-      //   path: "/shop/payment"
-      // }, {
+      {
+        subTitle: "Checkout",
+        path: "/shop/payment"
+      },
+      //  {
       //   subTitle: "Purchase Confirmation",
       //   path: "/shop/payment-success"
       // }

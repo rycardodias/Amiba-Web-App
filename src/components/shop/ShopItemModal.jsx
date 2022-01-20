@@ -8,8 +8,9 @@ import { CarouselProvider, Dot, Slide, Slider } from "pure-react-carousel";
 import { H2, H3, H6 } from "components/Typography";
 import { useTranslation } from "react-i18next";
 import toast from "react-hot-toast";
-import { addItem } from 'lib/requests/specific/cartsAddProducts'
+// import { addItem } from 'lib/requests/specific/cartsAddProducts'
 import { StyledModalCard } from 'components/backoffice/styledComponents/AddModalStyles'
+import * as cartsRequests from 'lib/requests/cartsRequests'
 
 const ModalCard = styled(StyledModalCard)(({ theme }) => ({
     outline: "none", [theme.breakpoints.down("sm")]: { maxHeight: 400, overflow: "auto" }
@@ -55,15 +56,19 @@ const ShopItemModal = (props) => {
     }
 
     const addToCart = async () => {
-        addItem(props.itemModal, cartQuantity)
-            .then(response => {
-                if (response.error || response.data.error) return toast.error(t("Fail to add product to cart!"));
-                return toast.success(t("Item added to cart successfully!"));
-            })
-            .catch(error => {
-                console.error(error)
-                return toast.error(t("Fail to add product to cart!"));
-            })
+        const res = await cartsRequests.createCart(props.itemModal.id, cartQuantity)
+        if (res.error || res.data.error) return toast.error(t("Fail to add product to cart!"));
+        return toast.success(t("Item added to cart successfully!"));
+
+        // addItem(props.itemModal, cartQuantity)
+        //     .then(response => {
+        //         if (response.error || response.data.error) return toast.error(t("Fail to add product to cart!"));
+        //         return toast.success(t("Item added to cart successfully!"));
+        //     })
+        //     .catch(error => {
+        //         console.error(error)
+        //         return toast.error(t("Fail to add product to cart!"));
+        //     })
     }
 
     return (

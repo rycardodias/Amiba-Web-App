@@ -4,16 +4,19 @@ import FlexBox from "components/FlexBox";
 import { H3, H5, Small } from "components/Typography";
 import { convertUnitNames } from "lib/values/convertions";
 import { useTranslation } from "react-i18next";
-import { addItem } from 'lib/requests/specific/cartsAddProducts'
+// import { addItem } from 'lib/requests/specific/cartsAddProducts'
 import toast from "react-hot-toast";
+import * as cartsRequests from 'lib/requests/cartsRequests'
 
 const ProductCard = (props) => {
   const theme = useTheme();
   const { t } = useTranslation()
 
   const addToCart = async () => {
-    const newItemsResult = await addItem(props.product, 1)
-    if (newItemsResult.error || newItemsResult.data.error) return toast.error(t("Fail to add product to cart!"));
+    const res = await cartsRequests.createCart(props.product.id, 1)
+    if (res.error || res.data.error) return toast.error(t("Fail to add product to cart!"));
+    // const newItemsResult = await addItem(props.product, 1)
+    // if (newItemsResult.error || newItemsResult.data.error) return toast.error(t("Fail to add product to cart!"));
     props.onCloseModal()
     return toast.success(t("Item added to cart successfully!"));
   }

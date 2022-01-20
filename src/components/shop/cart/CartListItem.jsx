@@ -18,17 +18,19 @@ const StyledCard = styled(Card)(() => ({ display: "flex", flexWrap: "wrap", alig
 
 const ButtonWrapper = styled(Box)(({ theme }) => ({ [theme.breakpoints.down(868)]: { marginTop: 16 } }));
 
-const CartListItem = ({ item, removeItemList }) => {
+const CartListItem = ({ item, removeItemList, refreshQuantity }) => {
   const { t } = useTranslation()
   const [quantity, setQuantity] = useState(item.quantity);
 
   async function handleSumArticleQuantity(quantity) {
-    const { AnimalProductId, EggsBatchProductId, } = item
-    const res = await cartsRequests.createCart(AnimalProductId, EggsBatchProductId, quantity)
+    const { /*AnimalProductId, EggsBatchProductId,*/ ProductId } = item
+    const res = await cartsRequests.createCart(/*AnimalProductId, EggsBatchProductId,*/ ProductId, quantity)
 
     if (res.error || res.data.error) return toast.error(t("Error Changing Quantity"));
 
-    return setQuantity(state => state + quantity)
+
+    setQuantity(state => state + quantity)
+      refreshQuantity(item,quantity)
   }
 
   useEffect(() => {
@@ -44,15 +46,15 @@ const CartListItem = ({ item, removeItemList }) => {
     removeItemList(item.id)
   }
 
-  const image = item.AnimalProduct ? item.AnimalProduct.Product.image : item.EggsBatchProduct.Product.image;
+  const image = item.image //item.AnimalProduct ? item.AnimalProduct.Product.image : item.EggsBatchProduct.Product.image;
 
   return <StyledCard>
     <FlexBox alignItems="center">
       <UkoAvatar src={`${process.env.REACT_APP_BACKEND_SERVER_URL}uploadFiles/1920x1080_${image}`} sx={{ width: 70, height: 70, borderRadius: "10%" }} />
 
       <Box marginLeft={2}>
-        <H3>{item.AnimalProduct ? item.AnimalProduct.Product.name : item.EggsBatchProduct.Product.name}</H3>
-        <H3>{calcPrice(item)}€</H3>
+        <H3>{item.Product.name /*item.AnimalProduct ? item.AnimalProduct.Product.name : item.EggsBatchProduct.Product.name*/}</H3>
+        <H3>{item.quantity * item.Product.price /*calcPrice(item)*/}€</H3>
         <Small color="text.disabled">
           {item.stock !== 0 ? "In Stock" : "Out of Stock"}
         </Small>

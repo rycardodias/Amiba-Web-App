@@ -132,7 +132,8 @@ const routes = [{
   </AuthGuard>,
   children: [
     { path: 'list', element: <Shop /> },
-    { path: 'cart', element: <Cart /> }
+    { path: 'cart', element: <Cart /> },
+    { path: 'payment', element: <Payment /> },
   ]
 }, {
   path: 'account',
