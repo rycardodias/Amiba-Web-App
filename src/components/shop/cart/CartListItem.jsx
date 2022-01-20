@@ -54,7 +54,7 @@ const CartListItem = ({ item, removeItemList }) => {
 
   return <StyledCard>
     <FlexBox alignItems="center">
-      <UkoAvatar src={`${process.env.REACT_APP_BACKEND_SERVER_URL}/uploadFiles/1920x1080_${image}`} sx={{ width: 70, height: 70, borderRadius: "10%" }} />
+      <UkoAvatar src={`${process.env.REACT_APP_BACKEND_SERVER_URL}uploadFiles/1920x1080_${image}`} sx={{ width: 70, height: 70, borderRadius: "10%" }} />
 
       <Box marginLeft={2}>
         <H3>{item.AnimalProduct ? item.AnimalProduct.Product.name : item.EggsBatchProduct.Product.name}</H3>
