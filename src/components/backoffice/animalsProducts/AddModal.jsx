@@ -34,8 +34,8 @@ const AddModal = ({ open, onClose, edit, data }) => {
   const [animals, setanimals] = useState([])
   const [products, setproducts] = useState([])
   const [explorations, setexplorations] = useState([])
-  const [enableWeight, setenableWeight] = useState(false)
-  const [enableQuantity, setenableQuantity] = useState(false)
+  // const [enableWeight, setenableWeight] = useState(false)
+  // const [enableQuantity, setenableQuantity] = useState(false)
 
 
 
@@ -75,16 +75,16 @@ const AddModal = ({ open, onClose, edit, data }) => {
     }
   }
 
-  function handleWeight(e) {
-    handleChange(e)
-    const product = products.find(product => product.id === e.target.value)
+  // function handleWeight(e) {
+  //   handleChange(e)
+  //   const product = products.find(product => product.id === e.target.value)
 
-    product && product.unit === 'KG' ? setenableWeight(true) : setenableWeight(false)
-    product && product.unit === 'KG' ? setenableQuantity(false) : setenableQuantity(true)
-  }
+  //   product && product.unit === 'KG' ? setenableWeight(true) : setenableWeight(false)
+  //   product && product.unit === 'KG' ? setenableQuantity(false) : setenableQuantity(true)
+  // }
 
   const fieldValidationSchema = Yup.object().shape({
-    // quantity: Yup.string().required(`${t('Quantity')} ${t('is required!')}`),
+    quantity: Yup.string().required(`${t('Quantity')} ${t('is required!')}`),
     AnimalId: Yup.string().required(`${t('Animal')} ${t('is required!')}`),
     ProductId: Yup.string().required(`${t('Product')} ${t('is required!')}`),
   });
@@ -137,7 +137,7 @@ const AddModal = ({ open, onClose, edit, data }) => {
               </Grid> :
               <Grid item xs={6}>
                 <H6 mb={1}>{t('Product')}</H6>
-                <StyledSelect fullWidth name="ProductId" value={values.ProductId} onChange={(e) => { handleChange(e); handleWeight(e) }} input={<InputBase placeholder={t('Product')} />} IconComponent={() => <KeyboardArrowDown fontSize="small" />}>
+                <StyledSelect fullWidth name="ProductId" value={values.ProductId} onChange={(e) => { handleChange(e); /*handleWeight(e) */ }} input={<InputBase placeholder={t('Product')} />} IconComponent={() => <KeyboardArrowDown fontSize="small" />}>
                   {products && products.map(item => {
                     return <StyledMenuItem key={item.id} value={item.id}>{t(item.name)}</StyledMenuItem>
                   })}
@@ -160,21 +160,21 @@ const AddModal = ({ open, onClose, edit, data }) => {
               </Grid>
             }
 
-            {(enableQuantity || data?.quantity) &&
-              <Grid item xs={6}>
-                <H6 mb={1}>{t('Quantity')}</H6>
-                <DarkTextField name="quantity" placeholder={t('Quantity')} onChange={handleChange} value={values.quantity}
-                  error={Boolean(errors.quantity && touched.quantity)} helperText={touched.quantity && errors.quantity} />
-              </Grid>
-            }
+            {/* {(enableQuantity || data?.quantity) && */}
+            <Grid item xs={6}>
+              <H6 mb={1}>{t('Quantity')}</H6>
+              <DarkTextField name="quantity" placeholder={t('Quantity')} onChange={handleChange} value={values.quantity}
+                error={Boolean(errors.quantity && touched.quantity)} helperText={touched.quantity && errors.quantity} />
+            </Grid>
+            {/* } */}
 
-            {(enableWeight || data?.weight) &&
+            {/* {(enableWeight || data?.weight) &&
               <Grid item xs={6}>
                 <H6 mb={1}>{t('Weight')}</H6>
                 <DarkTextField name="weight" placeholder={t('Weight')} onChange={handleChange} value={values.weight}
                   error={Boolean(errors.weight && touched.weight)} helperText={touched.weight && errors.weight} />
               </Grid>
-            }
+            } */}
 
           </Grid>
         </ScrollBar>

@@ -74,7 +74,8 @@ const ShopItemModal = (props) => {
                         <CarouselProvider totalSlides={3} naturalSlideWidth={100} naturalSlideHeight={115}>
                             <Slider style={{ marginBottom: 10 }}>
                                 <Slide >
-                                    <img alt={t("Product")} width="100%" height="100%" src={props.itemModal.image || "_"} style={{ objectFit: "cover" }} />
+                                    <img alt={t("Product")} width="100%" height="100%"
+                                        src={`${process.env.REACT_APP_BACKEND_SERVER_URL}uploadFiles/1920x1080_${props.itemModal.image}`} style={{ objectFit: "cover" }} />
                                 </Slide>
                             </Slider>
                             {/* ADICIONAR QUANDO TIVER VÀRIAS IMAGENS */}

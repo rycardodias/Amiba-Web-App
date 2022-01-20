@@ -20,7 +20,7 @@ const ProductCard = (props) => {
 
   return <Card sx={{ border: 0, boxShadow: 2 }}>
     <FlexBox onClick={props.handleClick} sx={{ height: 135, cursor: "pointer", alignItems: "center", justifyContent: "center", backgroundColor: "secondary.light", overflow: "hidden" }}>
-      <img src={`${process.env.REACT_APP_BACKEND_SERVER_URL}images/${props.product.image}`} alt={t("Product")} style={{ objectFit: "cover", maxWidth: "100%" }} />
+      <img src={`${process.env.REACT_APP_BACKEND_SERVER_URL}uploadFiles/1920x1080_${props.product.image}`} alt={t("Product")} style={{ objectFit: "cover", maxWidth: "100%" }} />
     </FlexBox>
     <Box padding={1.5} bgcolor={theme.palette.mode === "dark" ? alpha("#fff", 0.03) : ""}>
       <FlexBox alignItems="flex-start" justifyContent="space-between">

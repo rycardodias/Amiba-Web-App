@@ -25,11 +25,11 @@ const columnShape = [
     Header: () => i18n.t("Price"),
     accessor: "price",
   },
-  {
-    Header: () => i18n.t("Unit"),
-    accessor: "unit",
-    Filter: SelectColumnFilter
-  },
+  // {
+  //   Header: () => i18n.t("Unit"),
+  //   accessor: "unit",
+  //   Filter: SelectColumnFilter
+  // },
 ];
 
 export default columnShape;

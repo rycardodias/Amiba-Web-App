@@ -9,7 +9,6 @@ import { calcPrice } from "./priceCalculations";
 import * as cartsRequests from 'lib/requests/cartsRequests'
 import { useTranslation } from "react-i18next";
 import toast from "react-hot-toast";
-import * as uploadFilesRequests from 'lib/requests/uploadFilesRequests'
 
 const StyledButton = styled(ButtonBase)(({ theme }) => ({
   width: 35, height: 35, borderRadius: "8px", backgroundColor: theme.palette.mode === "light" ? theme.palette.secondary[200] : theme.palette.divider
@@ -44,11 +43,6 @@ const CartListItem = ({ item, removeItemList }) => {
 
     removeItemList(item.id)
   }
-
-  // async function getImage(image) {
-  //   const res = await uploadFilesRequests.getFile(``)
-  //   console.log(res);
-  // }
 
   const image = item.AnimalProduct ? item.AnimalProduct.Product.image : item.EggsBatchProduct.Product.image;
 

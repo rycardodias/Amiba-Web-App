@@ -14,8 +14,6 @@ import { useTranslation } from "react-i18next";
 
 import { StyledModalCard, StyledMenuItem, StyledSelect } from 'components/backoffice/styledComponents/AddModalStyles'
 
-
-
 const AddModal = ({ open, onClose, edit, data }) => {
   const { t } = useTranslation();
 

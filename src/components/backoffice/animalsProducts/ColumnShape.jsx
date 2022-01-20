@@ -16,10 +16,10 @@ const columnShape = [
     Header: () => i18n.t("Quantity"),
     accessor: "quantity"
   },
-  {
-    Header: () => i18n.t("Weight"),
-    accessor: "weight",
-  },
+  // {
+  //   Header: () => i18n.t("Weight"),
+  //   accessor: "weight",
+  // },
 
 ];
 

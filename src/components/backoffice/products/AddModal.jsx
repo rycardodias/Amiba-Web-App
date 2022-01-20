@@ -71,7 +71,7 @@ const AddModal = ({ open, onClose, edit, data }) => {
     tax: Yup.string().required(`${t('Tax')} ${t('is required!')}`),
     name: Yup.string().required(`${t('Name')} ${t('is required!')}`),
     price: Yup.string().required(`${t('Price')} ${t('is required!')}`),
-    unit: Yup.string().required(`${t('Unit')} ${t('is required!')}`),
+    // unit: Yup.string().required(`${t('Unit')} ${t('is required!')}`),
     OrganizationId: Yup.string().required(`${t('Organization')} ${t('is required!')}`),
   });
 
@@ -88,7 +88,7 @@ const AddModal = ({ open, onClose, edit, data }) => {
           })
           .catch(error => console.log(error));
       } else {
-        productsRequests.createProduct(values.type, values.tax, values.name, values.description, values.price, values.unit, fileName !== "" ? fileName : values.image, values.OrganizationId)
+        productsRequests.createProduct(values.type, values.tax, values.name, values.description, values.price, values.type === "ANIMAL" ? "UNIT" : "DOZEN", fileName !== "" ? fileName : values.image, values.OrganizationId)
           .then(response => {
             if (response.error || response.data.error) return toast.error(t("Error Creating Record"));
 
@@ -106,7 +106,7 @@ const AddModal = ({ open, onClose, edit, data }) => {
     <StyledModalCard>
       <H2 mb={2}>{edit ? `${t("Edit")} ${t("Product")}` : `${t("Add new")} ${t("Product")}`}</H2>
 
-      <form onSubmit={handleSubmit} enctype="multipart/form-data">
+      <form onSubmit={handleSubmit} >
         <ScrollBar style={{ maxHeight: 400 }}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
@@ -119,6 +119,21 @@ const AddModal = ({ open, onClose, edit, data }) => {
               <DarkTextField name="description" placeholder={t('Description')} onChange={handleChange} value={values.description}
                 error={Boolean(errors.description && touched.description)} helperText={touched.description && errors.description} />
             </Grid>
+
+            {edit ?
+              <Grid item xs={6}>
+                <H6 mb={1}>{t('Organization')}</H6>
+                <DarkTextField disabled name="OrganizationId" value={values.OrganizationName} />
+              </Grid> :
+              <Grid item xs={6}>
+                <H6 mb={1}>{t('Organization')}</H6>
+                <StyledSelect fullWidth name="OrganizationId" value={values.OrganizationId} onChange={handleChange} input={<InputBase placeholder={t('Organization')} />} IconComponent={() => <KeyboardArrowDown fontSize="small" />}>
+                  {organizations && organizations.map(item => {
+                    return <StyledMenuItem key={item.id} value={item.id}>{t(item.name)}</StyledMenuItem>
+                  })}
+                </StyledSelect>
+              </Grid>
+            }
 
             {edit ?
               <Grid item xs={6}>
@@ -135,7 +150,7 @@ const AddModal = ({ open, onClose, edit, data }) => {
               </Grid>
             }
 
-            {edit ?
+            {/* {edit ?
               <Grid item xs={6}>
                 <H6 mb={1}>{t('Unit')}</H6>
                 <DarkTextField disabled name="unit" value={values.unit} />
@@ -148,7 +163,7 @@ const AddModal = ({ open, onClose, edit, data }) => {
                   })}
                 </StyledSelect>
               </Grid>
-            }
+            } */}
 
             <Grid item xs={6}>
               <H6 mb={1}>{t('Tax')}</H6>
@@ -165,20 +180,7 @@ const AddModal = ({ open, onClose, edit, data }) => {
                 error={Boolean(errors.price && touched.price)} helperText={touched.price && errors.price} />
             </Grid>
 
-            {edit ?
-              <Grid item xs={12}>
-                <H6 mb={1}>{t('Organization')}</H6>
-                <DarkTextField disabled name="OrganizationId" value={values.OrganizationName} />
-              </Grid> :
-              <Grid item xs={12}>
-                <H6 mb={1}>{t('Organization')}</H6>
-                <StyledSelect fullWidth name="OrganizationId" value={values.OrganizationId} onChange={handleChange} input={<InputBase placeholder={t('Organization')} />} IconComponent={() => <KeyboardArrowDown fontSize="small" />}>
-                  {organizations && organizations.map(item => {
-                    return <StyledMenuItem key={item.id} value={item.id}>{t(item.name)}</StyledMenuItem>
-                  })}
-                </StyledSelect>
-              </Grid>
-            }
+            
 
             <Grid item xs={12}>
               <H6 mb={1}>{t('Add Picture')}</H6>
@@ -192,7 +194,6 @@ const AddModal = ({ open, onClose, edit, data }) => {
                 </IconButton>
               </label>
             </Grid>
-            a
           </Grid>
         </ScrollBar>
 
