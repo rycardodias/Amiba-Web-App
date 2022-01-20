@@ -45,16 +45,16 @@ const CartListItem = ({ item, removeItemList }) => {
     removeItemList(item.id)
   }
 
-  async function getImage(image) {
-    const res = await uploadFilesRequests.getFile(`1920x1080_${image}`)
-    console.log(res);
-  }
+  // async function getImage(image) {
+  //   const res = await uploadFilesRequests.getFile(``)
+  //   console.log(res);
+  // }
 
   const image = item.AnimalProduct ? item.AnimalProduct.Product.image : item.EggsBatchProduct.Product.image;
 
   return <StyledCard>
     <FlexBox alignItems="center">
-      <UkoAvatar src={getImage(image)} sx={{ width: 70, height: 70, borderRadius: "10%" }} />
+      <UkoAvatar src={`${process.env.REACT_APP_BACKEND_SERVER_URL}/uploadFiles/1920x1080_${image}`} sx={{ width: 70, height: 70, borderRadius: "10%" }} />
 
       <Box marginLeft={2}>
         <H3>{item.AnimalProduct ? item.AnimalProduct.Product.name : item.EggsBatchProduct.Product.name}</H3>
