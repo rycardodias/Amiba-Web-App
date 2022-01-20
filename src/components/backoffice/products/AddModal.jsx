@@ -69,8 +69,8 @@ const AddModal = ({ open, onClose, edit, data }) => {
         .then((response) => {
           console.log(response);
         })
-        .catch(error => console.error(error));
-        
+        .catch(error => console.error("falhou img", error));
+
       if (edit) {
         productsRequests.updateProduct(values.id, values.tax, values.name, values.description, values.price, values.image)
           .then(response => {
@@ -174,7 +174,7 @@ const AddModal = ({ open, onClose, edit, data }) => {
             <Grid item xs={12}>
               <H6 mb={1}>{t('Add Picture')}</H6>
               <label htmlFor="image">
-                <input value={values.image} onChange={handleChange} type="file" accept="image/*" id="image" style={{ display: "none" }} />
+                <input onChange={handleChange} type="file" accept="image/*" id="image" style={{ display: "none" }} />
                 <IconButton disableRipple component="span" sx={{ padding: 0, display: "block" }}>
                   <Box sx={{ minHeight: 40, display: "flex", borderRadius: "8px", alignItems: "center", justifyContent: "center", backgroundColor: "divider" }}>
                     <ImageUploadIcon sx={{ fontSize: 18, marginRight: 0.5, color: "text.disabled" }} />
