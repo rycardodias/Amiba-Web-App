@@ -42,7 +42,8 @@ const DashboardSideBar = ({ sideBarLocked, showMobileSideBar, closeMobileSideBar
   const downMd = useMediaQuery(theme => theme.breakpoints.down(1200));
 
   const handleActiveMainMenu = menuItem => async () => {
-    console.log("menuItem", menuItem.children);
+    let newData = ""
+
     setActive(menuItem.title);
 
     if (menuItem.children && menuItem.children.length > 0) {
@@ -50,12 +51,13 @@ const DashboardSideBar = ({ sideBarLocked, showMobileSideBar, closeMobileSideBar
       const res = await usersRequests.tokenPermission()
       if (res.error || res.data.error) return
 
-      const newData = menuItem.children.filter(item => {
-        // console.log(checkURLPermission(item.path, res.data.data));
+      newData = menuItem.children.filter(item => {
         if (checkURLPermission(item.path, res.data.data)) return item
-
       })
-      console.log('categoriasAux', res.data.data, newData);
+    }
+
+    if (newData.length > 0) {
+
 
       setCategoryMenus(newData);
       const matched = openSecondarySideBar && active === menuItem.title;
