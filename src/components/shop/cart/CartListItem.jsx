@@ -46,7 +46,7 @@ const CartListItem = ({ item, removeItemList }) => {
   }
 
   async function getImage(image) {
-    const res = await uploadFilesRequests.getFile(`16x9_${image}`)
+    const res = await uploadFilesRequests.getFile(`1920x1080_${image}`)
     console.log(res);
   }
 
