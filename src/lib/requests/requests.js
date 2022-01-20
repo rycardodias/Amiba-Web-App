@@ -27,9 +27,6 @@ const sendImageRequest = async (url, formData) => {
     headers: {
       'Content-Type': 'multipart/form-data'
     },
-    body: {
-      requiredSizes: ["1:1", "16:9"]
-    }
   });
 
   return response

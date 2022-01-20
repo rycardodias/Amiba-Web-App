@@ -18,10 +18,11 @@ const Cart = () => {
 
   async function fetchProducts() {
     const res = await cartsRequests.getCartByUserWithProduct()
-
     if (res.error) return
     if (res.data.error) return
     setdata(res.data.data)
+    console.log(res.data.data);
+
     setIsLoading(false)
   }
 

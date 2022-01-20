@@ -38,6 +38,19 @@ const AddModal = ({ open, onClose, edit, data }) => {
   };
 
   const [organizations, setorganizations] = useState([])
+  const [fileName, setfileName] = useState("");
+
+  const saveImage = async (e) => {
+    const { files } = e.target;
+    const data = new FormData();
+    data.append('file', files[0]);
+
+    const res = await uploadFilesRequests.createFile(data)
+
+    if (res.data.data) {
+      setfileName(res.data.data.fileName)
+    }
+  }
 
   async function initialData() {
     if (edit) return
@@ -64,15 +77,10 @@ const AddModal = ({ open, onClose, edit, data }) => {
 
   const { values, errors, handleChange, handleSubmit, touched } = useFormik({
     initialValues, validationSchema: fieldValidationSchema, onSubmit: values => {
-      console.log(values);
-      uploadFilesRequests.createFile(values.image)
-        .then((response) => {
-          console.log(response);
-        })
-        .catch(error => console.error("falhou img", error));
+
 
       if (edit) {
-        productsRequests.updateProduct(values.id, values.tax, values.name, values.description, values.price, values.image)
+        productsRequests.updateProduct(values.id, values.tax, values.name, values.description, values.price, fileName !== "" ? fileName : values.image)
           .then(response => {
             if (response.error || response.data.error) return toast.error(t("Error Updating Record"));;
             onClose(true);
@@ -80,7 +88,7 @@ const AddModal = ({ open, onClose, edit, data }) => {
           })
           .catch(error => console.log(error));
       } else {
-        productsRequests.createProduct(values.type, values.tax, values.name, values.description, values.price, values.unit, values.image, values.OrganizationId)
+        productsRequests.createProduct(values.type, values.tax, values.name, values.description, values.price, values.unit, fileName !== "" ? fileName : values.image, values.OrganizationId)
           .then(response => {
             if (response.error || response.data.error) return toast.error(t("Error Creating Record"));
 
@@ -93,11 +101,12 @@ const AddModal = ({ open, onClose, edit, data }) => {
   });
 
 
+
   return <Modal open={open} onClose={onClose}>
     <StyledModalCard>
       <H2 mb={2}>{edit ? `${t("Edit")} ${t("Product")}` : `${t("Add new")} ${t("Product")}`}</H2>
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} enctype="multipart/form-data">
         <ScrollBar style={{ maxHeight: 400 }}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
@@ -174,7 +183,7 @@ const AddModal = ({ open, onClose, edit, data }) => {
             <Grid item xs={12}>
               <H6 mb={1}>{t('Add Picture')}</H6>
               <label htmlFor="image">
-                <input onChange={handleChange} type="file" accept="image/*" id="image" style={{ display: "none" }} />
+                <input onChange={saveImage} type="file" accept="image/*" id="image" style={{ display: "none" }} />
                 <IconButton disableRipple component="span" sx={{ padding: 0, display: "block" }}>
                   <Box sx={{ minHeight: 40, display: "flex", borderRadius: "8px", alignItems: "center", justifyContent: "center", backgroundColor: "divider" }}>
                     <ImageUploadIcon sx={{ fontSize: 18, marginRight: 0.5, color: "text.disabled" }} />
@@ -183,7 +192,7 @@ const AddModal = ({ open, onClose, edit, data }) => {
                 </IconButton>
               </label>
             </Grid>
-
+            a
           </Grid>
         </ScrollBar>
 
