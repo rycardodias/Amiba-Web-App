@@ -44,9 +44,25 @@ const DashboardSideBar = ({ sideBarLocked, showMobileSideBar, closeMobileSideBar
   const [categoryMenus, setCategoryMenus] = useState([{ subTitle: "" }]);
   const downMd = useMediaQuery(theme => theme.breakpoints.down(1200));
 
+  const [permission, setpermission] = useState(["USER"]);
+  const [isLoading, setisLoading] = useState(true);
+
   // const sess = Cookies.get("express:sess")
   // const token = jwt.verify(sess, "MySecret")
   // const perms = token.permission
+
+  useEffect(() => {
+    async function getToken() {
+      const res = await usersRequests.tokenPermission()
+      if (res.error || res.data.error) return ["USER"]
+      // await settokenDone(true)
+      await setpermission(res.data.data)
+      await setisLoading(false)
+      return
+    }
+    getToken()
+  }, []);
+
 
   const handleActiveMainMenu = menuItem => async () => {
     let newData = ""
@@ -93,14 +109,13 @@ const DashboardSideBar = ({ sideBarLocked, showMobileSideBar, closeMobileSideBar
     closeMobileSideBar();
   }; // main menus content
 
-  const mainSideBarContent = <List sx={{ height: "100%" }}>
+  const mainSideBarContent = () => <List sx={{ height: "100%" }}>
     <StyledListItemButton disableRipple>
       <img src="/static/logo/logo.svg" alt="UKO Logo" width={31} />
     </StyledListItemButton>
-    {/* {console.log('Cookies.get()', sess, token, perms)} */}
     <ScrollBar style={{ maxHeight: "calc(100% - 50px)" }}>
-      {topMenuList.map((nav, index) => {
-        if (nav.title === "Backoffice" && !verifyPermission(["ADMIN"], ["ADMIN"])) return
+      {!isLoading && topMenuList.map((nav, index) => {
+        if (nav.title === "Backoffice" && !verifyPermission(permission, ["ADMIN"])) return
         return <Tooltip title={t(nav.title)} placement="right" key={index}>
           <StyledListItemButton disableRipple onClick={handleActiveMainMenu(nav)}>
             <nav.Icon sx={{ color: active === nav.title ? "primary.main" : "secondary.400" }} />
@@ -134,7 +149,7 @@ const DashboardSideBar = ({ sideBarLocked, showMobileSideBar, closeMobileSideBar
         "& .simplebar-track.simplebar-vertical": { width: 7 }, "& .simplebar-scrollbar:before": { background: theme => theme.palette.text.primary },
         transform: showMobileSideBar ? "translateX(0)" : "translateX(-100%)", transition: "transform 0.3s"
       }}>
-        {mainSideBarContent}
+        {mainSideBarContent()}
       </Box>
 
       {showMobileSideBar && <Box onClick={closeMobileSideBar} sx={{
@@ -152,7 +167,7 @@ const DashboardSideBar = ({ sideBarLocked, showMobileSideBar, closeMobileSideBar
   }
 
   return <Fragment>
-    <MainMenu>{mainSideBarContent}</MainMenu>
+    <MainMenu>{mainSideBarContent()}</MainMenu>
 
     <SecondarySideBar show={openSecondarySideBar}>
       {secondarySideBarContent}
