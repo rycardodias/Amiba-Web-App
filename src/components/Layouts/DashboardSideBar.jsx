@@ -41,6 +41,9 @@ const DashboardSideBar = ({ sideBarLocked, showMobileSideBar, closeMobileSideBar
   const [categoryMenus, setCategoryMenus] = useState([{ subTitle: "" }]);
   const downMd = useMediaQuery(theme => theme.breakpoints.down(1200));
 
+  const sess = Cookies.get("express:sess")
+  const { token } = sess
+
   const handleActiveMainMenu = menuItem => async () => {
     let newData = ""
 
@@ -90,7 +93,7 @@ const DashboardSideBar = ({ sideBarLocked, showMobileSideBar, closeMobileSideBar
     <StyledListItemButton disableRipple>
       <img src="/static/logo/logo.svg" alt="UKO Logo" width={31} />
     </StyledListItemButton>
-    {console.log('Cookies.get()', Cookies.get())}
+    {console.log('Cookies.get()', sess, token}
     <ScrollBar style={{ maxHeight: "calc(100% - 50px)" }}>
       {topMenuList.map((nav, index) => <Tooltip title={t(nav.title)} placement="right" key={index}>
         <StyledListItemButton disableRipple onClick={handleActiveMainMenu(nav)}>
