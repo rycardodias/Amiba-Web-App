@@ -93,7 +93,7 @@ const DashboardSideBar = ({ sideBarLocked, showMobileSideBar, closeMobileSideBar
     <StyledListItemButton disableRipple>
       <img src="/static/logo/logo.svg" alt="UKO Logo" width={31} />
     </StyledListItemButton>
-    {console.log('Cookies.get()', sess, token}
+    {console.log('Cookies.get()', sess, token)}
     <ScrollBar style={{ maxHeight: "calc(100% - 50px)" }}>
       {topMenuList.map((nav, index) => <Tooltip title={t(nav.title)} placement="right" key={index}>
         <StyledListItemButton disableRipple onClick={handleActiveMainMenu(nav)}>
