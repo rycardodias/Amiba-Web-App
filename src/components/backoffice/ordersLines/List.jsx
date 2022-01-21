@@ -14,8 +14,8 @@ import * as orderLinesRequests from 'lib/requests/orderLinesRequests'
 
 export const List = () => {
     const { t } = useTranslation();
-    const tableName = t('Explorations')
-    const tableSingleName = t('Exploration')
+    const tableName = t('Order Lines')
+    const tableSingleName = t('Order Line')
     useTitle(tableName);
 
     const [tableData, setTableData] = useState([]);
