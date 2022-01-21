@@ -92,7 +92,7 @@ const Payment = () => {
         </Card>
       </Grid>
       <Grid item lg={4} md={5} sm={5} xs={12}>
-        <OrderSummery btnText={t("Order")} data={data} />
+        <OrderSummery btnText="Order" data={data} />
       </Grid>
     </Grid>
   </Box>;

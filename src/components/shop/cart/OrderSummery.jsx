@@ -39,8 +39,8 @@ const OrderSummery = ({ btnText, data }) => {
         </H3>
       </FlexBox>
 
-      <Button variant="contained" fullWidth onClick={() => navigate("/shop/payment")}>
-        {btnText || t("Proceed to payment")}
+      <Button variant="contained" fullWidth onClick={() => btnText === "Order" ? navigate("/shop/payment-success") : navigate("/shop/payment")}>
+        {t(btnText || "Proceed to payment")}
       </Button>
     </Box>
 

@@ -105,15 +105,6 @@ const routes = [{
     //   path: 'account-settings',
     //   element: <AccountSettings />
     // }, {
-    //   path: 'cart',
-    //   element: <Cart />
-    // }, {
-    //   path: 'payment',
-    //   element: <Payment />
-    // }, {
-    //   path: 'payment-success',
-    //   element: <PaymentSuccess />
-    // }, {
     //   path: 'about',
     //   element: <AboutPage />
     // }, {
@@ -134,6 +125,7 @@ const routes = [{
     { path: 'list', element: <Shop /> },
     { path: 'cart', element: <Cart /> },
     { path: 'payment', element: <Payment /> },
+    { path: 'payment-success', element: <PaymentSuccess /> },
   ]
 }, {
   path: 'account',
