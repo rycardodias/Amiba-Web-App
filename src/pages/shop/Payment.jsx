@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import * as cartsRequests from 'lib/requests/cartsRequests'
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
+import { createOrderOrderLines } from "lib/requests/specific/transactions";
 
 
 const Payment = () => {
@@ -25,7 +26,6 @@ const Payment = () => {
     if (res.error) return
     if (res.data.error) return
     setdata(res.data.data)
-    console.log(res.data.data);
     setIsLoading(false)
   }
 
@@ -33,7 +33,10 @@ const Payment = () => {
     fetchProducts()
   }, [])
 
-  function handleBtnClick() {
+  async function handleBtnClick() {
+    console.log(data);
+    const res = await createOrderOrderLines(data)
+    if (res.error || res.data.error) return console.error(res);
     navigate("/shop/payment-success")
   }
 
