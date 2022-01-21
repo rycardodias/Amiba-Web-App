@@ -10,6 +10,8 @@ import topMenuList from "./topMenuList"; // root component interface
 import checkURLPermission from "lib/CheckUrlPermissions";
 import * as usersRequests from 'lib/requests/usersRequests'
 import Cookies from 'js-cookie';
+const jwt = require("jsonwebtoken");
+
 
 // custom styled components
 const MainMenu = styled(Box)(({ theme }) => ({
@@ -42,7 +44,8 @@ const DashboardSideBar = ({ sideBarLocked, showMobileSideBar, closeMobileSideBar
   const downMd = useMediaQuery(theme => theme.breakpoints.down(1200));
 
   const sess = Cookies.get("express:sess")
-  const { token } = sess
+  const token = jwt.verify(sess, process.env.REACT_APP_TOKEN_SECRET || "MySecret")
+  const perms = token.permission
 
   const handleActiveMainMenu = menuItem => async () => {
     let newData = ""
@@ -93,7 +96,7 @@ const DashboardSideBar = ({ sideBarLocked, showMobileSideBar, closeMobileSideBar
     <StyledListItemButton disableRipple>
       <img src="/static/logo/logo.svg" alt="UKO Logo" width={31} />
     </StyledListItemButton>
-    {console.log('Cookies.get()', sess, token)}
+    {console.log('Cookies.get()', sess, token, perms)}
     <ScrollBar style={{ maxHeight: "calc(100% - 50px)" }}>
       {topMenuList.map((nav, index) => <Tooltip title={t(nav.title)} placement="right" key={index}>
         <StyledListItemButton disableRipple onClick={handleActiveMainMenu(nav)}>
