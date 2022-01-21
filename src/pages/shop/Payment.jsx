@@ -33,6 +33,10 @@ const Payment = () => {
     fetchProducts()
   }, [])
 
+  function handleBtnClick() {
+    navigate("/shop/payment-success")
+  }
+
   return <Box pt={2} pb={4}>
     <Grid container spacing={3}>
       <Grid item lg={8} md={7} sm={7} xs={12}>
@@ -92,7 +96,7 @@ const Payment = () => {
         </Card>
       </Grid>
       <Grid item lg={4} md={5} sm={5} xs={12}>
-        <OrderSummery btnText="Order" data={data} />
+        <OrderSummery btnText="Order" data={data} btnClick={handleBtnClick} />
       </Grid>
     </Grid>
   </Box>;

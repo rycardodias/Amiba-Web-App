@@ -3,11 +3,11 @@ import FlexBox from "components/FlexBox";
 import { H3, H4 } from "components/Typography";
 import { useTranslation } from "react-i18next"; // component props interface
 import { calcTotalPrice } from "./priceCalculations";
-import { useNavigate } from "react-router";
+// import { useNavigate } from "react-router";
 
-const OrderSummery = ({ btnText, data }) => {
+const OrderSummery = ({ btnText, data, btnClick }) => {
   const { t } = useTranslation();
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
 
   return <Card>
     <H3 paddingX={3} paddingY={2}>
@@ -39,7 +39,8 @@ const OrderSummery = ({ btnText, data }) => {
         </H3>
       </FlexBox>
 
-      <Button variant="contained" fullWidth onClick={() => btnText === "Order" ? navigate("/shop/payment-success") : navigate("/shop/payment")}>
+      <Button variant="contained" fullWidth onClick={btnClick}>
+        {/* () => btnText === "Order" ? navigate("/shop/payment-success") : navigate("/shop/payment")}> */}
         {t(btnText || "Proceed to payment")}
       </Button>
     </Box>
