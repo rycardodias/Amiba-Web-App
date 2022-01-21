@@ -65,12 +65,14 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     const response = await usersRequests.login(email, password)
-    if (response.error || response.data.error) return response
-    console.log(response);
+    if (response.error || response.data.error) return 
+
+    const info = await usersRequests.getUserByToken()
+
     dispatch({
       type: "LOGIN",
       payload: {
-        user: response.data.data
+        user: info.data.data
       }
     });
     return response
@@ -104,7 +106,7 @@ export const AuthProvider = ({ children }) => {
     (async () => {
       try {
         const validToken = await usersRequests.validateToken()
-        
+
         if (validToken.data.data) {
           const response = await usersRequests.getUserByToken() //@ts-ignore
           dispatch({
