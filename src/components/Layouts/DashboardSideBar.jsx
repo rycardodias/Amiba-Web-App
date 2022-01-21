@@ -9,7 +9,7 @@ import ScrollBar from "simplebar-react";
 import topMenuList from "./topMenuList"; // root component interface
 import checkURLPermission from "lib/CheckUrlPermissions";
 import * as usersRequests from 'lib/requests/usersRequests'
-
+import Cookies from 'js-cookie';
 
 // custom styled components
 const MainMenu = styled(Box)(({ theme }) => ({
@@ -90,7 +90,7 @@ const DashboardSideBar = ({ sideBarLocked, showMobileSideBar, closeMobileSideBar
     <StyledListItemButton disableRipple>
       <img src="/static/logo/logo.svg" alt="UKO Logo" width={31} />
     </StyledListItemButton>
-
+    {console.log('Cookies.get()', Cookies.get())}
     <ScrollBar style={{ maxHeight: "calc(100% - 50px)" }}>
       {topMenuList.map((nav, index) => <Tooltip title={t(nav.title)} placement="right" key={index}>
         <StyledListItemButton disableRipple onClick={handleActiveMainMenu(nav)}>
