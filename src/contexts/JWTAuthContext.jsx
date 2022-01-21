@@ -103,9 +103,9 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     (async () => {
       try {
-        const validToken = (await usersRequests.validateToken()).data.data
-
-        if (validToken) {
+        const validToken = await usersRequests.validateToken()
+        
+        if (validToken.data.data) {
           const response = await usersRequests.getUserByToken() //@ts-ignore
           dispatch({
             type: "INIT",

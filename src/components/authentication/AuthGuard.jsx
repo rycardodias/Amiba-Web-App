@@ -21,18 +21,6 @@ const AuthGuard = ({ children }) => {
     return <Login />;
   }
 
-  // const checkURLPermission = (url, permission) => {
-  //   let permissionValid = false
-
-  //   routes.filter(u => u.path === url)
-  //     .map((value) => {
-  //       if (verifyPermission(permission, value.permissions)) {
-  //         permissionValid = true
-  //       }
-  //     })
-
-  //   return permissionValid
-  // }
 
   usersRequests.tokenPermission()
     .then(response => {
