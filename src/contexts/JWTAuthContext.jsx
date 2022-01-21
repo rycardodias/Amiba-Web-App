@@ -66,7 +66,7 @@ export const AuthProvider = ({ children }) => {
   const login = async (email, password) => {
     const response = await usersRequests.login(email, password)
     if (response.error || response.data.error) return response
-
+    console.log(response);
     dispatch({
       type: "LOGIN",
       payload: {
