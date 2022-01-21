@@ -71,11 +71,8 @@ const DashboardSideBar = ({ sideBarLocked, showMobileSideBar, closeMobileSideBar
 
     if (menuItem.children && menuItem.children.length > 0) {
 
-      const res = await usersRequests.tokenPermission()
-      if (res.error || res.data.error) return
-
       newData = menuItem.children.filter(item => {
-        if (checkURLPermission(item.path, res.data.data)) return item
+        if (checkURLPermission(item.path, permission)) return item
       })
     }
 
