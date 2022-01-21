@@ -44,7 +44,7 @@ const DashboardSideBar = ({ sideBarLocked, showMobileSideBar, closeMobileSideBar
   const downMd = useMediaQuery(theme => theme.breakpoints.down(1200));
 
   const sess = Cookies.get("express:sess")
-  const token = jwt.verify(sess, process.env.REACT_APP_TOKEN_SECRET || "MySecret")
+  const token = jwt.verify(sess, "MySecret")
   const perms = token.permission
 
   const handleActiveMainMenu = menuItem => async () => {
