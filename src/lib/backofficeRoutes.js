@@ -35,6 +35,8 @@ const routes = [
     { path: '/shop/list', permissions: ['ADMIN', 'USER'] },
     { path: '/shop/cart', permissions: ['ADMIN', 'USER'] },
     { path: '/shop/payment', permissions: ['ADMIN', 'USER'] },
+    { path: '/shop/payment-success', permissions: ['ADMIN', 'USER'] },
+
 
 
     // ### ACCOUNT ###
