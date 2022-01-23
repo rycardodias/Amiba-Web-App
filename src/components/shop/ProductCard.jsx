@@ -13,7 +13,7 @@ const ProductCard = (props) => {
   const { t } = useTranslation()
 
   const addToCart = async () => {
-    const res = await cartsRequests.createCart(props.product.id, props.product.type === "EGGS" ? 12 : 1)
+    const res = await cartsRequests.createCart(props.product.id, 1)
     if (res.error || res.data.error) return toast.error(t("Fail to add product to cart!"));
     // const newItemsResult = await addItem(props.product, 1)
     // if (newItemsResult.error || newItemsResult.data.error) return toast.error(t("Fail to add product to cart!"));
