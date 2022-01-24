@@ -50,20 +50,22 @@ const AccountSettings = () => {
       </Grid>
 
       <Grid item md={9} xs={12}>
-        {active === convertToSlug(tabList[0].name) && <UserInfo />}
-        {active === convertToSlug(tabList[1].name) && <Password />}
+        {/* {active === convertToSlug(tabList[0].name) && <UserInfo />} */}
+        {active === convertToSlug(tabList[0].name) && <Password />}
       </Grid>
     </Grid>
   </Box>;
 };
 
-const tabList = [{
-  id: 1,
-  name: "User Info",
-  Icon: ProfileIcon
-}, {
-  id: 2,
-  name: "Password",
-  Icon: PasswordIcon
-}];
+const tabList = [
+  // {
+  //   id: 1,
+  //   name: "User Info",
+  //   Icon: ProfileIcon
+  // },
+  {
+    id: 2,
+    name: "Password",
+    Icon: PasswordIcon
+  }];
 export default AccountSettings;
