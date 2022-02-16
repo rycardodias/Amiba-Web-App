@@ -23,6 +23,7 @@ const AddModal = ({ open, onClose, edit, data }) => {
   const initialValues = {
     id: data?.id || "",
     name: data?.name || "",
+    marker: data?.marker || "",
     type: data?.type || "",
     OrganizationId: data?.OrganizationId || "",
     address: data?.address || "",
@@ -54,6 +55,7 @@ const AddModal = ({ open, onClose, edit, data }) => {
 
   const fieldValidationSchema = Yup.object().shape({
     name: Yup.string().min(3, t("Too Short")).required(`${t('Name')} ${t('is required!')}`),
+    marker: Yup.string().min(5, t("Too Short")).max(5, t("Too Long")).required(`${t('Marker')} ${t('is required!')}`),
     type: Yup.string().required(`${t('Type')} ${t('is required!')}`),
     OrganizationId: Yup.string().required(`${t('Organization')} ${t('is required!')}`),
     address: Yup.string().min(6, t("Too Short")).required(`${t('Name')} ${t('is required!')}`),
@@ -65,7 +67,7 @@ const AddModal = ({ open, onClose, edit, data }) => {
   const { values, errors, handleChange, handleSubmit, touched } = useFormik({
     initialValues, validationSchema: fieldValidationSchema, onSubmit: values => {
       if (edit) {
-        explorationsRequests.updateExploration(values.id, values.type, values.name, values.address, values.locale,
+        explorationsRequests.updateExploration(values.id, values.type, values.name, values.marker, values.address, values.locale,
           values.zipcode, values.fiscalNumber, values.telephone, values.mobilePhone, values.gpsLocalization)
           .then(response => {
             if (response.error || response.data.error) return toast.error(t("Error Updating Record"));;
@@ -74,7 +76,7 @@ const AddModal = ({ open, onClose, edit, data }) => {
           })
           .catch(error => console.log(error));
       } else {
-        explorationsRequests.createExploration(values.OrganizationId, values.type, values.name, values.address, values.locale,
+        explorationsRequests.createExploration(values.OrganizationId, values.type, values.name, values.marker, values.address, values.locale,
           values.zipcode, values.fiscalNumber, values.telephone, values.mobilePhone, values.gpsLocalization)
           .then(response => {
             if (response.error || response.data.error) return toast.error(t("Error Creating Record"));
@@ -98,6 +100,10 @@ const AddModal = ({ open, onClose, edit, data }) => {
             <Grid item xs={12}>
               <H6 mb={1}>{t('Name')}</H6>
               <DarkTextField name="name" placeholder={t('Name')} onChange={handleChange} value={values.name} error={Boolean(errors.name && touched.name)} helperText={touched.name && errors.name} />
+            </Grid>
+            <Grid item xs={12}>
+              <H6 mb={1}>{t('Marker')}</H6>
+              <DarkTextField name="marker" placeholder={t('Marker')} onChange={handleChange} value={values.marker} error={Boolean(errors.marker && touched.marker)} helperText={touched.marker && errors.marker} />
             </Grid>
 
             <Grid item xs={6}>

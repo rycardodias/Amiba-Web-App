@@ -141,6 +141,7 @@ const i18nPT = {
     "I agree to terms & conditions": "Aceito os termos e condições",
     "The page you requested could not be found.": "A página que procura não se encontra disponivel",
     "Back to Home": "Voltar ao Início",
+    "Marker": "Marcador"
 }
 
 export { i18nPT }
