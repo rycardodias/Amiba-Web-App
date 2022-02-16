@@ -49,7 +49,7 @@ const DashboardSideBar = ({ sideBarLocked, showMobileSideBar, closeMobileSideBar
     async function getToken() {
       const res = await usersRequests.tokenPermission()
       if (res.error || res.data.error) return ["USER"]
-      
+
       await setpermission(res.data.data)
       await setisLoading(false)
       return
@@ -102,11 +102,11 @@ const DashboardSideBar = ({ sideBarLocked, showMobileSideBar, closeMobileSideBar
 
   const mainSideBarContent = () => <List sx={{ height: "100%" }}>
     <StyledListItemButton disableRipple>
-      <img src="/static/logo/logo.svg" alt="UKO Logo" width={31} />
+      <img src="/static/logo/logo.svg" alt="Amiba Logo" width={31} />
     </StyledListItemButton>
     <ScrollBar style={{ maxHeight: "calc(100% - 50px)" }}>
       {!isLoading && topMenuList.map((nav, index) => {
-        if (nav.title === "Backoffice" && !verifyPermission(permission, ["ADMIN"])) return
+        if (nav.title === "Backoffice" && !verifyPermission(permission, ['ADMIN', 'AMIBA', 'PRODUCTOR'])) return
         return <Tooltip title={t(nav.title)} placement="right" key={index}>
           <StyledListItemButton disableRipple onClick={handleActiveMainMenu(nav)}>
             <nav.Icon sx={{ color: active === nav.title ? "primary.main" : "secondary.400" }} />
