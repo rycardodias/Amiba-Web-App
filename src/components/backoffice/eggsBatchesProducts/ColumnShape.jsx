@@ -10,7 +10,7 @@ const columnShape = [
   {
     minWidth: 150,
     Header: () => i18n.t("Eggs Batch"),
-    accessor: "EggsBatchId",
+    accessor: "EggsBatch.name",
   },
   {
     Header: () => i18n.t("Quantity"),

@@ -1,10 +1,16 @@
 const userPermissions = [
-    'ADMIN',
-    'AMIBA',
-    'PRODUCTOR',
-    'RESTAURANT',
-    'CALIBRATOR',
-    'USER',
+    {
+        id: 'ADMIN', name: 'Administrator'
+    },
+    {
+        id: 'AMIBA', name: 'Amiba'
+    },
+    {
+        id: 'PRODUCTOR', name: 'Productor'
+    },
+    {
+        id: 'USER', name: 'User'
+    },
 ]
 
 export { userPermissions }

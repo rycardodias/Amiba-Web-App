@@ -17,6 +17,10 @@ const updateUser = async (id, name, email, password, address, locale, zipcode, f
     return await sendRequest('PUT', 'users/update', { id, name, email, password, address, locale, zipcode, fiscalNumber, telephone, mobilePhone })
 };
 
+const updateUserPermissions = async (id, permission) => {
+    return await sendRequest('PUT', 'users/updatePermission', { id, permission })
+};
+
 const deleteUser = async (id) => {
     return await sendRequest('DELETE', 'users/delete', { id })
 }
@@ -50,4 +54,4 @@ const updatePassword = async (oldPassword, newPassword) => {
     return await sendRequest('PUT', 'users/update/password', { oldPassword, newPassword });
 };
 
-export { getUsers, getUserId, createUser, updateUser, deleteUser, login, logout, updateAddress, updatePassword, getUserByToken, validateToken, tokenPermission }
+export { getUsers, getUserId, createUser, updateUser, updateUserPermissions, deleteUser, login, logout, updateAddress, updatePassword, getUserByToken, validateToken, tokenPermission }

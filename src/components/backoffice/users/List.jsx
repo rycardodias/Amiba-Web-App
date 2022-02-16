@@ -10,7 +10,7 @@ import { ButtonWrapper } from '../styledComponents/ButtonWrapper';
 import toast from "react-hot-toast";
 import DataTable from "components/backoffice/utils/DataTable";
 import columnShape from "components/backoffice/users/ColumnShape";
-// import AddModal from "components/backoffice/users/AddModal";
+import AddModal from "components/backoffice/users/AddModal";
 import * as usersRequests from 'lib/requests/usersRequests'
 
 export const List = () => {
@@ -23,7 +23,7 @@ export const List = () => {
     const [selectedRows, setSelectedRows] = useState([]);
     const [clearFilter, setClearFilter] = useState("");
     const [hasFilter, setHasFilter] = useState("");
-    // const [openModal, setOpenModal] = useState(false);
+    const [openModal, setOpenModal] = useState(false);
 
     function getInitialData() {
         usersRequests.getUsers()
@@ -63,7 +63,7 @@ export const List = () => {
             <FlexBox flexWrap="wrap" alignItems="center" justifyContent="space-between">
                 {/* <SearchInput placeholder={`${t('Find')} ${tableSingleName}`} /> */}
                 <div></div>
-{/* 
+
                 <ButtonWrapper alignItems="center">
                     {!!hasFilter && <FlexBox alignItems="center" mr={2}>
                         <Button size="small" color="error" variant="contained" sx={{ color: "common.white" }} onClick={handleClearFilter}>
@@ -71,7 +71,7 @@ export const List = () => {
                         </Button>
                     </FlexBox>}
 
-                    {selectedRows.length > 0 &&
+                    {/* {selectedRows.length > 0 &&
                         (selectedRows.length === 1 ? (
                             <FlexBox alignItems="center" mr={2}>
                                 <H6 mr={1}>{selectedRows.length} {t('Selected')}</H6>
@@ -87,26 +87,26 @@ export const List = () => {
                                     </Button>
                                 </>)
                         )
-                    }
+                    } */}
 
                     {(selectedRows.length === 1) &&
                         <Button size="small" color="warning" variant="contained" endIcon={<Edit />} onClick={() => setOpenModal(true)} sx={{ color: "common.white" }}>
                             {t('Edit Selected')}
                         </Button>
                     }
-                    {(selectedRows.length === 0) && <Button variant="contained" size="small" endIcon={<Add />} onClick={() => setOpenModal(true)}>
+                    {/* {(selectedRows.length === 0) && <Button variant="contained" size="small" endIcon={<Add />} onClick={() => setOpenModal(true)}>
                         {`${t('Add')} ${t(tableSingleName)}`}
                     </Button>
-                    }
+                    } */}
 
-                </ButtonWrapper> */}
+                </ButtonWrapper>
             </FlexBox >
 
-            {/* {openModal && <AddModal open={openModal}
+            {openModal && <AddModal open={openModal}
                 edit={selectedRows.length === 1}
                 data={selectedRows.length === 1 && selectedRows[0].original}
                 onClose={(newRecord) => { setOpenModal(false); newRecord === true && getInitialData() }}
-            />} */}
+            />}
 
             <Card sx={{ marginTop: 3 }}>
                 <DataTable data={tableData}
