@@ -40,11 +40,12 @@ const columnShape = [
       return <CommonCell title={zipcode} body={locale} />;
     }
   },
-  {
-    minWidth: 170,
-    Header: () => i18n.t("Address"),
-    accessor: "address",
-  }];
+  // {
+  //   minWidth: 170,
+  //   Header: () => i18n.t("Address"),
+  //   accessor: "address",
+  // }
+];
 
 
 export default columnShape;

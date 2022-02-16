@@ -48,8 +48,8 @@ const index = [
       path: "/backoffice/eggsBatches",
       subCategories: [
         { name: "Eggs Batches", path: "/backoffice/eggsBatches" },
-        { name: "Eggs Batch/Product", path: "/backoffice/eggsBatches/EggsBatchesProducts" },
-        { name: "Eggs Batches Lines", path: "/backoffice/eggsBatches/EggsBatchesLines" },
+        { name: "Eggs Batch/Product", path: "/backoffice/eggsBatches/eggsBatchesProducts" },
+        { name: "Eggs Batches Lines", path: "/backoffice/eggsBatches/eggsBatchesLines" },
       ]
     },
 

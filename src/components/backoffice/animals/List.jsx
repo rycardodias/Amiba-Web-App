@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import useTitle from "hooks/useTitle";
 import { useTranslation } from "react-i18next";
 import { Add, Edit, Delete } from "@mui/icons-material";
-import { Box, Button, Card, styled } from "@mui/material";
+import { Box, Button, Card } from "@mui/material";
 import { H6 } from "components/Typography";
 import toast from "react-hot-toast";
 import FlexBox from "components/FlexBox";

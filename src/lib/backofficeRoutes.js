@@ -9,38 +9,35 @@ const verifyPermission = (perm1, perm2) => {
     return false
 }
 
-
 const routes = [
     {
-        path: '/backoffice', permissions: ['ADMIN',]
+        path: '/backoffice', permissions: ['ADMIN', 'AMIBA']
     },
-    { path: '/backoffice/organizations', permissions: ['ADMIN',] },
-    { path: '/backoffice/explorations', permissions: ['ADMIN',] },
-    { path: '/backoffice/explorations/certifications', permissions: ['ADMIN',] },
+    { path: '/backoffice/organizations', permissions: ['ADMIN', 'AMIBA'] },
+    { path: '/backoffice/explorations', permissions: ['ADMIN', 'AMIBA',] },
+    { path: '/backoffice/explorations/certifications', permissions: ['ADMIN', 'AMIBA',] },
     { path: '/backoffice/users', permissions: ['ADMIN',] },
-    { path: '/backoffice/restaurants', permissions: ['ADMIN',] },
-    { path: '/backoffice/restaurants/menus', permissions: ['ADMIN',] },
-    { path: '/backoffice/animals', permissions: ['ADMIN',] },
-    { path: '/backoffice/animals/animalProducts', permissions: ['ADMIN',] },
-    { path: '/backoffice/eggsBatches', permissions: ['ADMIN',] },
-    { path: '/backoffice/eggsBatches/EggsBatchesProducts', permissions: ['ADMIN',] },
-    { path: '/backoffice/eggsBatches/eggsBatchesLines', permissions: ['ADMIN',] },
-    { path: '/backoffice/orders', permissions: ['ADMIN',] },
-    { path: '/backoffice/orders/ordersLines', permissions: ['ADMIN',] },
-    { path: '/backoffice/orders/ordersHistory', permissions: ['ADMIN',] },
-    { path: '/backoffice/products', permissions: ['ADMIN',] },
+    // { path: '/backoffice/restaurants', permissions: ['ADMIN',] },
+    // { path: '/backoffice/restaurants/menus', permissions: ['ADMIN',] },
+    { path: '/backoffice/animals', permissions: ['ADMIN', 'AMIBA', 'PRODUCTOR',] },
+    { path: '/backoffice/animals/animalProducts', permissions: ['ADMIN', 'AMIBA', 'PRODUCTOR',] },
+    { path: '/backoffice/eggsBatches', permissions: ['ADMIN', 'AMIBA', 'PRODUCTOR',] },
+    { path: '/backoffice/eggsBatches/eggsBatchesProducts', permissions: ['ADMIN', 'AMIBA', 'PRODUCTOR',] },
+    { path: '/backoffice/eggsBatches/eggsBatchesLines', permissions: ['ADMIN', 'AMIBA', 'PRODUCTOR',] },
+    { path: '/backoffice/orders', permissions: ['ADMIN', 'AMIBA', 'PRODUCTOR',] },
+    { path: '/backoffice/orders/ordersLines', permissions: ['ADMIN', 'AMIBA', 'PRODUCTOR',] },
+    { path: '/backoffice/orders/ordersHistory', permissions: ['ADMIN', 'AMIBA', 'PRODUCTOR',] },
+    { path: '/backoffice/products', permissions: ['ADMIN', 'AMIBA', 'PRODUCTOR',] },
 
     // ### SHOP ###
-    { path: '/shop', permissions: ['ADMIN', 'USER'] },
-    { path: '/shop/list', permissions: ['ADMIN', 'USER'] },
-    { path: '/shop/cart', permissions: ['ADMIN', 'USER'] },
-    { path: '/shop/payment', permissions: ['ADMIN', 'USER'] },
-    { path: '/shop/payment-success', permissions: ['ADMIN', 'USER'] },
-
-
+    { path: '/shop', permissions: ['ADMIN', 'AMIBA', 'PRODUCTOR', 'USER'] },
+    { path: '/shop/list', permissions: ['ADMIN', 'AMIBA', 'PRODUCTOR', 'USER'] },
+    { path: '/shop/cart', permissions: ['ADMIN', 'AMIBA', 'PRODUCTOR', 'USER'] },
+    { path: '/shop/payment', permissions: ['ADMIN', 'AMIBA', 'PRODUCTOR', 'USER'] },
+    { path: '/shop/payment-success', permissions: ['ADMIN', 'AMIBA', 'PRODUCTOR', 'USER'] },
 
     // ### ACCOUNT ###
-    { path: '/account/account-settings', permissions: ['ADMIN', 'USER',] },
+    { path: '/account/account-settings', permissions: ['ADMIN', 'AMIBA', 'PRODUCTOR', 'USER',] },
 
 ]
 

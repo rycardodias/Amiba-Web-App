@@ -16,7 +16,7 @@ import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 import { StyledModalCard, StyledMenuItem, StyledSelect } from 'components/backoffice/styledComponents/AddModalStyles'
-import { genders, productTypes, races } from "lib/values/types";
+import { productTypes, races } from "lib/values/types";
 
 
 const AddModal = ({ open, onClose, edit, data }) => {
@@ -25,7 +25,6 @@ const AddModal = ({ open, onClose, edit, data }) => {
   const initialValues = {
     id: data?.id || "",
     quantity: data?.quantity || "",
-    weight: data?.weight || "",
     AnimalId: data?.AnimalId || "",
     ProductId: data?.ProductId || "",
     ProductName: data?.Product?.name || ""
@@ -34,8 +33,6 @@ const AddModal = ({ open, onClose, edit, data }) => {
   const [animals, setanimals] = useState([])
   const [products, setproducts] = useState([])
   const [explorations, setexplorations] = useState([])
-  // const [enableWeight, setenableWeight] = useState(false)
-  // const [enableQuantity, setenableQuantity] = useState(false)
 
 
 
@@ -74,15 +71,6 @@ const AddModal = ({ open, onClose, edit, data }) => {
       setproducts(res2.data.data)
     }
   }
-
-  // function handleWeight(e) {
-  //   handleChange(e)
-  //   const product = products.find(product => product.id === e.target.value)
-
-  //   product && product.unit === 'KG' ? setenableWeight(true) : setenableWeight(false)
-  //   product && product.unit === 'KG' ? setenableQuantity(false) : setenableQuantity(true)
-  // }
-
   const fieldValidationSchema = Yup.object().shape({
     quantity: Yup.string().required(`${t('Quantity')} ${t('is required!')}`),
     AnimalId: Yup.string().required(`${t('Animal')} ${t('is required!')}`),
@@ -166,15 +154,6 @@ const AddModal = ({ open, onClose, edit, data }) => {
               <DarkTextField name="quantity" placeholder={t('Quantity')} onChange={handleChange} value={values.quantity}
                 error={Boolean(errors.quantity && touched.quantity)} helperText={touched.quantity && errors.quantity} />
             </Grid>
-            {/* } */}
-
-            {/* {(enableWeight || data?.weight) &&
-              <Grid item xs={6}>
-                <H6 mb={1}>{t('Weight')}</H6>
-                <DarkTextField name="weight" placeholder={t('Weight')} onChange={handleChange} value={values.weight}
-                  error={Boolean(errors.weight && touched.weight)} helperText={touched.weight && errors.weight} />
-              </Grid>
-            } */}
 
           </Grid>
         </ScrollBar>

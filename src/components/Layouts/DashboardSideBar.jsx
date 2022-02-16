@@ -9,9 +9,7 @@ import ScrollBar from "simplebar-react";
 import topMenuList from "./topMenuList"; // root component interface
 import checkURLPermission from "lib/CheckUrlPermissions";
 import * as usersRequests from 'lib/requests/usersRequests'
-import Cookies from 'js-cookie';
 import { verifyPermission } from "lib/backofficeRoutes";
-const jwt = require("jsonwebtoken");
 
 
 // custom styled components
@@ -47,15 +45,11 @@ const DashboardSideBar = ({ sideBarLocked, showMobileSideBar, closeMobileSideBar
   const [permission, setpermission] = useState(["USER"]);
   const [isLoading, setisLoading] = useState(true);
 
-  // const sess = Cookies.get("express:sess")
-  // const token = jwt.verify(sess, "MySecret")
-  // const perms = token.permission
-
   useEffect(() => {
     async function getToken() {
       const res = await usersRequests.tokenPermission()
       if (res.error || res.data.error) return ["USER"]
-      // await settokenDone(true)
+      
       await setpermission(res.data.data)
       await setisLoading(false)
       return

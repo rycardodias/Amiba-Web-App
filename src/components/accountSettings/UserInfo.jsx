@@ -1,15 +1,14 @@
-import { CameraAlt, Clear, Facebook, Instagram, SportsBasketball, Twitter } from "@mui/icons-material";
-import { Autocomplete, Box, Button, Card, Divider, Grid, IconButton } from "@mui/material";
+import { CameraAlt, Facebook, Instagram, SportsBasketball, Twitter } from "@mui/icons-material";
+import { Box, Button, Card, Divider, Grid, IconButton } from "@mui/material";
 import FlexBox from "components/FlexBox";
 import LightTextField from "components/LightTextField";
 import { H5, Tiny } from "components/Typography";
 import UkoAvatar from "components/UkoAvatar";
 import { useFormik } from "formik";
 import useAuth from "hooks/useAuth";
-import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import * as Yup from "yup";
-import { StyledBadge, StyledChip, StyledInput } from "./StyledComponent";
+import { StyledBadge, StyledInput } from "./StyledComponent";
 
 const UserInfo = () => {
   const { user } = useAuth();
