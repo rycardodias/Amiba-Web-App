@@ -72,7 +72,7 @@ const AddModal = ({ open, onClose, edit, data }) => {
     name: Yup.string().required(`${t('Name')} ${t('is required!')}`),
     price: Yup.string().required(`${t('Price')} ${t('is required!')}`),
     // unit: Yup.string().required(`${t('Unit')} ${t('is required!')}`),
-    OrganizationId: Yup.string().required(`${t('Organization')} ${t('is required!')}`),
+    OrganizationId: Yup.string().required(`${t('Productor')} ${t('is required!')}`),
   });
 
   const { values, errors, handleChange, handleSubmit, touched } = useFormik({
@@ -122,12 +122,12 @@ const AddModal = ({ open, onClose, edit, data }) => {
 
             {edit ?
               <Grid item xs={6}>
-                <H6 mb={1}>{t('Organization')}</H6>
+                <H6 mb={1}>{t('Productor')}</H6>
                 <DarkTextField disabled name="OrganizationId" value={values.OrganizationName} />
               </Grid> :
               <Grid item xs={6}>
-                <H6 mb={1}>{t('Organization')}</H6>
-                <StyledSelect fullWidth name="OrganizationId" value={values.OrganizationId} onChange={handleChange} input={<InputBase placeholder={t('Organization')} />} IconComponent={() => <KeyboardArrowDown fontSize="small" />}>
+                <H6 mb={1}>{t('Productor')}</H6>
+                <StyledSelect fullWidth name="OrganizationId" value={values.OrganizationId} onChange={handleChange} input={<InputBase placeholder={t('Productor')} />} IconComponent={() => <KeyboardArrowDown fontSize="small" />}>
                   {organizations && organizations.map(item => {
                     return <StyledMenuItem key={item.id} value={item.id}>{t(item.name)}</StyledMenuItem>
                   })}

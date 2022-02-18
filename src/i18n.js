@@ -171,7 +171,6 @@ const resources = {
       Explorations: 'Explorations',
       Menus: 'Menus',
       Orders: 'Orders',
-      Organizations: 'Organizations',
       Products: 'Products',
       Restaurants: 'Restaurants',
 

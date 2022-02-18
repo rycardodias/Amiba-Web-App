@@ -83,7 +83,7 @@ const AddModal = ({ open, onClose, edit, data }) => {
 
   return <Modal open={open} onClose={onClose}>
     <StyledModalCard>
-      <H2 mb={2}>{edit ? `${t("Edit")} ${t("Organization")}` : `${t("Add new")} ${t("Organization")}`}</H2>
+      <H2 mb={2}>{edit ? `${t("Edit")} ${t("Productor")}` : `${t("Add new")} ${t("Productor")}`}</H2>
 
       <form onSubmit={handleSubmit}>
         <ScrollBar style={{ maxHeight: 400 }}>

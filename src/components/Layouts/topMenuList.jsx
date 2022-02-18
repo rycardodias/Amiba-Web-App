@@ -5,10 +5,10 @@ const index = [
     title: "Backoffice",
     Icon: Icons.DataTableIcon,
     children: [{
-      subTitle: "Organizations",
+      subTitle: "Productors",
       path: "/backoffice/organizations",
       subCategories: [
-        { name: "Organizations", path: "/backoffice/organizations" },
+        { name: "Productors", path: "/backoffice/organizations" },
       ]
     },
     {

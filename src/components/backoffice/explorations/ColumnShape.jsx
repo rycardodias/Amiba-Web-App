@@ -19,7 +19,7 @@ const columnShape = [
   },
   {
     minWidth: 150,
-    Header: () => i18n.t("Organization"),
+    Header: () => i18n.t("Productor"),
     accessor: "Organization.name",
     Filter: SelectColumnFilter
   }, {

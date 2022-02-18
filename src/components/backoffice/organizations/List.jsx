@@ -15,8 +15,8 @@ import * as organizationsRequests from 'lib/requests/organizationsRequests'
 
 export const List = () => {
     const { t } = useTranslation();
-    const tableName = t('Organizations')
-    const tableSingleName = t('Organization')
+    const tableName = t('Productors')
+    const tableSingleName = t('Productor')
     useTitle(tableName);
 
     const [tableData, setTableData] = useState([]);

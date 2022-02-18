@@ -49,7 +49,7 @@ const Login = () => {
         toast.success(t("You Logged In Successfully"));
         navigate("/");
       }).catch(error => {
-        setError(error.message);
+        setError(t("Invalid e-mail or password!"));
         setLoading(false);
       });
     }
