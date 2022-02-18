@@ -8,6 +8,10 @@ const getAnimalId = async (id) => {
     return await sendRequest('GET', 'animals/id/' + id);
 };
 
+const getAnimalsUserId = async () => {
+    return await sendRequest('GET', 'animals/UserId');
+};
+
 const getAnimalsExplorationIdCertificated = async (ExplorationId) => {
     return await sendRequest('GET', 'animals/ExplorationId/' + ExplorationId + '/certificated');
 }
@@ -24,4 +28,4 @@ const deleteAnimal = async (id) => {
     return await sendRequest('DELETE', 'animals/delete', { id })
 }
 
-export { getAnimals, getAnimalId, getAnimalsExplorationIdCertificated, createAnimal, updateAnimal, deleteAnimal }
+export { getAnimals, getAnimalId, getAnimalsUserId, getAnimalsExplorationIdCertificated, createAnimal, updateAnimal, deleteAnimal }

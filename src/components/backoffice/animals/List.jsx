@@ -25,7 +25,7 @@ export const List = () => {
     const [openModal, setOpenModal] = useState(false);
 
     function getInitialData() {
-        animalsRequests.getAnimals()
+        animalsRequests.getAnimalsUserId()
             .then(response => {
                 if (response.error || response.data.error) return setTableData([])
                 setTableData(response.data.data)
