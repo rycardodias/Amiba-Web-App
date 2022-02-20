@@ -18,9 +18,6 @@ import { useTranslation } from "react-i18next";
 import { StyledModalCard, StyledMenuItem, StyledSelect } from 'components/backoffice/styledComponents/AddModalStyles'
 import { productTypes } from "lib/values/types";
 import { taxes } from "lib/values/taxes";
-import { units } from "lib/values/units";
-
-
 
 const AddModal = ({ open, onClose, edit, data }) => {
   const { t } = useTranslation();
@@ -55,7 +52,7 @@ const AddModal = ({ open, onClose, edit, data }) => {
   async function initialData() {
     if (edit) return
 
-    const res = await organizationsRequests.getOrganizations()
+    const res = await organizationsRequests.getOrganizationsUserId()
     if (res.error) return
     if (res.data.error) return toast.error(t("Error Getting essential Data"))
     setorganizations(res.data.data)
@@ -180,7 +177,7 @@ const AddModal = ({ open, onClose, edit, data }) => {
                 error={Boolean(errors.price && touched.price)} helperText={touched.price && errors.price} />
             </Grid>
 
-            
+
 
             <Grid item xs={12}>
               <H6 mb={1}>{t('Add Picture')}</H6>

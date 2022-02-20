@@ -3,7 +3,9 @@ import { sendRequest } from './requests'
 const getProducts = async () => {
     return await sendRequest('GET', 'products');
 };
-
+const getProductsUserId = async () => {
+    return await sendRequest('GET', 'products/UserId');
+};
 const getProductId = async (id) => {
     return await sendRequest('GET', 'products/id/' + id);
 };
@@ -48,7 +50,7 @@ const deleteProduct = async (id) => {
 }
 
 export {
-    getProducts, getProductId, getProductByType, getProductByExploration,
+    getProducts, getProductsUserId, getProductId, getProductByType, getProductByExploration,
     getProductsAllAvailable, getProductsAllAvailableId, getProductsAllAvailableType, getProductsAllAvailableTypeOrganization, getProductsAllAvailableInOrganization,
     createProduct, updateProduct, deleteProduct
 }

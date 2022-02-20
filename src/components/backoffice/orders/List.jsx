@@ -26,7 +26,7 @@ export const List = () => {
     // const [openModal, setOpenModal] = useState(false);
 
     function getInitialData() {
-        ordersRequests.getOrders()
+        ordersRequests.getOrdersUserId()
             .then(response => {
                 if (response.error || response.data.error) return setTableData([])
                 setTableData(response.data.data)
@@ -101,7 +101,7 @@ export const List = () => {
 
                 </ButtonWrapper> */}
             </FlexBox >
-{/* 
+            {/* 
             {openModal && <AddModal open={openModal}
                 edit={selectedRows.length === 1}
                 data={selectedRows.length === 1 && selectedRows[0].original}
@@ -113,7 +113,7 @@ export const List = () => {
                     columnShape={columnShape}
                     clearFilter={clearFilter}
                     handleRowSelect={(e) => setSelectedRows(e)}
-                    // onFilterChange={filters => setHasFilter(filters.length)}
+                // onFilterChange={filters => setHasFilter(filters.length)}
                 />
             </Card>
         </Box >

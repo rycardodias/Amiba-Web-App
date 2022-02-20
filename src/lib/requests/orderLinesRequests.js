@@ -3,6 +3,9 @@ import { sendRequest } from './requests'
 const getOrdersLines = async () => {
     return await sendRequest('GET', 'orderLines');
 };
+const getOrdersLinesUserId = async () => {
+    return await sendRequest('GET', 'orderLines/UserId');
+};
 
 const getOrderLinesId = async (id) => {
     return await sendRequest('GET', 'orderLines/id/' + id);
@@ -24,4 +27,4 @@ const deleteOrderLine = async (id) => {
     return await sendRequest('DELETE', 'orderLines/delete', { id })
 }
 
-export { getOrdersLines, getOrderLinesId, getOrderLinesOrderId, createOrderLine, updateOrderLine, deleteOrderLine }
+export { getOrdersLines, getOrdersLinesUserId, getOrderLinesId, getOrderLinesOrderId, createOrderLine, updateOrderLine, deleteOrderLine }

@@ -14,8 +14,6 @@ import { useTranslation } from "react-i18next";
 import { StyledModalCard, StyledMenuItem, StyledSelect } from 'components/backoffice/styledComponents/AddModalStyles'
 import { ordersHistoryTypes } from "lib/values/types";
 
-
-
 const AddModal = ({ open, onClose, edit, data }) => {
   const { t } = useTranslation();
 
@@ -30,7 +28,7 @@ const AddModal = ({ open, onClose, edit, data }) => {
   async function initialData() {
     if (edit) return
 
-    const res = await ordersRequests.getOrders()
+    const res = await ordersRequests.getOrdersUserId()
     if (res.error) return
     if (res.data.error) return toast.error(t("Error Getting essential Data"))
     setorders(res.data.data)
