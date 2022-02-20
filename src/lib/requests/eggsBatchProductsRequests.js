@@ -5,7 +5,7 @@ const getEggsBatchProducts = async () => {
 };
 
 const getEggsBatchProductsUserId = async () => {
-    return await sendRequest('GET', 'eggsBatchProducts');
+    return await sendRequest('GET', 'eggsBatchProducts/UserId');
 };
 
 const getEggsBatchProductsProductIdEggsBatchId = async (ProductId, EggsBatchId) => {
