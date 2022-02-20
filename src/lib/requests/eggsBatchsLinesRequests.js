@@ -4,6 +4,10 @@ const getEggsBatchsLines = async () => {
     return await sendRequest('GET', 'eggsBatchsLines');
 };
 
+const getEggsBatchsLinesUserId = async () => {
+    return await sendRequest('GET', 'eggsBatchsLines/UserId');
+};
+
 const getEggsBatchsLinesId = async (id) => {
     return await sendRequest('GET', 'eggsBatchsLines/id/' + id);
 };
@@ -21,6 +25,6 @@ const deleteEggsBatchsLines = async (id) => {
 }
 
 export {
-    getEggsBatchsLines, getEggsBatchsLinesId, createEggsBatchsLines,
+    getEggsBatchsLines, getEggsBatchsLinesUserId, getEggsBatchsLinesId, createEggsBatchsLines,
     updateEggsBatchsLines, deleteEggsBatchsLines
 }

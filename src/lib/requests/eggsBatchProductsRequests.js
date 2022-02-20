@@ -4,6 +4,10 @@ const getEggsBatchProducts = async () => {
     return await sendRequest('GET', 'eggsBatchProducts');
 };
 
+const getEggsBatchProductsUserId = async () => {
+    return await sendRequest('GET', 'eggsBatchProducts');
+};
+
 const getEggsBatchProductsProductIdEggsBatchId = async (ProductId, EggsBatchId) => {
     return await sendRequest('GET', 'eggsBatchProducts/ProductId/' + ProductId + '/EggsBatchId/' + EggsBatchId);
 };
@@ -20,4 +24,4 @@ const deleteEggsBatchProducts = async (id) => {
     return await sendRequest('DELETE', 'eggsBatchProducts/delete', { id })
 }
 
-export { getEggsBatchProducts, getEggsBatchProductsProductIdEggsBatchId, createEggsBatchProducts, updateEggsBatchProducts, deleteEggsBatchProducts }
+export { getEggsBatchProducts, getEggsBatchProductsUserId, getEggsBatchProductsProductIdEggsBatchId, createEggsBatchProducts, updateEggsBatchProducts, deleteEggsBatchProducts }
