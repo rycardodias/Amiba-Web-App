@@ -1,12 +1,10 @@
 import i18n from 'i18next';
-import { SelectColumnFilter } from 'components/backoffice/utils/columnFilters'
 
 const columnShape = [
   {
     minWidth: 150,
     Header: () => i18n.t("User"),
-    accessor: "User.name",
-    Filter: SelectColumnFilter
+    accessor: "User.name"
   },
   {
     minWidth: 150,
