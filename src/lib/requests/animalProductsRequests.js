@@ -4,6 +4,11 @@ const getAnimalProducts = async () => {
     return await sendRequest('GET', 'animalProducts');
 };
 
+const getAnimalProductsUserId = async () => {
+    return await sendRequest('GET', 'animalProducts/UserId');
+};
+
+
 const getAnimalProductsProductIdAnimalId = async (ProductId, AnimalId) => {
     return await sendRequest('GET', 'animalProducts/ProductId/' + ProductId + '/AnimalId/' + AnimalId);
 };
@@ -25,7 +30,7 @@ const deleteAnimalProducts = async (id) => {
 }
 
 export {
-    getAnimalProducts, getAnimalProductsProductIdAnimalId,
+    getAnimalProducts, getAnimalProductsUserId, getAnimalProductsProductIdAnimalId,
     getAnimalProductsAvailableProductId,
     createAnimalProducts, updateAnimalProducts, deleteAnimalProducts
 }

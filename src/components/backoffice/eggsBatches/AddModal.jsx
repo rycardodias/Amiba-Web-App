@@ -29,7 +29,7 @@ const AddModal = ({ open, onClose, edit, data }) => {
   async function initialData() {
     if (edit) return
 
-    const res = await explorationsRequests.getExplorations()
+    const res = await explorationsRequests.getExplorationsUserId()
     if (res.error) return
     if (res.data.error) return toast.error(t("Error Getting essential Data"))
     setexplorations(res.data.data)

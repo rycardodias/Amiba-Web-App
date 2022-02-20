@@ -8,7 +8,7 @@ const getExplorationId = async (id) => {
     return await sendRequest('GET', 'explorations/id/' + id);
 };
 
-const getExplorationUserId = async () => {
+const getExplorationsUserId = async () => {
     return await sendRequest('GET', 'explorations/UserId');
 };
 
@@ -24,4 +24,4 @@ const deleteExploration = async (id) => {
     return await sendRequest('DELETE', 'explorations/delete', { id })
 }
 
-export { getExplorations, getExplorationId, getExplorationUserId, createExploration, updateExploration, deleteExploration }
+export { getExplorations, getExplorationId, getExplorationsUserId, createExploration, updateExploration, deleteExploration }
