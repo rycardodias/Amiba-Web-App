@@ -80,11 +80,11 @@ const AddModal = ({ open, onClose, edit, data }) => {
                 <H6 mb={1}>{t('Order')}</H6>
                 <DarkTextField disabled name="OrderId" value={values.OrderId} />
               </Grid> :
-              <Grid item xs={6}>
+              <Grid item xs={12}>
                 <H6 mb={1}>{t('Order')}</H6>
                 <StyledSelect fullWidth name="OrderId" value={values.OrderId} onChange={handleChange} input={<InputBase placeholder={t('Order')} />} IconComponent={() => <KeyboardArrowDown fontSize="small" />}>
                   {orders && orders.map(item => {
-                    return <StyledMenuItem key={item.id} value={item.id}>{t(item.id)}</StyledMenuItem>
+                    return <StyledMenuItem key={item.id} value={item.id}>{`${t(item.id)} - ${item.fiscalNumber} - ${item.User.name}`}</StyledMenuItem>
                   })}
                 </StyledSelect>
               </Grid>

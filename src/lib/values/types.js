@@ -22,7 +22,8 @@ const genders = [
 
 const ordersHistoryTypes = [
     { id: "PROCESSING", name: "Processing" },
-    { id: "SENT", name: "Sent" }
+    { id: "SENT", name: "Sent" },
+    { id: "CANCELED", name: "Canceled" }
 ]
 
 export { races, productTypes, explorationTypes, genders, ordersHistoryTypes }

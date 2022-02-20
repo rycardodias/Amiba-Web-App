@@ -144,7 +144,15 @@ const i18nPT = {
     "I agree to terms & conditions": "Aceito os termos e condições",
     "The page you requested could not be found.": "A página que procura não se encontra disponivel",
     "Back to Home": "Voltar ao Início",
-    "Marker": "Marcador"
+    "Marker": "Marcador",
+    "Canceled": "Cancelado",
+    "Processing": "Em Processamento",
+    "Sent": "Enviado",
+    "Identifier": "Identificador",
+    "Race": "Raça",
+    "Gender": "Genero",
+    "Birth Date": "Data Nascimento",
+    "Total VAT": "Total IVA"
 }
 
 export { i18nPT }
