@@ -84,16 +84,16 @@ const AddModal = ({ open, onClose, edit, data }) => {
                 <H6 mb={1}>{t('Order')}</H6>
                 <StyledSelect fullWidth name="OrderId" value={values.OrderId} onChange={handleChange} input={<InputBase placeholder={t('Order')} />} IconComponent={() => <KeyboardArrowDown fontSize="small" />}>
                   {orders && orders.map(item => {
-                    return <StyledMenuItem key={item.id} value={item.id}>{t(item.name)}</StyledMenuItem>
+                    return <StyledMenuItem key={item.id} value={item.id}>{t(item.id)}</StyledMenuItem>
                   })}
                 </StyledSelect>
               </Grid>
             }
 
             <Grid item xs={12}>
-              <H6 mb={1}>{t('state')}</H6>
+              <H6 mb={1}>{t('State')}</H6>
               <StyledSelect fullWidth name="state" value={values.state} onChange={handleChange} input={<InputBase placeholder={t('State')} />} IconComponent={() => <KeyboardArrowDown fontSize="small" />}>
-                {ordersHistoryTypes && ordersHistoryTypes.map(item => {
+                {ordersHistoryTypes && ordersHistoryTypes.filter(item => item.id !== values.state).map(item => {
                   return <StyledMenuItem key={item.id} value={item.id}>{t(item.name)}</StyledMenuItem>
                 })}
               </StyledSelect>

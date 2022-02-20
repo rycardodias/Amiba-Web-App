@@ -1,13 +1,8 @@
-// const organizationTypes = [
-//     { id: "PRODUCTOR", name: "Productor" },
-//     { id: "AMIBA", name: "Amiba" },
-//     { id: "MATADOURO", name: "Matadouro" },
-// ]
-
 const races = [
-    { id: 'PRETA', name: 'Raça Preta' },
+    { id: 'PRETA', name: 'Preta Lusitânica ' },
     { id: 'BRANCA', name: 'Raça Branca' },
-    { id: 'AMARELA', name: 'Raça Amarela' },
+    { id: 'AMARELA', name: 'Amarela' },
+    { id: 'PEDRES', name: 'Pedrês Portuguesa' },
 ]
 
 const productTypes = [
