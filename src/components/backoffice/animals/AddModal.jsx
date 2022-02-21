@@ -24,6 +24,8 @@ const AddModal = ({ open, onClose, edit, data }) => {
     id: data?.id || "",
     identifier: data?.identifier || "",
     ExplorationId: data?.ExplorationId || "",
+    lgn: data?.lgn || "",
+    lga: data?.lga || "",
     race: data?.race || "",
     gender: data?.gender || "",
     birthDate: data?.birthDate || "",
@@ -69,7 +71,7 @@ const AddModal = ({ open, onClose, edit, data }) => {
           })
           .catch(error => console.log(error));
       } else {
-        animalsRequests.createAnimal(values.identifier, values.race, values.ExplorationId, values.gender, values.birthDate, values.weight)
+        animalsRequests.createAnimal(values.identifier, values.race, values.ExplorationId, values.lgn, values.lga, values.gender, values.birthDate, values.weight)
           .then(response => {
             if (response.error || response.data.error) return toast.error(t("Error Creating Record"));
 
@@ -109,6 +111,18 @@ const AddModal = ({ open, onClose, edit, data }) => {
                 </StyledSelect>
               </Grid>
             }
+
+            <Grid item xs={6}>
+              <H6 mb={1}>{t('LGN Number')}</H6>
+              <DarkTextField disabled={edit} name="lgn" placeholder={t('LGN Number')} onChange={handleChange} value={values.lgn}
+                error={Boolean(errors.lgn && touched.lgn)} helperText={touched.lgn && errors.lgn} />
+            </Grid>
+
+            <Grid item xs={6}>
+              <H6 mb={1}>{t('LGA Number')}</H6>
+              <DarkTextField disabled={edit} name="lga" placeholder={t('LGA Number')} onChange={handleChange} value={values.lga}
+                error={Boolean(errors.lga && touched.lga)} helperText={touched.lga && errors.lga} />
+            </Grid>
 
             <Grid item xs={6}>
               <H6 mb={1}>{t('Race')}</H6>

@@ -152,7 +152,9 @@ const i18nPT = {
     "Race": "Raça",
     "Gender": "Genero",
     "Birth Date": "Data Nascimento",
-    "Total VAT": "Total IVA"
+    "Total VAT": "Total IVA",
+    "LGA Number": "Número LGA",
+    "LGN Number": "Número LGN",
 }
 
 export { i18nPT }

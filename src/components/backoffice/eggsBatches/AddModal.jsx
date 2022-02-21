@@ -77,8 +77,8 @@ const AddModal = ({ open, onClose, edit, data }) => {
         <ScrollBar style={{ maxHeight: 400 }}>
           <Grid container spacing={2}>
             <Grid item xs={6}>
-              <H6 mb={1}>{t('Name')}</H6>
-              <DarkTextField name="name" placeholder={t('Name')} onChange={handleChange} value={values.name}
+              <H6 mb={1}>{t('Identifier')}</H6>
+              <DarkTextField name="name" placeholder={t('Identifier')} onChange={handleChange} value={values.name}
                 error={Boolean(errors.name && touched.name)} helperText={touched.name && errors.name} />
             </Grid>
 

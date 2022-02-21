@@ -8,7 +8,7 @@ const columnShape = [
   },
   {
     minWidth: 150,
-    Header: () => i18n.t("Name"),
+    Header: () => i18n.t("Identifier"),
     accessor: "name",
   },
   {
