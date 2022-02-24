@@ -6,20 +6,26 @@ import i18n from 'i18next';
 import { CommonCell, SelectColumnFilter, DateColumnFilter } from 'components/backoffice/utils/columnFilters'
 
 
-const columnShape = [{
+const columnShape = [
+//   {
+//   minWidth: 200,
+//   Header: () => i18n.t("Name"),
+//   accessor: "name",
+//   Cell: ({ row }) => {
+//     const { avatar, name, id } = row.original;
+//     return <FlexBox alignItems="center">
+//       <UkoAvatar alt={name} src={avatar} />
+//       <FlexBox flexDirection="column" ml={1.2}>
+//         <Small mb={0.5}>{name}</Small>
+//         <Tiny color="text.disabled">{id}</Tiny>
+//       </FlexBox>
+//     </FlexBox>;
+//   }
+// },
+{
   minWidth: 200,
   Header: () => i18n.t("Name"),
   accessor: "name",
-  Cell: ({ row }) => {
-    const { avatar, name, id } = row.original;
-    return <FlexBox alignItems="center">
-      <UkoAvatar alt={name} src={avatar} />
-      <FlexBox flexDirection="column" ml={1.2}>
-        <Small mb={0.5}>{name}</Small>
-        <Tiny color="text.disabled">{id}</Tiny>
-      </FlexBox>
-    </FlexBox>;
-  }
 },
 {
   minWidth: 150,
@@ -29,8 +35,7 @@ const columnShape = [{
 {
   minWidth: 150,
   Header: () => i18n.t("Responsable"),
-  accessor: "User.name",
-  Filter: SelectColumnFilter
+  accessor: "User.name"
 }, {
   minWidth: 150,
   Header: () => i18n.t("Phone/Mobile"),

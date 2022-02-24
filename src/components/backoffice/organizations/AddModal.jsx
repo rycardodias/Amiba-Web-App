@@ -109,12 +109,12 @@ const AddModal = ({ open, onClose, edit, data }) => {
 
             <Grid item xs={6}>
               <H6 mb={1}>{t('Telephone')}</H6>
-              <DarkTextField name="telephone" placeholder={t('telephone')} onChange={handleChange} value={values.telephone}
+              <DarkTextField name="telephone" placeholder={t('Telephone')} onChange={handleChange} value={values.telephone}
                 error={Boolean(errors.telephone && touched.telephone)} helperText={touched.telephone && errors.telephone} />
             </Grid>
             <Grid item xs={6}>
               <H6 mb={1}>{t('Mobile Phone')}</H6>
-              <DarkTextField name="mobilePhone" placeholder={t('mobilePhone')} onChange={handleChange} value={values.mobilePhone}
+              <DarkTextField name="mobilePhone" placeholder={t('Mobile Phone')} onChange={handleChange} value={values.mobilePhone}
                 error={Boolean(errors.mobilePhone && touched.mobilePhone)} helperText={touched.mobilePhone && errors.mobilePhone} />
             </Grid>
 
@@ -137,7 +137,7 @@ const AddModal = ({ open, onClose, edit, data }) => {
 
 
 
-            <Grid item xs={12}>
+            {/* <Grid item xs={12}>
               <H6 mb={1}>{t('Add Picture')}</H6>
               <label htmlFor="icon-button-file">
                 <input type="file" accept="image/*" id="icon-button-file" style={{ display: "none" }} />
@@ -148,7 +148,7 @@ const AddModal = ({ open, onClose, edit, data }) => {
                   </Box>
                 </IconButton>
               </label>
-            </Grid>
+            </Grid> */}
 
           </Grid>
         </ScrollBar>

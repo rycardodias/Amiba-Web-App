@@ -24,8 +24,12 @@ const updateAnimal = async (id, slaughterDate, slaughterWeight, slaughterLocal, 
     return await sendRequest('PUT', 'animals/update', { id, slaughterDate, slaughterWeight, slaughterLocal, breeder })
 };
 
+const validateAnimal = async (id, validated) => {
+    return await sendRequest('PUT', 'animals/validate', { id, validated })
+};
+
 const deleteAnimal = async (id) => {
     return await sendRequest('DELETE', 'animals/delete', { id })
 }
 
-export { getAnimals, getAnimalId, getAnimalsUserId, getAnimalsExplorationIdCertificated, createAnimal, updateAnimal, deleteAnimal }
+export { getAnimals, getAnimalId, getAnimalsUserId, getAnimalsExplorationIdCertificated, createAnimal, updateAnimal, validateAnimal, deleteAnimal }

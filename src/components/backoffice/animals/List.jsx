@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import useTitle from "hooks/useTitle";
 import { useTranslation } from "react-i18next";
-import { Add, Edit, Delete } from "@mui/icons-material";
+import { Add, Edit, Delete, Done } from "@mui/icons-material";
 import { Box, Button, Card } from "@mui/material";
 import { H6 } from "components/Typography";
 import toast from "react-hot-toast";
@@ -10,7 +10,10 @@ import DataTable from "components/backoffice/utils/DataTable";
 import columnShape from "components/backoffice/animals/ColumnShape";
 import AddModal from "components/backoffice/animals/AddModal";
 import * as animalsRequests from 'lib/requests/animalsRequests'
+import * as usersRequests from 'lib/requests/usersRequests'
+
 import { ButtonWrapper } from '../styledComponents/ButtonWrapper';
+import { verifyPermission } from 'lib/backofficeRoutes';
 
 export const List = () => {
     const { t } = useTranslation();
@@ -23,12 +26,24 @@ export const List = () => {
     const [clearFilter, setClearFilter] = useState("");
     const [hasFilter, setHasFilter] = useState("");
     const [openModal, setOpenModal] = useState(false);
+    const [hasPermission, setHasPermission] = useState(false)
 
     function getInitialData() {
         animalsRequests.getAnimalsUserId()
             .then(response => {
                 if (response.error || response.data.error) return setTableData([])
                 setTableData(response.data.data)
+            })
+            .catch(error => console.error(error))
+
+        usersRequests.tokenPermission()
+            .then(response => {
+                if (response.error || response.data.error) return
+                verifyPermission(response.data.data, ['ADMIN', 'AMIBA'])
+                    .then(response => {
+                        console.log("response", response)
+                    })
+                    .catch(error => console.error(error))
             })
             .catch(error => console.error(error))
     }
@@ -50,12 +65,24 @@ export const List = () => {
             const res = await animalsRequests.deleteAnimal(id)
             if (res.error || res.data.error) {
                 toast.error(`${t('Error removing')} ${tableSingleName}`);
-            } else {
-                toast.success(`${t('Success removing')} ${tableSingleName}`)
             }
         }
+
+        toast.success(`${t('Success removing')} ${tableSingleName}`)
         await getInitialData()
     };
+
+    const handleValidateAnimal = async () => {
+        const ids = selectedRows.map(item => item.original.id);
+        for (let id of ids) {
+            const res = await animalsRequests.validateAnimal(id, true)
+            if (res.error || res.data.error) {
+                toast.error(`${t('Error validating')} ${tableSingleName}`);
+            }
+        }
+        toast.success(`${t('Success validating')} ${tableSingleName}`)
+        await getInitialData()
+    }
 
 
     return (
@@ -96,6 +123,12 @@ export const List = () => {
                     }
                     {(selectedRows.length === 0) && <Button variant="contained" size="small" endIcon={<Add />} onClick={() => setOpenModal(true)}>
                         {`${t('Add')} ${t(tableSingleName)}`}
+                    </Button>
+                    }
+
+                    {/* VALIDAR ANIMAIS */}
+                    {(selectedRows.length > 0) && <Button variant="contained" size="small" endIcon={<Done />} onClick={handleValidateAnimal}>
+                        {`${t('Validate')} ${t(tableSingleName)}`}
                     </Button>
                     }
 
