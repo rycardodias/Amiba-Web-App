@@ -86,6 +86,8 @@ export const List = () => {
     const handleValidateAnimal = async () => {
         const ids = selectedRows.map(item => item.original.id);
         for (let id of ids) {
+            console.log(id)
+            if (id.validated) return
             const res = await animalsRequests.validateAnimal(id, true)
             if (res.error || res.data.error) {
                 toast.error(`${t('Error validating')} ${tableSingleName}`);
