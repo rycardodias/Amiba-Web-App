@@ -25,11 +25,11 @@ const App = () => {
   };
   return <StyledEngineProvider injectFirst>
     <ThemeProvider theme={appTheme}>
-      <RTL direction={appTheme.direction}>
+      {/* <RTL direction={appTheme.direction}> */}
         <CssBaseline />
         <Toaster toastOptions={toasterOptions} />
         {allPages}
-      </RTL>
+      {/* </RTL> */}
     </ThemeProvider>
   </StyledEngineProvider>;
 };

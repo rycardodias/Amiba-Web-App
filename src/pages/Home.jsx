@@ -9,11 +9,11 @@ const Home = () => {
     saveSettings
   } = useContext(SettingsContext);
 
-  const handleChangeDirection = event => {
-    saveSettings({ ...settings,
-      direction: event.target.value
-    });
-  };
+  // const handleChangeDirection = event => {
+  //   saveSettings({ ...settings,
+  //     direction: event.target.value
+  //   });
+  // };
 
   const handleChangeTheme = event => {
     saveSettings({ ...settings,
@@ -30,13 +30,13 @@ const Home = () => {
         laboriosam
       </Typography>
 
-      <Box my={3}>
+      {/* <Box my={3}>
         <Typography variant="h4">Change Direction</Typography>
         <RadioGroup row value={settings.direction} onChange={handleChangeDirection}>
           <FormControlLabel value="ltr" control={<Radio />} label="LTR Direction" />
           <FormControlLabel value="rtl" control={<Radio />} label="RTL Direction" />
         </RadioGroup>
-      </Box>
+      </Box> */}
 
       <Box my={3}>
         <Typography variant="h4">Change Theme</Typography>
