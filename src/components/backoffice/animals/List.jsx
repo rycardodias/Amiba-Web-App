@@ -29,20 +29,34 @@ export const List = () => {
     const [hasPermission, setHasPermission] = useState(false)
 
     async function getInitialData() {
-        animalsRequests.getAnimalsUserId()
-            .then(response => {
-                if (response.error || response.data.error) return setTableData([])
-                setTableData(response.data.data)
-            })
-            .catch(error => console.error(error))
+        const animals = await animalsRequests.getAnimalsUserId()
 
-        usersRequests.tokenPermission()
-            .then(response => {
-                if (response.error || response.data.error) return
-                const allowed = verifyPermission(response.data.data, ['ADMIN', 'AMIBA'])
-                console.log("allowed", allowed)
-            })
-            .catch(error => console.error(error))
+        if (animals.error || animals.data.error) return setTableData([])
+
+        setTableData(animals.data.data)
+
+        // animalsRequests.getAnimalsUserId()
+        //     .then(response => {
+        //         if (response.error || response.data.error) return setTableData([])
+        //         setTableData(response.data.data)
+        //     })
+        //     .catch(error => console.error(error))
+
+        const user = await usersRequests.tokenPermission()
+
+        if (user.error || user.data.error) return
+
+        const allowed = await verifyPermission(user.data.data, ['ADMIN', 'AMIBA'])
+
+        if (allowed) await setHasPermission(allowed)
+
+        // setTableData(user.data.data)
+        //     .then(response => {
+        //         if (response.error || response.data.error) return
+        //         const allowed = verifyPermission(response.data.data, ['ADMIN', 'AMIBA'])
+        //         setHasPermission(allowed)
+        //     })
+        //     .catch(error => console.error(error))
     }
 
     useEffect(() => {
