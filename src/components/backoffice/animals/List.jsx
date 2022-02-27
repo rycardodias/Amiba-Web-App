@@ -84,11 +84,12 @@ export const List = () => {
     };
 
     const handleValidateAnimal = async () => {
-        const ids = selectedRows.map(item => item.original);
-        for (let id of ids) {
-            console.log(id)
-            if (id.validated) return
-            const res = await animalsRequests.validateAnimal(id.id, true)
+        const rows = await selectedRows.map(item => item.original);
+        for (let row of rows) {
+            if (row.validated) return
+
+            const res = await animalsRequests.validateAnimal(row.id, true)
+
             if (res.error || res.data.error) {
                 toast.error(`${t('Error validating')} ${tableSingleName}`);
             }
@@ -140,7 +141,7 @@ export const List = () => {
                     }
 
                     {/* VALIDAR ANIMAIS */}
-                    {(selectedRows.length > 0 && hasPermission) && <Button variant="contained" size="small" endIcon={<Done />} onClick={handleValidateAnimal}>
+                    {(selectedRows.length > 0 && hasPermission) && <Button ml="2" variant="contained" size="small" endIcon={<Done />} onClick={handleValidateAnimal}>
                         {`${t('Validate')} ${t(tableSingleName)}`}
                     </Button>
                     }
