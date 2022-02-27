@@ -39,7 +39,7 @@ export const List = () => {
         usersRequests.tokenPermission()
             .then(response => {
                 if (response.error || response.data.error) return
-                const allowed = await verifyPermission(response.data.data, ['ADMIN', 'AMIBA'])
+                const allowed = verifyPermission(response.data.data, ['ADMIN', 'AMIBA'])
                 console.log("allowed", allowed)
             })
             .catch(error => console.error(error))
