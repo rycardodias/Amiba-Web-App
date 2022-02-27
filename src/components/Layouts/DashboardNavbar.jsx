@@ -4,8 +4,8 @@ import FlexBox from "components/FlexBox";
 import { H2 } from "components/Typography";
 import { SettingsContext } from "contexts/SettingsContext";
 import { TitleContext } from "contexts/TitleContext";
-import LTR from "icons/LTR";
-import RtlIcon from "icons/RTL";
+// import LTR from "icons/LTR";
+// import RtlIcon from "icons/RTL";
 import ThemeIcon from "icons/ThemeIcon";
 import { useContext } from "react";
 import { useTranslation } from "react-i18next";
@@ -35,7 +35,7 @@ const DashboardNavbar = props => {
   const downSm = useMediaQuery(theme => theme.breakpoints.down("sm"));
 
   const handleChangeTheme = theme => { saveSettings({ ...settings, theme }); };
-  const handleChangeDirection = direction => { saveSettings({ ...settings, direction }); };
+  // const handleChangeDirection = direction => { saveSettings({ ...settings, direction }); };
 
   const handleToggleBtn = () => {
     if (downMd) {
@@ -71,11 +71,11 @@ const DashboardNavbar = props => {
         </H2>
 
         <Box>
-          {settings.direction === "ltr" ? <StyledIconButton disableRipple onClick={() => handleChangeDirection("rtl")}>
+          {/* {settings.direction === "ltr" ? <StyledIconButton disableRipple onClick={() => handleChangeDirection("rtl")}>
             <RtlIcon sx={{ color: "text.disabled" }} />
           </StyledIconButton> : <StyledIconButton disableRipple onClick={() => handleChangeDirection("ltr")}>
             <LTR sx={{ color: "text.disabled" }} />
-          </StyledIconButton>}
+          </StyledIconButton>} */}
 
           {settings.theme === "light" ? <StyledIconButton disableRipple onClick={() => handleChangeTheme(THEMES.DARK)}>
             <ThemeIcon />
@@ -100,12 +100,12 @@ const DashboardNavbar = props => {
       </H2>
 
       <Box flexGrow={1} ml={1} />
-
+{/* 
       {settings.direction === "ltr" ? <StyledIconButton disableRipple onClick={() => handleChangeDirection("rtl")}>
         <RtlIcon sx={{ color: "text.disabled" }} />
       </StyledIconButton> : <StyledIconButton disableRipple onClick={() => handleChangeDirection("ltr")}>
         <LTR sx={{ color: "text.disabled" }} />
-      </StyledIconButton>}
+      </StyledIconButton>} */}
 
       {settings.theme === "light" ? <StyledIconButton disableRipple onClick={() => handleChangeTheme(THEMES.DARK)}>
         <ThemeIcon />
