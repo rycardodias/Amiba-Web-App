@@ -28,7 +28,7 @@ export const List = () => {
     const [openModal, setOpenModal] = useState(false);
     const [hasPermission, setHasPermission] = useState(false)
 
-    function getInitialData() {
+    async function getInitialData() {
         animalsRequests.getAnimalsUserId()
             .then(response => {
                 if (response.error || response.data.error) return setTableData([])
@@ -39,11 +39,8 @@ export const List = () => {
         usersRequests.tokenPermission()
             .then(response => {
                 if (response.error || response.data.error) return
-                verifyPermission(response.data.data, ['ADMIN', 'AMIBA'])
-                    .then(response => {
-                        console.log("response", response)
-                    })
-                    .catch(error => console.error(error))
+                const allowed = await verifyPermission(response.data.data, ['ADMIN', 'AMIBA'])
+                console.log("allowed", allowed)
             })
             .catch(error => console.error(error))
     }

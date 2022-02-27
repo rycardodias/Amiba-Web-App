@@ -29,10 +29,15 @@ const columnShape = [
     accessor: "birthDate",
     Filter: DateColumnFilter
   },
+  // {
+  //   minWidth: 150,
+  //   Header: () => i18n.t("Weight"),
+  //   accessor: "weight",
+  // },
   {
     minWidth: 150,
-    Header: () => i18n.t("Weight"),
-    accessor: "weight",
+    Header: () => i18n.t("Validated"),
+    accessor: "validated",
   },
 
 ];
