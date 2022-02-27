@@ -37,7 +37,7 @@ const columnShape = [
   {
     minWidth: 150,
     Header: () => i18n.t("Validated"),
-    accessor: "validated",
+    accessor: "validated.toString()",
   },
 
 ];
