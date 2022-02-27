@@ -140,7 +140,7 @@ export const List = () => {
                     }
 
                     {/* VALIDAR ANIMAIS */}
-                    {(selectedRows.length > 0) && <Button variant="contained" size="small" endIcon={<Done />} onClick={handleValidateAnimal}>
+                    {(selectedRows.length > 0 && hasPermission) && <Button variant="contained" size="small" endIcon={<Done />} onClick={handleValidateAnimal}>
                         {`${t('Validate')} ${t(tableSingleName)}`}
                     </Button>
                     }
