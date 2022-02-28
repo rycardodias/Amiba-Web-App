@@ -29,6 +29,7 @@ const AddModal = ({ open, onClose, edit, data }) => {
     race: data?.race || "",
     gender: data?.gender || "",
     birthDate: data?.birthDate || "",
+    weight: data?.weight || "",
     slaughterDate: data?.slaughterDate || "",
     slaughterWeight: data?.slaughterWeight || "",
     slaughterLocal: data?.slaughterLocal || "",

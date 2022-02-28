@@ -1,6 +1,5 @@
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { StyledEngineProvider } from "@mui/material/styles";
-import RTL from "components/RTL";
 import useSettings from "hooks/useSettings";
 import { Toaster } from "react-hot-toast";
 import { useRoutes } from "react-router-dom";
@@ -25,11 +24,9 @@ const App = () => {
   };
   return <StyledEngineProvider injectFirst>
     <ThemeProvider theme={appTheme}>
-      {/* <RTL direction={appTheme.direction}> */}
         <CssBaseline />
         <Toaster toastOptions={toasterOptions} />
         {allPages}
-      {/* </RTL> */}
     </ThemeProvider>
   </StyledEngineProvider>;
 };

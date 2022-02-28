@@ -1,5 +1,4 @@
 import i18n from 'i18next';
-import { SelectColumnFilter } from 'components/backoffice/utils/columnFilters'
 
 const columnShape = [
   {

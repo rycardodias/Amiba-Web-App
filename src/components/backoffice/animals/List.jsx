@@ -141,9 +141,20 @@ export const List = () => {
                     }
 
                     {/* VALIDAR ANIMAIS */}
-                    {(selectedRows.length > 0 && hasPermission) && <Button ml="2" variant="contained" size="small" endIcon={<Done />} onClick={handleValidateAnimal}>
-                        {`${t('Validate')} ${t(tableSingleName)}`}
-                    </Button>
+                    {(selectedRows.length === 1 && hasPermission) &&
+                        selectedRows[0].original.validated === false &&
+                        <FlexBox alignItems="center" ml={2}>
+                            <Button ms={2} variant="contained" size="small" endIcon={<Done />} onClick={handleValidateAnimal}>
+                                {`${t('Validate')} ${t(tableSingleName)}`}
+                            </Button>
+                        </FlexBox>
+                    }
+
+                    {(selectedRows.length > 1 && hasPermission) && <FlexBox alignItems="center" ml={2}>
+                        <Button ms={2} variant="contained" size="small" endIcon={<Done />} onClick={handleValidateAnimal}>
+                            {`${t('Validate')} ${t(tableSingleName)}`}
+                        </Button>
+                    </FlexBox>
                     }
 
                 </ButtonWrapper>

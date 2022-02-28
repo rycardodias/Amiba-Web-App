@@ -31,7 +31,7 @@ function SelectColumnFilter({ column }) {
     }} />}>
         <MenuItem value="" sx={{ fontSize: 12, fontWeight: 500 }}> All </MenuItem>
         {options.map((option, i) => <MenuItem key={i} value={option} sx={{ fontSize: 12, fontWeight: 500 }}>
-            {option}
+            {option.toString()}
         </MenuItem>)}
     </Select>;
 }
@@ -40,7 +40,7 @@ function DateColumnFilter({ column }) {
     const { filterValue, setFilter } = column;
     const theme = useTheme();
     const handleChange = newValue => {
-        const date = format(new Date(newValue),'yyyy-MM-dd') || undefined;
+        const date = format(new Date(newValue), 'yyyy-MM-dd') || undefined;
         setFilter(date);
     };
 
