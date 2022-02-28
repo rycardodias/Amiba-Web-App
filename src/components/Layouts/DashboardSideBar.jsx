@@ -10,7 +10,7 @@ import topMenuList from "./topMenuList"; // root component interface
 import checkURLPermission from "lib/CheckUrlPermissions";
 import * as usersRequests from 'lib/requests/usersRequests'
 import { verifyPermission } from "lib/backofficeRoutes";
-import Icons from "icons/sidebar";
+// import Icons from "icons/sidebar";
 
 
 // custom styled components

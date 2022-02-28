@@ -1,4 +1,4 @@
-import { Box, Button, Grid, IconButton, Modal, InputBase } from "@mui/material";
+import { Button, Grid, Modal, InputBase } from "@mui/material";
 import { KeyboardArrowDown } from "@mui/icons-material";
 import DarkTextField from "components/DarkTextField";
 import FlexBox from "components/FlexBox";
@@ -22,7 +22,7 @@ const AddModal = ({ open, onClose, edit, data }) => {
     fiscalNumber: data?.fiscalNumber || "",
     permission: data?.permission || "",
   };
-  
+
   const fieldValidationSchema = Yup.object().shape({
     permission: Yup.string().required(`${t('Permission')} ${t('is required!')}`),
   });

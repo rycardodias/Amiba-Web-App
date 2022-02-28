@@ -18,15 +18,15 @@ const Payment = () => {
 
 
   const [data, setdata] = useState([])
-  const [isLoading, setIsLoading] = useState(true)
+  // const [isLoading, setIsLoading] = useState(true)
 
   async function fetchProducts() {
-    setIsLoading(true)
+    // setIsLoading(true)
     const res = await cartsRequests.getCartByUser()
     if (res.error) return
     if (res.data.error) return
     setdata(res.data.data)
-    setIsLoading(false)
+    // setIsLoading(false)
   }
 
   useEffect(() => {

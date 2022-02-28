@@ -1,9 +1,4 @@
-import { sendImageRequest, sendRequest } from './requests'
-
-
-// const getFile = async (id) => {
-//     return await sendRequest('GET', 'uploadFiles/' + id);
-// };
+import { sendImageRequest } from './requests'
 
 const createFile = async (file) => {
     return await sendImageRequest('uploadFiles/create', file)

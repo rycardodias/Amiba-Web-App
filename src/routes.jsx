@@ -12,9 +12,9 @@ const Loadable = Component => props => <Suspense fallback={<LoadingScreen />}>
 
 // const LandingPage = Loadable(lazy(() => import('./pages/LandingPage')));
 const ComponentsPage = Loadable(lazy(() => import('./pages/ComponentsPage')));
-const AboutPage = Loadable(lazy(() => import('./pages/About')));
-const PrivacyPage = Loadable(lazy(() => import('./pages/Privacy')));
-const ContactPage = Loadable(lazy(() => import('./pages/Contact'))); // authentication pages
+// const AboutPage = Loadable(lazy(() => import('./pages/About')));
+// const PrivacyPage = Loadable(lazy(() => import('./pages/Privacy')));
+// const ContactPage = Loadable(lazy(() => import('./pages/Contact'))); // authentication pages
 
 const Login = Loadable(lazy(() => import('./pages/authentication/Login')));
 const Register = Loadable(lazy(() => import('./pages/authentication/Register')));

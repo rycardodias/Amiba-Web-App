@@ -4,10 +4,8 @@ import { StyledPagination } from 'components/backoffice/styledComponents/DataTab
 
 import ProductCard from "components/shop/ProductCard";
 import SearchFilter from "components/shop/SearchFilter";
-import { Box, ButtonBase, Card, Grid, Stack, styled } from "@mui/material";
-import { StyledModalCard } from 'components/backoffice/styledComponents/AddModalStyles'
+import { Box,  Card, Grid, Stack } from "@mui/material";
 import useTitle from "hooks/useTitle";
-import { Dot, } from "pure-react-carousel";
 import { useState, useEffect } from "react";
 import * as productsRequests from 'lib/requests/productsRequests'
 import { useTranslation } from "react-i18next";

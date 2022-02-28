@@ -1,11 +1,11 @@
 import { Box, Button, Card, Grid, styled, useTheme } from "@mui/material";
 import Password from "components/accountSettings/Password";
-import UserInfo from "components/accountSettings/UserInfo";
+// import UserInfo from "components/accountSettings/UserInfo";
 import FlexBox from "components/FlexBox";
 import { H3 } from "components/Typography";
 import useTitle from "hooks/useTitle";
 import PasswordIcon from "icons/PasswordIcon";
-import ProfileIcon from "icons/ProfileIcon";
+// import ProfileIcon from "icons/ProfileIcon";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import convertToSlug from "utils/convertSlug"; // styled component

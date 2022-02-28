@@ -1,10 +1,9 @@
-import { Box, Button, Grid, IconButton, Modal, InputBase } from "@mui/material";
+import {  Button, Grid,  Modal, InputBase } from "@mui/material";
 import { KeyboardArrowDown } from "@mui/icons-material";
 import DarkTextField from "components/DarkTextField";
 import FlexBox from "components/FlexBox";
 import { H2, H6, Small } from "components/Typography";
 import { useFormik } from "formik";
-import ImageUploadIcon from "icons/ImageUploadIcon";
 import toast from "react-hot-toast";
 import ScrollBar from "simplebar-react";
 import * as Yup from "yup";
@@ -12,10 +11,7 @@ import * as organizationsRequests from 'lib/requests/organizationsRequests'
 import * as usersRequests from 'lib/requests/usersRequests'
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-
 import { StyledModalCard, StyledMenuItem, StyledSelect } from 'components/backoffice/styledComponents/AddModalStyles'
-
-
 
 const AddModal = ({ open, onClose, edit, data }) => {
   const { t } = useTranslation();

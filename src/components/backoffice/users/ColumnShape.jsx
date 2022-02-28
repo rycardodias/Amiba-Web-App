@@ -3,7 +3,7 @@ import { Small, Tiny } from "components/Typography";
 import FlexBox from "components/FlexBox";
 import UkoAvatar from "components/UkoAvatar";
 import i18n from 'i18next';
-import { CommonCell, SelectColumnFilter, DateColumnFilter } from 'components/backoffice/utils/columnFilters'
+import { CommonCell, SelectColumnFilter } from 'components/backoffice/utils/columnFilters'
 
 
 const columnShape = [

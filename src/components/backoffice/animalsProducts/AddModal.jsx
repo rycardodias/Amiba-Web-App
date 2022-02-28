@@ -16,7 +16,7 @@ import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 import { StyledModalCard, StyledMenuItem, StyledSelect } from 'components/backoffice/styledComponents/AddModalStyles'
-import { productTypes, races } from "lib/values/types";
+import { productTypes } from "lib/values/types";
 
 
 const AddModal = ({ open, onClose, edit, data }) => {
@@ -26,6 +26,7 @@ const AddModal = ({ open, onClose, edit, data }) => {
     id: data?.id || "",
     quantity: data?.quantity || "",
     AnimalId: data?.AnimalId || "",
+    ExplorationId: data?.ExplorationId || "",
     ProductId: data?.ProductId || "",
     ProductName: data?.Product?.name || ""
   };
@@ -42,7 +43,7 @@ const AddModal = ({ open, onClose, edit, data }) => {
     const res = await explorationsRequests.getExplorationsUserId()
     if (res.error) return
     if (res.data.error) return toast.error(t("Error Getting essential Data"))
-    setexplorations(res.data.data)
+    return await setexplorations(res.data.data)
   }
   useEffect(() => {
     initialData()
@@ -111,7 +112,7 @@ const AddModal = ({ open, onClose, edit, data }) => {
             {!edit &&
               <Grid item xs={12}>
                 <H6 mb={1}>{t('Exploration')}</H6>
-                <StyledSelect fullWidth name="ExplorationId" value={values.ExplorationId} onChange={followingData} input={<InputBase placeholder={t('Exploration')} />} IconComponent={() => <KeyboardArrowDown fontSize="small" />}>
+                <StyledSelect fullWidth name="ExplorationId" value={values.ExplorationId} onChange={(e)=> {handleChange(e); followingData(e)}} input={<InputBase placeholder={t('Exploration')} />} IconComponent={() => <KeyboardArrowDown fontSize="small" />}>
                   {explorations && explorations.map(item => {
                     return <StyledMenuItem key={item.id} value={item.id}>{t(item.name)}</StyledMenuItem>
                   })}
@@ -148,8 +149,7 @@ const AddModal = ({ open, onClose, edit, data }) => {
               </Grid>
             }
 
-            {/* {(enableQuantity || data?.quantity) && */}
-            <Grid item xs={6}>
+            <Grid item xs={12}>
               <H6 mb={1}>{t('Quantity')}</H6>
               <DarkTextField name="quantity" placeholder={t('Quantity')} onChange={handleChange} value={values.quantity}
                 error={Boolean(errors.quantity && touched.quantity)} helperText={touched.quantity && errors.quantity} />

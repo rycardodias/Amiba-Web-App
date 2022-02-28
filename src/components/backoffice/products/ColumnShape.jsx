@@ -1,6 +1,6 @@
 
 import i18n from 'i18next';
-import { CommonCell, SelectColumnFilter, DateColumnFilter } from 'components/backoffice/utils/columnFilters'
+import { SelectColumnFilter } from 'components/backoffice/utils/columnFilters'
 
 
 const columnShape = [
