@@ -94,10 +94,10 @@ export const List = () => {
                             {t('Edit Selected')}
                         </Button>
                     }
-                    {(selectedRows.length === 0) && <Button variant="contained" size="small" endIcon={<Add />} onClick={() => setOpenModal(true)}>
+                    {/* {(selectedRows.length === 0) && <Button variant="contained" size="small" endIcon={<Add />} onClick={() => setOpenModal(true)}>
                         {`${t('Add')} ${t(tableSingleName)}`}
                     </Button>
-                    }
+                    } */}
 
                 </ButtonWrapper>
             </FlexBox >

@@ -10,6 +10,7 @@ import * as Yup from "yup";
 import * as eggsBatchsRequests from 'lib/requests/eggsBatchsRequests'
 import * as explorationsRequests from 'lib/requests/explorationsRequests'
 import * as eggsBatchsLinesRequests from 'lib/requests/eggsBatchsLinesRequests'
+import * as transactions from 'lib/requests/specific/transactions'
 
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
@@ -24,6 +25,7 @@ const AddModal = ({ open, onClose, edit, data }) => {
   const initialValues = {
     id: data?.id || "",
     quantity: data?.quantity || "",
+    ExplorationId: data?.explorationId || "",
     EggsBatchId: data?.ExplorationId || "",
     EggsBatchName: data?.EggsBatch?.name || ""
   };
@@ -48,7 +50,6 @@ const AddModal = ({ open, onClose, edit, data }) => {
     const res = await eggsBatchsRequests.getEggsBatchsByExploration(e.target.value)
 
     if (res.error || res.data.error) {
-      toast.error(t("Error Getting essential Data"))
       seteggsBatches([])
     }
     seteggsBatches(res.data.data)
@@ -70,6 +71,20 @@ const AddModal = ({ open, onClose, edit, data }) => {
           })
           .catch(error => console.log(error));
       } else {
+        if (values.EggsBatchId === "NEW") {
+          return transactions.createEggsBatchEggsBatchLines(
+            values.EggsBatchName,
+            values.ExplorationId,
+            [{ quantity: values.quantity }]
+          )
+            .then(response => {
+              if (response.error || response.data.error) return toast.error(t("Error Creating Record"));
+              onClose(true);
+              toast.success(t("New Record Added Successfully"));
+            })
+            .catch(error => console.log(error));
+
+        }
         eggsBatchsLinesRequests.createEggsBatchsLines(values.EggsBatchId, values.quantity)
           .then(response => {
             if (response.error || response.data.error) return toast.error(t("Error Creating Record"));
@@ -82,6 +97,10 @@ const AddModal = ({ open, onClose, edit, data }) => {
     }
   });
 
+  async function handleEggsBatchChange(e) {
+    console.log(e.target)
+  }
+
 
   return <Modal open={open} onClose={onClose}>
     <StyledModalCard>
@@ -93,7 +112,7 @@ const AddModal = ({ open, onClose, edit, data }) => {
             {!edit &&
               <Grid item xs={12}>
                 <H6 mb={1}>{t('Exploration')}</H6>
-                <StyledSelect fullWidth name="ExplorationId" value={values.ExplorationId} onChange={followingData} input={<InputBase placeholder={t('Exploration')} />} IconComponent={() => <KeyboardArrowDown fontSize="small" />}>
+                <StyledSelect fullWidth name="ExplorationId" value={values.ExplorationId} onChange={(e) => { handleChange(e); followingData(e) }} input={<InputBase placeholder={t('Exploration')} />} IconComponent={() => <KeyboardArrowDown fontSize="small" />}>
                   {explorations && explorations.map(item => {
                     return <StyledMenuItem key={item.id} value={item.id}>{t(item.name)}</StyledMenuItem>
                   })}
@@ -105,20 +124,31 @@ const AddModal = ({ open, onClose, edit, data }) => {
                 <H6 mb={1}>{t('Eggs Batch')}</H6>
                 <DarkTextField disabled name="EggsBatchId" value={values.EggsBatchName} />
               </Grid> :
+              values.ExplorationId &&
               <Grid item xs={6}>
                 <H6 mb={1}>{t('Eggs Batch')}</H6>
                 <StyledSelect fullWidth name="EggsBatchId" value={values.EggsBatchId} onChange={handleChange} input={<InputBase placeholder={t('Eggs Batch')} />} IconComponent={() => <KeyboardArrowDown fontSize="small" />}>
+                  <StyledMenuItem key="NEW" value="NEW">{`[${t("New")}]`}</StyledMenuItem>
                   {eggsBatches && eggsBatches.map(item => {
                     return <StyledMenuItem key={item.id} value={item.id}>{t(item.name)}</StyledMenuItem>
                   })}
                 </StyledSelect>
               </Grid>
             }
-            <Grid item xs={6}>
-              <H6 mb={1}>{t('Quantity')}</H6>
-              <DarkTextField name="quantity" placeholder={t('Quantity')} onChange={handleChange} value={values.quantity}
-                error={Boolean(errors.quantity && touched.quantity)} helperText={touched.quantity && errors.quantity} />
-            </Grid>
+            {values.EggsBatchId === "NEW" &&
+              <Grid item xs={6}>
+                <H6 mb={1}>{t('Name')}</H6>
+                <DarkTextField name="EggsBatchName" placeholder={t('Name')} onChange={handleChange} value={values.EggsBatchName}
+                  error={Boolean(errors.EggsBatchName && touched.EggsBatchName)} helperText={touched.EggsBatchName && errors.EggsBatchName} />
+              </Grid>
+            }
+            {values.ExplorationId &&
+              <Grid item xs={values.EggsBatchId === "NEW" ? 12 : 6}>
+                <H6 mb={1}>{t('Quantity')}</H6>
+                <DarkTextField name="quantity" placeholder={t('Quantity')} onChange={handleChange} value={values.quantity}
+                  error={Boolean(errors.quantity && touched.quantity)} helperText={touched.quantity && errors.quantity} />
+              </Grid>
+            }
 
           </Grid>
         </ScrollBar>

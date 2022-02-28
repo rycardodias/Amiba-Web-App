@@ -6,6 +6,7 @@ import { DatePicker } from "@mui/lab";
 import { InputBase, MenuItem, Select, TextField, useTheme } from "@mui/material";
 import { format } from "date-fns";
 import { useMemo } from "react";
+import i18next from "i18next";
 
 
 const CommonCell = ({ title, body }) => <FlexBox flexDirection="column">
@@ -29,8 +30,8 @@ function SelectColumnFilter({ column }) {
         "& .MuiPopover-paper": { boxShadow: "none" },
         "& > .MuiSelect-select": { paddingRight: "0 !important" }
     }} />}>
-        <MenuItem value="" sx={{ fontSize: 12, fontWeight: 500 }}> All </MenuItem>
-        {options.map((option, i) => <MenuItem key={i} value={option} sx={{ fontSize: 12, fontWeight: 500 }}>
+        <MenuItem value="" sx={{ fontSize: 12, fontWeight: 500 }}> {i18next.t("All")} </MenuItem>
+        {options.map((option, i) => <MenuItem key={i} value={option.toString()} sx={{ fontSize: 12, fontWeight: 500 }}>
             {option.toString()}
         </MenuItem>)}
     </Select>;

@@ -4,4 +4,8 @@ const createOrderOrderLines = async (OrderLines, address, locale, zipcode, obser
     return await sendRequest('POST', 'transactions/createOrderOrderLines', { address, locale, zipcode, observation, fiscalNumber, OrderLines });
 };
 
-export { createOrderOrderLines }
+const createEggsBatchEggsBatchLines = async (name, ExplorationId, EggsBatchLines) => {
+    return await sendRequest('POST', 'transactions/createEggsBatchEggsBatchLines', { name, ExplorationId, EggsBatchLines });
+}
+
+export { createOrderOrderLines, createEggsBatchEggsBatchLines }

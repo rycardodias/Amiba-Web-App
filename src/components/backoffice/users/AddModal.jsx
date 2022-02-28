@@ -62,7 +62,7 @@ const AddModal = ({ open, onClose, edit, data }) => {
             <Grid item xs={6}>
               <H6 mb={1}>{t('Permission')}</H6>
               <StyledSelect fullWidth name="permission" value={values.permission} onChange={handleChange} input={<InputBase placeholder={t('Permission')} />} IconComponent={() => <KeyboardArrowDown fontSize="small" />}>
-                {userPermissions && userPermissions.map(item => {
+                {userPermissions && userPermissions.filter(i => i.id !== "ADMIN").map(item => {
                   return <StyledMenuItem key={item.id} value={item.id}>{t(item.name)}</StyledMenuItem>
                 })}
               </StyledSelect>

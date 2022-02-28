@@ -134,6 +134,7 @@ const AddModal = ({ open, onClose, edit, data }) => {
               <Grid item xs={6}>
                 <H6 mb={1}>{t('Eggs Batch')}</H6>
                 <StyledSelect fullWidth name="EggsBatchId" value={values.EggsBatchId} onChange={handleChange} input={<InputBase placeholder={t('Eggs Batch')} />} IconComponent={() => <KeyboardArrowDown fontSize="small" />}>
+                  
                   {eggsBatches && eggsBatches.map(item => {
                     return <StyledMenuItem key={item.id} value={item.id}>{t(item.name)}</StyledMenuItem>
                   })}

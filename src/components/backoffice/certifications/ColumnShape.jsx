@@ -6,6 +6,11 @@ import { DateColumnFilter } from 'components/backoffice/utils/columnFilters'
 const columnShape = [
   {
     minWidth: 150,
+    Header: () => i18n.t("Exploration"),
+    accessor: "Exploration.name",
+  },
+  {
+    minWidth: 150,
     Header: () => i18n.t("Certification Code"),
     accessor: "certificationCode",
   },
@@ -19,11 +24,11 @@ const columnShape = [
     accessor: "finalDate",
     Filter: DateColumnFilter
   },
-  {
-    minWidth: 300,
-    Header: () => i18n.t("Description"),
-    accessor: "description",
-  },
+  // {
+  //   minWidth: 300,
+  //   Header: () => i18n.t("Description"),
+  //   accessor: "description",
+  // },
 ];
 
 
