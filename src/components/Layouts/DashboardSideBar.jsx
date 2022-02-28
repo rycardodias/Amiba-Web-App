@@ -10,6 +10,7 @@ import topMenuList from "./topMenuList"; // root component interface
 import checkURLPermission from "lib/CheckUrlPermissions";
 import * as usersRequests from 'lib/requests/usersRequests'
 import { verifyPermission } from "lib/backofficeRoutes";
+import Icons from "icons/sidebar";
 
 
 // custom styled components
@@ -37,9 +38,9 @@ const SubMenuItem = styled(FlexBox)(({ theme, active }) => ({
 const DashboardSideBar = ({ sideBarLocked, showMobileSideBar, closeMobileSideBar, openSecondarySideBar, setOpenSecondarySideBar }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const [active, setActive] = useState("Dashboard");
+  const [active, setActive] = useState("Ecommerce");
   const [activeSubMenuItem, setActiveSubMenuItem] = useState("");
-  const [categoryMenus, setCategoryMenus] = useState([{ subTitle: "" }]);
+  const [categoryMenus, setCategoryMenus] = useState(initialCategoryMenus);
   const downMd = useMediaQuery(theme => theme.breakpoints.down(1200));
 
   const [permission, setpermission] = useState(["USER"]);
@@ -166,5 +167,14 @@ const DashboardSideBar = ({ sideBarLocked, showMobileSideBar, closeMobileSideBar
   </Fragment>;
 };
 
+const initialCategoryMenus = [
+  {
+    subTitle: "Shop",
+    path: "/shop/list"
+  }, {
+    subTitle: "Cart",
+    path: "/shop/cart"
+  },
+]
 
 export default DashboardSideBar;
