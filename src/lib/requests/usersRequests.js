@@ -55,7 +55,7 @@ const updatePassword = async (oldPassword, newPassword) => {
 };
 
 const forgetPassword = async (email) => {
-    return await sendRequest('GET', 'users/forgetPassword/' + email);
+    return await sendRequest('POST', 'users/forgetPassword', { email });
 };
 
 export {
