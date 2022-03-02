@@ -58,8 +58,14 @@ const forgetPassword = async (email) => {
     return await sendRequest('POST', 'users/forgetPassword', { email });
 };
 
+const recoverPassword = async (token, password, repeatPassword) => {
+    return await sendRequest('PUT', 'users/recoverPassword/:token', { password, repeatPassword });
+};
+
+
+
 export {
     getUsers, getUserId, createUser, updateUser, updateUserPermissions, deleteUser,
     login, logout, updateAddress, updatePassword, getUserByToken, validateToken, tokenPermission,
-    forgetPassword
+    forgetPassword, recoverPassword
 }

@@ -19,6 +19,7 @@ const ComponentsPage = Loadable(lazy(() => import('./pages/ComponentsPage')));
 const Login = Loadable(lazy(() => import('./pages/authentication/Login')));
 const Register = Loadable(lazy(() => import('./pages/authentication/Register')));
 const ForgetPassword = Loadable(lazy(() => import('./pages/authentication/ForgetPassword'))); // Dashboard pages
+const RecoverPassword = Loadable(lazy(() => import('./pages/authentication/RecoverPassword'))); // Dashboard pages
 
 const AccountSettings = Loadable(lazy(() => import('./pages/AccountSettings'))); // projects
 
@@ -69,6 +70,12 @@ const routes = [{
   path: 'forget-password',
   element: <GuestGuard>
     <ForgetPassword />
+  </GuestGuard>
+},
+{
+  path: 'recover-password',
+  element: <GuestGuard>
+    <RecoverPassword />
   </GuestGuard>
 },
 
