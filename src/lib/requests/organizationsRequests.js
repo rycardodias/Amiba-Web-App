@@ -12,10 +12,6 @@ const getOrganizationId = async (id) => {
     return await sendRequest('GET', 'organizations/id/' + id);
 };
 
-const getOrganizationUserId = async (UserId) => {
-    return await sendRequest('GET', 'organizations/UserId/' + UserId);
-};
-
 const getOrganizationsProductAvailable = async () => {
     return await sendRequest('GET', 'organizations/productAvailable');
 };
