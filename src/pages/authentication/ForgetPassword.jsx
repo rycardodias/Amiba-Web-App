@@ -4,6 +4,7 @@ import FlexBox from "components/FlexBox";
 import LightTextField from "components/LightTextField";
 import { H1, Small } from "components/Typography";
 import { useFormik } from "formik";
+import { forgetPassword } from "lib/requests/usersRequests";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
@@ -24,18 +25,17 @@ const ForgetPassword = () => {
     email: Yup.string().email(t("Must be a valid email")).max(255).required(`${t('Email')} ${t('is required!')}`)
   });
   const { errors, values, touched, handleBlur, handleChange, handleSubmit } = useFormik({
-    initialValues, validationSchema,
-    onSubmit: values => {
+    initialValues, validationSchema, onSubmit: values => {
       setLoading(true);
-      setTimeout(() => {
-        setLoading(false);
-        toast.success(t("Reset link has been sent!"));
-      }, 1000);
-
-      if (error) {
-        setError("Error!");
-        setLoading(false);
-      }
+      forgetPassword(values.email)
+        .then(response => {
+          if (response.error || response.data.error) return setError("Error!")
+          return toast.success(t("Reset link has been sent!"));
+        })
+        .catch(error => {
+          setError("Error!")
+        })
+      setLoading(false);
     }
   });
   return <FlexBox height="100vh" alignItems="center" flexDirection="column" justifyContent="center">

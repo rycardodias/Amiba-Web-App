@@ -54,4 +54,12 @@ const updatePassword = async (oldPassword, newPassword) => {
     return await sendRequest('PUT', 'users/update/password', { oldPassword, newPassword });
 };
 
-export { getUsers, getUserId, createUser, updateUser, updateUserPermissions, deleteUser, login, logout, updateAddress, updatePassword, getUserByToken, validateToken, tokenPermission }
+const forgetPassword = async (email) => {
+    return await sendRequest('GET', 'users/forgetPassword/' + email);
+};
+
+export {
+    getUsers, getUserId, createUser, updateUser, updateUserPermissions, deleteUser,
+    login, logout, updateAddress, updatePassword, getUserByToken, validateToken, tokenPermission,
+    forgetPassword
+}
