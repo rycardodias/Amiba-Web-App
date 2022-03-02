@@ -29,4 +29,4 @@ const deleteOrganization = async (id) => {
     return await sendRequest('DELETE', 'organizations/delete', { id })
 }
 
-export { getOrganizations, getOrganizationsUserId, getOrganizationId, getOrganizationUserId, getOrganizationsProductAvailable, createOrganization, updateOrganization, deleteOrganization }
+export { getOrganizations, getOrganizationsUserId, getOrganizationId, getOrganizationsProductAvailable, createOrganization, updateOrganization, deleteOrganization }
