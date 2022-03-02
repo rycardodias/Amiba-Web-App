@@ -59,7 +59,7 @@ const forgetPassword = async (email) => {
 };
 
 const recoverPassword = async (token, password, repeatPassword) => {
-    return await sendRequest('PUT', 'users/recoverPassword/:token', { password, repeatPassword });
+    return await sendRequest('PUT', 'users/recoverPassword/' + token, { password, repeatPassword });
 };
 
 

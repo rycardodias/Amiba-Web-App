@@ -14,6 +14,7 @@ const i18nPT = {
     "Confirm new password": "Confirme nova palavra-passe",
     "Change Your Password": "Altere a sua Palavra-Passe",
     "Password": "Palavra-passe",
+    "Repeat Password": "Repetir palavra-passe",
     "Current Password": "Palavra-passe atual",
     "Passwords don't match!": "Palavras-passe não coincidem!",
     "User Info": "Dados utilizador",

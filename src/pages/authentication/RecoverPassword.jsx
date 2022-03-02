@@ -21,12 +21,14 @@ const RecoverPassword = () => {
   }; // form field value validation schema
 
   const validationSchema = Yup.object().shape({
-    email: Yup.string().email(t("Must be a valid email")).max(255).required(`${t('Email')} ${t('is required!')}`)
+    password: Yup.string().min(6, t("Too Short")).max(255).required(`${t('Password')} ${t('is required!')}`),
+    repeatPassword: Yup.string().min(6, t("Too Short")).max(255).required(`${t('Password')} ${t('is required!')}`)
   });
   const { errors, values, touched, handleBlur, handleChange, handleSubmit } = useFormik({
     initialValues, validationSchema, onSubmit: values => {
       setLoading(true);
-      recoverPassword(searchParams.get('token'), values.password, values.repeatPassword)
+      const token = searchParams.get('token')
+      recoverPassword(token, values.password, values.repeatPassword)
         .then(response => {
           if (response.error || response.data.error) return setError("Error!")
           return toast.success(t("Password Changed!"));
