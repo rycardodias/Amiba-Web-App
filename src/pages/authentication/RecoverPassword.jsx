@@ -2,6 +2,7 @@ import { LoadingButton } from "@mui/lab";
 import { Box, Button, Card, FormHelperText } from "@mui/material";
 import FlexBox from "components/FlexBox";
 import LightTextField from "components/LightTextField";
+import { SocialIconButton, TextFieldWrapper } from "components/authentication/StyledComponents";
 import { H1, Small } from "components/Typography";
 import { useFormik } from "formik";
 import { recoverPassword } from "lib/requests/usersRequests";
@@ -52,13 +53,17 @@ const RecoverPassword = () => {
 
       <FlexBox justifyContent="space-between" flexWrap="wrap" my={2}>
         <form noValidate onSubmit={handleSubmit} style={{ width: "100%" }}>
-          <LightTextField fullWidth name="password" type="password" label={t("Password")}
-            onBlur={handleBlur} onChange={handleChange} value={values.password || ""}
-            error={Boolean(touched.password && errors.password)} helperText={touched.password && errors.password} />
+          <TextFieldWrapper sx={{ mt: 2, width: "100%" }}>
+            <LightTextField fullWidth name="password" type="password" label={t("Password")}
+              onBlur={handleBlur} onChange={handleChange} value={values.password || ""}
+              error={Boolean(touched.password && errors.password)} helperText={touched.password && errors.password} />
+          </TextFieldWrapper>
 
-          <LightTextField fullWidth name="repeatPassword" type="password" label={t("Repeat Password")}
-            onBlur={handleBlur} onChange={handleChange} value={values.repeatPassword || ""}
-            error={Boolean(touched.repeatPassword && errors.repeatPassword)} helperText={touched.repeatPassword && errors.repeatPassword} />
+          <TextFieldWrapper sx={{ mt: 2, width: "100%" }}>
+            <LightTextField fullWidth name="repeatPassword" type="password" label={t("Repeat Password")}
+              onBlur={handleBlur} onChange={handleChange} value={values.repeatPassword || ""}
+              error={Boolean(touched.repeatPassword && errors.repeatPassword)} helperText={touched.repeatPassword && errors.repeatPassword} />
+          </TextFieldWrapper>
 
           {error && <FormHelperText error sx={{ mt: 2, fontSize: 13, fontWeight: 500, textAlign: "center" }}>{error}</FormHelperText>}
 

@@ -142,7 +142,7 @@ const i18nPT = {
     "Reset your password": "Recuperar palavra-chave",
     "Recovery your password": "Recuperar palavra-chave",
     "Reset link has been sent!": "Endereço de recuperação enviado!",
-    "Change Password": "Alterar palavra-chave",
+    "Change Password": "Alterar palavra-passe",
     "Must be a valid email": "Deve ser um email válido",
     "Sign In": "Entrar",
     "Sign Up": "Registar",
