@@ -26,7 +26,7 @@ const columnShape = [
     Header: () => i18n.t("State"),
     accessor: "OrderHistories.state",
     Cell: ({ row }) => {
-      const { state } = row.original.OrderHistories;
+      const { state } = row.original.OrderHistories[0];
       return i18n.t(ordersHistoryTypes.find(item => item.id === state).name)
     }
   },
