@@ -1,6 +1,7 @@
 
 import i18n from 'i18next';
 import { SelectColumnFilter } from 'components/backoffice/utils/columnFilters'
+import { productTypes } from 'lib/values/types';
 
 
 const columnShape = [
@@ -12,8 +13,11 @@ const columnShape = [
   {
     Header: () => i18n.t("Type"),
     accessor: "type",
-    Filter: SelectColumnFilter
-
+    Filter: SelectColumnFilter,
+    Cell: ({ row }) => {
+      const { type } = row.original;
+      return i18n.t(productTypes.find(item => item.id === type).name)
+    }
   },
   {
     Header: () => i18n.t("Tax"),

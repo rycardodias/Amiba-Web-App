@@ -4,6 +4,12 @@ import { CommonCell, SelectColumnFilter, DateColumnFilter } from 'components/bac
 const columnShape = [
   {
     minWidth: 150,
+    Header: () => i18n.t("Productor"),
+    accessor: "Organization.name",
+    Filter: SelectColumnFilter
+  },
+  {
+    minWidth: 150,
     Header: () => i18n.t("Name"),
     accessor: "name",
   },
@@ -17,12 +23,8 @@ const columnShape = [
     Header: () => i18n.t("VAT Number"),
     accessor: "fiscalNumber",
   },
+
   {
-    minWidth: 150,
-    Header: () => i18n.t("Productor"),
-    accessor: "Organization.name",
-    Filter: SelectColumnFilter
-  }, {
     minWidth: 150,
     Header: () => i18n.t("Phone/Mobile"),
     accessor: "telephone",

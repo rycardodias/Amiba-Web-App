@@ -9,12 +9,23 @@ const columnShape = [
   {
     minWidth: 150,
     Header: () => i18n.t("Animal/Product"),
-    accessor: "AnimalProductId",
+    accessor: "AnimalProduct.Product.name",
+    Cell: ({ row }) => {
+      // console.log(first)
+      if (!row.original.AnimalProductId) return ""
+      const { Animal, Product } = row.original.AnimalProduct;
+      return `${Animal.identifier} / ${Product.name}`
+    }
   },
   {
     minWidth: 150,
     Header: () => i18n.t("Eggs Batch/Product"),
-    accessor: "EggsBatchProductId"
+    accessor: "EggsBatchProduct.Product.name",
+    Cell: ({ row }) => {
+      if (!row.original.EggsBatchProduct) return ""
+      const { EggsBatch, Product } = row.original.EggsBatchProduct;
+      return `${EggsBatch.name} / ${Product.name}`
+    }
   },
   {
     minWidth: 150,
