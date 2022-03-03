@@ -1,5 +1,4 @@
 import i18n from 'i18next';
-import { ordersHistoryTypes } from 'lib/values/types';
 
 const columnShape = [
   {
@@ -20,15 +19,6 @@ const columnShape = [
     Header: () => i18n.t("Quantity Available"),
     accessor: "quantityAvailable"
   },
-  {
-    Header: () => i18n.t("State"),
-    accessor: "OrderHistories.state",
-    Cell: ({ row }) => {
-      const { state } = row.original.OrderHistories;
-      return i18n.t(ordersHistoryTypes.find(item => item.id === state).name)
-    }
-  },
-
 ];
 
 export default columnShape;
