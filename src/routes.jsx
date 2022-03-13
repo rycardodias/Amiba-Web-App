@@ -36,7 +36,6 @@ const AnimalsList = Loadable(lazy(() => import('pages/backoffice/AnimalsList')))
 const AnimalsProductsList = Loadable(lazy(() => import('pages/backoffice/AnimalsProductsList')));
 const EggsBatchesList = Loadable(lazy(() => import('pages/backoffice/EggsBatchesList')));
 const EggsBatchesProductsList = Loadable(lazy(() => import('pages/backoffice/EggsBatchesProductsList')));
-const EggsBatchesLinesList = Loadable(lazy(() => import('pages/backoffice/EggsBatchesLinesList')));
 const OrdersList = Loadable(lazy(() => import('pages/backoffice/OrdersList')));
 const OrdersLinesList = Loadable(lazy(() => import('pages/backoffice/OrdersLinesList')));
 const OrdersHistoryList = Loadable(lazy(() => import('pages/backoffice/OrdersHistoryList')));
@@ -96,7 +95,6 @@ const routes = [{
     { path: 'animals/animalProducts', element: <AnimalsProductsList /> },
     { path: 'eggsBatches', element: <EggsBatchesList /> },
     { path: 'eggsBatches/eggsBatchesProducts', element: <EggsBatchesProductsList /> },
-    { path: 'eggsBatches/eggsBatchesLines', element: <EggsBatchesLinesList /> },
     { path: 'orders', element: <OrdersList /> },
     { path: 'orders/ordersLines', element: <OrdersLinesList /> },
     { path: 'orders/ordersHistory', element: <OrdersHistoryList /> },

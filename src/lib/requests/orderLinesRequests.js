@@ -19,8 +19,8 @@ const createOrderLine = async (OrderId, quantity, AnimalProductId, EggsBatchProd
     return await sendRequest('POST', 'orderLines/create', { OrderId, quantity, AnimalProductId, EggsBatchProductId })
 };
 
-const updateOrderLine = async (id, OrderId, quantity, AnimalProductId, EggsBatchProductId) => {
-    return await sendRequest('PUT', 'orderLines/update', { id, OrderId, quantity, AnimalProductId, EggsBatchProductId })
+const updateOrderLine = async (id, quantity) => {
+    return await sendRequest('PUT', 'orderLines/update', { id, quantity })
 };
 
 const deleteOrderLine = async (id) => {

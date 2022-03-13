@@ -21,6 +21,11 @@ const columnShape = [
     Header: () => i18n.t("Quantity Available"),
     accessor: "quantityAvailable",
   },
+  {
+    minWidth: 150,
+    Header: () => i18n.t("Validity"),
+    accessor: "validity",
+  },
 ];
 
 export default columnShape;

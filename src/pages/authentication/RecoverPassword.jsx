@@ -2,7 +2,7 @@ import { LoadingButton } from "@mui/lab";
 import { Box, Button, Card, FormHelperText } from "@mui/material";
 import FlexBox from "components/FlexBox";
 import LightTextField from "components/LightTextField";
-import { SocialIconButton, TextFieldWrapper } from "components/authentication/StyledComponents";
+import { TextFieldWrapper } from "components/authentication/StyledComponents";
 import { H1, Small } from "components/Typography";
 import { useFormik } from "formik";
 import { recoverPassword } from "lib/requests/usersRequests";

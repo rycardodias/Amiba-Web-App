@@ -24,7 +24,7 @@ const AccountSettings = () => {
   useTitle(t("Account Settings"));
   const theme = useTheme();
 
-  const [active, setActive] = useState("user-info");
+  const [active, setActive] = useState("password");
   const style = {
     backgroundColor: theme.palette.mode === "light" ? theme.palette.secondary.light : theme.palette.divider, color: theme.palette.primary.main,
     "&::before": { width: 4, right: 0, content: '""', height: "100%", position: "absolute", backgroundColor: theme.palette.primary.main }
@@ -64,7 +64,7 @@ const tabList = [
   //   Icon: ProfileIcon
   // },
   {
-    id: 2,
+    id: 1,
     name: "Password",
     Icon: PasswordIcon
   }];
