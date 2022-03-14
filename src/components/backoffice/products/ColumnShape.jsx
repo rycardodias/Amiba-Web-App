@@ -13,7 +13,7 @@ const columnShape = [
   {
     Header: () => i18n.t("Type"),
     accessor: "type",
-    Filter: SelectColumnFilter,
+    // Filter: SelectColumnFilter,
     Cell: ({ row }) => {
       const { type } = row.original;
       return i18n.t(productTypes.find(item => item.id === type).name)
@@ -23,11 +23,19 @@ const columnShape = [
     Header: () => i18n.t("Tax"),
     accessor: "tax",
     // Filter: SelectColumnFilter
+    Cell: ({ row }) => {
+      const { tax } = row.original;
+      return `${tax}%`
+    }
 
   },
   {
     Header: () => i18n.t("Price"),
     accessor: "price",
+    Cell: ({ row }) => {
+      const { price } = row.original;
+      return `${price}€`
+    }
   },
   // {
   //   Header: () => i18n.t("Unit"),

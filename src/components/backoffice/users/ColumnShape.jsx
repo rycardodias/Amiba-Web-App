@@ -3,7 +3,7 @@ import { Small, Tiny } from "components/Typography";
 import FlexBox from "components/FlexBox";
 import UkoAvatar from "components/UkoAvatar";
 import i18n from 'i18next';
-import { CommonCell, SelectColumnFilter } from 'components/backoffice/utils/columnFilters'
+import { CommonCell } from 'components/backoffice/utils/columnFilters'
 import { userPermissions } from "lib/values/permissions";
 
 
@@ -32,7 +32,7 @@ const columnShape = [
     minWidth: 150,
     Header: () => i18n.t("Permission"),
     accessor: "permission",
-    Filter: SelectColumnFilter,
+    // Filter: SelectColumnFilter,
     Cell: ({ row }) => {
       const { permission } = row.original;
       return i18n.t(userPermissions.find(item => item.id === permission[0]).name)
