@@ -22,7 +22,6 @@ const columnShape = [
   {
     Header: () => i18n.t("Tax"),
     accessor: "tax",
-    // Filter: SelectColumnFilter
     Cell: ({ row }) => {
       const { tax } = row.original;
       return `${tax}%`
