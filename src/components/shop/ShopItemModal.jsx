@@ -25,7 +25,6 @@ const ShopItemModal = (props) => {
         let items = [];
         let list = props.itemModal
         if (list.id) {
-            console.log(list)
             if (list.type === "EGGS") {
                 for (let i = 1; i <= list.quantityAvailable / 6; i++) {
                     items.push(<MenuItem key={i*6} value={i*6}>{i*6}</MenuItem>);
@@ -98,9 +97,9 @@ const ShopItemModal = (props) => {
                         <Box mt={1}>
                             <Button disabled={cartQuantity === 0} onClick={addToCart}
                                 variant="contained" size="small" endIcon={<Add />}>{t("Add To Cart")}</Button>
-                            <IconButton sx={{ marginLeft: 1.5, backgroundColor: "secondary.200", "&:hover": { backgroundColor: "secondary.200" } }}>
+                            {/* <IconButton sx={{ marginLeft: 1.5, backgroundColor: "secondary.200", "&:hover": { backgroundColor: "secondary.200" } }}>
                                 <Favorite disabled sx={{ color: "text.disabled" }} />
-                            </IconButton>
+                            </IconButton> */}
                         </Box>
 
                         <Box marginTop={3}>

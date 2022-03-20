@@ -34,19 +34,19 @@ const ProductCard = (props) => {
           </Small>
         </Box>
 
-        <FlexBox alignItems="center">
+        {/* <FlexBox alignItems="center">
           <Star fontSize="small" color="warning" />
           <Small color="text.disabled">{props.product.rating || 5}</Small>
-        </FlexBox>
+        </FlexBox> */}
       </FlexBox>
 
       <FlexBox alignItems="center" justifyContent="space-between">
         <H3 fontWeight={700}>{`${props.product.price.toFixed(2)}€ ${t(convertUnitNames(props.product.unit))}`}</H3>
 
         <Box>
-          <IconButton sx={{ marginRight: 1, backgroundColor: "secondary.200", "&:hover": { backgroundColor: "secondary.200" } }}>
+          {/* <IconButton sx={{ marginRight: 1, backgroundColor: "secondary.200", "&:hover": { backgroundColor: "secondary.200" } }}>
             <Favorite fontSize="small" color="disabled" />
-          </IconButton>
+          </IconButton> */}
           <IconButton onClick={addToCart} sx={{ backgroundColor: "primary.main", "&:hover": { backgroundColor: "primary.main" } }}>
             <Add fontSize="small" sx={{ color: "white" }} />
           </IconButton>

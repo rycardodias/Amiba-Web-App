@@ -35,7 +35,21 @@ const SearchFilter = (props) => {
   }, [])
 
   return <Card sx={{ padding: 2 }}>
-    <Box>
+    <Box >
+      <H6>{t("Categories")}</H6>
+      {productTypes.map(item =>
+        <FlexBox key={item.id} value={item.id} alignItems="center" marginTop={2}
+          onClick={() => props.onFilterChange("CATEGORY", props.category === item.id ? "" : item.id)}
+          sx={{ cursor: "pointer", color: props.category === item ? "primary.main" : "text.disabled" }}>
+
+          <Dot active={props.category === item.id} />
+          <Small value={item.id}>{t(item.name)}</Small>
+
+        </FlexBox>
+      )}
+    </Box>
+
+    <Box marginTop={4}>
       <H6>{t("Organization")}</H6>
 
       {organizationsList && organizationsList.map(item =>
@@ -54,19 +68,7 @@ const SearchFilter = (props) => {
       )}
     </Box>
 
-    <Box marginTop={4}>
-      <H6>{t("Categories")}</H6>
-      {productTypes.map(item =>
-        <FlexBox key={item.id} value={item.id} alignItems="center" marginTop={2}
-          onClick={() => props.onFilterChange("CATEGORY", props.category === item.id ? "" : item.id)}
-          sx={{ cursor: "pointer", color: props.category === item ? "primary.main" : "text.disabled" }}>
 
-          <Dot active={props.category === item.id} />
-          <Small value={item.id}>{t(item.name)}</Small>
-
-        </FlexBox>
-      )}
-    </Box>
 
     {/* <Box marginTop={4}>
       <H6>{t("Sort By")}</H6>
