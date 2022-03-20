@@ -25,28 +25,17 @@ const ShopItemModal = (props) => {
         let items = [];
         let list = props.itemModal
         if (list.id) {
-
-            // if (list.unit === 'DOZEN') {
-            //     for (let i = 1; i <= (list.quantityAvailable / 12); i++) {
-            //         items.push(<MenuItem key={i} value={i}>{i}</MenuItem>);
-            //     }
-            // }
-            // // else if (list.unit === 'KG') {
-            // //     let k = 0
-            // //     let totalweight = 0
-            // //     for (let j = 0; j < list.AnimalProducts.length; j++) {
-            // //         for (let i = 0; i < list.AnimalProducts[j].quantityAvailable; i++) {
-            // //             k++
-            // //             totalweight += list.AnimalProducts[j].weight
-
-            // //             items.push(<MenuItem key={k} value={k}>{k + ' - ' + totalweight / 1000 + ' Kg'}</MenuItem>);
-            // //         }
-            // //     }
-            // // }
-            // else {
-            for (let i = 1; i <= list.quantityAvailable; i++) {
-                items.push(<MenuItem key={i} value={i}>{i}</MenuItem>);
-                // }
+            console.log(list)
+            if (list.type === "EGGS") {
+                for (let i = 1; i <= list.quantityAvailable / 6; i++) {
+                    items.push(<MenuItem key={i*6} value={i*6}>{i*6}</MenuItem>);
+                    // }
+                }
+            } else {
+                for (let i = 1; i <= list.quantityAvailable; i++) {
+                    items.push(<MenuItem key={i} value={i}>{i}</MenuItem>);
+                    // }
+                }
             }
         }
         return <>

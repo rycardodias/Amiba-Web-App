@@ -10,7 +10,7 @@ import * as Yup from "yup";
 import * as eggsBatchsRequests from 'lib/requests/eggsBatchsRequests'
 import * as productsRequests from 'lib/requests/productsRequests'
 import * as explorationsRequests from 'lib/requests/explorationsRequests'
-
+import * as transactions from 'lib/requests/specific/transactions'
 import * as eggsBatchProductsRequests from 'lib/requests/eggsBatchProductsRequests'
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
@@ -27,7 +27,8 @@ const AddModal = ({ open, onClose, edit, data }) => {
     EggsBatchId: data?.EggsBatchId || "",
     EggsBatchName: data?.EggsBatch?.name || "",
     ProductId: data?.ProductId || "",
-    ProductName: data?.Product?.name || ""
+    ProductName: data?.Product?.name || "",
+    ExplorationId: data?.ExplorationId || "",
   };
 
   const [eggsBatches, seteggsBatches] = useState([])
@@ -81,6 +82,20 @@ const AddModal = ({ open, onClose, edit, data }) => {
           })
           .catch(error => console.log(error));
       } else {
+        if (values.EggsBatchId === "NEW") {
+          return transactions.createEggsBatchEggsBatchProducts(
+            values.EggsBatchName,
+            values.ExplorationId,
+            [{ ProductId: values.ProductId, quantity: values.quantity }]
+          )
+            .then(response => {
+              if (response.error || response.data.error) return toast.error(t("Error Creating Record"));
+              onClose(true);
+              toast.success(t("New Record Added Successfully"));
+            })
+            .catch(error => console.log(error));
+        }
+
         eggsBatchProductsRequests.createEggsBatchProducts(values.ProductId, values.EggsBatchId, values.quantity)
           .then(response => {
             if (response.error || response.data.error) return toast.error(t("Error Creating Record"));
@@ -104,12 +119,37 @@ const AddModal = ({ open, onClose, edit, data }) => {
             {!edit &&
               <Grid item xs={12}>
                 <H6 mb={1}>{t('Exploration')}</H6>
-                <StyledSelect fullWidth name="ExplorationId" value={values.ExplorationId} onChange={followingData} input={<InputBase placeholder={t('Exploration')} />} IconComponent={() => <KeyboardArrowDown fontSize="small" />}>
+                <StyledSelect fullWidth name="ExplorationId" value={values.ExplorationId} onChange={(e) => { handleChange(e); followingData(e) }} input={<InputBase placeholder={t('Exploration')} />} IconComponent={() => <KeyboardArrowDown fontSize="small" />}>
                   {explorations && explorations.map(item => {
                     return <StyledMenuItem key={item.id} value={item.id}>{t(item.name)}</StyledMenuItem>
                   })}
                 </StyledSelect>
               </Grid>}
+
+            {edit ?
+              <Grid item xs={6}>
+                <H6 mb={1}>{t('Eggs Batch')}</H6>
+                <DarkTextField disabled name="EggsBatchId" value={values.EggsBatchName} />
+              </Grid> :
+              <Grid item xs={6}>
+                <H6 mb={1}>{t('Eggs Batch')}</H6>
+                <StyledSelect fullWidth name="EggsBatchId" value={values.EggsBatchId} onChange={handleChange} input={<InputBase placeholder={t('Eggs Batch')} />} IconComponent={() => <KeyboardArrowDown fontSize="small" />}>
+                  <StyledMenuItem key="NEW" value="NEW">{`[${t("New")}]`}</StyledMenuItem>
+
+                  {eggsBatches && eggsBatches.map(item => {
+                    return <StyledMenuItem key={item.id} value={item.id}>{t(item.name)}</StyledMenuItem>
+                  })}
+                </StyledSelect>
+              </Grid>
+            }
+
+            {values.EggsBatchId === "NEW" &&
+              <Grid item xs={6}>
+                <H6 mb={1}>{t('Name')}</H6>
+                <DarkTextField name="EggsBatchName" placeholder={t('Name')} onChange={handleChange} value={values.EggsBatchName}
+                  error={Boolean(errors.EggsBatchName && touched.EggsBatchName)} helperText={touched.EggsBatchName && errors.EggsBatchName} />
+              </Grid>
+            }
 
             {edit ?
               <Grid item xs={6}>
@@ -120,22 +160,6 @@ const AddModal = ({ open, onClose, edit, data }) => {
                 <H6 mb={1}>{t('Product')}</H6>
                 <StyledSelect fullWidth name="ProductId" value={values.ProductId} onChange={handleChange} input={<InputBase placeholder={t('Product')} />} IconComponent={() => <KeyboardArrowDown fontSize="small" />}>
                   {products && products.map(item => {
-                    return <StyledMenuItem key={item.id} value={item.id}>{t(item.name)}</StyledMenuItem>
-                  })}
-                </StyledSelect>
-              </Grid>
-            }
-
-            {edit ?
-              <Grid item xs={6}>
-                <H6 mb={1}>{t('Eggs Batch')}</H6>
-                <DarkTextField disabled name="EggsBatchId" value={values.EggsBatchName} />
-              </Grid> :
-              <Grid item xs={6}>
-                <H6 mb={1}>{t('Eggs Batch')}</H6>
-                <StyledSelect fullWidth name="EggsBatchId" value={values.EggsBatchId} onChange={handleChange} input={<InputBase placeholder={t('Eggs Batch')} />} IconComponent={() => <KeyboardArrowDown fontSize="small" />}>
-                  
-                  {eggsBatches && eggsBatches.map(item => {
                     return <StyledMenuItem key={item.id} value={item.id}>{t(item.name)}</StyledMenuItem>
                   })}
                 </StyledSelect>

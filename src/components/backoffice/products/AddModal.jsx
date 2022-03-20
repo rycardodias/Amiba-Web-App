@@ -85,7 +85,7 @@ const AddModal = ({ open, onClose, edit, data }) => {
           })
           .catch(error => console.log(error));
       } else {
-        productsRequests.createProduct(values.type, values.tax, values.name, values.description, values.price, values.type === "ANIMAL" ? "UNIT" : "DOZEN", fileName !== "" ? fileName : values.image, values.OrganizationId)
+        productsRequests.createProduct(values.type, values.tax, values.name, values.description, values.price, values.type === "ANIMAL" ? "UNIT" : "HALFDOZEN", fileName !== "" ? fileName : values.image, values.OrganizationId)
           .then(response => {
             if (response.error || response.data.error) return toast.error(t("Error Creating Record"));
 
